@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Ciudad de las Proporciones - Matematica 8 EBI 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#eef2f7;color:#1a1a2e;min-height:100vh;overflow-x:hidden}
+
+header{background:linear-gradient(135deg,#1a3c5e,#2e6da4);color:#fff;padding:14px 24px;text-align:center}
+header h1{font-size:24px;margin-bottom:4px}
+header p{font-size:13px;opacity:.8}
+
+.intro{max-width:900px;margin:20px auto;padding:0 20px;text-align:center}
+.intro p{font-size:15px;color:#444;line-height:1.6;background:#fff;border-radius:12px;padding:16px 24px;box-shadow:0 2px 8px rgba(0,0,0,.08);border-left:4px solid #2e6da4}
+
+/* Ciudad */
+.city{max-width:1000px;margin:20px auto;padding:0 20px;position:relative}
+.city-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px}
+
+.building{background:#fff;border-radius:16px;box-shadow:0 3px 12px rgba(0,0,0,.1);cursor:pointer;transition:transform .2s,box-shadow .2s;overflow:hidden;text-align:center;border:3px solid transparent}
+.building:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.building.active{border-color:#2e6da4;transform:translateY(-4px)}
+.building.solved{border-color:#4caf50}
+
+.building-icon{height:100px;display:flex;align-items:center;justify-content:center;font-size:42px;background:linear-gradient(135deg,#f5f9ff,#e3edf7);position:relative}
+.building-icon svg{width:56px;height:56px}
+.building-num{position:absolute;top:8px;left:8px;background:#1a3c5e;color:#fff;font-size:11px;font-weight:bold;padding:2px 8px;border-radius:10px}
+.building-check{position:absolute;top:8px;right:8px;background:#4caf50;color:#fff;font-size:14px;font-weight:bold;width:22px;height:22px;border-radius:50%;display:none;align-items:center;justify-content:center}
+.building.solved .building-check{display:flex}
+
+.building-name{padding:12px 10px;font-size:13px;font-weight:bold;color:#1a3c5e}
+
+/* Panel de situación */
+.panel-wrap{max-width:900px;margin:0 auto 30px;padding:0 20px}
+.panel{background:#fff;border-radius:16px;box-shadow:0 3px 16px rgba(0,0,0,.1);overflow:hidden;display:none}
+.panel.show{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.panel-header{background:linear-gradient(135deg,#1a3c5e,#2e6da4);color:#fff;padding:16px 24px}
+.panel-header h2{font-size:18px;margin-bottom:4px}
+.panel-header p{font-size:12px;opacity:.8}
+
+.panel-body{padding:24px}
+.panel-body .context{font-size:15px;color:#333;margin-bottom:16px;line-height:1.6}
+.panel-body .context b{color:#1a3c5e}
+
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.data-table th{background:#1a3c5e;color:#fff;padding:10px 12px;text-align:center;font-size:13px}
+.data-table td{padding:10px 12px;text-align:center;border:1px solid #ddd;font-size:15px}
+.data-table tr:nth-child(even) td{background:#f7f9fc}
+
+.question{background:#f5f9ff;border-left:4px solid #2e6da4;padding:14px 18px;border-radius:0 10px 10px 0;margin:16px 0;font-size:14px;color:#333}
+.question b{color:#1a3c5e}
+
+.btn-row{display:flex;gap:10px;margin-top:20px;justify-content:center}
+.btn{padding:10px 24px;border:none;border-radius:8px;font-size:14px;font-weight:bold;cursor:pointer;transition:background .2s}
+.btn-close{background:#eee;color:#555}
+.btn-close:hover{background:#ddd}
+.btn-done{background:#4caf50;color:#fff}
+.btn-done:hover{background:#43a047}
+
+/* Progreso */
+.progress{max-width:900px;margin:0 auto 20px;padding:0 20px;text-align:center}
+.progress-bar{background:#ddd;height:8px;border-radius:4px;overflow:hidden;margin:8px 0}
+.progress-fill{background:linear-gradient(90deg,#2e6da4,#4caf50);height:100%;border-radius:4px;transition:width .4s ease;width:0}
+.progress-text{font-size:13px;color:#888}
+
+.footer{text-align:center;padding:16px;font-size:12px;color:#999;margin-top:10px}
+
+@media(max-width:600px){.city-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>La Ciudad de las Proporciones</h1>
+  <p>Proporcionalidad directa en distintos contextos - Matematica 8. EBI 2026 - Liceo de Medanos</p>
+</header>
+
+<div class="intro">
+  <p>Recorres la Ciudad de las Proporciones. En cada parada encontras una situacion que involucra dos magnitudes. Haciendo click en cada edificio aparece la situacion. Tu tarea: decidir si la relacion es proporcionalidad directa, encontrar k si existe. Cuidado: uno de los cinco lugares esconde una trampa.</p>
+</div>
+
+<div class="progress">
+  <div class="progress-text">Paradas visitadas: <span id="count">0</span> de 5</div>
+  <div class="progress-bar"><div class="progress-fill" id="pbar"></div></div>
+</div>
+
+<div class="city">
+  <div class="city-grid">
+    <div class="building" onclick="showPanel(0)">
+      <div class="building-icon">
+        <div class="building-num">1</div>
+        <div class="building-check">ok</div>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="20" width="48" height="36" rx="4" fill="#5dade2" opacity=".3"/>
+          <rect x="14" y="8" width="10" height="48" rx="2" fill="#c0392b" opacity=".6"/>
+          <rect x="28" y="14" width="10" height="42" rx="2" fill="#27ae60" opacity=".6"/>
+          <rect x="42" y="10" width="10" height="46" rx="2" fill="#f39c12" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="building-name">La pintureria del barrio</div>
+    </div>
+    <div class="building" onclick="showPanel(1)">
+      <div class="building-icon">
+        <div class="building-num">2</div>
+        <div class="building-check">ok</div>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="40" width="56" height="6" rx="3" fill="#bbb"/>
+          <rect x="4" y="34" width="56" height="4" rx="1" fill="#7f8c8d" opacity=".4"/>
+          <rect x="20" y="22" width="24" height="16" rx="3" fill="#2e6da4" opacity=".5"/>
+          <circle cx="22" cy="44" r="6" fill="#333"/>
+          <circle cx="42" cy="44" r="6" fill="#333"/>
+          <circle cx="22" cy="44" r="2.5" fill="#999"/>
+          <circle cx="42" cy="44" r="2.5" fill="#999"/>
+        </svg>
+      </div>
+      <div class="building-name">La ruta principal</div>
+    </div>
+    <div class="building" onclick="showPanel(2)">
+      <div class="building-icon">
+        <div class="building-num">3</div>
+        <div class="building-check">ok</div>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="24" width="48" height="32" rx="3" fill="#f9e79f" opacity=".5"/>
+          <rect x="14" y="16" width="36" height="8" rx="2" fill="#e74c3c" opacity=".4"/>
+          <circle cx="24" cy="38" r="6" fill="#f5b041" opacity=".7"/>
+          <circle cx="40" cy="38" r="6" fill="#f5b041" opacity=".7"/>
+          <rect x="20" y="48" width="24" height="8" rx="2" fill="#aab7b8" opacity=".4"/>
+        </svg>
+      </div>
+      <div class="building-name">La feria de alimentos</div>
+    </div>
+    <div class="building" onclick="showPanel(3)">
+      <div class="building-icon">
+        <div class="building-num">4</div>
+        <div class="building-check">ok</div>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="30" width="44" height="26" rx="2" fill="#aab7b8" opacity=".4"/>
+          <polygon points="32,8 10,30 54,30" fill="#e67e22" opacity=".4"/>
+          <rect x="18" y="38" width="10" height="14" rx="1" fill="#5dade2" opacity=".5"/>
+          <rect x="36" y="38" width="10" height="14" rx="1" fill="#5dade2" opacity=".5"/>
+          <rect x="26" y="20" width="12" height="4" rx="1" fill="#7f8c8d" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="building-name">La obra en construccion</div>
+    </div>
+    <div class="building" onclick="showPanel(4)">
+      <div class="building-icon">
+        <div class="building-num">5</div>
+        <div class="building-check">ok</div>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="32" cy="52" rx="26" ry="6" fill="#27ae60" opacity=".25"/>
+          <rect x="30" y="24" width="4" height="28" rx="2" fill="#795548"/>
+          <ellipse cx="32" cy="22" rx="14" ry="12" fill="#27ae60" opacity=".5"/>
+          <ellipse cx="28" cy="18" rx="6" ry="5" fill="#2ecc71" opacity=".5"/>
+          <circle cx="38" cy="20" r="2" fill="#e74c3c" opacity=".6"/>
+        </svg>
+      </div>
+      <div class="building-name">La plaza central</div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-wrap">
+  <div class="panel" id="panel-0">
+    <div class="panel-header"><h2>Parada 1 - La pintureria del barrio</h2><p>Mezcla de pintura</p></div>
+    <div class="panel-body">
+      <p class="context">Para hacer verde, se mezclan <b>3 partes de azul</b> por cada <b>2 de amarillo</b>.</p>
+      <table class="data-table">
+        <tr><th>Azul (partes)</th><th>3</th><th>6</th><th>9</th><th>?</th></tr>
+        <tr><td>Amarillo (partes)</td><td>2</td><td>?</td><td>?</td><td>10</td></tr>
+      </table>
+      <div class="question"><b>a)</b> Es proporcionalidad directa? Cuanto vale k?</div>
+      <div class="btn-row">
+        <button class="btn btn-done" onclick="markDone(0)">Listo, siguiente parada</button>
+        <button class="btn btn-close" onclick="closePanel()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-1">
+    <div class="panel-header"><h2>Parada 2 - La ruta principal</h2><p>Velocidad constante</p></div>
+    <div class="panel-body">
+      <p class="context">Un auto recorre <b>90 km en 1 hora</b> manteniendo velocidad constante.</p>
+      <table class="data-table">
+        <tr><th>Horas</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+        <tr><td>Kilometros</td><td>90</td><td>?</td><td>?</td><td>?</td></tr>
+      </table>
+      <div class="question"><b>b)</b> Es proporcionalidad directa? Cuanto vale k? Que unidad tiene k? Que significa fisicamente ese valor de k?</div>
+      <div class="btn-row">
+        <button class="btn btn-done" onclick="markDone(1)">Listo, siguiente parada</button>
+        <button class="btn btn-close" onclick="closePanel()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-2">
+    <div class="panel-header"><h2>Parada 3 - La feria de alimentos</h2><p>Precio por kilo</p></div>
+    <div class="panel-body">
+      <p class="context">El queso cuesta <b>$320 el kilo</b>.</p>
+      <table class="data-table">
+        <tr><th>Kilos</th><th>0,5</th><th>1</th><th>1,5</th><th>2</th></tr>
+        <tr><td>Precio ($)</td><td>?</td><td>320</td><td>?</td><td>?</td></tr>
+      </table>
+      <div class="question"><b>c)</b> Es proporcionalidad directa? Cuanto vale k?</div>
+      <div class="btn-row">
+        <button class="btn btn-done" onclick="markDone(2)">Listo, siguiente parada</button>
+        <button class="btn btn-close" onclick="closePanel()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-3">
+    <div class="panel-header"><h2>Parada 4 - La obra en construccion</h2><p>Receta de cemento</p></div>
+    <div class="panel-body">
+      <p class="context">Para preparar mezcla se usan <b>2 baldes de cemento</b> por cada <b>5 de arena</b>.</p>
+      <table class="data-table">
+        <tr><th>Cemento (baldes)</th><th>2</th><th>4</th><th>6</th><th>10</th></tr>
+        <tr><td>Arena (baldes)</td><td>5</td><td>?</td><td>?</td><td>?</td></tr>
+      </table>
+      <div class="question"><b>d)</b> Es proporcionalidad directa? Cuanto vale k?</div>
+      <div class="btn-row">
+        <button class="btn btn-done" onclick="markDone(3)">Listo, siguiente parada</button>
+        <button class="btn btn-close" onclick="closePanel()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="panel-4">
+    <div class="panel-header"><h2>Parada 5 - La plaza central</h2><p>Crecimiento de una planta</p></div>
+    <div class="panel-body">
+      <p class="context">Una planta mide los siguientes centimetros al final de cada mes. Aunque la planta crece todos los meses: <b>crece SIEMPRE en la misma proporcion?</b></p>
+      <table class="data-table">
+        <tr><th>Mes</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+        <tr><td>Altura (cm)</td><td>4</td><td>10</td><td>14</td><td>17</td></tr>
+      </table>
+      <div class="question"><b>e)</b> Es proporcionalidad directa? Por que si o por que no? Calcula la razon en cada mes. Existe relacion entre las magnitudes aunque no sea proporcional? Explica.</div>
+      <div class="btn-row">
+        <button class="btn btn-done" onclick="markDone(4)">Listo, siguiente parada</button>
+        <button class="btn btn-close" onclick="closePanel()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">Matematica 8. EBI 2026 - Prof. Fernandez - Liceo de Medanos - S4: Proporcionalidad directa</div>
+
+<script>
+var solved = [false,false,false,false,false];
+
+function showPanel(i){
+  // Close all
+  for(var j=0;j<5;j++){
+    document.getElementById('panel-'+j).classList.remove('show');
+    document.querySelectorAll('.building')[j].classList.remove('active');
+  }
+  // Open selected
+  document.getElementById('panel-'+i).classList.add('show');
+  document.querySelectorAll('.building')[i].classList.add('active');
+  // Scroll to panel
+  document.getElementById('panel-'+i).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function closePanel(){
+  for(var j=0;j<5;j++){
+    document.getElementById('panel-'+j).classList.remove('show');
+    document.querySelectorAll('.building')[j].classList.remove('active');
+  }
+}
+
+function markDone(i){
+  solved[i]=true;
+  document.querySelectorAll('.building')[i].classList.add('solved');
+  document.querySelectorAll('.building')[i].classList.remove('active');
+  document.getElementById('panel-'+i).classList.remove('show');
+
+  var count=solved.filter(function(v){return v}).length;
+  document.getElementById('count').textContent=count;
+  document.getElementById('pbar').style.width=(count/5*100)+'%';
+
+  // Auto-open next unsolved
+  if(count<5){
+    for(var j=0;j<5;j++){
+      if(!solved[j]){showPanel(j);break;}
+    }
+  }
+}
+</script>
+</body>
+</html>

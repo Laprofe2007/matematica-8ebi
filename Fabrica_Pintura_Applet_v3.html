@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Fabrica de Pintura - Proporcionalidad Directa</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#eef2f7;color:#1a1a2e;min-height:100vh}
+
+header{background:linear-gradient(135deg,#1a3c5e,#2e6da4);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px}
+header h1{font-size:22px;margin-bottom:2px}
+header p{font-size:13px;opacity:.8}
+
+.main{display:flex;gap:14px;padding:14px;max-width:1300px;margin:0 auto}
+.col-left{width:340px;flex-shrink:0;display:flex;flex-direction:column;gap:14px}
+.col-right{flex:1;display:flex;flex-direction:column;gap:14px}
+
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1);padding:18px}
+.card-title{font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.8px;color:#2e6da4;border-bottom:2px solid #2e6da4;padding-bottom:6px;margin-bottom:14px}
+
+.orden{background:#fff8e6;border:2px dashed #f5a623;border-radius:10px;padding:12px;text-align:center;margin-bottom:4px}
+.orden-tag{font-size:11px;font-weight:bold;color:#b07800;letter-spacing:.5px}
+.orden-vals{font-size:19px;font-weight:bold;color:#1a3c5e;margin:6px 0}
+
+.slider-wrap{margin-bottom:14px}
+.slider-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.slider-head .sname{font-size:14px;font-weight:bold;color:#333}
+.slider-head .svar{font-size:17px;font-weight:bold;color:#2e6da4;margin:0 4px}
+.badge{background:#2e6da4;color:#fff;font-size:15px;font-weight:bold;padding:2px 12px;border-radius:20px;min-width:38px;text-align:center}
+input[type=range]{width:100%;accent-color:#2e6da4;cursor:pointer;height:5px}
+
+.k-box{background:linear-gradient(135deg,#1a3c5e,#2e6da4);border-radius:10px;padding:14px;text-align:center;color:#fff}
+.k-lbl{font-size:11px;opacity:.75;margin-bottom:2px}
+.k-num{font-size:36px;font-weight:bold;font-family:'Courier New',monospace;letter-spacing:1px}
+.k-form{font-size:12px;opacity:.65;margin-top:3px}
+
+.swatch-outer{margin-top:12px}
+.swatch-lbl{font-size:11px;color:#888;text-align:center;margin-bottom:5px}
+.swatch{width:100%;height:110px;border-radius:12px;border:3px solid #ddd;transition:background-color .25s ease;display:flex;align-items:center;justify-content:center}
+.swatch-name{background:rgba(0,0,0,.45);color:#fff;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:bold}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#1a3c5e;color:#fff;padding:8px 6px;text-align:center;font-size:12px}
+td{padding:7px 6px;text-align:center;border-bottom:1px solid #eee}
+tr.hl td{background:#e8f4e8;font-weight:bold}
+tr:not(.hl):nth-child(even) td{background:#f6f9ff}
+.kc{color:#2e6da4;font-weight:bold;font-family:monospace;font-size:14px}
+.ok{color:#2e7d32;font-size:12px}
+
+.comp-inner{background:#e8f4e8;border:2px solid #4caf50;border-radius:10px;padding:14px}
+.comp-head{font-size:13px;font-weight:bold;color:#2e7d32;margin-bottom:10px}
+.comp-inputs{display:flex;gap:8px;margin-bottom:10px}
+.comp-inputs label{flex:1;font-size:12px;color:#555}
+.comp-inputs input{width:100%;padding:6px;border:1.5px solid #ccc;border-radius:7px;font-size:15px;text-align:center;margin-top:3px}
+.comp-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.mini-swatch{width:38px;height:38px;border-radius:7px;border:2px solid #ccc;flex-shrink:0}
+.comp-kval{font-size:13px}
+.comp-kval b{color:#1a3c5e;font-size:15px}
+.match{text-align:center;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:bold;margin-top:6px}
+.match.si{background:#c8e6c9;color:#1b5e20}
+.match.no{background:#ffcdd2;color:#b71c1c}
+
+/* Canvas grafico */
+#grafico-wrap{border-radius:10px;overflow:hidden;border:1px solid #e0e0e0;background:#fafafa}
+canvas{display:block;width:100%;height:auto}
+.eje-info{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:6px;padding:0 4px}
+
+.note{font-size:12px;color:#888;text-align:center;margin-top:8px}
+
+@media(max-width:768px){
+  .main{flex-direction:column}
+  .col-left{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>La Fabrica de Pintura</h1>
+    <p>Proporcionalidad Directa - Matematica 8. EBI 2026 - Liceo de Medanos - Act. 1 - C26</p>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- COLUMNA IZQUIERDA -->
+  <div class="col-left">
+
+    <div class="card">
+      <div class="card-title">Tu Orden de Produccion</div>
+      <div class="orden">
+        <div class="orden-tag">RECETA SECRETA - CONFIDENCIAL</div>
+        <div class="orden-vals">Rojo: <span id="va">2</span> partes &nbsp;·&nbsp; Verde: <span id="vb">4</span> partes</div>
+        <div style="font-size:11px;color:#999">Move los sliders para ingresar tus valores</div>
+      </div>
+
+      <div class="slider-wrap" style="margin-top:14px">
+        <div class="slider-head">
+          <span class="sname">Pintura <span class="svar">Roja</span> &nbsp;<em style="font-size:12px;color:#c00">(a)</em></span>
+          <span class="badge" id="la">2</span>
+        </div>
+        <input type="range" id="sa" min="1" max="20" value="2" oninput="upd()">
+      </div>
+
+      <div class="slider-wrap">
+        <div class="slider-head">
+          <span class="sname">Pintura <span class="svar">Verde</span> &nbsp;<em style="font-size:12px;color:#2a7">(b)</em></span>
+          <span class="badge" id="lb">4</span>
+        </div>
+        <input type="range" id="sb" min="1" max="20" value="4" oninput="upd()">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Razon constante k</div>
+      <div class="k-box">
+        <div class="k-lbl">k = verde / rojo (pendiente de la recta)</div>
+        <div class="k-num" id="knum">2.000</div>
+        <div class="k-form" id="kform">= 4 / 2</div>
+      </div>
+      <div class="swatch-outer">
+        <div class="swatch-lbl">Tono de pintura que produce tu receta:</div>
+        <div class="swatch" id="swatch">
+          <span class="swatch-name" id="sname">Verde intenso</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Comparar con otra dupla</div>
+      <div class="comp-inner">
+        <div class="comp-head">Ingresa los valores de otra dupla:</div>
+        <div class="comp-inputs">
+          <label>Rojo (otra dupla)<input type="number" id="ca" min="1" max="20" value="3" oninput="upd()"></label>
+          <label>Verde (otra dupla)<input type="number" id="cb" min="1" max="20" value="6" oninput="upd()"></label>
+        </div>
+        <div class="comp-row">
+          <div class="mini-swatch" id="ms-mine"></div>
+          <div class="comp-kval">Mi dupla: k = <b id="ck-mine">2.000</b></div>
+        </div>
+        <div class="comp-row">
+          <div class="mini-swatch" id="ms-other"></div>
+          <div class="comp-kval">Otra dupla: k = <b id="ck-other">2.000</b></div>
+        </div>
+        <div class="match si" id="match-result">Misma razon k - Produciran el mismo tono de pintura.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COLUMNA DERECHA -->
+  <div class="col-right">
+
+    <div class="card">
+      <div class="card-title">Tabla de escalas - cambia k?</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Escala</th>
+            <th>Rojo (litros)</th>
+            <th>Verde (litros)</th>
+            <th>k = verde / rojo</th>
+            <th>k cambia?</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <p class="note">Observa que k es siempre el mismo valor aunque los litros cambien.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Grafico - recta proporcional</div>
+      <p style="font-size:12px;color:#666;margin-bottom:10px">
+        Cada punto es una escala de tu receta. La recta pasa por el origen con pendiente k = <span id="klbl">2.000</span>
+      </p>
+      <div id="grafico-wrap">
+        <canvas id="migrafico" width="700" height="460"></canvas>
+      </div>
+      <div class="eje-info">
+        <span>Eje horizontal (x) = litros de pintura roja</span>
+        <span>Eje vertical (y) = litros de pintura verde</span>
+      </div>
+      <p class="note">La recta pasa por el origen. Por que tiene sentido que (0,0) sea parte de la relacion?</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── Color helpers ────────────────────────────────────────────────────────────
+function rgbColor(a, b){
+  var t = a + b;
+  return {r: Math.round(255*a/t), g: Math.round(255*b/t), b: 0};
+}
+function toHex(c){
+  return '#' + [c.r, c.g, c.b].map(function(v){
+    return v.toString(16).padStart(2,'0');
+  }).join('');
+}
+function colorName(k){
+  // k = verde/rojo
+  if(k > 5.5)  return "Verde muy intenso";
+  if(k > 2.5)  return "Verde intenso";
+  if(k > 1.5)  return "Verde amarillento";
+  if(k > 0.85) return "Amarillo verdoso";
+  if(k > 0.65) return "Amarillo";
+  if(k > 0.4)  return "Naranja amarillento";
+  if(k > 0.25) return "Naranja";
+  if(k > 0.18) return "Naranja rojizo";
+  return "Rojo intenso";
+}
+
+// ── Tabla ────────────────────────────────────────────────────────────────────
+function buildTable(a, b){
+  var escalas = [[0.5,"x 0.5"],[1,"x 1"],[2,"x 2"],[3,"x 3"],[4,"x 4"]];
+  var k = b/a, html = "";
+  escalas.forEach(function(e, i){
+    var ra = a*e[0], rb = b*e[0], ki = rb/ra;
+    var hl = (i===1) ? "class='hl'" : "";
+    html += "<tr "+hl+"><td><b>"+e[1]+"</b></td>"
+          + "<td>"+(Number.isInteger(ra)?ra:ra.toFixed(1))+"</td>"
+          + "<td>"+(Number.isInteger(rb)?rb:rb.toFixed(1))+"</td>"
+          + "<td class='kc'>"+ki.toFixed(3)+"</td>"
+          + "<td class='ok'>"+(Math.abs(ki-k)<0.001?"igual":"distinto")+"</td></tr>";
+  });
+  document.getElementById("tbody").innerHTML = html;
+}
+
+// ── Grafico con Canvas nativo ─────────────────────────────────────────────────
+function dibujarGrafico(a, b){
+  var canvas = document.getElementById("migrafico");
+  var ctx = canvas.getContext("2d");
+  var W = canvas.width, H = canvas.height;
+
+  // Margenes
+  var ml = 64, mr = 24, mt = 24, mb = 56;
+  var gw = W - ml - mr;
+  var gh = H - mt - mb;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Maximo visible: el mayor de los puntos x4
+  var maxVal = Math.max(a, b) * 4;
+  // Redondear al siguiente multiplo de 5 para que la grilla quede limpia
+  var escala = Math.ceil(maxVal / 5) * 5;
+  if(escala < 10) escala = 10;
+
+  // Conversion coordenadas matematicas a pixels
+  function cx(xv){ return ml + (xv/escala)*gw; }
+  function cy(yv){ return H - mb - (yv/escala)*gh; }
+
+  // Fondo del area de grafico
+  ctx.fillStyle = "#fafafa";
+  ctx.fillRect(ml, mt, gw, gh);
+
+  // Grid
+  var step = escala <= 20 ? 2 : escala <= 40 ? 5 : 10;
+  ctx.strokeStyle = "#e0e0e0";
+  ctx.lineWidth = 1;
+  for(var v = 0; v <= escala; v += step){
+    // vertical
+    ctx.beginPath();
+    ctx.moveTo(cx(v), mt);
+    ctx.lineTo(cx(v), H-mb);
+    ctx.stroke();
+    // horizontal
+    ctx.beginPath();
+    ctx.moveTo(ml, cy(v));
+    ctx.lineTo(W-mr, cy(v));
+    ctx.stroke();
+  }
+
+  // Ejes
+  ctx.strokeStyle = "#555";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(ml, mt); ctx.lineTo(ml, H-mb); ctx.lineTo(W-mr, H-mb);
+  ctx.stroke();
+
+  // Tickmarks y numeros en ejes
+  ctx.fillStyle = "#555";
+  ctx.font = "11px Arial";
+  ctx.textAlign = "center";
+  for(var v = 0; v <= escala; v += step){
+    // eje x
+    ctx.beginPath();
+    ctx.moveTo(cx(v), H-mb);
+    ctx.lineTo(cx(v), H-mb+5);
+    ctx.stroke();
+    ctx.fillText(v, cx(v), H-mb+17);
+    // eje y
+    ctx.beginPath();
+    ctx.moveTo(ml, cy(v));
+    ctx.lineTo(ml-5, cy(v));
+    ctx.stroke();
+    ctx.textAlign = "right";
+    ctx.fillText(v, ml-8, cy(v)+4);
+    ctx.textAlign = "center";
+  }
+
+  // Recta proporcional (de origen al borde)
+  // y = k*x  con  k = b/a
+  var k = b/a;
+  // Encontrar el punto de corte con los bordes del area
+  var xEnd = escala, yEnd = k * escala;
+  if(yEnd > escala){ yEnd = escala; xEnd = yEnd/k; }
+
+  ctx.strokeStyle = "#c82828";
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([]);
+  ctx.beginPath();
+  ctx.moveTo(cx(0), cy(0));
+  ctx.lineTo(cx(xEnd), cy(yEnd));
+  ctx.stroke();
+
+  // Puntos a distintas escalas
+  var escalasP = [
+    [0.5,"x0.5","#5b8dd9"],
+    [1,  "x1",  "#1a3c5e"],
+    [2,  "x2",  "#2e8b57"],
+    [3,  "x3",  "#e67e22"],
+    [4,  "x4",  "#8e44ad"]
+  ];
+
+  escalasP.forEach(function(ep){
+    var px = a*ep[0], py = b*ep[0];
+    if(px > escala || py > escala) return; // fuera de rango
+    var pcx = cx(px), pcy = cy(py);
+
+    // Sombra
+    ctx.shadowColor = "rgba(0,0,0,0.15)";
+    ctx.shadowBlur = 4;
+    ctx.fillStyle = ep[2];
+    ctx.beginPath();
+    ctx.arc(pcx, pcy, 7, 0, 2*Math.PI);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Etiqueta
+    ctx.fillStyle = "#222";
+    ctx.font = "bold 11px Arial";
+    ctx.textAlign = "left";
+    var lx = pcx + 10, ly = pcy - 6;
+    // Ajustar si se sale por la derecha
+    if(lx + 60 > W-mr) lx = pcx - 65;
+    ctx.fillText(ep[1]+" ("+px.toFixed(1)+", "+py.toFixed(1)+")", lx, ly);
+  });
+
+  // Etiqueta de pendiente en la recta
+  var midX = Math.min(a*2, escala*0.6);
+  var midY = k*midX;
+  if(midY <= escala && midX <= escala){
+    ctx.save();
+    ctx.translate(cx(midX), cy(midY));
+    var ang = Math.atan2(-(gh/escala)*k, gw/escala);
+    ctx.rotate(ang);
+    ctx.fillStyle = "#c82828";
+    ctx.font = "bold 12px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("y = "+k.toFixed(2)+" x", 0, -10);
+    ctx.restore();
+  }
+
+  // Origen
+  ctx.fillStyle = "#1a3c5e";
+  ctx.beginPath();
+  ctx.arc(cx(0), cy(0), 5, 0, 2*Math.PI);
+  ctx.fill();
+  ctx.fillStyle = "#222";
+  ctx.font = "11px Arial";
+  ctx.textAlign = "left";
+  ctx.fillText("(0, 0)", cx(0)+8, cy(0)-6);
+
+  // Etiquetas de ejes dentro del grafico
+  ctx.fillStyle = "#888";
+  ctx.font = "12px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Rojo (litros)", ml + gw/2, H-mb+40);
+
+  ctx.save();
+  ctx.translate(14, mt + gh/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.textAlign = "center";
+  ctx.fillText("Verde (litros)", 0, 0);
+  ctx.restore();
+}
+
+// ── Main update ───────────────────────────────────────────────────────────────
+function upd(){
+  var a = +document.getElementById("sa").value;
+  var b = +document.getElementById("sb").value;
+  var ca = Math.max(+(document.getElementById("ca").value)||1, 1);
+  var cb = Math.max(+(document.getElementById("cb").value)||1, 1);
+  var k = b/a;
+
+  document.getElementById("la").textContent = a;
+  document.getElementById("lb").textContent = b;
+  document.getElementById("va").textContent = a;
+  document.getElementById("vb").textContent = b;
+
+  document.getElementById("knum").textContent = k.toFixed(3);
+  document.getElementById("kform").textContent = "= "+b+" / "+a;
+  document.getElementById("klbl").textContent = k.toFixed(3);
+
+  var c = rgbColor(a, b);
+  document.getElementById("swatch").style.backgroundColor = toHex(c);
+  document.getElementById("sname").textContent = colorName(k);
+
+  buildTable(a, b);
+  dibujarGrafico(a, b);
+
+  // Comparacion
+  var ko = cb/ca;
+  var cm = rgbColor(a,b), co = rgbColor(ca,cb);
+  document.getElementById("ms-mine").style.backgroundColor = toHex(cm);
+  document.getElementById("ms-other").style.backgroundColor = toHex(co);
+  document.getElementById("ck-mine").textContent = k.toFixed(3);
+  document.getElementById("ck-other").textContent = ko.toFixed(3);
+
+  var mr = document.getElementById("match-result");
+  if(Math.abs(k-ko) < 0.001){
+    mr.className = "match si";
+    mr.textContent = "Misma razon k - Produciran el mismo tono de pintura.";
+  } else {
+    mr.className = "match no";
+    mr.textContent = "Razones distintas - tonos diferentes.";
+  }
+}
+
+upd();
+</script>
+</body>
+</html>

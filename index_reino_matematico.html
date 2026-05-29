@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reino Matemático | Crónicas de los Exploradores de 8.º</title>
+  <style>
+    :root {
+      --ink: #2a1c12;
+      --dark-ink: #130e0a;
+      --parchment: #ead7a8;
+      --parchment-light: #f6eac8;
+      --gold: #c9983f;
+      --amber: #e6bb65;
+      --ruby: #8f2f2f;
+      --moss: #416b42;
+      --pine: #233d2f;
+      --water: #3f7483;
+      --night: #171311;
+      --shadow: rgba(20, 12, 5, 0.55);
+      --glow: rgba(236, 190, 93, 0.55);
+      --locked: rgba(39, 32, 27, 0.72);
+      --font-title: "Cinzel", "Georgia", serif;
+      --font-body: "Libre Baskerville", "Georgia", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--parchment-light);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(226, 187, 101, 0.18), transparent 24rem),
+        radial-gradient(circle at 82% 20%, rgba(76, 121, 114, 0.18), transparent 23rem),
+        linear-gradient(135deg, #100c08 0%, #24170d 42%, #15110d 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mix-blend-mode: screen;
+      z-index: 3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.48) 100%),
+        repeating-linear-gradient(90deg, rgba(255, 244, 198, 0.018) 0 1px, transparent 1px 5px);
+      z-index: 4;
+    }
+
+    .app-shell {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: clamp(1rem, 2vw, 1.6rem);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: clamp(0.6rem, 1.6vw, 1.1rem);
+      border: 1px solid rgba(229, 190, 106, 0.42);
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 1px rgba(36, 22, 12, 0.85), 0 0 50px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem clamp(0.5rem, 2vw, 1.4rem);
+    }
+
+    .seal {
+      display: inline-grid;
+      place-items: center;
+      width: 3.1rem;
+      height: 3.1rem;
+      flex: 0 0 auto;
+      color: var(--dark-ink);
+      font-family: var(--font-title);
+      font-weight: 800;
+      letter-spacing: 0;
+      border: 2px solid rgba(73, 42, 20, 0.8);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 28%, #ffe8a8 0 12%, transparent 13%),
+        radial-gradient(circle, #d9a84f 0%, #a86e2d 64%, #5b2a18 100%);
+      box-shadow: 0 0 18px rgba(215, 161, 67, 0.45), inset 0 0 10px rgba(255, 244, 207, 0.5);
+    }
+
+    .sound-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2.65rem;
+      border: 1px solid rgba(225, 188, 102, 0.5);
+      border-radius: 999px;
+      padding: 0.55rem 0.85rem;
+      color: var(--parchment-light);
+      background: rgba(24, 17, 11, 0.64);
+      box-shadow: inset 0 0 18px rgba(230, 177, 82, 0.08), 0 8px 24px rgba(0, 0, 0, 0.22);
+      font: 700 0.82rem/1 var(--font-body);
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .sound-toggle:hover,
+    .sound-toggle:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(246, 215, 142, 0.86);
+      background: rgba(44, 28, 16, 0.78);
+      outline: none;
+    }
+
+    .sound-toggle[aria-pressed="true"] {
+      color: #241507;
+      border-color: rgba(255, 228, 151, 0.9);
+      background: linear-gradient(180deg, #f2cf77, #c79335);
+    }
+
+    .map-stage {
+      position: relative;
+      z-index: 6;
+      display: grid;
+      place-items: center;
+      min-height: 0;
+      padding: clamp(0.6rem, 1.6vw, 1.2rem);
+    }
+
+    .map-board {
+      position: relative;
+      width: min(100%, 1280px);
+      min-height: min(75vh, 760px);
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(92, 54, 25, 0.95);
+      border-radius: 22px;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 24% 20%, rgba(250, 224, 157, 0.75), transparent 20%),
+        radial-gradient(circle at 70% 72%, rgba(214, 178, 104, 0.65), transparent 24%),
+        linear-gradient(145deg, #dfc88d 0%, #caa86a 42%, #a67644 100%);
+      box-shadow:
+        inset 0 0 0 10px rgba(83, 43, 20, 0.28),
+        inset 0 0 80px rgba(74, 38, 17, 0.48),
+        0 24px 70px rgba(0, 0, 0, 0.42);
+    }
+
+    .map-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(8deg, rgba(84, 47, 22, 0.045) 0 2px, transparent 2px 9px),
+        radial-gradient(circle at 50% 50%, transparent 0 52%, rgba(41, 24, 13, 0.27) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .map-board::after {
+      content: "";
+      position: absolute;
+      inset: 0.75rem;
+      border: 2px solid rgba(86, 47, 23, 0.42);
+      border-radius: 15px;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .title-block {
+      position: absolute;
+      top: clamp(1rem, 2.7vw, 2rem);
+      left: 50%;
+      z-index: 7;
+      width: min(90%, 660px);
+      transform: translateX(-50%);
+      text-align: center;
+      color: #28180c;
+      text-shadow: 0 1px 0 rgba(255, 239, 187, 0.7);
+    }
+
+    .title-block h1 {
+      margin: 0;
+      font-family: var(--font-title);
+      font-size: clamp(2.25rem, 5.1vw, 5.7rem);
+      line-height: 0.9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .title-block .chronicles {
+      margin: 0.35rem 0 0;
+      font-family: var(--font-title);
+      font-size: clamp(0.95rem, 1.65vw, 1.45rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #5a2d18;
+    }
+
+    .title-block .subtitle {
+      margin: 0.5rem auto 0;
+      width: min(100%, 34rem);
+      color: #533920;
+      font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+      font-style: italic;
+    }
+
+    .cartography,
+    .paths,
+    .decorations {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .paths {
+      z-index: 2;
+    }
+
+    .territory-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 6;
+    }
+
+    .territory {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      width: clamp(8.8rem, 13vw, 12rem);
+      min-height: 7.4rem;
+      transform: translate(-50%, -50%);
+      border: 0;
+      border-radius: 9px;
+      padding: 0.8rem 0.75rem 0.72rem;
+      color: #2b190d;
+      font-family: var(--font-body);
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255, 242, 200, 0.96), rgba(218, 182, 107, 0.94)),
+        repeating-linear-gradient(90deg, rgba(69, 38, 18, 0.08) 0 1px, transparent 1px 7px);
+      box-shadow: 0 10px 20px rgba(56, 30, 14, 0.35), inset 0 0 0 1px rgba(85, 48, 24, 0.55);
+      cursor: pointer;
+      transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+    }
+
+    .territory::before,
+    .territory::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 0.36rem;
+      border-radius: 50%;
+      background: rgba(83, 48, 24, 0.26);
+    }
+
+    .territory::before {
+      top: -0.16rem;
+    }
+
+    .territory::after {
+      bottom: -0.16rem;
+    }
+
+    .territory:hover,
+    .territory:focus-visible {
+      transform: translate(-50%, -54%) scale(1.045);
+      outline: none;
+      filter: saturate(1.08);
+      box-shadow: 0 0 0 3px rgba(246, 211, 125, 0.4), 0 16px 30px rgba(56, 30, 14, 0.42);
+    }
+
+    .territory[data-active="true"] {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 213, 0.74), transparent 38%),
+        linear-gradient(180deg, rgba(255, 236, 178, 0.98), rgba(209, 151, 65, 0.96));
+    }
+
+    .territory[data-active="true"] .territory-icon {
+      animation: pulseGlow 2.9s ease-in-out infinite;
+    }
+
+    .territory[data-active="false"] {
+      color: #c7b895;
+      background:
+        linear-gradient(180deg, rgba(52, 42, 33, 0.92), rgba(33, 28, 25, 0.92)),
+        repeating-linear-gradient(90deg, rgba(255, 236, 180, 0.04) 0 1px, transparent 1px 8px);
+      box-shadow: 0 10px 20px rgba(22, 15, 10, 0.38), inset 0 0 0 1px rgba(183, 146, 79, 0.24);
+    }
+
+    .territory-icon {
+      display: block;
+      font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+      text-shadow: 0 0 14px rgba(255, 227, 148, 0.55);
+    }
+
+    .territory-name {
+      display: block;
+      font-family: var(--font-title);
+      font-size: clamp(0.68rem, 1vw, 0.86rem);
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .territory-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 1.4rem;
+      margin-top: 0.55rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      color: #f8edc9;
+      background: rgba(42, 24, 12, 0.72);
+      font-size: 0.66rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .legend {
+      position: absolute;
+      left: clamp(1.2rem, 2.2vw, 2rem);
+      bottom: clamp(1rem, 2vw, 1.6rem);
+      z-index: 7;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      max-width: min(36rem, 72%);
+      color: #2e1b0e;
+      font-size: clamp(0.73rem, 1vw, 0.88rem);
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      min-height: 1.75rem;
+      border: 1px solid rgba(82, 48, 24, 0.35);
+      border-radius: 999px;
+      padding: 0.25rem 0.62rem;
+      background: rgba(243, 221, 165, 0.72);
+      box-shadow: 0 5px 15px rgba(70, 38, 18, 0.18);
+    }
+
+    .compass {
+      position: absolute;
+      right: clamp(1.1rem, 2.3vw, 2rem);
+      bottom: clamp(1rem, 2vw, 1.5rem);
+      z-index: 7;
+      width: clamp(4.2rem, 7vw, 6.2rem);
+      aspect-ratio: 1;
+      border: 1px solid rgba(75, 43, 21, 0.45);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(252, 232, 174, 0.7), rgba(132, 83, 40, 0.16));
+      box-shadow: inset 0 0 20px rgba(55, 32, 15, 0.25);
+    }
+
+    .compass::before,
+    .compass::after {
+      content: "";
+      position: absolute;
+      inset: 14%;
+      clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
+      background: rgba(63, 35, 17, 0.7);
+    }
+
+    .compass::after {
+      inset: 28%;
+      transform: rotate(45deg);
+      background: rgba(175, 112, 43, 0.72);
+    }
+
+    .footer-note {
+      position: relative;
+      z-index: 8;
+      padding: 0.2rem clamp(0.5rem, 2vw, 1.4rem) 0.7rem;
+      color: rgba(246, 234, 200, 0.76);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      background: rgba(9, 7, 5, 0.66);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 180ms ease;
+    }
+
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      position: relative;
+      width: min(95vw, 580px);
+      color: #2a190d;
+      border: 1px solid rgba(96, 55, 23, 0.75);
+      border-radius: 16px;
+      padding: clamp(1.2rem, 3vw, 2rem);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 246, 210, 0.85), transparent 28%),
+        linear-gradient(180deg, #f1dfae, #d3ab68);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.52), inset 0 0 0 8px rgba(112, 64, 28, 0.12);
+      transform: translateY(12px) scale(0.98);
+      transition: transform 180ms ease;
+    }
+
+    .modal-backdrop.is-open .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal::before,
+    .modal::after {
+      content: "";
+      position: absolute;
+      left: 1.2rem;
+      right: 1.2rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: rgba(82, 45, 20, 0.2);
+    }
+
+    .modal::before {
+      top: -0.28rem;
+    }
+
+    .modal::after {
+      bottom: -0.28rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.75rem;
+      display: grid;
+      place-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      border: 1px solid rgba(77, 43, 20, 0.36);
+      border-radius: 50%;
+      color: #2a190d;
+      background: rgba(255, 242, 198, 0.4);
+      font-size: 1.25rem;
+      cursor: pointer;
+    }
+
+    .modal h2 {
+      margin: 0 2.2rem 0.75rem 0;
+      font-family: var(--font-title);
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .modal p {
+      margin: 0 0 1.25rem;
+      color: #3d2917;
+      line-height: 1.65;
+    }
+
+    .resource-list {
+      display: grid;
+      gap: 0.55rem;
+      margin: 0 0 1.2rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .resource-list li {
+      border-left: 3px solid rgba(143, 72, 38, 0.55);
+      padding: 0.35rem 0.65rem;
+      background: rgba(255, 246, 217, 0.34);
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .primary-action,
+    .secondary-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2.75rem;
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .primary-action {
+      color: #fff5d7;
+      border: 1px solid rgba(66, 35, 16, 0.58);
+      background: linear-gradient(180deg, #9d4c2d, #5d2c1b);
+      box-shadow: 0 9px 20px rgba(70, 31, 16, 0.25);
+    }
+
+    .secondary-action {
+      color: #3b2412;
+      border: 1px solid rgba(70, 43, 24, 0.3);
+      background: rgba(255, 242, 205, 0.52);
+    }
+
+    .locked-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.4rem;
+      color: #5c2b1b;
+      font-weight: 800;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(255, 225, 128, 0.45));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 16px rgba(255, 240, 160, 0.9));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .map-board {
+        min-height: 980px;
+        aspect-ratio: auto;
+      }
+
+      .title-block {
+        top: 1.6rem;
+      }
+
+      .territory {
+        width: min(42vw, 11rem);
+      }
+
+      .legend {
+        max-width: calc(100% - 8rem);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .seal {
+        width: 2.65rem;
+        height: 2.65rem;
+      }
+
+      .sound-toggle {
+        max-width: 12rem;
+        line-height: 1.25;
+        border-radius: 16px;
+      }
+
+      .map-stage {
+        padding-inline: 0;
+      }
+
+      .map-board {
+        min-height: 1120px;
+        border-radius: 16px;
+      }
+
+      .title-block h1 {
+        font-size: clamp(2rem, 13vw, 3.3rem);
+      }
+
+      .legend {
+        left: 1rem;
+        right: 1rem;
+        bottom: 6rem;
+        max-width: none;
+      }
+
+      .compass {
+        right: 1rem;
+        bottom: 1rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <main class="hero" aria-labelledby="page-title">
+      <header class="topbar">
+        <div class="seal" aria-hidden="true">8</div>
+        <button class="sound-toggle" type="button" aria-pressed="false" id="soundToggle">
+          <span aria-hidden="true">🔊</span>
+          <span>Activar ambiente</span>
+        </button>
+      </header>
+
+      <section class="map-stage" aria-label="Mapa del Reino Matemático">
+        <div class="map-board">
+          <div class="title-block">
+            <h1 id="page-title">Reino Matemático</h1>
+            <p class="chronicles">Crónicas de los Exploradores de 8.º</p>
+            <p class="subtitle">"Cada territorio guarda un secreto matemático."</p>
+          </div>
+
+          <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#3a2110" flood-opacity="0.28"/>
+              </filter>
+              <linearGradient id="river" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#5f9aa2" stop-opacity="0.72"/>
+                <stop offset="100%" stop-color="#2d5968" stop-opacity="0.72"/>
+              </linearGradient>
+              <pattern id="grain" width="38" height="38" patternUnits="userSpaceOnUse">
+                <circle cx="7" cy="8" r="1.1" fill="#5e3217" opacity="0.12"/>
+                <circle cx="28" cy="24" r="0.9" fill="#fff1bb" opacity="0.13"/>
+              </pattern>
+            </defs>
+
+            <path d="M-40 708 C160 610 214 758 398 676 C584 596 550 470 704 430 C934 370 924 624 1108 588 C1278 556 1324 410 1644 434 L1644 940 L-40 940 Z" fill="#7f5c33" opacity="0.28"/>
+            <path d="M-40 300 C180 250 274 355 458 305 C624 260 690 160 854 194 C1040 234 1132 118 1340 142 C1486 160 1540 245 1640 215" fill="none" stroke="#7b4b25" stroke-width="3" opacity="0.2"/>
+            <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900" fill="none" stroke="url(#river)" stroke-width="42" opacity="0.55"/>
+            <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900" fill="none" stroke="#e8d7a5" stroke-width="6" opacity="0.14"/>
+            <rect width="1600" height="900" fill="url(#grain)"/>
+
+            <g filter="url(#softShadow)" opacity="0.96">
+              <path d="M1280 120 L1340 260 L1215 260 Z" fill="#6d6a5f"/>
+              <path d="M1350 90 L1432 285 L1260 285 Z" fill="#5f5b54"/>
+              <path d="M1450 150 L1516 300 L1370 300 Z" fill="#716c61"/>
+              <path d="M1318 142 L1340 260 L1282 260 Z" fill="#39352f" opacity="0.28"/>
+              <path d="M1350 90 L1388 285 L1260 285 Z" fill="#38342f" opacity="0.3"/>
+              <path d="M420 680 L500 845 L328 845 Z" fill="#655e53"/>
+              <path d="M520 630 L615 880 L410 880 Z" fill="#736a5a"/>
+              <path d="M610 710 L688 882 L510 882 Z" fill="#5f5b50"/>
+            </g>
+
+            <g opacity="0.9">
+              <path d="M110 585 C148 520 210 518 244 584 C198 550 154 552 110 585 Z" fill="#24442f"/>
+              <path d="M80 635 C170 555 292 572 354 644 C260 604 158 600 80 635 Z" fill="#2f5737"/>
+              <path d="M1015 300 C1074 218 1195 226 1250 312 C1178 262 1086 262 1015 300 Z" fill="#2d5135"/>
+              <path d="M970 354 C1072 274 1216 282 1308 370 C1195 326 1070 326 970 354 Z" fill="#396a3f"/>
+            </g>
+
+            <g opacity="0.55">
+              <path d="M133 610 l18 -58 l18 58 Z" fill="#1f3d2d"/>
+              <path d="M182 610 l20 -70 l22 70 Z" fill="#254b34"/>
+              <path d="M230 615 l19 -60 l22 60 Z" fill="#1f3d2d"/>
+              <path d="M1055 340 l22 -78 l25 78 Z" fill="#21422d"/>
+              <path d="M1110 348 l27 -88 l27 88 Z" fill="#2d5839"/>
+              <path d="M1180 342 l24 -82 l28 82 Z" fill="#244830"/>
+            </g>
+          </svg>
+
+          <svg class="paths" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M320 574 C460 500 505 445 610 398 C720 350 838 340 980 365 C1105 388 1200 330 1315 240" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.55"/>
+            <path d="M610 398 C685 498 773 562 900 608 C1030 655 1146 640 1294 620" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.45"/>
+            <path d="M900 608 C828 695 720 742 560 770" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.42"/>
+            <path d="M900 608 C1018 530 1114 486 1248 474" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.42"/>
+          </svg>
+
+          <div class="territory-layer" id="territoryLayer" aria-label="Territorios disponibles"></div>
+
+          <div class="legend" aria-label="Leyenda del mapa">
+            <span><strong>Activo</strong> territorio disponible</span>
+            <span><strong>Sellado</strong> se abrirá durante el curso</span>
+          </div>
+
+          <div class="compass" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <p class="footer-note">Portal preparado para GitHub Pages. Agrega nuevos recursos editando solamente el arreglo <strong>territorios</strong>.</p>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+    <article class="modal">
+      <button class="modal-close" type="button" id="modalClose" aria-label="Cerrar ventana">×</button>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <ul class="resource-list" id="resourceList"></ul>
+      <div class="modal-actions" id="modalActions"></div>
+    </article>
+  </div>
+
+  <script>
+    const territorios = [
+      {
+        id: "laboratorio-alquimistas",
+        nombre: "Laboratorio de los Alquimistas",
+        icono: "⚗",
+        activo: true,
+        tipo: "Applet HTML",
+        descripcion: "Los maestros alquimistas descubrieron que algunas mezclas conservan una relación secreta entre sus ingredientes.",
+        boton: "Entrar al Laboratorio",
+        enlace: "https://laprofe2007.github.io/matematica-8ebi/Fabrica_Pintura_Applet_v3.html",
+        posicion: { desktop: { x: "20%", y: "64%" }, mobile: { x: "31%", y: "31%" } },
+        recursos: [
+          { etiqueta: "Relaciones entre cantidades", tipo: "Concepto" },
+          { etiqueta: "Mezclas proporcionales", tipo: "Exploración" }
+        ]
+      },
+      {
+        id: "ciudad-proporciones",
+        nombre: "Ciudad de las Proporciones",
+        icono: "♜",
+        activo: true,
+        tipo: "Interactivo",
+        descripcion: "Comerciantes, viajeros y constructores utilizan una misma regla matemática para organizar la ciudad.",
+        boton: "Explorar la Ciudad",
+        enlace: "https://laprofe2007.github.io/matematica-8ebi/Ciudad_Proporciones_Interactivo.html",
+        posicion: { desktop: { x: "38%", y: "45%" }, mobile: { x: "69%", y: "39%" } },
+        recursos: [
+          { etiqueta: "Razones y proporciones", tipo: "Concepto" },
+          { etiqueta: "Problemas de escala", tipo: "Actividad" }
+        ]
+      },
+      {
+        id: "torre-constante-k",
+        nombre: "Torre de la Constante K",
+        icono: "K",
+        activo: false,
+        tipo: "Territorio sellado",
+        descripcion: "Solo quienes comprendan los secretos de las proporciones podrán ingresar.",
+        posicion: { desktop: { x: "61%", y: "43%" }, mobile: { x: "31%", y: "50%" } },
+        recursos: [
+          { etiqueta: "Constante de proporcionalidad", tipo: "Próximamente" }
+        ]
+      },
+      {
+        id: "castillo-probabilidad",
+        nombre: "Castillo de la Probabilidad",
+        icono: "⚂",
+        activo: false,
+        tipo: "Territorio sellado",
+        descripcion: "Los dados del destino aún no han sido lanzados.",
+        posicion: { desktop: { x: "82%", y: "28%" }, mobile: { x: "69%", y: "58%" } },
+        recursos: [
+          { etiqueta: "Azar, eventos y experimentos", tipo: "Próximamente" }
+        ]
+      },
+      {
+        id: "valle-funciones",
+        nombre: "Valle de las Funciones",
+        icono: "ƒ",
+        activo: false,
+        tipo: "Territorio sellado",
+        descripcion: "Los patrones todavía permanecen ocultos.",
+        posicion: { desktop: { x: "80%", y: "68%" }, mobile: { x: "31%", y: "67%" } },
+        recursos: [
+          { etiqueta: "Patrones y variación", tipo: "Próximamente" }
+        ]
+      },
+      {
+        id: "templo-geometria",
+        nombre: "Templo de la Geometría",
+        icono: "△",
+        activo: false,
+        tipo: "Territorio sellado",
+        descripcion: "Los constructores guardan sus secretos.",
+        posicion: { desktop: { x: "56%", y: "72%" }, mobile: { x: "69%", y: "76%" } },
+        recursos: [
+          { etiqueta: "Figuras, medidas y construcción", tipo: "Próximamente" }
+        ]
+      },
+      {
+        id: "minas-algebra",
+        nombre: "Minas del Álgebra",
+        icono: "∑",
+        activo: false,
+        tipo: "Territorio sellado",
+        descripcion: "Las fórmulas duermen bajo la montaña.",
+        posicion: { desktop: { x: "35%", y: "82%" }, mobile: { x: "50%", y: "88%" } },
+        recursos: [
+          { etiqueta: "Expresiones y ecuaciones", tipo: "Próximamente" }
+        ]
+      }
+    ];
+
+    const layer = document.querySelector("#territoryLayer");
+    const modalBackdrop = document.querySelector("#modalBackdrop");
+    const modalTitle = document.querySelector("#modalTitle");
+    const modalDescription = document.querySelector("#modalDescription");
+    const resourceList = document.querySelector("#resourceList");
+    const modalActions = document.querySelector("#modalActions");
+    const modalClose = document.querySelector("#modalClose");
+    const soundToggle = document.querySelector("#soundToggle");
+    let ultimoFoco = null;
+
+    function getPosition(territorio) {
+      const isSmallScreen = window.matchMedia("(max-width: 900px)").matches;
+      return isSmallScreen ? territorio.posicion.mobile : territorio.posicion.desktop;
+    }
+
+    function renderTerritorios() {
+      layer.innerHTML = "";
+
+      territorios.forEach((territorio, index) => {
+        const position = getPosition(territorio);
+        const button = document.createElement("button");
+        button.className = "territory";
+        button.type = "button";
+        button.dataset.active = String(territorio.activo);
+        button.dataset.id = territorio.id;
+        button.style.setProperty("--x", position.x);
+        button.style.setProperty("--y", position.y);
+        button.setAttribute("aria-label", `${territorio.nombre}. ${territorio.activo ? "Disponible" : "Bloqueado"}`);
+        button.innerHTML = `
+          <span class="territory-icon" aria-hidden="true">${territorio.icono}</span>
+          <span class="territory-name">${territorio.nombre}</span>
+          <span class="territory-status">${territorio.activo ? "Activo" : "Sellado"}</span>
+        `;
+        button.addEventListener("click", () => abrirTerritorio(index));
+        layer.appendChild(button);
+      });
+    }
+
+    function abrirTerritorio(index) {
+      const territorio = territorios[index];
+      ultimoFoco = document.activeElement;
+      modalTitle.textContent = territorio.nombre;
+      modalDescription.textContent = territorio.descripcion;
+
+      resourceList.innerHTML = "";
+      (territorio.recursos || []).forEach((recurso) => {
+        const item = document.createElement("li");
+        item.innerHTML = `<strong>${recurso.tipo}:</strong> ${recurso.etiqueta}`;
+        resourceList.appendChild(item);
+      });
+
+      modalActions.innerHTML = "";
+      if (territorio.activo && territorio.enlace) {
+        const action = document.createElement("a");
+        action.className = "primary-action";
+        action.href = territorio.enlace;
+        action.target = "_blank";
+        action.rel = "noopener";
+        action.textContent = territorio.boton || "Ingresar";
+        modalActions.appendChild(action);
+      } else {
+        const locked = document.createElement("span");
+        locked.className = "locked-note";
+        locked.textContent = "Territorio bloqueado";
+        modalActions.appendChild(locked);
+      }
+
+      const closeAction = document.createElement("button");
+      closeAction.className = "secondary-action";
+      closeAction.type = "button";
+      closeAction.textContent = "Volver al mapa";
+      closeAction.addEventListener("click", cerrarModal);
+      modalActions.appendChild(closeAction);
+
+      modalBackdrop.classList.add("is-open");
+      modalClose.focus();
+    }
+
+    function cerrarModal() {
+      modalBackdrop.classList.remove("is-open");
+      if (ultimoFoco) {
+        ultimoFoco.focus();
+      }
+    }
+
+    function prepararAmbiente() {
+      soundToggle.addEventListener("click", () => {
+        const activo = soundToggle.getAttribute("aria-pressed") === "true";
+        soundToggle.setAttribute("aria-pressed", String(!activo));
+        soundToggle.querySelector("span:last-child").textContent = activo ? "Activar ambiente" : "Ambiente listo";
+
+        // Punto de extensión: reemplazar por un elemento Audio cuando se agregue la pista ambiental.
+        window.reinoMatematicoAudio = window.reinoMatematicoAudio || {
+          estado: "preparado",
+          archivoSugerido: "ambiente_fantasy.mp3"
+        };
+      });
+    }
+
+    modalClose.addEventListener("click", cerrarModal);
+    modalBackdrop.addEventListener("click", (event) => {
+      if (event.target === modalBackdrop) {
+        cerrarModal();
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modalBackdrop.classList.contains("is-open")) {
+        cerrarModal();
+      }
+    });
+
+    window.addEventListener("resize", renderTerritorios);
+
+    renderTerritorios();
+    prepararAmbiente();
+  </script>
+</body>
+</html>

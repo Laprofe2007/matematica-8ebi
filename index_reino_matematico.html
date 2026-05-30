@@ -3,975 +3,709 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reino Matemático | Crónicas de los Exploradores de 8.º</title>
+  <title>Reino de las Proporciones | Reinos Matemáticos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #2a1c12;
-      --dark-ink: #130e0a;
-      --parchment: #ead7a8;
-      --parchment-light: #f6eac8;
-      --gold: #c9983f;
-      --amber: #e6bb65;
-      --ruby: #8f2f2f;
-      --moss: #416b42;
-      --pine: #233d2f;
-      --water: #3f7483;
-      --night: #171311;
-      --shadow: rgba(20, 12, 5, 0.55);
-      --glow: rgba(236, 190, 93, 0.55);
-      --locked: rgba(39, 32, 27, 0.72);
+      --parchment-light: #fdf5e0;
+      --parchment:       #f0e0b0;
+      --ink:             #2a1c12;
+      --ink-mid:         #5c3820;
+      --ink-light:       rgba(42, 28, 18, 0.52);
+      --gold:            #c9983f;
+      --amber:           #b07828;
+      --border-gold:     rgba(201, 152, 63, 0.6);
+      --shadow:          rgba(40, 24, 8, 0.2);
       --font-title: "Cinzel", "Georgia", serif;
-      --font-body: "Libre Baskerville", "Georgia", serif;
+      --font-body:  "Libre Baskerville", "Georgia", serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       min-height: 100vh;
       overflow-x: hidden;
-      color: var(--parchment-light);
       font-family: var(--font-body);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(226, 187, 101, 0.18), transparent 24rem),
-        radial-gradient(circle at 82% 20%, rgba(76, 121, 114, 0.18), transparent 23rem),
-        linear-gradient(135deg, #100c08 0%, #24170d 42%, #15110d 100%);
+      color: var(--ink);
+      background-color: #f2e2b0;
+      background-image:
+        radial-gradient(ellipse 80% 55% at 22% 15%, rgba(255,225,140,0.38), transparent 55%),
+        radial-gradient(ellipse 65% 50% at 80% 85%, rgba(205,165,80,0.28), transparent 55%),
+        linear-gradient(148deg, #faf2d8 0%, #f0e0b0 48%, #f5e8c0 100%);
     }
 
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.22;
-      background-image:
-        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mix-blend-mode: screen;
-      z-index: 3;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 28px,
+        rgba(160,120,50,0.055) 28px, rgba(160,120,50,0.055) 29px
+      );
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.48) 100%),
-        repeating-linear-gradient(90deg, rgba(255, 244, 198, 0.018) 0 1px, transparent 1px 5px);
-      z-index: 4;
-    }
-
-    .app-shell {
-      position: relative;
-      min-height: 100vh;
-      isolation: isolate;
-    }
+    .app-shell { position: relative; min-height: 100vh; z-index: 1; }
 
     .hero {
       position: relative;
       min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: clamp(1rem, 2vw, 1.6rem);
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: clamp(0.6rem, 1.6vw, 1.1rem);
-      border: 1px solid rgba(229, 190, 106, 0.42);
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 1px rgba(36, 22, 12, 0.85), 0 0 50px rgba(0, 0, 0, 0.25);
-      pointer-events: none;
-      z-index: 5;
-    }
-
+    /* ── Topbar ── */
     .topbar {
-      position: relative;
-      z-index: 8;
+      position: relative; z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      padding: 0.5rem clamp(0.5rem, 2vw, 1.4rem);
+      padding: 1rem 1.5rem;
+      gap: 1rem; flex-wrap: wrap;
     }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-title);
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .breadcrumb a   { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb .sep  { color: var(--ink-light); }
+    .breadcrumb .curr { color: var(--ink); opacity: .45; }
 
     .seal {
-      display: inline-grid;
-      place-items: center;
-      width: 3.1rem;
-      height: 3.1rem;
-      flex: 0 0 auto;
-      color: var(--dark-ink);
-      font-family: var(--font-title);
-      font-weight: 800;
-      letter-spacing: 0;
-      border: 2px solid rgba(73, 42, 20, 0.8);
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 34% 28%, #ffe8a8 0 12%, transparent 13%),
-        radial-gradient(circle, #d9a84f 0%, #a86e2d 64%, #5b2a18 100%);
-      box-shadow: 0 0 18px rgba(215, 161, 67, 0.45), inset 0 0 10px rgba(255, 244, 207, 0.5);
+      width: 3rem; height: 3rem; border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: grid; place-items: center;
+      font-family: var(--font-title); font-size: 1.1rem; color: var(--amber);
+      background: var(--parchment-light);
+      box-shadow: 0 2px 8px var(--shadow);
+      flex-shrink: 0;
     }
 
-    .sound-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      min-height: 2.65rem;
-      border: 1px solid rgba(225, 188, 102, 0.5);
-      border-radius: 999px;
-      padding: 0.55rem 0.85rem;
-      color: var(--parchment-light);
-      background: rgba(24, 17, 11, 0.64);
-      box-shadow: inset 0 0 18px rgba(230, 177, 82, 0.08), 0 8px 24px rgba(0, 0, 0, 0.22);
-      font: 700 0.82rem/1 var(--font-body);
-      cursor: pointer;
-      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-    }
-
-    .sound-toggle:hover,
-    .sound-toggle:focus-visible {
-      transform: translateY(-1px);
-      border-color: rgba(246, 215, 142, 0.86);
-      background: rgba(44, 28, 16, 0.78);
-      outline: none;
-    }
-
-    .sound-toggle[aria-pressed="true"] {
-      color: #241507;
-      border-color: rgba(255, 228, 151, 0.9);
-      background: linear-gradient(180deg, #f2cf77, #c79335);
-    }
-
+    /* ── Map stage ── */
     .map-stage {
-      position: relative;
-      z-index: 6;
-      display: grid;
-      place-items: center;
-      min-height: 0;
-      padding: clamp(0.6rem, 1.6vw, 1.2rem);
+      flex: 1; display: flex; align-items: stretch;
+      padding: 0 1.5rem 2rem;
     }
 
     .map-board {
-      position: relative;
-      width: min(100%, 1280px);
-      min-height: min(75vh, 760px);
-      aspect-ratio: 16 / 9;
-      border: 1px solid rgba(92, 54, 25, 0.95);
-      border-radius: 22px;
+      position: relative; width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #e8d488;
+      background-image:
+        radial-gradient(ellipse at 50% 30%, rgba(255,242,185,0.45), transparent 58%),
+        linear-gradient(to bottom right, #f0e098, #dcc075);
+      border-radius: 12px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 4px 28px var(--shadow), 0 0 0 4px rgba(201,152,63,0.12);
       overflow: hidden;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 24% 20%, rgba(250, 224, 157, 0.75), transparent 20%),
-        radial-gradient(circle at 70% 72%, rgba(214, 178, 104, 0.65), transparent 24%),
-        linear-gradient(145deg, #dfc88d 0%, #caa86a 42%, #a67644 100%);
-      box-shadow:
-        inset 0 0 0 10px rgba(83, 43, 20, 0.28),
-        inset 0 0 80px rgba(74, 38, 17, 0.48),
-        0 24px 70px rgba(0, 0, 0, 0.42);
     }
 
-    .map-board::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(8deg, rgba(84, 47, 22, 0.045) 0 2px, transparent 2px 9px),
-        radial-gradient(circle at 50% 50%, transparent 0 52%, rgba(41, 24, 13, 0.27) 100%);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .map-board::after {
-      content: "";
-      position: absolute;
-      inset: 0.75rem;
-      border: 2px solid rgba(86, 47, 23, 0.42);
-      border-radius: 15px;
-      pointer-events: none;
-      z-index: 4;
-    }
-
+    /* ── Title block ── */
     .title-block {
-      position: absolute;
-      top: clamp(1rem, 2.7vw, 2rem);
-      left: 50%;
-      z-index: 7;
-      width: min(90%, 660px);
+      position: absolute; top: 1.5rem; left: 50%;
       transform: translateX(-50%);
-      text-align: center;
-      color: #28180c;
-      text-shadow: 0 1px 0 rgba(255, 239, 187, 0.7);
+      text-align: center; z-index: 5;
+      pointer-events: none; width: 90%;
     }
 
     .title-block h1 {
-      margin: 0;
       font-family: var(--font-title);
-      font-size: clamp(2.25rem, 5.1vw, 5.7rem);
-      line-height: 0.9;
-      letter-spacing: 0;
-      text-transform: uppercase;
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 800; color: var(--ink);
+      letter-spacing: 0.04em; line-height: 1.1;
     }
 
-    .title-block .chronicles {
-      margin: 0.35rem 0 0;
+    .chronicles {
+      display: block;
       font-family: var(--font-title);
-      font-size: clamp(0.95rem, 1.65vw, 1.45rem);
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #5a2d18;
+      font-size: clamp(0.55rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-mid); margin-top: 0.35rem;
     }
 
-    .title-block .subtitle {
-      margin: 0.5rem auto 0;
-      width: min(100%, 34rem);
-      color: #533920;
-      font-size: clamp(0.85rem, 1.35vw, 1.05rem);
-      font-style: italic;
+    .subtitle {
+      display: block;
+      font-size: clamp(0.65rem, 1.6vw, 0.85rem);
+      font-style: italic; color: var(--ink-light); margin-top: 0.2rem;
     }
 
-    .cartography,
-    .paths,
-    .decorations {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
+    /* ── SVG layers ── */
+    .cartography, .paths {
+      position: absolute; inset: 0; width: 100%; height: 100%;
     }
+    .cartography { z-index: 1; }
+    .paths       { z-index: 2; }
 
-    .paths {
-      z-index: 2;
-    }
+    /* ── Territory layer ── */
+    .territory-layer { position: absolute; inset: 0; z-index: 6; }
 
-    .territory-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 6;
-    }
-
+    /* ── Territory button ── */
     .territory {
       position: absolute;
-      left: var(--x);
-      top: var(--y);
-      width: clamp(8.8rem, 13vw, 12rem);
-      min-height: 7.4rem;
+      left: var(--x); top: var(--y);
       transform: translate(-50%, -50%);
-      border: 0;
-      border-radius: 9px;
-      padding: 0.8rem 0.75rem 0.72rem;
-      color: #2b190d;
+      width: min(38vw, 10.5rem);
+      background: rgba(253,245,224,0.92);
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 0.7rem 0.85rem 0.6rem;
+      cursor: pointer; text-align: center;
       font-family: var(--font-body);
-      text-align: center;
-      background:
-        linear-gradient(180deg, rgba(255, 242, 200, 0.96), rgba(218, 182, 107, 0.94)),
-        repeating-linear-gradient(90deg, rgba(69, 38, 18, 0.08) 0 1px, transparent 1px 7px);
-      box-shadow: 0 10px 20px rgba(56, 30, 14, 0.35), inset 0 0 0 1px rgba(85, 48, 24, 0.55);
-      cursor: pointer;
-      transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      box-shadow: 0 3px 14px var(--shadow);
     }
-
-    .territory::before,
-    .territory::after {
-      content: "";
-      position: absolute;
-      left: 8%;
-      right: 8%;
-      height: 0.36rem;
-      border-radius: 50%;
-      background: rgba(83, 48, 24, 0.26);
-    }
-
-    .territory::before {
-      top: -0.16rem;
-    }
-
-    .territory::after {
-      bottom: -0.16rem;
-    }
-
-    .territory:hover,
-    .territory:focus-visible {
-      transform: translate(-50%, -54%) scale(1.045);
+    .territory:hover, .territory:focus-visible {
+      transform: translate(-50%, calc(-50% - 4px));
+      background: rgba(255,250,232,0.98);
+      border-color: var(--amber);
+      box-shadow: 0 7px 22px var(--shadow);
       outline: none;
-      filter: saturate(1.08);
-      box-shadow: 0 0 0 3px rgba(246, 211, 125, 0.4), 0 16px 30px rgba(56, 30, 14, 0.42);
     }
+    .territory:active { transform: translate(-50%, calc(-50% + 1px)); }
 
-    .territory[data-active="true"] {
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 213, 0.74), transparent 38%),
-        linear-gradient(180deg, rgba(255, 236, 178, 0.98), rgba(209, 151, 65, 0.96));
+    .territory-icon   { display: block; font-size: 1.5rem; line-height: 1.2; margin-bottom: .25rem; }
+    .territory-name   {
+      display: block; font-family: var(--font-title);
+      font-size: clamp(.62rem, 1.6vw, .82rem); font-weight: 600;
+      color: var(--ink); letter-spacing: .02em; line-height: 1.3; margin-bottom: .2rem;
     }
-
-    .territory[data-active="true"] .territory-icon {
-      animation: pulseGlow 2.9s ease-in-out infinite;
-    }
-
-    .territory[data-active="false"] {
-      color: #c7b895;
-      background:
-        linear-gradient(180deg, rgba(52, 42, 33, 0.92), rgba(33, 28, 25, 0.92)),
-        repeating-linear-gradient(90deg, rgba(255, 236, 180, 0.04) 0 1px, transparent 1px 8px);
-      box-shadow: 0 10px 20px rgba(22, 15, 10, 0.38), inset 0 0 0 1px rgba(183, 146, 79, 0.24);
-    }
-
-    .territory-icon {
-      display: block;
-      font-size: clamp(1.55rem, 2.6vw, 2.25rem);
-      line-height: 1;
-      margin-bottom: 0.35rem;
-      text-shadow: 0 0 14px rgba(255, 227, 148, 0.55);
-    }
-
-    .territory-name {
-      display: block;
-      font-family: var(--font-title);
-      font-size: clamp(0.68rem, 1vw, 0.86rem);
-      font-weight: 800;
-      line-height: 1.1;
-      text-transform: uppercase;
-    }
-
     .territory-status {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 1.4rem;
-      margin-top: 0.55rem;
-      padding: 0.18rem 0.5rem;
-      border-radius: 999px;
-      color: #f8edc9;
-      background: rgba(42, 24, 12, 0.72);
-      font-size: 0.66rem;
-      font-weight: 700;
-      text-transform: uppercase;
+      display: block; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--amber); font-family: var(--font-title);
     }
 
+    /* ── Legend / Compass ── */
     .legend {
-      position: absolute;
-      left: clamp(1.2rem, 2.2vw, 2rem);
-      bottom: clamp(1rem, 2vw, 1.6rem);
-      z-index: 7;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      max-width: min(36rem, 72%);
-      color: #2e1b0e;
-      font-size: clamp(0.73rem, 1vw, 0.88rem);
+      position: absolute; bottom: 1rem; left: 1.2rem; z-index: 7;
+      font-size: .7rem; font-family: var(--font-title); color: var(--ink-mid);
+      display: flex; flex-direction: column; gap: .25rem; letter-spacing: .06em;
     }
-
-    .legend span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      min-height: 1.75rem;
-      border: 1px solid rgba(82, 48, 24, 0.35);
-      border-radius: 999px;
-      padding: 0.25rem 0.62rem;
-      background: rgba(243, 221, 165, 0.72);
-      box-shadow: 0 5px 15px rgba(70, 38, 18, 0.18);
-    }
-
     .compass {
-      position: absolute;
-      right: clamp(1.1rem, 2.3vw, 2rem);
-      bottom: clamp(1rem, 2vw, 1.5rem);
-      z-index: 7;
-      width: clamp(4.2rem, 7vw, 6.2rem);
-      aspect-ratio: 1;
-      border: 1px solid rgba(75, 43, 21, 0.45);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(252, 232, 174, 0.7), rgba(132, 83, 40, 0.16));
-      box-shadow: inset 0 0 20px rgba(55, 32, 15, 0.25);
+      position: absolute; bottom: 1rem; right: 1.2rem; z-index: 7;
+      width: 3rem; height: 3rem; border: 1px solid var(--gold);
+      border-radius: 50%; display: grid; place-items: center; opacity: .5;
     }
+    .compass::before { content: "N"; font-family: var(--font-title); font-size: .75rem; color: var(--amber); }
 
-    .compass::before,
-    .compass::after {
-      content: "";
-      position: absolute;
-      inset: 14%;
-      clip-path: polygon(50% 0, 58% 42%, 100% 50%, 58% 58%, 50% 100%, 42% 58%, 0 50%, 42% 42%);
-      background: rgba(63, 35, 17, 0.7);
+    .back-row {
+      display: flex; justify-content: center;
+      padding: .75rem 1rem 0;
     }
-
-    .compass::after {
-      inset: 28%;
-      transform: rotate(45deg);
-      background: rgba(175, 112, 43, 0.72);
+    .btn-all-kingdoms {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .55rem 1.25rem;
+      background: rgba(201,152,63,.08);
+      border: 1px solid rgba(201,152,63,.38);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .68rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .btn-all-kingdoms:hover {
+      background: rgba(201,152,63,.16);
+      border-color: rgba(201,152,63,.65);
+      color: var(--ink);
     }
 
     .footer-note {
-      position: relative;
-      z-index: 8;
-      padding: 0.2rem clamp(0.5rem, 2vw, 1.4rem) 0.7rem;
-      color: rgba(246, 234, 200, 0.76);
-      font-size: 0.78rem;
-      text-align: center;
+      text-align: center; font-size: .75rem;
+      color: var(--ink-light); padding: .75rem 1rem 1.5rem;
     }
 
+    /* ════════════════════════
+       MODALES
+    ════════════════════════ */
     .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 30;
-      display: grid;
-      place-items: center;
-      padding: 1rem;
-      background: rgba(9, 7, 5, 0.66);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 180ms ease;
+      display: none; position: fixed; inset: 0;
+      background: rgba(20,12,5,.55);
+      backdrop-filter: blur(3px);
+      z-index: 100; padding: 1.5rem;
+      overflow-y: auto;
+      align-items: center; justify-content: center;
     }
-
-    .modal-backdrop.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .modal-backdrop.open { display: flex; }
 
     .modal {
       position: relative;
-      width: min(95vw, 580px);
-      color: #2a190d;
-      border: 1px solid rgba(96, 55, 23, 0.75);
-      border-radius: 16px;
-      padding: clamp(1.2rem, 3vw, 2rem);
-      background:
-        radial-gradient(circle at 20% 10%, rgba(255, 246, 210, 0.85), transparent 28%),
-        linear-gradient(180deg, #f1dfae, #d3ab68);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.52), inset 0 0 0 8px rgba(112, 64, 28, 0.12);
-      transform: translateY(12px) scale(0.98);
-      transition: transform 180ms ease;
+      background: var(--parchment-light);
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      padding: 2.5rem 2rem 2rem;
+      width: 100%; max-width: 480px;
+      color: var(--ink);
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
     }
-
-    .modal-backdrop.is-open .modal {
-      transform: translateY(0) scale(1);
-    }
-
-    .modal::before,
-    .modal::after {
-      content: "";
-      position: absolute;
-      left: 1.2rem;
-      right: 1.2rem;
-      height: 0.7rem;
-      border-radius: 50%;
-      background: rgba(82, 45, 20, 0.2);
-    }
-
-    .modal::before {
-      top: -0.28rem;
-    }
-
-    .modal::after {
-      bottom: -0.28rem;
+    .modal-misiones {
+      max-width: 680px;
+      background: #fdf8ed;
     }
 
     .modal-close {
-      position: absolute;
-      top: 0.7rem;
-      right: 0.75rem;
-      display: grid;
-      place-items: center;
-      width: 2.2rem;
-      height: 2.2rem;
-      border: 1px solid rgba(77, 43, 20, 0.36);
-      border-radius: 50%;
-      color: #2a190d;
-      background: rgba(255, 242, 198, 0.4);
-      font-size: 1.25rem;
-      cursor: pointer;
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: 1px solid var(--border-gold);
+      color: var(--amber); width: 2rem; height: 2rem;
+      border-radius: 3px; font-size: 1.2rem;
+      cursor: pointer; display: grid; place-items: center;
+      transition: background .2s, color .2s;
     }
+    .modal-close:hover { background: rgba(201,152,63,.12); color: var(--ink); }
 
     .modal h2 {
-      margin: 0 2.2rem 0.75rem 0;
-      font-family: var(--font-title);
-      font-size: clamp(1.55rem, 4vw, 2.35rem);
-      line-height: 1;
-      text-transform: uppercase;
+      font-family: var(--font-title); font-size: 1.18rem;
+      color: var(--ink); letter-spacing: .03em; margin-bottom: .2rem;
+    }
+    .modal-tipo {
+      display: block; font-size: .7rem; font-family: var(--font-title);
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .modal-desc {
+      font-size: .88rem; line-height: 1.65;
+      color: var(--ink-mid); margin-bottom: 1.25rem;
     }
 
-    .modal p {
-      margin: 0 0 1.25rem;
-      color: #3d2917;
-      line-height: 1.65;
-    }
-
-    .resource-list {
-      display: grid;
-      gap: 0.55rem;
-      margin: 0 0 1.2rem;
-      padding: 0;
-      list-style: none;
-    }
-
+    .resource-list { list-style: none; padding: 0; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .4rem; }
     .resource-list li {
-      border-left: 3px solid rgba(143, 72, 38, 0.55);
-      padding: 0.35rem 0.65rem;
-      background: rgba(255, 246, 217, 0.34);
+      font-size: .8rem; color: var(--ink-mid);
+      padding: .4rem .65rem;
+      background: rgba(201,152,63,.08);
+      border-left: 2px solid var(--gold); border-radius: 2px;
+    }
+    .res-tipo {
+      font-family: var(--font-title); font-size: .6rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-left: .5rem;
     }
 
-    .modal-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
+    /* Fila de botones: acción principal + volver, siempre en línea */
+    .modal-btn-row {
+      display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
     }
+    .modal-actions { display: contents; }
 
-    .primary-action,
-    .secondary-action {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 2.75rem;
-      border-radius: 999px;
-      padding: 0.75rem 1rem;
-      font-weight: 800;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .primary-action {
-      color: #fff5d7;
-      border: 1px solid rgba(66, 35, 16, 0.58);
-      background: linear-gradient(180deg, #9d4c2d, #5d2c1b);
-      box-shadow: 0 9px 20px rgba(70, 31, 16, 0.25);
-    }
-
-    .secondary-action {
-      color: #3b2412;
-      border: 1px solid rgba(70, 43, 24, 0.3);
-      background: rgba(255, 242, 205, 0.52);
-    }
-
-    .locked-note {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: 0.4rem;
-      color: #5c2b1b;
-      font-weight: 800;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+    .btn-primary {
+      display: inline-block; padding: .58rem 1.35rem;
+      background: var(--gold); color: #fff8ec;
+      border: none; border-radius: 5px;
+      font-family: var(--font-title); font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer; transition: background .2s;
       white-space: nowrap;
-      border: 0;
+    }
+    .btn-primary:hover { background: var(--amber); }
+
+    .btn-back-map {
+      display: inline-flex; align-items: center;
+      padding: .52rem .95rem;
+      background: transparent; border: 1px solid var(--border-gold);
+      border-radius: 5px; font-family: var(--font-title); font-size: .65rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mid); cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap;
+    }
+    .btn-back-map::before { content: '← '; }
+    .btn-back-map:hover { border-color: var(--gold); color: var(--amber); background: rgba(201,152,63,.06); }
+
+    /* ── Misiones modal ── */
+    .modal-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .35; margin: 1.1rem 0 1.6rem;
+    }
+    .modal-intro {
+      font-size: .84rem; color: var(--ink-mid);
+      font-style: italic; margin-bottom: .2rem;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% {
-        filter: drop-shadow(0 0 5px rgba(255, 225, 128, 0.45));
-      }
-
-      50% {
-        filter: drop-shadow(0 0 16px rgba(255, 240, 160, 0.9));
-      }
+    .mission-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+    .mission-item {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
+      padding: .85rem 1.1rem;
+      background: rgba(201,152,63,.06);
+      border: 1px solid rgba(201,152,63,.28);
+      border-radius: 5px; flex-wrap: wrap;
+      transition: border-color .2s;
     }
+    .mission-item:hover { border-color: var(--gold); }
 
+    .mission-info { flex: 1; min-width: 140px; }
+    .mission-num {
+      display: block; font-family: var(--font-title);
+      font-size: .57rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: .2rem;
+    }
+    .mission-name { font-family: var(--font-title); font-size: .84rem; color: var(--ink); letter-spacing: .02em; }
+
+    .mission-actions { display: flex; gap: .5rem; flex-wrap: wrap; flex-shrink: 0; }
+    .btn-mission {
+      display: inline-block; padding: .35rem .8rem;
+      background: transparent; border: 1px solid var(--border-gold);
+      border-radius: 3px; font-family: var(--font-title);
+      font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; white-space: nowrap;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .btn-mission:hover { background: rgba(201,152,63,.12); border-color: var(--gold); color: var(--ink); }
+    .btn-mission.btn-applet { background: rgba(201,152,63,.1); border-color: var(--gold); }
+    .btn-mission.btn-applet:hover { background: rgba(201,152,63,.2); }
+
+    /* ── Responsive ── */
     @media (max-width: 900px) {
-      .hero {
-        min-height: auto;
-      }
-
-      .map-board {
-        min-height: 980px;
-        aspect-ratio: auto;
-      }
-
-      .title-block {
-        top: 1.6rem;
-      }
-
-      .territory {
-        width: min(42vw, 11rem);
-      }
-
-      .legend {
-        max-width: calc(100% - 8rem);
-      }
+      .map-board { aspect-ratio: auto; min-height: 980px; }
     }
-
-    @media (max-width: 640px) {
-      .topbar {
-        align-items: flex-start;
-      }
-
-      .seal {
-        width: 2.65rem;
-        height: 2.65rem;
-      }
-
-      .sound-toggle {
-        max-width: 12rem;
-        line-height: 1.25;
-        border-radius: 16px;
-      }
-
-      .map-stage {
-        padding-inline: 0;
-      }
-
-      .map-board {
-        min-height: 1120px;
-        border-radius: 16px;
-      }
-
-      .title-block h1 {
-        font-size: clamp(2rem, 13vw, 3.3rem);
-      }
-
-      .legend {
-        left: 1rem;
-        right: 1rem;
-        bottom: 6rem;
-        max-width: none;
-      }
-
-      .compass {
-        right: 1rem;
-        bottom: 1rem;
-      }
+    @media (max-width: 580px) {
+      .map-board   { min-height: 1120px; border-radius: 0; }
+      .map-stage   { padding-inline: 0; }
+      .territory   { width: min(42vw, 11rem); }
+      .modal       { padding: 2rem 1.25rem; }
+      .mission-item { flex-direction: column; align-items: flex-start; }
     }
-
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: 0.001ms !important;
-      }
+      *, *::before, *::after { transition-duration: .001ms !important; }
     }
   </style>
 </head>
 <body>
-  <div class="app-shell">
-    <main class="hero" aria-labelledby="page-title">
-      <header class="topbar">
-        <div class="seal" aria-hidden="true">8</div>
-        <button class="sound-toggle" type="button" aria-pressed="false" id="soundToggle">
-          <span aria-hidden="true">🔊</span>
-          <span>Activar ambiente</span>
-        </button>
-      </header>
+<div class="app-shell">
+  <main class="hero" aria-labelledby="page-title">
 
-      <section class="map-stage" aria-label="Mapa del Reino Matemático">
-        <div class="map-board">
-          <div class="title-block">
-            <h1 id="page-title">Reino Matemático</h1>
-            <p class="chronicles">Crónicas de los Exploradores de 8.º</p>
-            <p class="subtitle">"Cada territorio guarda un secreto matemático."</p>
-          </div>
+    <header class="topbar">
+      <nav class="breadcrumb" aria-label="Navegación">
+        <a href="index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <span class="curr">Reino de las Proporciones</span>
+      </nav>
+      <div class="seal" aria-hidden="true">8</div>
+    </header>
 
-          <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#3a2110" flood-opacity="0.28"/>
-              </filter>
-              <linearGradient id="river" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#5f9aa2" stop-opacity="0.72"/>
-                <stop offset="100%" stop-color="#2d5968" stop-opacity="0.72"/>
-              </linearGradient>
-              <pattern id="grain" width="38" height="38" patternUnits="userSpaceOnUse">
-                <circle cx="7" cy="8" r="1.1" fill="#5e3217" opacity="0.12"/>
-                <circle cx="28" cy="24" r="0.9" fill="#fff1bb" opacity="0.13"/>
-              </pattern>
-            </defs>
+    <section class="map-stage" aria-label="Mapa del Reino de las Proporciones">
+      <div class="map-board">
 
-            <path d="M-40 708 C160 610 214 758 398 676 C584 596 550 470 704 430 C934 370 924 624 1108 588 C1278 556 1324 410 1644 434 L1644 940 L-40 940 Z" fill="#7f5c33" opacity="0.28"/>
-            <path d="M-40 300 C180 250 274 355 458 305 C624 260 690 160 854 194 C1040 234 1132 118 1340 142 C1486 160 1540 245 1640 215" fill="none" stroke="#7b4b25" stroke-width="3" opacity="0.2"/>
-            <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900" fill="none" stroke="url(#river)" stroke-width="42" opacity="0.55"/>
-            <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900" fill="none" stroke="#e8d7a5" stroke-width="6" opacity="0.14"/>
-            <rect width="1600" height="900" fill="url(#grain)"/>
-
-            <g filter="url(#softShadow)" opacity="0.96">
-              <path d="M1280 120 L1340 260 L1215 260 Z" fill="#6d6a5f"/>
-              <path d="M1350 90 L1432 285 L1260 285 Z" fill="#5f5b54"/>
-              <path d="M1450 150 L1516 300 L1370 300 Z" fill="#716c61"/>
-              <path d="M1318 142 L1340 260 L1282 260 Z" fill="#39352f" opacity="0.28"/>
-              <path d="M1350 90 L1388 285 L1260 285 Z" fill="#38342f" opacity="0.3"/>
-              <path d="M420 680 L500 845 L328 845 Z" fill="#655e53"/>
-              <path d="M520 630 L615 880 L410 880 Z" fill="#736a5a"/>
-              <path d="M610 710 L688 882 L510 882 Z" fill="#5f5b50"/>
-            </g>
-
-            <g opacity="0.9">
-              <path d="M110 585 C148 520 210 518 244 584 C198 550 154 552 110 585 Z" fill="#24442f"/>
-              <path d="M80 635 C170 555 292 572 354 644 C260 604 158 600 80 635 Z" fill="#2f5737"/>
-              <path d="M1015 300 C1074 218 1195 226 1250 312 C1178 262 1086 262 1015 300 Z" fill="#2d5135"/>
-              <path d="M970 354 C1072 274 1216 282 1308 370 C1195 326 1070 326 970 354 Z" fill="#396a3f"/>
-            </g>
-
-            <g opacity="0.55">
-              <path d="M133 610 l18 -58 l18 58 Z" fill="#1f3d2d"/>
-              <path d="M182 610 l20 -70 l22 70 Z" fill="#254b34"/>
-              <path d="M230 615 l19 -60 l22 60 Z" fill="#1f3d2d"/>
-              <path d="M1055 340 l22 -78 l25 78 Z" fill="#21422d"/>
-              <path d="M1110 348 l27 -88 l27 88 Z" fill="#2d5839"/>
-              <path d="M1180 342 l24 -82 l28 82 Z" fill="#244830"/>
-            </g>
-          </svg>
-
-          <svg class="paths" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M320 574 C460 500 505 445 610 398 C720 350 838 340 980 365 C1105 388 1200 330 1315 240" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.55"/>
-            <path d="M610 398 C685 498 773 562 900 608 C1030 655 1146 640 1294 620" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.45"/>
-            <path d="M900 608 C828 695 720 742 560 770" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.42"/>
-            <path d="M900 608 C1018 530 1114 486 1248 474" fill="none" stroke="#633719" stroke-width="18" stroke-linecap="round" stroke-dasharray="3 34" opacity="0.42"/>
-          </svg>
-
-          <div class="territory-layer" id="territoryLayer" aria-label="Territorios disponibles"></div>
-
-          <div class="legend" aria-label="Leyenda del mapa">
-            <span><strong>Activo</strong> territorio disponible</span>
-            <span><strong>Sellado</strong> se abrirá durante el curso</span>
-          </div>
-
-          <div class="compass" aria-hidden="true"></div>
+        <div class="title-block">
+          <h1 id="page-title">Reino de las Proporciones</h1>
+          <span class="chronicles">Crónicas de los Exploradores de 8.º</span>
+          <span class="subtitle">"Cada territorio guarda un secreto matemático."</span>
         </div>
-      </section>
 
-      <p class="footer-note">Portal preparado para GitHub Pages. Agrega nuevos recursos editando solamente el arreglo <strong>territorios</strong>.</p>
-    </main>
-  </div>
+        <!-- Fondo cartográfico -->
+        <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#7a5528" flood-opacity="0.18"/>
+            </filter>
+            <linearGradient id="river" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%"   stop-color="#7ab5c8" stop-opacity="0.65"/>
+              <stop offset="100%" stop-color="#4a8fa8" stop-opacity="0.65"/>
+            </linearGradient>
+            <pattern id="grain" width="38" height="38" patternUnits="userSpaceOnUse">
+              <circle cx="7"  cy="8"  r="1.1" fill="#a07828" opacity="0.09"/>
+              <circle cx="28" cy="24" r="0.9" fill="#604010" opacity="0.07"/>
+            </pattern>
+          </defs>
 
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-    <article class="modal">
-      <button class="modal-close" type="button" id="modalClose" aria-label="Cerrar ventana">×</button>
-      <h2 id="modalTitle"></h2>
-      <p id="modalDescription"></p>
-      <ul class="resource-list" id="resourceList"></ul>
+          <!-- Terrain base -->
+          <path d="M-40 708 C160 610 214 758 398 676 C584 596 550 470 704 430 C934 370 924 624 1108 588 C1278 556 1324 410 1644 434 L1644 940 L-40 940 Z"
+                fill="#c8a050" opacity="0.16"/>
+          <path d="M-40 300 C180 250 274 355 458 305 C624 260 690 160 854 194 C1040 234 1132 118 1340 142 C1486 160 1540 245 1640 215"
+                fill="none" stroke="#a08040" stroke-width="2" opacity="0.16"/>
+
+          <!-- River -->
+          <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900"
+                fill="none" stroke="url(#river)" stroke-width="40" opacity="0.42"/>
+          <path d="M166 0 C272 138 220 218 336 318 C450 416 644 376 746 502 C844 622 790 720 886 900"
+                fill="none" stroke="#d8f0ff" stroke-width="4" opacity="0.28"/>
+
+          <rect width="1600" height="900" fill="url(#grain)"/>
+
+          <!-- Montañas noreste -->
+          <g filter="url(#softShadow)" opacity="0.82">
+            <path d="M1280 120 L1340 260 L1215 260 Z" fill="#a09070"/>
+            <path d="M1350 90  L1432 285 L1260 285 Z" fill="#907e62"/>
+            <path d="M1450 150 L1516 300 L1370 300 Z" fill="#a89870"/>
+            <path d="M1280 120 L1300 168 L1260 168 Z" fill="#f0ead8" opacity="0.5"/>
+            <path d="M1350 90  L1376 148 L1324 148 Z" fill="#f0ead8" opacity="0.48"/>
+          </g>
+
+          <!-- Montañas suroeste -->
+          <g filter="url(#softShadow)" opacity="0.75">
+            <path d="M420 680 L500 845 L328 845 Z" fill="#988060"/>
+            <path d="M520 630 L615 880 L410 880 Z" fill="#a88a68"/>
+            <path d="M610 710 L688 882 L510 882 Z" fill="#907060"/>
+          </g>
+
+          <!-- Bosques -->
+          <g opacity="0.7">
+            <path d="M110 585 C148 520 210 518 244 584 C198 550 154 552 110 585 Z" fill="#4a7250"/>
+            <path d="M80 635 C170 555 292 572 354 644 C260 604 158 600 80 635 Z"  fill="#5a8258"/>
+            <path d="M1015 300 C1074 218 1195 226 1250 312 C1178 262 1086 262 1015 300 Z" fill="#4e7855"/>
+            <path d="M970 354 C1072 274 1216 282 1308 370 C1195 326 1070 326 970 354 Z"  fill="#5a8860"/>
+          </g>
+
+          <!-- Pinos -->
+          <g opacity="0.58">
+            <path d="M133 610 l18 -58 l18 58 Z" fill="#3a6040"/>
+            <path d="M182 610 l20 -70 l22 70 Z" fill="#436848"/>
+            <path d="M230 615 l19 -60 l22 60 Z" fill="#3a6040"/>
+            <path d="M1055 340 l22 -78 l25 78 Z" fill="#3e6845"/>
+            <path d="M1110 348 l27 -88 l27 88 Z" fill="#4a7852"/>
+            <path d="M1180 342 l24 -82 l28 82 Z" fill="#3e6845"/>
+          </g>
+        </svg>
+
+        <!-- Caminos -->
+        <svg class="paths" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M320 574 C460 500 505 445 610 398 C720 350 838 340 980 365 C1105 388 1200 330 1315 240"
+                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.38"/>
+          <path d="M610 398 C685 498 773 562 900 608 C1030 655 1146 640 1294 620"
+                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.32"/>
+          <path d="M900 608 C828 695 720 742 560 770"
+                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.28"/>
+          <path d="M900 608 C1018 530 1114 486 1248 474"
+                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.28"/>
+        </svg>
+
+        <div class="territory-layer" id="territoryLayer" aria-label="Territorios disponibles"></div>
+        <div class="legend" aria-label="Leyenda"><span><strong>Disponible</strong> — toca para ingresar</span></div>
+        <div class="compass" aria-hidden="true"></div>
+
+      </div>
+    </section>
+
+    <nav class="back-row" aria-label="Volver al portal">
+      <a class="btn-all-kingdoms" href="index.html">&#8592; Todos los reinos</a>
+    </nav>
+
+    <p class="footer-note">Reinos Matemáticos &middot; Crónicas de los Exploradores de 8.º &middot; Liceo de Médanos</p>
+  </main>
+</div>
+
+<!-- Modal detalle (Prólogo, Biblioteca, Bitácora) -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle" aria-describedby="modalDescription">
+  <article class="modal">
+    <button class="modal-close" type="button" id="modalClose" aria-label="Cerrar">×</button>
+    <h2 id="modalTitle"></h2>
+    <span class="modal-tipo" id="modalTipo"></span>
+    <p class="modal-desc" id="modalDescription"></p>
+    <ul class="resource-list" id="resourceList"></ul>
+    <div class="modal-btn-row">
       <div class="modal-actions" id="modalActions"></div>
-    </article>
-  </div>
+      <button class="btn-back-map" type="button" id="modalBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
 
-  <script>
-    const territorios = [
-      {
-        id: "laboratorio-alquimistas",
-        nombre: "Laboratorio de los Alquimistas",
-        icono: "⚗",
-        activo: true,
-        tipo: "Applet HTML",
-        descripcion: "Los maestros alquimistas descubrieron que algunas mezclas conservan una relación secreta entre sus ingredientes.",
-        boton: "Entrar al Laboratorio",
-        enlace: "https://laprofe2007.github.io/matematica-8ebi/Fabrica_Pintura_Applet_v3.html",
-        posicion: { desktop: { x: "20%", y: "64%" }, mobile: { x: "31%", y: "31%" } },
-        recursos: [
-          { etiqueta: "Relaciones entre cantidades", tipo: "Concepto" },
-          { etiqueta: "Mezclas proporcionales", tipo: "Exploración" }
-        ]
-      },
-      {
-        id: "ciudad-proporciones",
-        nombre: "Ciudad de las Proporciones",
-        icono: "♜",
-        activo: true,
-        tipo: "Interactivo",
-        descripcion: "Comerciantes, viajeros y constructores utilizan una misma regla matemática para organizar la ciudad.",
-        boton: "Explorar la Ciudad",
-        enlace: "https://laprofe2007.github.io/matematica-8ebi/Ciudad_Proporciones_Interactivo.html",
-        posicion: { desktop: { x: "38%", y: "45%" }, mobile: { x: "69%", y: "39%" } },
-        recursos: [
-          { etiqueta: "Razones y proporciones", tipo: "Concepto" },
-          { etiqueta: "Problemas de escala", tipo: "Actividad" }
-        ]
-      },
-      {
-        id: "torre-constante-k",
-        nombre: "Torre de la Constante K",
-        icono: "K",
-        activo: false,
-        tipo: "Territorio sellado",
-        descripcion: "Solo quienes comprendan los secretos de las proporciones podrán ingresar.",
-        posicion: { desktop: { x: "61%", y: "43%" }, mobile: { x: "31%", y: "50%" } },
-        recursos: [
-          { etiqueta: "Constante de proporcionalidad", tipo: "Próximamente" }
-        ]
-      },
-      {
-        id: "castillo-probabilidad",
-        nombre: "Castillo de la Probabilidad",
-        icono: "⚂",
-        activo: false,
-        tipo: "Territorio sellado",
-        descripcion: "Los dados del destino aún no han sido lanzados.",
-        posicion: { desktop: { x: "82%", y: "28%" }, mobile: { x: "69%", y: "58%" } },
-        recursos: [
-          { etiqueta: "Azar, eventos y experimentos", tipo: "Próximamente" }
-        ]
-      },
-      {
-        id: "valle-funciones",
-        nombre: "Valle de las Funciones",
-        icono: "ƒ",
-        activo: false,
-        tipo: "Territorio sellado",
-        descripcion: "Los patrones todavía permanecen ocultos.",
-        posicion: { desktop: { x: "80%", y: "68%" }, mobile: { x: "31%", y: "67%" } },
-        recursos: [
-          { etiqueta: "Patrones y variación", tipo: "Próximamente" }
-        ]
-      },
-      {
-        id: "templo-geometria",
-        nombre: "Templo de la Geometría",
-        icono: "△",
-        activo: false,
-        tipo: "Territorio sellado",
-        descripcion: "Los constructores guardan sus secretos.",
-        posicion: { desktop: { x: "56%", y: "72%" }, mobile: { x: "69%", y: "76%" } },
-        recursos: [
-          { etiqueta: "Figuras, medidas y construcción", tipo: "Próximamente" }
-        ]
-      },
-      {
-        id: "minas-algebra",
-        nombre: "Minas del Álgebra",
-        icono: "∑",
-        activo: false,
-        tipo: "Territorio sellado",
-        descripcion: "Las fórmulas duermen bajo la montaña.",
-        posicion: { desktop: { x: "35%", y: "82%" }, mobile: { x: "50%", y: "88%" } },
-        recursos: [
-          { etiqueta: "Expresiones y ecuaciones", tipo: "Próximamente" }
-        ]
-      }
-    ];
+<!-- Modal Misiones -->
+<div class="modal-backdrop" id="modalMisiones" role="dialog" aria-modal="true"
+     aria-labelledby="misionesTitle" aria-describedby="misionesDesc">
+  <article class="modal modal-misiones">
+    <button class="modal-close" type="button" id="misionesClose" aria-label="Cerrar misiones">×</button>
+    <h2 id="misionesTitle">Misiones del Explorador</h2>
+    <span class="modal-tipo">Práctica · 6 misiones disponibles</span>
+    <p class="modal-intro" id="misionesDesc">Seleccioná una misión para acceder a la ficha o al applet interactivo.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
 
-    const layer = document.querySelector("#territoryLayer");
-    const modalBackdrop = document.querySelector("#modalBackdrop");
-    const modalTitle = document.querySelector("#modalTitle");
-    const modalDescription = document.querySelector("#modalDescription");
-    const resourceList = document.querySelector("#resourceList");
-    const modalActions = document.querySelector("#modalActions");
-    const modalClose = document.querySelector("#modalClose");
-    const soundToggle = document.querySelector("#soundToggle");
-    let ultimoFoco = null;
+    <ol class="mission-list" aria-label="Lista de misiones">
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión I</span>
+          <span class="mission-name">Fábrica de Pintura</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/Actividad_Fabrica_Pintura_v3%20version%20alumno%20digital.pdf" target="_blank" rel="noopener">Ficha</a>
+          <a class="btn-mission btn-applet" href="Fabrica_Pintura_Applet_v3.html" target="_blank">Applet</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión II</span>
+          <span class="mission-name">Mapa de Uruguay</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/Ficha_Mapa_Uruguay_Escala.pdf" target="_blank" rel="noopener">Ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión III</span>
+          <span class="mission-name">El Intruso de la Proporcionalidad</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/S4_Act3_ElIntruso_v2.pdf" target="_blank" rel="noopener">Ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión IV</span>
+          <span class="mission-name">Ciudad de las Proporciones</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/S4_Act4_CiudadProporciones.pdf" target="_blank" rel="noopener">Ficha</a>
+          <a class="btn-mission btn-applet" href="Ciudad_Proporciones_Interactivo.html" target="_blank">Applet</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión V</span>
+          <span class="mission-name">Viaje de Egresados</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/S4_Act5_ViajeEgresados_v2.pdf" target="_blank" rel="noopener">Ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión VI</span>
+          <span class="mission-name">Clasificación de Situaciones</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="Actividades/S4_Act6_Clasificacion_v2.pdf" target="_blank" rel="noopener">Ficha</a>
+        </div>
+      </li>
+    </ol>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="misionesBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
 
-    function getPosition(territorio) {
-      const isSmallScreen = window.matchMedia("(max-width: 900px)").matches;
-      return isSmallScreen ? territorio.posicion.mobile : territorio.posicion.desktop;
+<script>
+  const territorios = [
+    {
+      id: "prologo", nombre: "Prólogo del Reino", icono: "📜", tipo: "Introducción",
+      descripcion: "Introducción narrativa al mundo de las razones y la proporcionalidad.",
+      boton: "Abrir Prólogo", enlace: "Actividades/Prologo_Reino_Razones_Proporciones.pdf",
+      nuevaPestana: true, esMisiones: false,
+      posicion: { desktop: { x: "16%", y: "44%" }, mobile: { x: "26%", y: "28%" } },
+      recursos: [{ etiqueta: "Prólogo narrativo", tipo: "PDF" }]
+    },
+    {
+      id: "biblioteca", nombre: "Biblioteca del Explorador", icono: "📖", tipo: "Material teórico",
+      descripcion: "Razones, proporcionalidad directa e inversa, y constante k. Todo el material de consulta del reino.",
+      boton: "Ingresar a la Biblioteca", enlace: "biblioteca_razones_proporcionalidad.html",
+      nuevaPestana: false, esMisiones: false,
+      posicion: { desktop: { x: "74%", y: "34%" }, mobile: { x: "72%", y: "38%" } },
+      recursos: [{ etiqueta: "Teoría completa", tipo: "Página HTML" }]
+    },
+    {
+      id: "misiones", nombre: "Misiones del Explorador", icono: "🧪", tipo: "Práctica",
+      descripcion: "Seis actividades y applets para explorar el territorio de la proporcionalidad.",
+      boton: "Ver misiones", enlace: null,
+      nuevaPestana: false, esMisiones: true,
+      posicion: { desktop: { x: "38%", y: "64%" }, mobile: { x: "50%", y: "60%" } },
+      recursos: [{ etiqueta: "6 misiones disponibles", tipo: "Actividades" }]
+    },
+    {
+      id: "bitacora", nombre: "Bitácora del Explorador", icono: "📓", tipo: "Registro de evaluación",
+      descripcion: "Registro personal del recorrido de junio. Actividad transversal que se completa progresivamente.",
+      boton: "Abrir Bitácora", enlace: "Actividades/TD_Bitacora_Explorador.pdf",
+      nuevaPestana: true, esMisiones: false,
+      posicion: { desktop: { x: "80%", y: "68%" }, mobile: { x: "72%", y: "78%" } },
+      recursos: [{ etiqueta: "Bitácora evaluativa", tipo: "PDF" }]
     }
+  ];
 
-    function renderTerritorios() {
-      layer.innerHTML = "";
+  const layer         = document.getElementById('territoryLayer');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalMisiones = document.getElementById('modalMisiones');
+  const modalTitle    = document.getElementById('modalTitle');
+  const modalTipo     = document.getElementById('modalTipo');
+  const modalDesc     = document.getElementById('modalDescription');
+  const resourceList  = document.getElementById('resourceList');
+  const modalActions  = document.getElementById('modalActions');
+  const modalClose    = document.getElementById('modalClose');
+  const misionesClose = document.getElementById('misionesClose');
+  let ultimoFoco = null;
 
-      territorios.forEach((territorio, index) => {
-        const position = getPosition(territorio);
-        const button = document.createElement("button");
-        button.className = "territory";
-        button.type = "button";
-        button.dataset.active = String(territorio.activo);
-        button.dataset.id = territorio.id;
-        button.style.setProperty("--x", position.x);
-        button.style.setProperty("--y", position.y);
-        button.setAttribute("aria-label", `${territorio.nombre}. ${territorio.activo ? "Disponible" : "Bloqueado"}`);
-        button.innerHTML = `
-          <span class="territory-icon" aria-hidden="true">${territorio.icono}</span>
-          <span class="territory-name">${territorio.nombre}</span>
-          <span class="territory-status">${territorio.activo ? "Activo" : "Sellado"}</span>
-        `;
-        button.addEventListener("click", () => abrirTerritorio(index));
-        layer.appendChild(button);
-      });
-    }
+  function getPosition(t) {
+    return window.matchMedia("(max-width: 900px)").matches ? t.posicion.mobile : t.posicion.desktop;
+  }
 
-    function abrirTerritorio(index) {
-      const territorio = territorios[index];
-      ultimoFoco = document.activeElement;
-      modalTitle.textContent = territorio.nombre;
-      modalDescription.textContent = territorio.descripcion;
-
-      resourceList.innerHTML = "";
-      (territorio.recursos || []).forEach((recurso) => {
-        const item = document.createElement("li");
-        item.innerHTML = `<strong>${recurso.tipo}:</strong> ${recurso.etiqueta}`;
-        resourceList.appendChild(item);
-      });
-
-      modalActions.innerHTML = "";
-      if (territorio.activo && territorio.enlace) {
-        const action = document.createElement("a");
-        action.className = "primary-action";
-        action.href = territorio.enlace;
-        action.target = "_blank";
-        action.rel = "noopener";
-        action.textContent = territorio.boton || "Ingresar";
-        modalActions.appendChild(action);
-      } else {
-        const locked = document.createElement("span");
-        locked.className = "locked-note";
-        locked.textContent = "Territorio bloqueado";
-        modalActions.appendChild(locked);
-      }
-
-      const closeAction = document.createElement("button");
-      closeAction.className = "secondary-action";
-      closeAction.type = "button";
-      closeAction.textContent = "Volver al mapa";
-      closeAction.addEventListener("click", cerrarModal);
-      modalActions.appendChild(closeAction);
-
-      modalBackdrop.classList.add("is-open");
-      modalClose.focus();
-    }
-
-    function cerrarModal() {
-      modalBackdrop.classList.remove("is-open");
-      if (ultimoFoco) {
-        ultimoFoco.focus();
-      }
-    }
-
-    function prepararAmbiente() {
-      soundToggle.addEventListener("click", () => {
-        const activo = soundToggle.getAttribute("aria-pressed") === "true";
-        soundToggle.setAttribute("aria-pressed", String(!activo));
-        soundToggle.querySelector("span:last-child").textContent = activo ? "Activar ambiente" : "Ambiente listo";
-
-        // Punto de extensión: reemplazar por un elemento Audio cuando se agregue la pista ambiental.
-        window.reinoMatematicoAudio = window.reinoMatematicoAudio || {
-          estado: "preparado",
-          archivoSugerido: "ambiente_fantasy.mp3"
-        };
-      });
-    }
-
-    modalClose.addEventListener("click", cerrarModal);
-    modalBackdrop.addEventListener("click", (event) => {
-      if (event.target === modalBackdrop) {
-        cerrarModal();
-      }
+  function renderTerritorios() {
+    layer.innerHTML = "";
+    territorios.forEach((t, i) => {
+      const pos = getPosition(t);
+      const btn = document.createElement("button");
+      btn.className = "territory";
+      btn.type = "button";
+      btn.dataset.id = t.id;
+      btn.style.setProperty("--x", pos.x);
+      btn.style.setProperty("--y", pos.y);
+      btn.setAttribute("aria-label", `${t.nombre} — ${t.tipo}`);
+      btn.innerHTML = `
+        <span class="territory-icon" aria-hidden="true">${t.icono}</span>
+        <span class="territory-name">${t.nombre}</span>
+        <span class="territory-status">Disponible</span>`;
+      btn.addEventListener("click", () => abrirTerritorio(i));
+      layer.appendChild(btn);
     });
+  }
 
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modalBackdrop.classList.contains("is-open")) {
-        cerrarModal();
-      }
+  function abrirTerritorio(i) {
+    const t = territorios[i];
+    ultimoFoco = document.activeElement;
+    if (t.esMisiones) {
+      modalMisiones.classList.add('open');
+      misionesClose.focus();
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    modalTitle.textContent = t.nombre;
+    modalTipo.textContent  = t.tipo;
+    modalDesc.textContent  = t.descripcion;
+    resourceList.innerHTML = "";
+    (t.recursos || []).forEach(r => {
+      const li = document.createElement("li");
+      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      resourceList.appendChild(li);
     });
+    modalActions.innerHTML = "";
+    if (t.enlace) {
+      const a = document.createElement("a");
+      a.href = t.enlace; a.className = "btn-primary"; a.textContent = t.boton;
+      if (t.nuevaPestana) { a.target = "_blank"; a.rel = "noopener"; }
+      modalActions.appendChild(a);
+    }
+    modalBackdrop.classList.add('open');
+    modalClose.focus();
+    document.body.style.overflow = 'hidden';
+  }
 
-    window.addEventListener("resize", renderTerritorios);
+  function cerrarModal()    { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarMisiones() { modalMisiones.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
 
-    renderTerritorios();
-    prepararAmbiente();
-  </script>
+  modalClose.addEventListener('click', cerrarModal);
+  document.getElementById('modalBackBtn').addEventListener('click', cerrarModal);
+  misionesClose.addEventListener('click', cerrarMisiones);
+  document.getElementById('misionesBackBtn').addEventListener('click', cerrarMisiones);
+  modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) cerrarModal(); });
+  modalMisiones.addEventListener('click', e => { if (e.target === modalMisiones) cerrarMisiones(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (modalBackdrop.classList.contains('open')) cerrarModal();
+    if (modalMisiones.classList.contains('open')) cerrarMisiones();
+  });
+
+  function trapFocus(backdrop, e) {
+    const els = Array.from(backdrop.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+    if (!els.length) return;
+    if (e.shiftKey && document.activeElement === els[0])             { e.preventDefault(); els[els.length-1].focus(); }
+    else if (!e.shiftKey && document.activeElement === els[els.length-1]) { e.preventDefault(); els[0].focus(); }
+  }
+  modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBackdrop, e); });
+  modalMisiones.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalMisiones, e); });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });
+
+  renderTerritorios();
+</script>
 </body>
 </html>

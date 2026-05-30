@@ -15,8 +15,6 @@
       --dark-ink:       #130e0a;
       --parchment:      #ead7a8;
       --parchment-light:#f6eac8;
-      --gold:           #c9983f;
-      --amber:          #e6bb65;
       --ruby:           #8f2f2f;
       --moss:           #416b42;
       --pine:           #233d2f;
@@ -26,6 +24,10 @@
       --glow:           rgba(236, 190, 93, 0.55);
       --font-title:     "Cinzel", "Georgia", serif;
       --font-body:      "Libre Baskerville", "Georgia", serif;
+
+      /* Versión oscura de oro/ámbar — legible sobre fondo claro */
+      --gold:           #8a5e14;
+      --amber:          #7a4f0a;
     }
 
     /* ── Reset ── */
@@ -136,8 +138,8 @@
 
     .lib-subtitle {
       font-size: 0.85rem;
-      color: var(--parchment);
-      opacity: 0.5;
+      color: var(--ink);
+      opacity: 0.55;
       font-style: italic;
     }
 
@@ -200,8 +202,8 @@
     /* Subtítulo en cursiva inmediatamente después del h2 */
     .lib-section h2 + p {
       font-style: italic;
-      color: var(--parchment);
-      opacity: 0.6;
+      color: var(--ink);
+      opacity: 0.55;
       font-size: 0.88rem;
       margin-bottom: 1.5rem;
     }
@@ -547,6 +549,8 @@
         <iframe
           src="https://www.youtube.com/embed/UOz6Za4EB-k"
           title="Video introductorio — Proporcionalidad"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>
@@ -584,6 +588,8 @@
         <iframe
           src="https://www.youtube.com/embed/nP9SwAqhVTI"
           title="Video — Proporcionalidad directa"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>
@@ -621,6 +627,8 @@
         <iframe
           src="https://www.youtube.com/embed/S_dmdGX8rw8"
           title="Video — Proporcionalidad inversa"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>
@@ -637,6 +645,8 @@
         <iframe
           src="https://www.youtube.com/embed/Gm7KWLdtCaY"
           title="Video — Diferencias entre proporcionalidad directa e inversa"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>

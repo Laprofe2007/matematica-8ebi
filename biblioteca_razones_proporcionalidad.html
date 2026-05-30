@@ -32,27 +32,23 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ── Fondo idéntico al proyecto ── */
+    /* ── Fondo claro — biblioteca para lectura ── */
     body {
       min-height: 100vh;
-      color: var(--parchment-light);
+      color: var(--ink);
       font-family: var(--font-body);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(226,187,101,0.18), transparent 24rem),
-        radial-gradient(circle at 82% 20%, rgba(76,121,114,0.18),  transparent 23rem),
-        linear-gradient(135deg, #100c08 0%, #24170d 42%, #15110d 100%);
+      background: #fdf5e0;
     }
 
     body::before {
       content: "";
       position: fixed; inset: 0;
       pointer-events: none;
-      opacity: 0.22;
+      opacity: 0.06;
       background-image:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+        linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px);
       background-size: 48px 48px;
-      mix-blend-mode: screen;
       z-index: 1;
     }
 
@@ -62,8 +58,8 @@
       pointer-events: none;
       background: radial-gradient(circle at center,
         transparent 0%,
-        rgba(0,0,0,0.12) 58%,
-        rgba(0,0,0,0.48) 100%);
+        rgba(180,140,80,0.04) 60%,
+        rgba(160,120,60,0.08) 100%);
       z-index: 2;
     }
 
@@ -95,14 +91,14 @@
     }
 
     .topnav a {
-      color: var(--gold);
+      color: var(--amber);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .topnav a:hover { color: var(--amber); }
+    .topnav a:hover { color: var(--ink); }
 
-    .topnav .sep  { color: var(--gold); opacity: 0.35; }
-    .topnav .curr { color: var(--parchment-light); opacity: 0.55; }
+    .topnav .sep  { color: var(--gold); opacity: 0.5; }
+    .topnav .curr { color: var(--ink); opacity: 0.55; }
 
     /* ══════════════════════════════════════
        Encabezado de la biblioteca
@@ -149,8 +145,8 @@
        Índice de contenidos
     ══════════════════════════════════════ */
     .toc {
-      background: rgba(20,14,8,0.5);
-      border: 1px solid rgba(201,152,63,0.22);
+      background: rgba(201,152,63,0.07);
+      border: 1px solid rgba(201,152,63,0.35);
       border-radius: 8px;
       padding: 1.5rem 1.75rem;
       margin-bottom: 3.5rem;
@@ -161,8 +157,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.7;
+      color: var(--amber);
       margin-bottom: 1rem;
     }
 
@@ -176,7 +171,7 @@
     .toc li { font-size: 0.88rem; line-height: 1.4; }
 
     .toc a {
-      color: var(--parchment-light);
+      color: var(--ink);
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -232,11 +227,11 @@
     .lib-section p {
       font-size: 0.94rem;
       line-height: 1.78;
-      color: var(--parchment-light);
+      color: var(--ink);
       margin-bottom: 0.8rem;
     }
 
-    /* Negrita → color ámbar */
+    /* Negrita → color ámbar oscuro */
     .lib-section strong { color: var(--amber); }
 
     /* Listas */
@@ -249,7 +244,7 @@
     .lib-section li {
       font-size: 0.92rem;
       line-height: 1.72;
-      color: var(--parchment-light);
+      color: var(--ink);
       margin-bottom: 0.25rem;
     }
 
@@ -259,19 +254,19 @@
 
     /* ── Cuadro de alerta ── */
     .alerta {
-      background: rgba(143,47,47,0.12);
-      border: 1px solid rgba(143,47,47,0.38);
+      background: rgba(143,47,47,0.07);
+      border: 1px solid rgba(143,47,47,0.3);
       border-left: 3px solid var(--ruby);
       border-radius: 6px;
       padding: 0.9rem 1.2rem;
       margin: 1rem 0;
     }
-    .alerta p { margin-bottom: 0; }
+    .alerta p { margin-bottom: 0; color: var(--ink); }
 
     /* ── Idea fuerza ── */
     p.idea-fuerza {
-      background: rgba(201,152,63,0.09);
-      border: 1px solid rgba(201,152,63,0.28);
+      background: rgba(201,152,63,0.1);
+      border: 1px solid rgba(201,152,63,0.35);
       border-left: 3px solid var(--gold);
       border-radius: 6px;
       padding: 1rem 1.2rem;
@@ -293,12 +288,12 @@
     .lib-section a {
       color: var(--amber);
       text-decoration: none;
-      border-bottom: 1px solid rgba(230,187,101,0.32);
+      border-bottom: 1px solid rgba(176,120,40,0.4);
       transition: color 0.2s, border-color 0.2s;
     }
     .lib-section a:hover {
-      color: var(--parchment-light);
-      border-color: rgba(230,187,101,0.65);
+      color: var(--ink);
+      border-color: rgba(176,120,40,0.7);
     }
 
     /* ── Wrapper de video responsive ── */
@@ -320,8 +315,8 @@
 
     /* ── Bloque pendiente (imagen por subir) ── */
     .pending-block {
-      background: rgba(20,14,8,0.55);
-      border: 1px dashed rgba(201,152,63,0.32);
+      background: rgba(201,152,63,0.06);
+      border: 1px dashed rgba(201,152,63,0.45);
       border-radius: 8px;
       padding: 2.5rem 1.5rem;
       text-align: center;
@@ -329,8 +324,7 @@
     }
     .pending-block .pending-icon { font-size: 2rem; margin-bottom: 0.75rem; }
     .pending-block p {
-      color: var(--gold);
-      opacity: 0.65;
+      color: var(--amber);
       font-size: 0.83rem;
       font-style: italic;
       margin-bottom: 0.3rem;
@@ -338,19 +332,18 @@
     .pending-block code {
       font-family: monospace;
       font-size: 0.8rem;
-      background: rgba(201,152,63,0.1);
+      background: rgba(201,152,63,0.12);
       padding: 0.15rem 0.45rem;
       border-radius: 3px;
-      color: var(--amber);
-      opacity: 0.8;
+      color: var(--ink);
     }
 
     /* ══════════════════════════════════════
        Sección Próximamente
     ══════════════════════════════════════ */
     .proximamente {
-      background: rgba(20,14,8,0.45);
-      border: 1px solid rgba(201,152,63,0.16);
+      background: rgba(201,152,63,0.05);
+      border: 1px solid rgba(201,152,63,0.25);
       border-radius: 8px;
       padding: 1.75rem;
       margin-bottom: 3rem;
@@ -361,8 +354,7 @@
       font-size: 0.78rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.6;
+      color: var(--amber);
       margin-bottom: 1.1rem;
     }
 
@@ -376,8 +368,8 @@
 
     .proximamente li {
       font-size: 0.87rem;
-      color: var(--parchment);
-      opacity: 0.45;
+      color: var(--ink);
+      opacity: 0.5;
       padding-left: 1.2rem;
       position: relative;
     }
@@ -387,7 +379,6 @@
       position: absolute;
       left: 0;
       color: var(--gold);
-      opacity: 0.38;
     }
 
     /* ══════════════════════════════════════
@@ -401,15 +392,15 @@
 
     .credits p {
       font-size: 0.78rem;
-      color: var(--parchment);
-      opacity: 0.4;
+      color: var(--ink);
+      opacity: 0.5;
       line-height: 1.75;
       margin-bottom: 0.2rem;
     }
 
     .credits strong {
-      color: var(--parchment);
-      opacity: 0.6;
+      color: var(--ink);
+      opacity: 0.7;
     }
 
     /* ══════════════════════════════════════
@@ -427,8 +418,8 @@
       align-items: center;
       gap: 0.4rem;
       padding: 0.6rem 1.25rem;
-      background: rgba(20,14,8,0.55);
-      border: 1px solid rgba(201,152,63,0.26);
+      background: rgba(201,152,63,0.08);
+      border: 1px solid rgba(201,152,63,0.35);
       border-radius: 6px;
       font-family: var(--font-title);
       font-size: 0.72rem;
@@ -439,8 +430,8 @@
     }
 
     .btn-back:hover {
-      border-color: rgba(201,152,63,0.52);
-      background: rgba(30,20,10,0.72);
+      border-color: rgba(201,152,63,0.6);
+      background: rgba(201,152,63,0.15);
     }
 
     /* ══════════════════════════════════════
@@ -555,7 +546,7 @@
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/UOz6Za4EB-k?wmode=opaque"
+          src="https://www.youtube.com/embed/UOz6Za4EB-k"
           title="Video introductorio — Proporcionalidad"
           allowfullscreen
           loading="lazy"></iframe>
@@ -592,7 +583,7 @@
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/nP9SwAqhVTI?wmode=opaque"
+          src="https://www.youtube.com/embed/nP9SwAqhVTI"
           title="Video — Proporcionalidad directa"
           allowfullscreen
           loading="lazy"></iframe>
@@ -629,7 +620,7 @@
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/S_dmdGX8rw8?wmode=opaque"
+          src="https://www.youtube.com/embed/S_dmdGX8rw8"
           title="Video — Proporcionalidad inversa"
           allowfullscreen
           loading="lazy"></iframe>
@@ -645,7 +636,7 @@
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/Gm7KWLdtCaY?wmode=opaque"
+          src="https://www.youtube.com/embed/Gm7KWLdtCaY"
           title="Video — Diferencias entre proporcionalidad directa e inversa"
           allowfullscreen
           loading="lazy"></iframe>

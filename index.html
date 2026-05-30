@@ -8,201 +8,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --ink: #2a1c12;
-      --dark-ink: #130e0a;
-      --parchment: #ead7a8;
-      --parchment-light: #f6eac8;
-      --gold: #c9983f;
-      --amber: #e6bb65;
-      --ruby: #8f2f2f;
-      --moss: #416b42;
-      --pine: #233d2f;
-      --water: #3f7483;
-      --night: #171311;
-      --shadow: rgba(20, 12, 5, 0.55);
-      --glow: rgba(236, 190, 93, 0.55);
-      --font-title: "Cinzel", "Georgia", serif;
-      --font-body: "Libre Baskerville", "Georgia", serif;
+      --ink:         #2a1c12;
+      --ink-mid:     #5c3820;
+      --gold:        #8a5e14;
+      --amber:       #7a4f0a;
+      --font-title:  "Cinzel", "Georgia", serif;
+      --font-body:   "Libre Baskerville", "Georgia", serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
-      color: var(--parchment-light);
       font-family: var(--font-body);
-      background:
-        radial-gradient(circle at 18% 12%, rgba(226, 187, 101, 0.18), transparent 24rem),
-        radial-gradient(circle at 82% 20%, rgba(76, 121, 114, 0.18), transparent 23rem),
-        linear-gradient(135deg, #100c08 0%, #24170d 42%, #15110d 100%);
+      color: var(--ink);
+      background: #fdf5e0;
     }
 
+    /* Textura suave de papel */
     body::before {
       content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.22;
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.05;
       background-image:
-        linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px);
       background-size: 48px 48px;
-      mix-blend-mode: screen;
-      z-index: 1;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.12) 58%, rgba(0, 0, 0, 0.48) 100%);
-      z-index: 2;
     }
 
     .shell {
-      position: relative;
-      z-index: 3;
-      max-width: 880px;
+      position: relative; z-index: 1;
+      max-width: 820px;
       margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
+      padding: 3rem 1.5rem 5rem;
     }
 
-    /* ── Topbar ── */
-    .topbar {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding-bottom: 2.5rem;
+    /* ── Encabezado ── */
+    .site-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(138,94,20,0.2);
     }
 
     .seal {
-      width: 3rem;
-      height: 3rem;
+      display: inline-grid;
+      place-items: center;
+      width: 3.2rem; height: 3.2rem;
       border-radius: 50%;
       border: 2px solid var(--gold);
-      display: grid;
-      place-items: center;
       font-family: var(--font-title);
       font-size: 1.1rem;
       color: var(--amber);
-      flex-shrink: 0;
+      margin-bottom: 1rem;
     }
 
-    /* ── Título ── */
-    .title-block {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .title-block h1 {
+    .site-header h1 {
       font-family: var(--font-title);
-      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-size: clamp(1.9rem, 6vw, 3rem);
       color: var(--amber);
       letter-spacing: 0.04em;
       line-height: 1.15;
+      margin-bottom: 0.5rem;
     }
 
     .chronicles {
+      display: block;
       font-family: var(--font-title);
-      font-size: clamp(0.7rem, 2.2vw, 0.9rem);
-      letter-spacing: 0.2em;
-      color: var(--gold);
+      font-size: clamp(0.65rem, 2vw, 0.8rem);
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-top: 0.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
     }
 
     .subtitle {
-      font-size: 0.88rem;
-      color: var(--parchment);
-      opacity: 0.55;
+      font-size: 0.87rem;
+      color: var(--ink);
+      opacity: 0.5;
       font-style: italic;
-      margin-top: 0.6rem;
-    }
-
-    /* ── Divisor ── */
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(201, 152, 63, 0.2);
-      margin-block: 2rem;
-    }
-
-    /* ── Banner del Prólogo ── */
-    .prologo-banner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.25rem 1.5rem;
-      background: rgba(201, 152, 63, 0.07);
-      border: 1px solid rgba(201, 152, 63, 0.28);
-      border-radius: 8px;
-      margin-bottom: 2.5rem;
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .prologo-banner:hover,
-    .prologo-banner:focus-visible {
-      background: rgba(201, 152, 63, 0.13);
-      border-color: rgba(201, 152, 63, 0.5);
-      outline: none;
-    }
-
-    .prologo-body {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .prologo-icon {
-      font-size: 2rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-
-    .prologo-text h2 {
-      font-family: var(--font-title);
-      font-size: 0.95rem;
-      color: var(--amber);
-      letter-spacing: 0.06em;
-      margin-bottom: 0.3rem;
-    }
-
-    .prologo-text p {
-      font-size: 0.83rem;
-      color: var(--parchment);
-      opacity: 0.7;
-      line-height: 1.5;
-    }
-
-    .prologo-cta {
-      font-family: var(--font-title);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      color: var(--gold);
-      white-space: nowrap;
-      flex-shrink: 0;
     }
 
     /* ── Etiqueta de sección ── */
     .section-label {
       font-family: var(--font-title);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      opacity: 0.65;
       margin-bottom: 1.25rem;
     }
 
@@ -213,33 +107,40 @@
       gap: 1.25rem;
     }
 
-    /* ── Tarjeta de reino ── */
-    .kingdom-card {
-      background: rgba(20, 14, 8, 0.55);
-      border: 1px solid rgba(201, 152, 63, 0.18);
-      border-radius: 10px;
-      padding: 1.5rem 1.4rem;
+    /* ── Tarjeta activa ── */
+    a.kingdom-card {
       display: flex;
       flex-direction: column;
       gap: 0.7rem;
-    }
-
-    a.kingdom-card {
+      padding: 1.5rem 1.4rem;
+      background: #fff8ec;
+      border: 1px solid rgba(138,94,20,0.35);
+      border-radius: 10px;
       text-decoration: none;
       color: inherit;
-      border-color: rgba(201, 152, 63, 0.38);
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 10px rgba(42,28,18,0.07);
     }
 
     a.kingdom-card:hover,
     a.kingdom-card:focus-visible {
-      border-color: rgba(201, 152, 63, 0.7);
-      background: rgba(30, 20, 10, 0.7);
+      border-color: rgba(138,94,20,0.65);
+      background: #fffdf4;
+      box-shadow: 0 4px 18px rgba(42,28,18,0.12);
       outline: none;
     }
 
-    .kingdom-card.locked {
+    /* ── Tarjeta bloqueada ── */
+    .kingdom-card-locked {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 1.5rem 1.4rem;
+      background: rgba(201,152,63,0.04);
+      border: 1px dashed rgba(138,94,20,0.22);
+      border-radius: 10px;
       opacity: 0.5;
+      cursor: default;
     }
 
     .kingdom-icon {
@@ -256,137 +157,90 @@
 
     .kingdom-desc {
       font-size: 0.82rem;
-      color: var(--parchment);
-      opacity: 0.68;
+      color: var(--ink);
+      opacity: 0.65;
       line-height: 1.55;
       flex: 1;
     }
 
     .kingdom-status {
       font-family: var(--font-title);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
-
-    .kingdom-status.open {
-      color: #6aaa6e;
-    }
-
-    .kingdom-status.soon {
-      color: var(--gold);
-      opacity: 0.5;
-    }
+    .kingdom-status.open { color: #3a7a3e; }
+    .kingdom-status.soon { color: var(--gold); }
 
     .kingdom-enter {
-      display: inline-block;
       align-self: flex-start;
       margin-top: 0.2rem;
-      padding: 0.45rem 1rem;
-      background: rgba(201, 152, 63, 0.1);
-      border: 1px solid rgba(201, 152, 63, 0.32);
+      padding: 0.42rem 1rem;
+      background: rgba(138,94,20,0.08);
+      border: 1px solid rgba(138,94,20,0.28);
       border-radius: 5px;
       font-family: var(--font-title);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 0.1em;
       color: var(--amber);
     }
 
-    /* ── Nota al pie ── */
+    /* ── Pie ── */
     .footer-note {
       text-align: center;
-      font-size: 0.75rem;
-      color: var(--parchment);
+      font-size: 0.74rem;
+      color: var(--ink);
       opacity: 0.35;
-      margin-top: 3.5rem;
+      margin-top: 4rem;
     }
 
     /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .prologo-banner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .kingdoms-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 580px) {
+      .kingdoms-grid { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * {
-        transition-duration: 0.001ms !important;
-      }
+      * { transition-duration: 0.001ms !important; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <header class="topbar">
+
+    <header class="site-header">
       <div class="seal" aria-hidden="true">8</div>
+      <h1>Reinos Matemáticos</h1>
+      <span class="chronicles">Crónicas de los Exploradores de 8.º</span>
+      <p class="subtitle">"Cada reino guarda un secreto matemático."</p>
     </header>
 
-    <div class="title-block">
-      <h1>Reinos Matemáticos</h1>
-      <p class="chronicles">Crónicas de los Exploradores de 8.º</p>
-      <p class="subtitle">"Cada reino guarda un secreto matemático."</p>
-    </div>
-
-    <hr class="divider">
-
-    <a class="prologo-banner"
-       href="Prologo_Reino_Razones_Proporciones.pdf"
-       target="_blank"
-       rel="noopener"
-       aria-label="Abrir el Prólogo del Reino (PDF)">
-      <div class="prologo-body">
-        <span class="prologo-icon" aria-hidden="true">📜</span>
-        <div class="prologo-text">
-          <h2>Prólogo del Reino</h2>
-          <p>Antes de comenzar la exploración, descubre las ideas que dan forma a este mundo matemático.</p>
-        </div>
-      </div>
-      <span class="prologo-cta" aria-hidden="true">Abrir →</span>
-    </a>
-
-    <p class="section-label">Territorios del mundo</p>
+    <p class="section-label">Territorios disponibles</p>
 
     <div class="kingdoms-grid">
 
+      <!-- Reino activo -->
       <a class="kingdom-card"
          href="index_reino_matematico.html"
          aria-label="Ingresar al Reino de las Proporciones">
         <span class="kingdom-icon" aria-hidden="true">🏙</span>
         <span class="kingdom-name">Reino de las Proporciones</span>
-        <p class="kingdom-desc">Comerciantes, constructores y exploradores descubren que algunas relaciones entre cantidades permanecen constantes.</p>
+        <p class="kingdom-desc">Razones, proporcionalidad directa e inversa, constante k y sus aplicaciones.</p>
         <span class="kingdom-status open">Activo</span>
         <span class="kingdom-enter">Ingresar →</span>
       </a>
 
-      <div class="kingdom-card locked" aria-label="Reino del Azar, próximamente">
-        <span class="kingdom-icon" aria-hidden="true">🎲</span>
-        <span class="kingdom-name">Reino del Azar</span>
-        <p class="kingdom-desc">Los dados del destino aún no han sido lanzados. Sus secretos se revelarán más adelante en el año.</p>
-        <span class="kingdom-status soon">Próximamente</span>
-      </div>
-
-      <div class="kingdom-card locked" aria-label="Reino de los Patrones, próximamente">
-        <span class="kingdom-icon" aria-hidden="true">📈</span>
-        <span class="kingdom-name">Reino de los Patrones</span>
-        <p class="kingdom-desc">Los patrones permanecen ocultos. Solo los exploradores preparados podrán descifrarlos.</p>
-        <span class="kingdom-status soon">Próximamente</span>
-      </div>
-
-      <div class="kingdom-card locked" aria-label="Reino de las Formas, próximamente">
-        <span class="kingdom-icon" aria-hidden="true">📐</span>
-        <span class="kingdom-name">Reino de las Formas</span>
-        <p class="kingdom-desc">Los constructores guardan sus secretos. Las figuras y medidas esperan a ser conquistadas.</p>
+      <!-- Reinos futuros — bloqueado, se reemplaza por tarjetas reales al agregar HTMLs -->
+      <div class="kingdom-card-locked" aria-label="Siguientes reinos, próximamente">
+        <span class="kingdom-icon" aria-hidden="true">🔒</span>
+        <span class="kingdom-name">Siguientes reinos</span>
+        <p class="kingdom-desc">Nuevos territorios irán apareciendo a medida que avance el año.</p>
         <span class="kingdom-status soon">Próximamente</span>
       </div>
 
     </div>
 
-    <p class="footer-note">Portal preparado para GitHub Pages · Reinos Matemáticos 2026</p>
+    <p class="footer-note">Reinos Matemáticos 2026 · Liceo de Médanos</p>
+
   </div>
 </body>
 </html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca del Explorador | Reino de las Proporciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════
+       Tokens idénticos al proyecto
+    ══════════════════════════════════════ */
+    :root {
+      --ink:            #2a1c12;
+      --dark-ink:       #130e0a;
+      --parchment:      #ead7a8;
+      --parchment-light:#f6eac8;
+      --gold:           #c9983f;
+      --amber:          #e6bb65;
+      --ruby:           #8f2f2f;
+      --moss:           #416b42;
+      --pine:           #233d2f;
+      --water:          #3f7483;
+      --night:          #171311;
+      --shadow:         rgba(20, 12, 5, 0.55);
+      --glow:           rgba(236, 190, 93, 0.55);
+      --font-title:     "Cinzel", "Georgia", serif;
+      --font-body:      "Libre Baskerville", "Georgia", serif;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Fondo idéntico al proyecto ── */
+    body {
+      min-height: 100vh;
+      color: var(--parchment-light);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 18% 12%, rgba(226,187,101,0.18), transparent 24rem),
+        radial-gradient(circle at 82% 20%, rgba(76,121,114,0.18),  transparent 23rem),
+        linear-gradient(135deg, #100c08 0%, #24170d 42%, #15110d 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mix-blend-mode: screen;
+      z-index: 1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center,
+        transparent 0%,
+        rgba(0,0,0,0.12) 58%,
+        rgba(0,0,0,0.48) 100%);
+      z-index: 2;
+    }
+
+    /* ── Contenedor principal ── */
+    .shell {
+      position: relative;
+      z-index: 3;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    /* ══════════════════════════════════════
+       Barra de navegación superior
+    ══════════════════════════════════════ */
+    .topnav {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      padding: 1.25rem 1.5rem;
+      max-width: 800px;
+      margin: 0 auto;
+      font-family: var(--font-title);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+    }
+
+    .topnav a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .topnav a:hover { color: var(--amber); }
+
+    .topnav .sep  { color: var(--gold); opacity: 0.35; }
+    .topnav .curr { color: var(--parchment-light); opacity: 0.55; }
+
+    /* ══════════════════════════════════════
+       Encabezado de la biblioteca
+    ══════════════════════════════════════ */
+    .lib-header {
+      text-align: center;
+      padding: 2rem 0 2.5rem;
+      border-bottom: 1px solid rgba(201,152,63,0.22);
+      margin-bottom: 2.5rem;
+    }
+
+    .lib-icon {
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .lib-header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      color: var(--amber);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.55rem;
+    }
+
+    .lib-kingdom {
+      font-family: var(--font-title);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 0.4rem;
+    }
+
+    .lib-subtitle {
+      font-size: 0.85rem;
+      color: var(--parchment);
+      opacity: 0.5;
+      font-style: italic;
+    }
+
+    /* ══════════════════════════════════════
+       Índice de contenidos
+    ══════════════════════════════════════ */
+    .toc {
+      background: rgba(20,14,8,0.5);
+      border: 1px solid rgba(201,152,63,0.22);
+      border-radius: 8px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-title);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .toc ol {
+      padding-left: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .toc li { font-size: 0.88rem; line-height: 1.4; }
+
+    .toc a {
+      color: var(--parchment-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--amber); }
+
+    /* ══════════════════════════════════════
+       Secciones de contenido
+    ══════════════════════════════════════ */
+    .lib-section {
+      margin-bottom: 4rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid rgba(201,152,63,0.13);
+    }
+
+    /* Títulos h2 de sección */
+    .lib-section h2 {
+      font-family: var(--font-title);
+      font-size: clamp(1.2rem, 4vw, 1.75rem);
+      color: var(--amber);
+      letter-spacing: 0.04em;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(201,152,63,0.22);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Subtítulo en cursiva inmediatamente después del h2 */
+    .lib-section h2 + p {
+      font-style: italic;
+      color: var(--parchment);
+      opacity: 0.6;
+      font-size: 0.88rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* h3 */
+    .lib-section h3 {
+      font-family: var(--font-title);
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      margin-top: 2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    /* HR dentro de sección */
+    .lib-section hr {
+      border: none;
+      border-top: 1px solid rgba(201,152,63,0.14);
+      margin: 1.25rem 0;
+    }
+
+    /* Párrafos */
+    .lib-section p {
+      font-size: 0.94rem;
+      line-height: 1.78;
+      color: var(--parchment-light);
+      margin-bottom: 0.8rem;
+    }
+
+    /* Negrita → color ámbar */
+    .lib-section strong { color: var(--amber); }
+
+    /* Listas */
+    .lib-section ul,
+    .lib-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .lib-section li {
+      font-size: 0.92rem;
+      line-height: 1.72;
+      color: var(--parchment-light);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Espaciador &nbsp; — reducir impacto visual */
+    .lib-section p:empty,
+    .lib-section h3:empty { display: none; }
+
+    /* ── Cuadro de alerta ── */
+    .alerta {
+      background: rgba(143,47,47,0.12);
+      border: 1px solid rgba(143,47,47,0.38);
+      border-left: 3px solid var(--ruby);
+      border-radius: 6px;
+      padding: 0.9rem 1.2rem;
+      margin: 1rem 0;
+    }
+    .alerta p { margin-bottom: 0; }
+
+    /* ── Idea fuerza ── */
+    p.idea-fuerza {
+      background: rgba(201,152,63,0.09);
+      border: 1px solid rgba(201,152,63,0.28);
+      border-left: 3px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      font-style: italic;
+      color: var(--amber) !important;
+      margin: 1.25rem 0 0.8rem;
+    }
+
+    /* ── Imágenes ── */
+    .lib-section img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      margin: 1.25rem auto;
+    }
+
+    /* ── Enlace de video ── */
+    .lib-section a {
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(230,187,101,0.32);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .lib-section a:hover {
+      color: var(--parchment-light);
+      border-color: rgba(230,187,101,0.65);
+    }
+
+    /* ── Wrapper de video responsive ── */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 6px;
+      background: rgba(0,0,0,0.35);
+      margin: 1.25rem 0 1.5rem;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── Bloque pendiente (imagen por subir) ── */
+    .pending-block {
+      background: rgba(20,14,8,0.55);
+      border: 1px dashed rgba(201,152,63,0.32);
+      border-radius: 8px;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .pending-block .pending-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .pending-block p {
+      color: var(--gold);
+      opacity: 0.65;
+      font-size: 0.83rem;
+      font-style: italic;
+      margin-bottom: 0.3rem;
+    }
+    .pending-block code {
+      font-family: monospace;
+      font-size: 0.8rem;
+      background: rgba(201,152,63,0.1);
+      padding: 0.15rem 0.45rem;
+      border-radius: 3px;
+      color: var(--amber);
+      opacity: 0.8;
+    }
+
+    /* ══════════════════════════════════════
+       Sección Próximamente
+    ══════════════════════════════════════ */
+    .proximamente {
+      background: rgba(20,14,8,0.45);
+      border: 1px solid rgba(201,152,63,0.16);
+      border-radius: 8px;
+      padding: 1.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .proximamente h2 {
+      font-family: var(--font-title);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 1.1rem;
+    }
+
+    .proximamente ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .proximamente li {
+      font-size: 0.87rem;
+      color: var(--parchment);
+      opacity: 0.45;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .proximamente li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      opacity: 0.38;
+    }
+
+    /* ══════════════════════════════════════
+       Créditos
+    ══════════════════════════════════════ */
+    .credits {
+      border-top: 1px solid rgba(201,152,63,0.14);
+      padding-top: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .credits p {
+      font-size: 0.78rem;
+      color: var(--parchment);
+      opacity: 0.4;
+      line-height: 1.75;
+      margin-bottom: 0.2rem;
+    }
+
+    .credits strong {
+      color: var(--parchment);
+      opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════════
+       Botones de retorno
+    ══════════════════════════════════════ */
+    .back-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.25rem;
+      background: rgba(20,14,8,0.55);
+      border: 1px solid rgba(201,152,63,0.26);
+      border-radius: 6px;
+      font-family: var(--font-title);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-back:hover {
+      border-color: rgba(201,152,63,0.52);
+      background: rgba(30,20,10,0.72);
+    }
+
+    /* ══════════════════════════════════════
+       Responsive
+    ══════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .back-buttons  { flex-direction: column; }
+      .topnav        { font-size: 0.66rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.001ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ Barra de navegación ══ -->
+  <nav class="topnav" aria-label="Ruta de navegación">
+    <a href="index.html">🏰 Reinos Matemáticos</a>
+    <span class="sep">/</span>
+    <a href="index_reino_matematico.html">🏙 Reino de las Proporciones</a>
+    <span class="sep">/</span>
+    <span class="curr">📖 Biblioteca</span>
+  </nav>
+
+  <div class="shell">
+
+    <!-- ══ Encabezado ══ -->
+    <header class="lib-header">
+      <div class="lib-icon" aria-hidden="true">📖</div>
+      <h1>Biblioteca del Explorador</h1>
+      <p class="lib-kingdom">Reino de las Proporciones</p>
+      <p class="lib-subtitle">Razones y proporcionalidad · 8.º EBI</p>
+    </header>
+
+    <!-- ══ Índice de contenidos ══ -->
+    <nav class="toc" aria-label="Índice de contenidos">
+      <p class="toc-title">Índice de contenidos</p>
+      <ol>
+        <li><a href="#razones">Razones</a></li>
+        <li><a href="#intro-proporcionalidad">Introducción — Proporcionalidad. La constante k</a></li>
+        <li><a href="#proporcionalidad">Proporcionalidad</a></li>
+        <li><a href="#infografia">Infografía: Aplicaciones de la proporcionalidad e interés simple</a></li>
+      </ol>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 1 — Razones
+    ══════════════════════════════════════ -->
+    <section id="razones" class="lib-section" aria-labelledby="titulo-razones">
+
+      <h2 id="titulo-razones">Razones</h2>
+      <p><em>Comparar cantidades a partir de relaciones</em></p>
+
+      <hr>
+
+      <h3>✅ Idea central</h3>
+      <p>Una <strong>razón</strong> es una forma de comparar dos cantidades poniendo una en relación con la otra.</p>
+      <p>Comparar no es sumar ni dividir: es observar cómo se relacionan.</p>
+
+      <h3>📊 Fracción, división y razón</h3>
+      <p>Aunque se escriban con números similares, una fracción, una división y una razón <strong>no representan lo mismo</strong>.</p>
+      <p>&nbsp;</p>
+      <p>
+        <img
+          src="https://ceibal.schoology.com/system/files/attachments/page_embeds/m/2026-04/Disenar_una_infografia_educativa_limpia_y_visual_p_69cd9d4ddda5c.png"
+          alt="Comparación visual entre fracción, división y razón"
+          title="">
+      </p>
+      <p style="text-align: center;">&nbsp;Comparación visual entre fracción, división y razón.</p>
+
+      <h3>🧠 Ideas clave para recordar</h3>
+      <ul>
+        <li>Una razón compara cantidades, no indica un total.</li>
+        <li>Dos razones pueden ser equivalentes si expresan la misma relación.</li>
+        <li>El orden de las cantidades en una razón es importante.</li>
+      </ul>
+
+      <h3>⚠️ Atención</h3>
+      <div class="alerta">
+        <p><strong>3 : 6</strong> no representa lo mismo que <strong>6 : 3</strong>.</p>
+      </div>
+
+      <p class="idea-fuerza">La razón permite comparar situaciones diferentes sin importar cuán grandes sean las cantidades.</p>
+      <p>Esta idea será clave para estudiar la proporcionalidad.</p>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 2 — Introducción / Constante k
+    ══════════════════════════════════════ -->
+    <section id="intro-proporcionalidad" class="lib-section" aria-labelledby="titulo-intro">
+
+      <h2 id="titulo-intro">Introducción — Proporcionalidad. La constante k</h2>
+      <p><em>Observar, comparar y descubrir relaciones entre magnitudes</em></p>
+
+      <hr>
+
+      <h3>👀 Antes de la clase</h3>
+      <p>Antes de trabajar el tema en clase, te proponemos observar algunas situaciones y pensar cómo se relacionan las cantidades.</p>
+      <p>Prestá atención a:</p>
+      <ul>
+        <li>qué cambia,</li>
+        <li>qué se mantiene igual,</li>
+        <li>qué ocurre cuando una cantidad aumenta.</li>
+      </ul>
+
+      <h3>🎥 Video principal (mirar obligatoriamente)</h3>
+      <p>En este video se presentan distintas situaciones para observar cómo cambian las cantidades en relación unas con otras.</p>
+      <p><a href="https://youtu.be/UOz6Za4EB-k" rel="noreferrer noopener" target="_blank"> ▶ Ver video introductorio </a></p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/UOz6Za4EB-k?wmode=opaque"
+          title="Video introductorio — Proporcionalidad"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+
+      <h3>📝 Para pensar</h3>
+      <ul>
+        <li>¿Qué tienen en común las situaciones que se muestran?</li>
+        <li>¿Qué ocurre cuando una cantidad aumenta?</li>
+        <li>¿Siempre pasa lo mismo con la otra cantidad?</li>
+      </ul>
+      <p><em>No es necesario conocer los nombres formales todavía.</em> Estas ideas se retomarán y ordenarán en clase.</p>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 3 — Proporcionalidad
+    ══════════════════════════════════════ -->
+    <section id="proporcionalidad" class="lib-section" aria-labelledby="titulo-prop">
+
+      <h2 id="titulo-prop">Proporcionalidad</h2>
+      <p><em>Reconocer relaciones estables entre magnitudes</em></p>
+
+      <hr>
+
+      <h3>✅ Idea central</h3>
+      <p>Dos magnitudes son proporcionales cuando mantienen una misma relación al compararse.</p>
+      <p>No basta con que ambas crezcan o disminuyan: importa cómo cambia una en relación con la otra.</p>
+      <p>&nbsp;</p>
+
+      <h3>🎥 Video — Proporcionalidad directa</h3>
+      <p>En este video se analiza una situación concreta de proporcionalidad directa, utilizando tablas y gráficos.</p>
+      <p>&nbsp;</p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/nP9SwAqhVTI?wmode=opaque"
+          title="Video — Proporcionalidad directa"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+
+      <p>&nbsp;</p>
+
+      <h3>📌 Proporcionalidad directa</h3>
+      <p>Existe proporcionalidad directa cuando:</p>
+      <ul>
+        <li>si una magnitud aumenta, la otra también aumenta;</li>
+        <li>si una se duplica, la otra se duplica;</li>
+        <li>la relación entre ambas se mantiene constante.</li>
+      </ul>
+
+      <h3>🔢 La constante de proporcionalidad (k)</h3>
+      <p>En la proporcionalidad directa existe un número fijo llamado <strong>constante de proporcionalidad</strong>.</p>
+      <p>Se calcula como:</p>
+      <p><strong>k = y / x</strong></p>
+      <p>y permite expresar la relación como:</p>
+      <p><strong>y = k · x</strong></p>
+      <p>&nbsp;</p>
+
+      <h3>📊 Criterio de tabla</h3>
+      <p>Una tabla representa proporcionalidad directa si el valor de <strong>y / x</strong> es el mismo en todas sus filas.</p>
+
+      <h3>📈 Criterio de gráfico</h3>
+      <p>Un gráfico representa proporcionalidad directa cuando es una línea recta que pasa por el origen (0,0).</p>
+      <p>&nbsp;</p>
+
+      <h3>🎥 Video — Proporcionalidad inversa</h3>
+      <p>En este video se muestran ejemplos cotidianos de proporcionalidad inversa y se analiza cómo se comportan las magnitudes involucradas.</p>
+      <p>&nbsp;</p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/S_dmdGX8rw8?wmode=opaque"
+          title="Video — Proporcionalidad inversa"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+
+      <h3>📌 Proporcionalidad inversa</h3>
+      <p>En la proporcionalidad inversa, cuando una magnitud aumenta, la otra disminuye proporcionalmente.</p>
+      <p>&nbsp;</p>
+
+      <h3>🎥 Video — Diferencias entre directa e inversa</h3>
+      <p>En este video se comparan distintas situaciones para analizar cuándo una relación es directa y cuándo es inversa.</p>
+      <p>&nbsp;</p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/Gm7KWLdtCaY?wmode=opaque"
+          title="Video — Diferencias entre proporcionalidad directa e inversa"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+
+      <hr>
+
+      <h3>⚠️ Atención</h3>
+      <p>No toda relación creciente es proporcional.</p>
+
+      <p class="idea-fuerza">La proporcionalidad es un modelo para describir relaciones estables entre magnitudes.</p>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 4 — Infografía
+         (modular: imagen se agrega cuando se suba a GitHub)
+    ══════════════════════════════════════ -->
+    <section id="infografia" class="lib-section" aria-labelledby="titulo-infografia">
+
+      <h2 id="titulo-infografia">Infografía: Aplicaciones de la proporcionalidad e interés simple</h2>
+      <p><em>Conexiones entre la proporcionalidad y situaciones cotidianas</em></p>
+
+      <hr>
+
+      <!--
+        IMAGEN PENDIENTE DE PUBLICACIÓN EN GITHUB
+        ─────────────────────────────────────────
+        Archivo local: infografia interes simple.png
+        Ruta local:    G:\Mi unidad\Matemática_8EBI_2026\02_Secuencias_Didacticas\
+                       Bloque_01_Numeros_Proporcionalidad\Hojas teoricas\
+        Paso requerido: copiar el archivo a esta carpeta del proyecto con el
+                        nombre "infografia_interes_simple.png" y publicar en GitHub.
+        Una vez subido, la imagen se mostrará automáticamente.
+      -->
+      <img
+        src="infografia_interes_simple.png"
+        alt="Infografía: Aplicaciones de la proporcionalidad e interés simple"
+        id="img-infografia"
+        onerror="this.style.display='none'; document.getElementById('img-pendiente').style.display='block'">
+
+      <div id="img-pendiente" class="pending-block" style="display:none;" aria-live="polite">
+        <div class="pending-icon" aria-hidden="true">🖼️</div>
+        <p>Imagen pendiente de publicación</p>
+        <p>Archivo: <code>infografia_interes_simple.png</code></p>
+        <p>Subir el archivo a GitHub para que se visualice aquí.</p>
+      </div>
+
+    </section>
+
+    <!-- ══════════════════════════════════════
+         Próximamente en esta biblioteca
+    ══════════════════════════════════════ -->
+    <section class="proximamente" aria-label="Próximamente en esta biblioteca">
+      <h2>Próximamente en esta biblioteca</h2>
+      <ul>
+        <li>Escalas</li>
+        <li>Porcentajes</li>
+        <li>Interés simple</li>
+      </ul>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         Créditos
+    ══════════════════════════════════════ -->
+    <footer class="credits" aria-label="Créditos">
+      <p><strong>Autora pedagógica:</strong> Gabriela Michelle Fernández</p>
+      <p><strong>Proyecto:</strong> Reinos Matemáticos. Crónicas de los Exploradores de 8.º</p>
+      <p><strong>Institución:</strong> Liceo de Médanos</p>
+    </footer>
+
+    <!-- ══════════════════════════════════════
+         Botones de retorno
+    ══════════════════════════════════════ -->
+    <nav class="back-buttons" aria-label="Navegación de retorno">
+      <a class="btn-back" href="index_reino_matematico.html">🏙 Volver al Reino de las Proporciones</a>
+      <a class="btn-back" href="index.html">🏰 Volver a Reinos Matemáticos</a>
+    </nav>
+
+  </div><!-- /shell -->
+
+</body>
+</html>

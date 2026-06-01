@@ -508,7 +508,7 @@
   <article class="modal modal-misiones">
     <button class="modal-close" type="button" id="misionesClose" aria-label="Cerrar misiones">×</button>
     <h2 id="misionesTitle">Misiones del Explorador</h2>
-    <span class="modal-tipo">Práctica · 6 misiones disponibles</span>
+    <span class="modal-tipo">Práctica · 7 misiones disponibles · 1 desafío bloqueado</span>
     <p class="modal-intro" id="misionesDesc">Seleccioná una misión para acceder a la ficha o al applet interactivo.</p>
     <div class="modal-rule" aria-hidden="true"></div>
 
@@ -519,7 +519,7 @@
           <span class="mission-name">Fábrica de Pintura</span>
         </div>
         <div class="mission-actions">
-          <a class="btn-mission" href="actividades/Actividad_Fabrica_Pintura_v3%20version%20alumno%20digital.pdf" target="_blank" rel="noopener">Ficha</a>
+          <a class="btn-mission" href="actividades/S4%20Act1_Fabrica_Pintura_v3.pdf" target="_blank" rel="noopener">Ficha</a>
           <a class="btn-mission btn-applet" href="Fabrica_Pintura_Applet_v3.html" target="_blank">Applet</a>
         </div>
       </li>
@@ -529,7 +529,7 @@
           <span class="mission-name">Mapa de Uruguay</span>
         </div>
         <div class="mission-actions">
-          <a class="btn-mission" href="actividades/Ficha_Mapa_Uruguay_Escala.pdf" target="_blank" rel="noopener">Ficha</a>
+          <a class="btn-mission" href="actividades/S4_Act2_Mapa_Uruguay_Escala.pdf" target="_blank" rel="noopener">Ficha</a>
         </div>
       </li>
       <li class="mission-item">
@@ -569,9 +569,47 @@
           <a class="btn-mission" href="actividades/S4_Act6_Clasificacion_v2.pdf" target="_blank" rel="noopener">Ficha</a>
         </div>
       </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Act 8</span>
+          <span class="mission-name">K en todos lados</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="actividades/Act8_K_en_todos_lados_v2.pdf" target="_blank" rel="noopener">Ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Desafío</span>
+          <span class="mission-name">Recorrido final</span>
+        </div>
+        <div class="mission-actions">
+          <button class="btn-mission" type="button" id="desafioBtn" aria-disabled="true">Bloqueado</button>
+        </div>
+      </li>
     </ol>
     <div style="margin-top:1.5rem;">
       <button class="btn-back-map" type="button" id="misionesBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
+<!-- Modal desafío bloqueado -->
+<div class="modal-backdrop" id="modalDesafio" role="dialog" aria-modal="true"
+     aria-labelledby="desafioTitle" aria-describedby="desafioDesc">
+  <article class="modal">
+    <button class="modal-close" type="button" id="desafioClose" aria-label="Cerrar desafío">×</button>
+    <h2 id="desafioTitle">Desafío del Explorador</h2>
+    <span class="modal-tipo">Misión bloqueada</span>
+    <p class="modal-intro" id="desafioDesc">Aún no has completado tu recorrido. Próximamente estará disponible tu desafío final.</p>
+    <p class="modal-intro">Esta misión será habilitada por la profesora cuando corresponda.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
+    <div class="mission-actions">
+      <button class="btn-mission" type="button" disabled>Minievaluación</button>
+      <button class="btn-mission" type="button" disabled>Evaluación Integradora</button>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="desafioBackBtn">Volver al mapa</button>
     </div>
   </article>
 </div>
@@ -615,6 +653,7 @@
   const layer         = document.getElementById('territoryLayer');
   const modalBackdrop = document.getElementById('modalBackdrop');
   const modalMisiones = document.getElementById('modalMisiones');
+  const modalDesafio  = document.getElementById('modalDesafio');
   const modalTitle    = document.getElementById('modalTitle');
   const modalTipo     = document.getElementById('modalTipo');
   const modalDesc     = document.getElementById('modalDescription');
@@ -622,6 +661,7 @@
   const modalActions  = document.getElementById('modalActions');
   const modalClose    = document.getElementById('modalClose');
   const misionesClose = document.getElementById('misionesClose');
+  const desafioClose  = document.getElementById('desafioClose');
   let ultimoFoco = null;
 
   function getPosition(t) {
@@ -680,17 +720,24 @@
 
   function cerrarModal()    { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
   function cerrarMisiones() { modalMisiones.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function abrirDesafio()   { ultimoFoco = document.activeElement; modalDesafio.classList.add('open'); desafioClose.focus(); document.body.style.overflow = 'hidden'; }
+  function cerrarDesafio()  { modalDesafio.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
 
   modalClose.addEventListener('click', cerrarModal);
   document.getElementById('modalBackBtn').addEventListener('click', cerrarModal);
   misionesClose.addEventListener('click', cerrarMisiones);
   document.getElementById('misionesBackBtn').addEventListener('click', cerrarMisiones);
+  desafioClose.addEventListener('click', cerrarDesafio);
+  document.getElementById('desafioBackBtn').addEventListener('click', cerrarDesafio);
+  document.getElementById('desafioBtn').addEventListener('click', abrirDesafio);
   modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) cerrarModal(); });
   modalMisiones.addEventListener('click', e => { if (e.target === modalMisiones) cerrarMisiones(); });
+  modalDesafio.addEventListener('click', e => { if (e.target === modalDesafio) cerrarDesafio(); });
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (modalBackdrop.classList.contains('open')) cerrarModal();
     if (modalMisiones.classList.contains('open')) cerrarMisiones();
+    if (modalDesafio.classList.contains('open')) cerrarDesafio();
   });
 
   function trapFocus(backdrop, e) {
@@ -701,6 +748,7 @@
   }
   modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBackdrop, e); });
   modalMisiones.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalMisiones, e); });
+  modalDesafio.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalDesafio, e); });
 
   let resizeTimer;
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });

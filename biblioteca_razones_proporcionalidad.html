@@ -102,6 +102,23 @@
     .topnav .sep  { color: var(--gold); opacity: 0.5; }
     .topnav .curr { color: var(--ink); opacity: 0.55; }
 
+    .nav-icon,
+    .inline-icon,
+    .btn-icon {
+      display: inline-block;
+      width: 1.35em;
+      height: 1.35em;
+      object-fit: contain;
+      vertical-align: -0.25em;
+      margin-right: 0.35rem;
+    }
+
+    .btn-icon {
+      width: 1.55em;
+      height: 1.55em;
+      margin-right: 0.45rem;
+    }
+
     /* ══════════════════════════════════════
        Encabezado de la biblioteca
     ══════════════════════════════════════ */
@@ -113,9 +130,15 @@
     }
 
     .lib-icon {
-      font-size: 3rem;
       line-height: 1;
       margin-bottom: 0.75rem;
+    }
+
+    .lib-icon img {
+      width: 5rem;
+      height: 5rem;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 16px rgba(42,28,18,0.2));
     }
 
     .lib-header h1 {
@@ -324,7 +347,12 @@
       text-align: center;
       margin: 1.5rem 0;
     }
-    .pending-block .pending-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .pending-block .pending-icon { margin-bottom: 0.75rem; }
+    .pending-block .pending-icon img {
+      width: 3.4rem;
+      height: 3.4rem;
+      object-fit: contain;
+    }
     .pending-block p {
       color: var(--amber);
       font-size: 0.83rem;
@@ -338,49 +366,6 @@
       padding: 0.15rem 0.45rem;
       border-radius: 3px;
       color: var(--ink);
-    }
-
-    /* ══════════════════════════════════════
-       Sección Próximamente
-    ══════════════════════════════════════ */
-    .proximamente {
-      background: rgba(201,152,63,0.05);
-      border: 1px solid rgba(201,152,63,0.25);
-      border-radius: 8px;
-      padding: 1.75rem;
-      margin-bottom: 3rem;
-    }
-
-    .proximamente h2 {
-      font-family: var(--font-title);
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--amber);
-      margin-bottom: 1.1rem;
-    }
-
-    .proximamente ul {
-      list-style: none;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .proximamente li {
-      font-size: 0.87rem;
-      color: var(--ink);
-      opacity: 0.5;
-      padding-left: 1.2rem;
-      position: relative;
-    }
-
-    .proximamente li::before {
-      content: "—";
-      position: absolute;
-      left: 0;
-      color: var(--gold);
     }
 
     /* ══════════════════════════════════════
@@ -453,18 +438,18 @@
 
   <!-- ══ Barra de navegación ══ -->
   <nav class="topnav" aria-label="Ruta de navegación">
-    <a href="index.html">🏰 Reinos Matemáticos</a>
+    <a href="index.html"><img class="nav-icon" src="iconos_web/castillo.png" alt="">Reinos Matemáticos</a>
     <span class="sep">/</span>
-    <a href="index_reino_matematico.html">🏙 Reino de las Proporciones</a>
+    <a href="index_reino_matematico.html"><img class="nav-icon" src="iconos_web/torre.png" alt="">Reino de las Proporciones</a>
     <span class="sep">/</span>
-    <span class="curr">📖 Biblioteca</span>
+    <span class="curr"><img class="nav-icon" src="iconos_web/biblioteca.png" alt="">Biblioteca</span>
   </nav>
 
   <div class="shell">
 
     <!-- ══ Encabezado ══ -->
     <header class="lib-header">
-      <div class="lib-icon" aria-hidden="true">📖</div>
+      <div class="lib-icon" aria-hidden="true"><img src="iconos_web/biblioteca.png" alt=""></div>
       <h1>Biblioteca del Explorador</h1>
       <p class="lib-kingdom">Reino de las Proporciones</p>
       <p class="lib-subtitle">Razones y proporcionalidad · 8.º EBI</p>
@@ -491,11 +476,11 @@
 
       <hr>
 
-      <h3>✅ Idea central</h3>
+      <h3><img class="inline-icon" src="iconos_web/linterna.png" alt="">Idea central</h3>
       <p>Una <strong>razón</strong> es una forma de comparar dos cantidades poniendo una en relación con la otra.</p>
       <p>Comparar no es sumar ni dividir: es observar cómo se relacionan.</p>
 
-      <h3>📊 Fracción, división y razón</h3>
+      <h3><img class="inline-icon" src="iconos_web/pergamino.png" alt="">Fracción, división y razón</h3>
       <p>Aunque se escriban con números similares, una fracción, una división y una razón <strong>no representan lo mismo</strong>.</p>
       <p>&nbsp;</p>
       <p>
@@ -505,14 +490,14 @@
       </p>
       <p style="text-align: center;">&nbsp;Comparación visual entre fracción, división y razón.</p>
 
-      <h3>🧠 Ideas clave para recordar</h3>
+      <h3><img class="inline-icon" src="iconos_web/pocion.png" alt="">Ideas clave para recordar</h3>
       <ul>
         <li>Una razón compara cantidades, no indica un total.</li>
         <li>Dos razones pueden ser equivalentes si expresan la misma relación.</li>
         <li>El orden de las cantidades en una razón es importante.</li>
       </ul>
 
-      <h3>⚠️ Atención</h3>
+      <h3><img class="inline-icon" src="iconos_web/escudo.png" alt="">Atención</h3>
       <div class="alerta">
         <p><strong>3 : 6</strong> no representa lo mismo que <strong>6 : 3</strong>.</p>
       </div>
@@ -532,7 +517,7 @@
 
       <hr>
 
-      <h3>👀 Antes de la clase</h3>
+      <h3><img class="inline-icon" src="iconos_web/baculo.png" alt="">Antes de la clase</h3>
       <p>Antes de trabajar el tema en clase, te proponemos observar algunas situaciones y pensar cómo se relacionan las cantidades.</p>
       <p>Prestá atención a:</p>
       <ul>
@@ -541,21 +526,22 @@
         <li>qué ocurre cuando una cantidad aumenta.</li>
       </ul>
 
-      <h3>🎥 Video principal (mirar obligatoriamente)</h3>
+      <h3><img class="inline-icon" src="iconos_web/cristal.png" alt="">Video principal (mirar obligatoriamente)</h3>
       <p>En este video se presentan distintas situaciones para observar cómo cambian las cantidades en relación unas con otras.</p>
-      <p><a href="https://youtu.be/UOz6Za4EB-k" rel="noreferrer noopener" target="_blank"> ▶ Ver video introductorio </a></p>
+      <p><a href="https://youtu.be/UOz6Za4EB-k" rel="noreferrer noopener" target="_blank">Ver video introductorio</a></p>
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/UOz6Za4EB-k"
+          src="https://www.youtube.com/embed/UOz6Za4EB-k?si=94pIpSJ9Ue2m2IdR"
           title="Video introductorio — Proporcionalidad"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>
 
-      <h3>📝 Para pensar</h3>
+      <h3><img class="inline-icon" src="iconos_web/arbol.png" alt="">Para pensar</h3>
       <ul>
         <li>¿Qué tienen en común las situaciones que se muestran?</li>
         <li>¿Qué ocurre cuando una cantidad aumenta?</li>
@@ -575,19 +561,20 @@
 
       <hr>
 
-      <h3>✅ Idea central</h3>
+      <h3><img class="inline-icon" src="iconos_web/linterna.png" alt="">Idea central</h3>
       <p>Dos magnitudes son proporcionales cuando mantienen una misma relación al compararse.</p>
       <p>No basta con que ambas crezcan o disminuyan: importa cómo cambia una en relación con la otra.</p>
       <p>&nbsp;</p>
 
-      <h3>🎥 Video — Proporcionalidad directa</h3>
+      <h3><img class="inline-icon" src="iconos_web/cristal.png" alt="">Video — Proporcionalidad directa</h3>
       <p>En este video se analiza una situación concreta de proporcionalidad directa, utilizando tablas y gráficos.</p>
       <p>&nbsp;</p>
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/nP9SwAqhVTI"
+          src="https://www.youtube.com/embed/nP9SwAqhVTI?si=XfEEQpoSv7oTSP2C"
           title="Video — Proporcionalidad directa"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
@@ -596,7 +583,7 @@
 
       <p>&nbsp;</p>
 
-      <h3>📌 Proporcionalidad directa</h3>
+      <h3><img class="inline-icon" src="iconos_web/estandarte.png" alt="">Proporcionalidad directa</h3>
       <p>Existe proporcionalidad directa cuando:</p>
       <ul>
         <li>si una magnitud aumenta, la otra también aumenta;</li>
@@ -604,7 +591,7 @@
         <li>la relación entre ambas se mantiene constante.</li>
       </ul>
 
-      <h3>🔢 La constante de proporcionalidad (k)</h3>
+      <h3><img class="inline-icon" src="iconos_web/cristal.png" alt="">La constante de proporcionalidad (k)</h3>
       <p>En la proporcionalidad directa existe un número fijo llamado <strong>constante de proporcionalidad</strong>.</p>
       <p>Se calcula como:</p>
       <p><strong>k = y / x</strong></p>
@@ -612,39 +599,41 @@
       <p><strong>y = k · x</strong></p>
       <p>&nbsp;</p>
 
-      <h3>📊 Criterio de tabla</h3>
+      <h3><img class="inline-icon" src="iconos_web/pergamino.png" alt="">Criterio de tabla</h3>
       <p>Una tabla representa proporcionalidad directa si el valor de <strong>y / x</strong> es el mismo en todas sus filas.</p>
 
-      <h3>📈 Criterio de gráfico</h3>
+      <h3><img class="inline-icon" src="iconos_web/fuente.png" alt="">Criterio de gráfico</h3>
       <p>Un gráfico representa proporcionalidad directa cuando es una línea recta que pasa por el origen (0,0).</p>
       <p>&nbsp;</p>
 
-      <h3>🎥 Video — Proporcionalidad inversa</h3>
+      <h3><img class="inline-icon" src="iconos_web/cristal.png" alt="">Video — Proporcionalidad inversa</h3>
       <p>En este video se muestran ejemplos cotidianos de proporcionalidad inversa y se analiza cómo se comportan las magnitudes involucradas.</p>
       <p>&nbsp;</p>
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/S_dmdGX8rw8"
+          src="https://www.youtube.com/embed/S_dmdGX8rw8?si=eL0XFRrRUZOMGtxB"
           title="Video — Proporcionalidad inversa"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
           loading="lazy"></iframe>
       </div>
 
-      <h3>📌 Proporcionalidad inversa</h3>
+      <h3><img class="inline-icon" src="iconos_web/estandarte.png" alt="">Proporcionalidad inversa</h3>
       <p>En la proporcionalidad inversa, cuando una magnitud aumenta, la otra disminuye proporcionalmente.</p>
       <p>&nbsp;</p>
 
-      <h3>🎥 Video — Diferencias entre directa e inversa</h3>
+      <h3><img class="inline-icon" src="iconos_web/cristal.png" alt="">Video — Diferencias entre directa e inversa</h3>
       <p>En este video se comparan distintas situaciones para analizar cuándo una relación es directa y cuándo es inversa.</p>
       <p>&nbsp;</p>
 
       <div class="video-wrap">
         <iframe
-          src="https://www.youtube.com/embed/Gm7KWLdtCaY"
+          src="https://www.youtube.com/embed/Gm7KWLdtCaY?si=JPepHjkNBA4OqZqP"
           title="Video — Diferencias entre proporcionalidad directa e inversa"
+          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen
@@ -653,7 +642,7 @@
 
       <hr>
 
-      <h3>⚠️ Atención</h3>
+      <h3><img class="inline-icon" src="iconos_web/escudo.png" alt="">Atención</h3>
       <p>No toda relación creciente es proporcional.</p>
 
       <p class="idea-fuerza">La proporcionalidad es un modelo para describir relaciones estables entre magnitudes.</p>
@@ -688,24 +677,12 @@
         onerror="this.style.display='none'; document.getElementById('img-pendiente').style.display='block'">
 
       <div id="img-pendiente" class="pending-block" style="display:none;" aria-live="polite">
-        <div class="pending-icon" aria-hidden="true">🖼️</div>
+        <div class="pending-icon" aria-hidden="true"><img src="iconos_web/pergamino.png" alt=""></div>
         <p>Imagen pendiente de publicación</p>
         <p>Archivo: <code>infografia_interes_simple.png</code></p>
         <p>Subir el archivo a GitHub para que se visualice aquí.</p>
       </div>
 
-    </section>
-
-    <!-- ══════════════════════════════════════
-         Próximamente en esta biblioteca
-    ══════════════════════════════════════ -->
-    <section class="proximamente" aria-label="Próximamente en esta biblioteca">
-      <h2>Próximamente en esta biblioteca</h2>
-      <ul>
-        <li>Escalas</li>
-        <li>Porcentajes</li>
-        <li>Interés simple</li>
-      </ul>
     </section>
 
     <!-- ══════════════════════════════════════
@@ -721,8 +698,8 @@
          Botones de retorno
     ══════════════════════════════════════ -->
     <nav class="back-buttons" aria-label="Navegación de retorno">
-      <a class="btn-back" href="index_reino_matematico.html">🏙 Volver al Reino de las Proporciones</a>
-      <a class="btn-back" href="index.html">🏰 Volver a Reinos Matemáticos</a>
+      <a class="btn-back" href="index_reino_matematico.html"><img class="btn-icon" src="iconos_web/torre.png" alt="">Volver al Reino de las Proporciones</a>
+      <a class="btn-back" href="index.html"><img class="btn-icon" src="iconos_web/castillo.png" alt="">Volver a Reinos Matemáticos</a>
     </nav>
 
   </div><!-- /shell -->

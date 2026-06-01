@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Sobres — Panini FIFA World Cup 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      background: #f0f4f8;
+      color: #1a2a3a;
+      min-height: 100vh;
+    }
+
+    /* ===== ACCESSIBILITY BAR ===== */
+    #a11y-bar {
+      position: fixed;
+      top: 10px;
+      right: 12px;
+      z-index: 1000;
+      display: flex;
+      gap: 6px;
+      background: rgba(255,255,255,0.95);
+      padding: 6px 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    #a11y-bar button {
+      background: #1a3c5e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 9px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #a11y-bar button:hover { background: #2e6da4; }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #1a3c5e, #2e6da4);
+      color: white;
+      padding: 24px 20px 20px;
+      text-align: center;
+      padding-right: 220px;
+    }
+    header h1 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 900;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    header p {
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    /* ===== MODE TABS ===== */
+    #mode-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: #1a3c5e;
+      padding: 0 20px;
+    }
+    #mode-tabs button {
+      background: none;
+      color: rgba(255,255,255,0.7);
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 12px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #mode-tabs button:hover { color: white; }
+    #mode-tabs button[aria-selected="true"] {
+      color: white;
+      border-bottom-color: #F1C40F;
+    }
+
+    /* ===== LIBRE CONFIG ===== */
+    #libre-config {
+      background: #e8f0f8;
+      padding: 14px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #c5d8ea;
+    }
+    #libre-config label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3c5e;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #libre-config input {
+      border: 2px solid #2e6da4;
+      border-radius: 6px;
+      padding: 6px 10px;
+      width: 80px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a2a3a;
+    }
+    #btn-apply {
+      background: #2e6da4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #btn-apply:hover { background: #1a3c5e; }
+
+    /* ===== MAIN LAYOUT ===== */
+    #main-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr 290px;
+      gap: 16px;
+      padding: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ===== LEFT PANEL ===== */
+    #panel-action {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #envelope-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    #envelope-svg {
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      cursor: pointer;
+    }
+    #envelope-svg.shaking {
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0) rotate(0deg); }
+      10% { transform: translateX(-8px) rotate(-4deg); }
+      20% { transform: translateX(8px) rotate(4deg); }
+      30% { transform: translateX(-7px) rotate(-3deg); }
+      40% { transform: translateX(7px) rotate(3deg); }
+      50% { transform: translateX(-5px) rotate(-2deg); }
+      60% { transform: translateX(5px) rotate(2deg); }
+      70% { transform: translateX(-3px) rotate(-1deg); }
+      80% { transform: translateX(3px) rotate(1deg); }
+      90% { transform: translateX(-1px); }
+    }
+
+    #action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #btn-open1 {
+      background: #2e6da4;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.5px;
+    }
+    #btn-open1:hover { background: #1a3c5e; transform: translateY(-1px); }
+    #btn-open1:active { transform: translateY(0); }
+    #btn-open10 {
+      background: #2e6da4;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      opacity: 0.85;
+    }
+    #btn-open10:hover { background: #1a3c5e; opacity: 1; }
+    #btn-reset {
+      background: #7f8c8d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #btn-reset:hover { background: #5d6d7e; }
+
+    /* ===== COUNTERS ===== */
+    #counters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .counter-item {
+      background: #f0f4f8;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .counter-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #5d6d7e;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
+    }
+    .counter-value {
+      font-size: 28px;
+      font-weight: 900;
+      color: #1a3c5e;
+      line-height: 1;
+    }
+    .counter-total {
+      font-size: 14px;
+      font-weight: 700;
+      color: #7f8c8d;
+    }
+
+    /* ===== LAST PACK BADGES ===== */
+    #last-pack-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #5d6d7e;
+      margin-bottom: 6px;
+    }
+    #last-pack-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 28px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: white;
+      padding: 0 8px;
+      animation: fadeInBadge 0.3s ease;
+      position: relative;
+    }
+    .badge.repeated {
+      opacity: 0.55;
+    }
+    .badge.repeated::after {
+      content: 'R';
+      font-size: 9px;
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      width: 14px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+    @keyframes fadeInBadge {
+      from { opacity: 0; transform: scale(0.6) translateY(4px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ===== CENTER PANEL - ALBUM ===== */
+    #panel-album {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #panel-album h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1a3c5e;
+      border-bottom: 2px solid #e8f0f8;
+      padding-bottom: 8px;
+    }
+    #album-grid-wrapper {
+      overflow-y: auto;
+      max-height: 520px;
+      border-radius: 8px;
+      border: 1px solid #e0e8f0;
+      padding: 4px;
+    }
+    #album-grid {
+      display: grid;
+      gap: 3px;
+    }
+    /* Aula mode: 4 cols, bigger cells */
+    #album-grid.mode-aula {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    #album-grid.mode-aula .sticker-cell {
+      height: 60px;
+      font-size: 14px;
+      border-radius: 8px;
+    }
+    /* Real/Libre mode: up to 10 cols, small cells */
+    #album-grid.mode-real,
+    #album-grid.mode-libre {
+      grid-template-columns: repeat(var(--grid-cols, 10), 1fr);
+      gap: 2px;
+    }
+    #album-grid.mode-real .sticker-cell,
+    #album-grid.mode-libre .sticker-cell {
+      height: 20px;
+      font-size: 7px;
+      border-radius: 3px;
+      min-width: 0;
+    }
+
+    .sticker-cell {
+      background: #D0D0D0;
+      color: #888;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      cursor: default;
+      border-radius: 6px;
+      overflow: hidden;
+      user-select: none;
+    }
+    .sticker-cell.obtained {
+      color: white;
+    }
+    .sticker-cell.special {
+      border: 2px solid #FFD700;
+      animation: shimmer 2s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%,100% { box-shadow: 0 0 4px rgba(255,215,0,0.6); }
+      50% { box-shadow: 0 0 10px rgba(255,215,0,1), 0 0 4px rgba(255,255,255,0.5); }
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    #progress-container { margin-top: 4px; }
+    #progress-bar-bg {
+      height: 14px;
+      background: #e0e8f0;
+      border-radius: 7px;
+      overflow: hidden;
+    }
+    #progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2ECC71, #1ABC9C);
+      border-radius: 7px;
+      transition: width 0.5s ease;
+    }
+    #progress-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #2e6da4;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    /* ===== RIGHT PANEL - STATS ===== */
+    #panel-stats {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #panel-stats h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #1a3c5e;
+      border-bottom: 2px solid #e8f0f8;
+      padding-bottom: 8px;
+    }
+    #stats-table-wrapper {
+      max-height: 400px;
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid #e0e8f0;
+    }
+    #stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    #stats-table thead {
+      position: sticky;
+      top: 0;
+      background: #1a3c5e;
+      color: white;
+      z-index: 2;
+    }
+    #stats-table th {
+      padding: 8px 6px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    #stats-table td {
+      padding: 5px 6px;
+      border-bottom: 1px solid #f0f4f8;
+      vertical-align: middle;
+    }
+    #stats-table tbody tr:hover { background: #f8fafc; }
+    .sticker-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px;
+      height: 20px;
+      border-radius: 4px;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 0 4px;
+    }
+    .freq-bar {
+      height: 10px;
+      border-radius: 3px;
+      min-width: 2px;
+      transition: width 0.3s ease;
+    }
+    #freq-formula {
+      font-size: 11px;
+      color: #7f8c8d;
+      font-style: italic;
+      border-top: 1px solid #e8f0f8;
+      padding-top: 8px;
+      line-height: 1.4;
+    }
+
+    /* ===== BOTTOM PANEL ===== */
+    #bottom-panel {
+      max-width: 1400px;
+      margin: 0 auto 20px;
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    #comparison-boxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .comp-box {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border-left: 5px solid #ccc;
+    }
+    .comp-box.ideal { border-left-color: #3498DB; }
+    .comp-box.experiment { border-left-color: #E67E22; }
+    .comp-box h3 {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      color: #5d6d7e;
+    }
+    .comp-box p {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a2a3a;
+      line-height: 1.5;
+    }
+    .comp-box strong {
+      color: #1a3c5e;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    #chart-container {
+      background: white;
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    #reflection {
+      background: linear-gradient(135deg, #fff9e6, #fffde7);
+      border-radius: 14px;
+      padding: 18px 24px;
+      border-left: 5px solid #F1C40F;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a2a3a;
+      line-height: 1.6;
+      min-height: 20px;
+      transition: all 0.3s;
+    }
+    #reflection:empty { display: none; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1a3c5e;
+      color: #a8c0d4;
+      text-align: center;
+      padding: 18px 20px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* ===== READING MODE OVERLAY ===== */
+    #reading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #reading-overlay[hidden] { display: none; }
+    #reading-overlay article {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    #reading-overlay article h2 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #1a3c5e;
+      margin-bottom: 16px;
+    }
+    #reading-overlay article h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #2e6da4;
+      margin: 16px 0 8px;
+    }
+    #reading-overlay article p,
+    #reading-overlay article li {
+      margin-bottom: 8px;
+      color: #1a2a3a;
+    }
+    #reading-overlay article ol,
+    #reading-overlay article ul {
+      padding-left: 24px;
+    }
+    #btn-close-reading {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* ===== HIGH CONTRAST MODE ===== */
+    body.high-contrast {
+      background: #000;
+      color: #fff;
+    }
+    body.high-contrast header {
+      background: #000;
+      border-bottom: 2px solid #fff;
+    }
+    body.high-contrast #mode-tabs {
+      background: #000;
+      border-bottom: 2px solid #fff;
+    }
+    body.high-contrast #panel-action,
+    body.high-contrast #panel-album,
+    body.high-contrast #panel-stats,
+    body.high-contrast .comp-box,
+    body.high-contrast #chart-container,
+    body.high-contrast #reflection,
+    body.high-contrast #reading-overlay article {
+      background: #111;
+      color: #fff;
+      border: 1px solid #fff;
+      box-shadow: none;
+    }
+    body.high-contrast .sticker-cell {
+      border: 1px solid #fff;
+    }
+    body.high-contrast .sticker-cell.obtained {
+      border: 2px solid #fff;
+    }
+    body.high-contrast #stats-table th {
+      background: #000;
+      color: #fff;
+      border-bottom: 2px solid #fff;
+    }
+    body.high-contrast #stats-table td {
+      border-bottom: 1px solid #555;
+      color: #fff;
+    }
+    body.high-contrast .counter-item {
+      background: #222;
+      border: 1px solid #555;
+    }
+    body.high-contrast .counter-value { color: #fff; }
+    body.high-contrast footer {
+      background: #000;
+      border-top: 2px solid #fff;
+      color: #ccc;
+    }
+    body.high-contrast #a11y-bar {
+      background: #000;
+      border: 1px solid #fff;
+    }
+    body.high-contrast #libre-config {
+      background: #111;
+      border-bottom-color: #555;
+    }
+    body.high-contrast #libre-config input {
+      background: #222;
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      #main-layout {
+        grid-template-columns: 250px 1fr;
+        grid-template-rows: auto auto;
+      }
+      #panel-stats {
+        grid-column: 1 / -1;
+      }
+      header { padding-right: 20px; padding-top: 60px; }
+    }
+    @media (max-width: 600px) {
+      #main-layout {
+        grid-template-columns: 1fr;
+      }
+      #panel-action, #panel-album, #panel-stats {
+        grid-column: 1;
+      }
+      #comparison-boxes {
+        grid-template-columns: 1fr;
+      }
+      #mode-tabs button {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+      header { padding-top: 70px; }
+      #a11y-bar { flex-wrap: wrap; top: 5px; right: 5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Accessibility bar (fixed, top-right) -->
+  <div id="a11y-bar" role="toolbar" aria-label="Accesibilidad">
+    <button id="btn-a-plus" aria-label="Aumentar tamaño de texto">A+</button>
+    <button id="btn-a-minus" aria-label="Reducir tamaño de texto">A-</button>
+    <button id="btn-contrast" aria-label="Alternar alto contraste">Alto contraste</button>
+    <button id="btn-reading" aria-label="Modo lectura">Modo lectura</button>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <h1>Simulador de Sobres — Panini FIFA World Cup 2026™</h1>
+    <p>Probabilidad y Frecuencia | Matemática 8° EBI 2026 | Liceo de Médanos</p>
+  </header>
+
+  <!-- Mode tabs -->
+  <nav id="mode-tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-mode="aula" id="tab-aula">📚 Modo Aula</button>
+    <button role="tab" aria-selected="false" data-mode="real" id="tab-real">🏆 Modo Real</button>
+    <button role="tab" aria-selected="false" data-mode="libre" id="tab-libre">⚙️ Modo Libre</button>
+  </nav>
+
+  <!-- Libre config panel (hidden unless libre mode) -->
+  <div id="libre-config" hidden>
+    <label>Total de figuritas: <input type="number" id="input-total" min="5" max="980" value="50"></label>
+    <label>Figuritas por sobre: <input type="number" id="input-pack" min="1" max="10" value="5"></label>
+    <button id="btn-apply">Aplicar configuración</button>
+  </div>
+
+  <!-- Main 3-column layout -->
+  <main id="main-layout">
+    <!-- LEFT: Action panel -->
+    <section id="panel-action" aria-label="Panel de acción">
+      <!-- Envelope SVG (aria-hidden) -->
+      <div id="envelope-container">
+        <svg id="envelope-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="160" height="107">
+          <!-- body -->
+          <rect x="5" y="20" width="110" height="55" rx="5" fill="#f5a623"/>
+          <!-- left triangle -->
+          <polygon points="5,20 5,75 52,49" fill="#f5b942"/>
+          <!-- right triangle -->
+          <polygon points="115,20 115,75 68,49" fill="#f5b942"/>
+          <!-- bottom flap triangle -->
+          <polygon points="5,75 60,48 115,75" fill="#e8941a"/>
+          <!-- top flap -->
+          <polygon points="5,20 60,52 115,20" fill="#e89514"/>
+          <!-- seal circle -->
+          <circle cx="60" cy="47" r="8" fill="#d4800f"/>
+          <text x="60" y="51" text-anchor="middle" font-size="8" fill="white" font-weight="bold">P</text>
+        </svg>
+      </div>
+
+      <!-- Action buttons -->
+      <div id="action-buttons">
+        <button id="btn-open1" aria-label="Abrir 1 sobre de figuritas">ABRIR 1 SOBRE</button>
+        <button id="btn-open10" aria-label="Abrir 10 sobres de figuritas">ABRIR 10 SOBRES</button>
+        <button id="btn-reset" aria-label="Reiniciar simulador">REINICIAR</button>
+      </div>
+
+      <!-- Counters -->
+      <div id="counters" role="status" aria-live="polite" aria-label="Estadísticas actuales">
+        <div class="counter-item">
+          <span class="counter-label">Sobres abiertos</span>
+          <span class="counter-value" id="cnt-packs">0</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-label">Figuritas nuevas</span>
+          <span class="counter-value" id="cnt-new">0</span><span class="counter-total" id="cnt-total-label"> / 20</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-label">Figuritas repetidas</span>
+          <span class="counter-value" id="cnt-rep">0</span>
+        </div>
+        <div class="counter-item">
+          <span class="counter-label">Costo acumulado</span>
+          <span class="counter-value" id="cnt-cost">$0</span>
+        </div>
+      </div>
+
+      <!-- Last pack display -->
+      <div id="last-pack-section">
+        <p id="last-pack-title" style="display:none">Último sobre:</p>
+        <div id="last-pack-badges"></div>
+      </div>
+    </section>
+
+    <!-- CENTER: Visual album -->
+    <section id="panel-album" aria-label="Álbum visual de figuritas">
+      <h2>Álbum</h2>
+      <div id="album-grid-wrapper">
+        <div id="album-grid" role="grid" aria-label="Grilla de figuritas del álbum"></div>
+      </div>
+      <div id="progress-container">
+        <div id="progress-bar-bg">
+          <div id="progress-bar-fill"></div>
+        </div>
+        <p id="progress-text">Completado: 0%</p>
+      </div>
+    </section>
+
+    <!-- RIGHT: Statistics -->
+    <section id="panel-stats" aria-label="Registro estadístico de frecuencias">
+      <h2>Registro de frecuencias</h2>
+      <div id="stats-table-wrapper">
+        <table id="stats-table" aria-label="Tabla de frecuencias de figuritas">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Fig.</th>
+              <th scope="col">Veces</th>
+              <th scope="col">Frec. Rel.</th>
+              <th scope="col">Barra</th>
+            </tr>
+          </thead>
+          <tbody id="stats-tbody"></tbody>
+        </table>
+      </div>
+      <p id="freq-formula">Frecuencia relativa = veces / total de figuritas obtenidas hasta ahora</p>
+    </section>
+  </main>
+
+  <!-- Bottom panel -->
+  <section id="bottom-panel" aria-label="Comparación y análisis">
+    <div id="comparison-boxes">
+      <div class="comp-box ideal">
+        <h3>Modelo Ideal</h3>
+        <p id="ideal-text">Sin repetidas necesitarías <strong id="ideal-packs">7</strong> sobres (<strong id="ideal-cost">$420</strong>)</p>
+      </div>
+      <div class="comp-box experiment">
+        <h3>Tu Experimento</h3>
+        <p><strong id="exp-packs">0</strong> sobres abiertos (<strong id="exp-cost">$0</strong>)</p>
+      </div>
+    </div>
+    <!-- SVG Bar chart -->
+    <div id="chart-container" aria-label="Gráfico de barras: nuevas vs repetidas">
+      <svg id="stats-chart" width="100%" height="100" viewBox="0 0 320 100" preserveAspectRatio="xMidYMid meet">
+        <text x="10" y="28" font-size="13" fill="currentColor" font-family="Nunito">Nuevas</text>
+        <rect id="bar-new" x="90" y="12" height="22" width="0" fill="#2ECC71" rx="4"/>
+        <text id="label-new" x="94" y="28" font-size="12" fill="white" font-weight="bold">0</text>
+        <text x="10" y="72" font-size="13" fill="currentColor" font-family="Nunito">Repetidas</text>
+        <rect id="bar-rep" x="90" y="56" height="22" width="0" fill="#E67E22" rx="4"/>
+        <text id="label-rep" x="94" y="72" font-size="12" fill="white" font-weight="bold">0</text>
+      </svg>
+    </div>
+    <!-- Reflection text -->
+    <div id="reflection" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Material didáctico digital elaborado para el proyecto Reino Matemático — Crónicas de los Exploradores de 8. Liceo de Médanos. Diseño pedagógico: Gabriela Michelle Fernández. Desarrollo asistido por herramientas de IA.</p>
+  </footer>
+
+  <!-- Reading mode overlay -->
+  <div id="reading-overlay" hidden role="dialog" aria-modal="true" aria-label="Modo lectura">
+    <article aria-label="Texto de la actividad">
+      <button id="btn-close-reading" aria-label="Cerrar modo lectura">✕ Cerrar</button>
+      <h2>Simulador de Sobres Panini — Actividad de Matemática</h2>
+      <h3>Contexto</h3>
+      <p>El álbum Panini FIFA World Cup 2026™ tiene <strong>980 figuritas</strong>. Cada sobre trae <strong>7 figuritas</strong> y cuesta <strong>$60 (pesos uruguayos)</strong>. El álbum en sí cuesta aproximadamente $200.</p>
+      <p>En el <strong>escenario ideal</strong> (sin repeticiones), necesitarías exactamente 140 sobres para completar las 980 figuritas, con un costo de $8.400. En la realidad, siempre hacen falta muchos más sobres porque las figuritas se repiten al azar.</p>
+      <h3>Consignas</h3>
+      <ol>
+        <li>Abrí sobres virtuales y observá qué pasa con las figuritas nuevas y repetidas.</li>
+        <li>¿Cuántos sobres necesitaste para completar el álbum? ¿Es más o menos que el modelo ideal?</li>
+        <li>Registrá la frecuencia absoluta y relativa de cada figurita.</li>
+        <li>¿Por qué las frecuencias relativas se acercan a 1/N con muchos sobres?</li>
+        <li>Reflexioná: ¿qué significa probabilidad experimental en este contexto?</li>
+      </ol>
+      <h3>Datos del Álbum Real</h3>
+      <ul>
+        <li>Total de figuritas: 980</li>
+        <li>Figuritas especiales (doradas, numeradas del 1 al 68): 68</li>
+        <li>Figuritas por sobre: 7</li>
+        <li>Precio del sobre: $60 (Uruguay)</li>
+        <li>Precio del álbum: $200 aprox.</li>
+        <li>Mínimo teórico (sin repetidas): 140 sobres = $8.400</li>
+      </ul>
+      <p style="margin-top:1.5rem; font-size:0.85em; color:#666; border-top:1px solid #ccc; padding-top:1rem;">Para Lector Inmersivo: abrí este recurso en Microsoft Edge y presioná Ctrl+Shift+U</p>
+    </article>
+  </div>
+
+  <script>
+    const COLORS = ['#E74C3C','#E67E22','#F1C40F','#2ECC71','#1ABC9C','#3498DB','#9B59B6','#E91E63','#00BCD4','#8BC34A','#FF5722','#795548','#607D8B','#F06292','#AED581','#4DD0E1','#FFB74D','#A1887F','#90A4AE','#CE93D8'];
+    const PACK_COST = 60;
+    const SPECIAL_MAX = 68;
+
+    let STATE = {
+      mode: 'aula',
+      totalStickers: 20,
+      packSize: 3,
+      obtained: [],
+      counts: [],
+      packsOpened: 0,
+      newCount: 0,
+      repeatedCount: 0,
+      totalPulled: 0,
+      completed: false,
+      lastPack: [],
+      baseFontSize: 16,
+      currentFontSize: 16,
+      highContrast: false,
+    };
+
+    function getStickerColor(idx, total) {
+      if (total <= COLORS.length) return COLORS[idx % COLORS.length];
+      const groupSize = Math.ceil(total / COLORS.length);
+      return COLORS[Math.floor(idx / groupSize) % COLORS.length];
+    }
+
+    function initState() {
+      STATE.obtained = new Array(STATE.totalStickers).fill(false);
+      STATE.counts = new Array(STATE.totalStickers).fill(0);
+      STATE.packsOpened = 0;
+      STATE.newCount = 0;
+      STATE.repeatedCount = 0;
+      STATE.totalPulled = 0;
+      STATE.completed = false;
+      STATE.lastPack = [];
+    }
+
+    function buildGrid() {
+      const grid = document.getElementById('album-grid');
+      grid.innerHTML = '';
+      grid.className = '';
+      grid.classList.add('mode-' + STATE.mode);
+
+      let cols = 10;
+      if (STATE.mode === 'aula') {
+        cols = 4;
+      } else {
+        cols = Math.min(10, STATE.totalStickers);
+        if (STATE.totalStickers <= 20) cols = 4;
+        else if (STATE.totalStickers <= 50) cols = 5;
+        else if (STATE.totalStickers <= 100) cols = 7;
+        else cols = 10;
+      }
+      grid.style.setProperty('--grid-cols', cols);
+
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < STATE.totalStickers; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'sticker-cell';
+        cell.id = 'sticker-' + (i + 1);
+        cell.textContent = i + 1;
+        cell.title = 'Figurita ' + (i + 1);
+        cell.setAttribute('role', 'gridcell');
+        cell.setAttribute('aria-label', 'Figurita ' + (i + 1) + ', no obtenida');
+        fragment.appendChild(cell);
+      }
+      grid.appendChild(fragment);
+    }
+
+    function updateCell(num) {
+      const cell = document.getElementById('sticker-' + num);
+      if (!cell) return;
+      const idx = num - 1;
+      if (STATE.obtained[idx]) {
+        const color = getStickerColor(idx, STATE.totalStickers);
+        cell.style.backgroundColor = color;
+        cell.classList.add('obtained');
+        cell.setAttribute('aria-label', 'Figurita ' + num + ', obtenida');
+        if (STATE.mode === 'real' && num <= SPECIAL_MAX) {
+          cell.classList.add('special');
+          cell.setAttribute('aria-label', 'Figurita ' + num + ', especial dorada, obtenida');
+        }
+      }
+    }
+
+    function openPacks(n) {
+      if (STATE.completed) return;
+
+      const envelope = document.getElementById('envelope-svg');
+      envelope.classList.remove('shaking');
+      void envelope.offsetWidth;
+      envelope.classList.add('shaking');
+      setTimeout(() => envelope.classList.remove('shaking'), 550);
+
+      const allNewStickers = [];
+
+      for (let p = 0; p < n; p++) {
+        const packStickers = [];
+        for (let s = 0; s < STATE.packSize; s++) {
+          const num = Math.floor(Math.random() * STATE.totalStickers) + 1;
+          const idx = num - 1;
+          STATE.counts[idx]++;
+          STATE.totalPulled++;
+          const isNew = !STATE.obtained[idx];
+          if (isNew) {
+            STATE.obtained[idx] = true;
+            STATE.newCount++;
+            updateCell(num);
+          } else {
+            STATE.repeatedCount++;
+          }
+          packStickers.push({ num, isNew });
+        }
+        allNewStickers.push(...packStickers);
+        STATE.packsOpened++;
+      }
+
+      STATE.lastPack = allNewStickers.slice(-STATE.packSize * Math.min(n, 3));
+
+      if (STATE.newCount === STATE.totalStickers) {
+        STATE.completed = true;
+      }
+
+      updateCounters();
+      updateLastPack();
+      updateProgress();
+      updateStatsTable();
+      updateChart();
+      updateReflection();
+      updateComparison();
+    }
+
+    function updateCounters() {
+      document.getElementById('cnt-packs').textContent = STATE.packsOpened;
+      document.getElementById('cnt-new').textContent = STATE.newCount;
+      document.getElementById('cnt-rep').textContent = STATE.repeatedCount;
+      document.getElementById('cnt-cost').textContent = '$' + STATE.packsOpened * PACK_COST;
+      document.getElementById('cnt-total-label').textContent = ' / ' + STATE.totalStickers;
+    }
+
+    function updateLastPack() {
+      const container = document.getElementById('last-pack-badges');
+      const title = document.getElementById('last-pack-title');
+
+      if (STATE.lastPack.length === 0) {
+        container.innerHTML = '';
+        title.style.display = 'none';
+        return;
+      }
+
+      title.style.display = 'block';
+      let html = '';
+      for (const { num, isNew } of STATE.lastPack) {
+        const color = getStickerColor(num - 1, STATE.totalStickers);
+        const cls = isNew ? 'badge new' : 'badge repeated';
+        html += '<div class="' + cls + '" style="background:' + color + '" title="Figurita ' + num + (isNew ? ' (nueva)' : ' (repetida)') + '">' + num + '</div>';
+      }
+      container.innerHTML = html;
+    }
+
+    function updateProgress() {
+      const pct = STATE.totalStickers > 0 ? Math.round((STATE.newCount / STATE.totalStickers) * 100) : 0;
+      document.getElementById('progress-bar-fill').style.width = pct + '%';
+      document.getElementById('progress-text').textContent = 'Completado: ' + pct + '%  (' + STATE.newCount + '/' + STATE.totalStickers + ' figuritas)';
+    }
+
+    function updateStatsTable() {
+      const tbody = document.getElementById('stats-tbody');
+      const total = STATE.totalPulled;
+
+      let rows = '';
+      let rowNum = 1;
+      for (let i = 0; i < STATE.totalStickers; i++) {
+        if (STATE.counts[i] > 0) {
+          const num = i + 1;
+          const count = STATE.counts[i];
+          const freqRel = total > 0 ? count / total : 0;
+          const color = getStickerColor(i, STATE.totalStickers);
+          const barWidth = Math.round(freqRel * 80);
+          const fracStr = count + '/' + total;
+          const decStr = freqRel.toFixed(2);
+          rows += '<tr>' +
+            '<td>' + rowNum++ + '</td>' +
+            '<td><span class="sticker-badge" style="background:' + color + '">' + num + '</span></td>' +
+            '<td>' + count + '</td>' +
+            '<td style="white-space:nowrap">' + fracStr + ' = ' + decStr + '</td>' +
+            '<td><div class="freq-bar" style="width:' + barWidth + 'px;background:' + color + '"></div></td>' +
+            '</tr>';
+        }
+      }
+      tbody.innerHTML = rows;
+    }
+
+    function updateChart() {
+      const newCount = STATE.newCount;
+      const repCount = STATE.repeatedCount;
+      const maxVal = Math.max(newCount, repCount, 1);
+      const maxWidth = 200;
+
+      const newWidth = Math.round((newCount / maxVal) * maxWidth);
+      const repWidth = Math.round((repCount / maxVal) * maxWidth);
+
+      document.getElementById('bar-new').setAttribute('width', Math.max(newWidth, 2));
+      document.getElementById('bar-rep').setAttribute('width', Math.max(repWidth, 2));
+
+      const labelNew = document.getElementById('label-new');
+      const labelRep = document.getElementById('label-rep');
+
+      labelNew.textContent = newCount;
+      labelRep.textContent = repCount;
+
+      if (newWidth > 30) {
+        labelNew.setAttribute('x', 94);
+        labelNew.setAttribute('fill', 'white');
+      } else {
+        labelNew.setAttribute('x', 90 + Math.max(newWidth, 2) + 4);
+        labelNew.setAttribute('fill', '#1a2a3a');
+      }
+
+      if (repWidth > 30) {
+        labelRep.setAttribute('x', 94);
+        labelRep.setAttribute('fill', 'white');
+      } else {
+        labelRep.setAttribute('x', 90 + Math.max(repWidth, 2) + 4);
+        labelRep.setAttribute('fill', '#1a2a3a');
+      }
+    }
+
+    function updateComparison() {
+      const ideal = Math.ceil(STATE.totalStickers / STATE.packSize);
+      const idealCost = ideal * PACK_COST;
+      document.getElementById('ideal-packs').textContent = ideal;
+      document.getElementById('ideal-cost').textContent = '$' + idealCost.toLocaleString('es-UY');
+      document.getElementById('exp-packs').textContent = STATE.packsOpened;
+      document.getElementById('exp-cost').textContent = '$' + (STATE.packsOpened * PACK_COST).toLocaleString('es-UY');
+    }
+
+    function updateReflection() {
+      const reflection = document.getElementById('reflection');
+      const ideal = Math.ceil(STATE.totalStickers / STATE.packSize);
+
+      if (STATE.completed) {
+        const ratio = (STATE.packsOpened / ideal).toFixed(1);
+        reflection.innerHTML = '🎉 <strong>¡Álbum completo!</strong> Usaste <strong>' + STATE.packsOpened + '</strong> sobres (el modelo ideal era <strong>' + ideal + '</strong>). Gastaste <strong>' + ratio + '×</strong> más de lo mínimo teórico. El costo real fue <strong>$' + (STATE.packsOpened * PACK_COST).toLocaleString('es-UY') + '</strong> contra los $' + (ideal * PACK_COST).toLocaleString('es-UY') + ' ideales.';
+      } else if (STATE.packsOpened >= ideal * 2 && STATE.packsOpened > 0) {
+        reflection.innerHTML = '⚠️ Ya abriste el doble de sobres del mínimo ideal (<strong>' + STATE.packsOpened + '</strong> vs <strong>' + ideal + '</strong>) y todavía faltan <strong>' + (STATE.totalStickers - STATE.newCount) + '</strong> figuritas. <em>¿Por qué pasa esto?</em> Las figuritas se repiten al azar — la probabilidad de obtener una nueva disminuye a medida que completás más el álbum.';
+      } else if (STATE.packsOpened === 0) {
+        reflection.innerHTML = '';
+      } else {
+        reflection.innerHTML = '';
+      }
+    }
+
+    function resetSimulator() {
+      initState();
+      buildGrid();
+      updateCounters();
+      updateLastPack();
+      updateProgress();
+      document.getElementById('stats-tbody').innerHTML = '';
+      updateChart();
+      updateComparison();
+      updateReflection();
+      document.getElementById('last-pack-title').style.display = 'none';
+      document.getElementById('last-pack-badges').innerHTML = '';
+      document.getElementById('reflection').innerHTML = '';
+    }
+
+    function switchMode(mode) {
+      STATE.mode = mode;
+      if (mode === 'aula') {
+        STATE.totalStickers = 20;
+        STATE.packSize = 3;
+        document.getElementById('libre-config').hidden = true;
+      } else if (mode === 'real') {
+        STATE.totalStickers = 980;
+        STATE.packSize = 7;
+        document.getElementById('libre-config').hidden = true;
+      } else if (mode === 'libre') {
+        document.getElementById('libre-config').hidden = false;
+        const t = parseInt(document.getElementById('input-total').value) || 50;
+        const p = parseInt(document.getElementById('input-pack').value) || 5;
+        STATE.totalStickers = Math.max(5, Math.min(980, t));
+        STATE.packSize = Math.max(1, Math.min(10, p));
+      }
+      document.querySelectorAll('#mode-tabs button').forEach(btn => {
+        btn.setAttribute('aria-selected', btn.dataset.mode === mode ? 'true' : 'false');
+      });
+      resetSimulator();
+    }
+
+    function adjustFontSize(delta) {
+      const newSize = STATE.currentFontSize + delta;
+      if (newSize < STATE.baseFontSize || newSize > STATE.baseFontSize + 8) return;
+      STATE.currentFontSize = newSize;
+      document.body.style.fontSize = newSize + 'px';
+    }
+
+    function toggleContrast() {
+      STATE.highContrast = !STATE.highContrast;
+      document.body.classList.toggle('high-contrast', STATE.highContrast);
+      document.getElementById('btn-contrast').textContent = STATE.highContrast ? 'Normal' : 'Alto contraste';
+    }
+
+    function toggleReadingMode() {
+      const overlay = document.getElementById('reading-overlay');
+      overlay.hidden = !overlay.hidden;
+      if (!overlay.hidden) {
+        document.getElementById('btn-close-reading').focus();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initState();
+      buildGrid();
+      updateCounters();
+      updateProgress();
+      updateComparison();
+
+      document.querySelectorAll('#mode-tabs button').forEach(btn => {
+        btn.addEventListener('click', () => switchMode(btn.dataset.mode));
+      });
+
+      document.getElementById('btn-open1').addEventListener('click', () => openPacks(1));
+      document.getElementById('btn-open10').addEventListener('click', () => openPacks(10));
+      document.getElementById('btn-reset').addEventListener('click', resetSimulator);
+
+      document.getElementById('btn-open1').addEventListener('keydown', e => {
+        if (e.key === 'Enter') openPacks(1);
+      });
+
+      document.getElementById('btn-apply').addEventListener('click', () => {
+        const t = parseInt(document.getElementById('input-total').value);
+        const p = parseInt(document.getElementById('input-pack').value);
+        if (isNaN(t) || isNaN(p) || t < 5 || t > 980 || p < 1 || p > 10) {
+          alert('Valores inválidos. Total: 5-980, figuritas por sobre: 1-10.');
+          return;
+        }
+        STATE.totalStickers = t;
+        STATE.packSize = p;
+        resetSimulator();
+      });
+
+      document.getElementById('btn-a-plus').addEventListener('click', () => adjustFontSize(2));
+      document.getElementById('btn-a-minus').addEventListener('click', () => adjustFontSize(-2));
+      document.getElementById('btn-contrast').addEventListener('click', toggleContrast);
+      document.getElementById('btn-reading').addEventListener('click', toggleReadingMode);
+      document.getElementById('btn-close-reading').addEventListener('click', toggleReadingMode);
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !document.getElementById('reading-overlay').hidden) {
+          toggleReadingMode();
+        }
+      });
+
+      document.getElementById('envelope-svg').addEventListener('click', () => openPacks(1));
+      document.getElementById('envelope-container').style.cursor = 'pointer';
+    });
+  </script>
+</body>
+</html>

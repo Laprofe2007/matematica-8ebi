@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Las Tierras sin Mapa | Reino Matemático</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #0D1B2A;
+      --text:   #FFFFFF;
+      --gold:   #D4A017;
+      --green:  #1D6A4A;
+      --blue:   #1A3D60;
+      --fade-in:  1500ms;
+      --fade-out: 900ms;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cinzel', Georgia, serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── Niebla perimetral ── */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 50%, transparent 45%, rgba(13,27,42,0.82) 100%);
+      z-index: 2;
+    }
+
+    /* ── Estrellas ── */
+    #stars {
+      position: fixed; inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle linear infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.15; transform: scale(1); }
+      50%       { opacity: 0.85; transform: scale(1.4); }
+    }
+
+    /* ── Símbolos flotantes ── */
+    .floater {
+      position: fixed;
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--gold);
+      opacity: 0.045;
+      animation: floatDrift ease-in-out infinite;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      line-height: 1;
+    }
+
+    @keyframes floatDrift {
+      0%, 100% { transform: translateY(0)   rotate(0deg); }
+      30%       { transform: translateY(-18px) rotate(6deg); }
+      65%       { transform: translateY(12px)  rotate(-4deg); }
+    }
+
+    /* ── Escenario central ── */
+    #stage {
+      position: relative; z-index: 10;
+      width: min(680px, 90vw);
+      min-height: 8rem;
+      text-align: center;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+
+    /* ── Frase activa ── */
+    #frase-wrap {
+      opacity: 0;
+      transition: opacity var(--fade-in) ease;
+    }
+    #frase-wrap.visible  { opacity: 1; }
+    #frase-wrap.saliendo {
+      opacity: 0;
+      transition: opacity var(--fade-out) ease;
+    }
+
+    .frase-lg {
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
+    }
+
+    .frase-md {
+      font-size: clamp(1rem, 3vw, 1.45rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.65;
+    }
+
+    .frase-sm {
+      font-size: clamp(0.88rem, 2.4vw, 1.2rem);
+      font-weight: 400;
+      letter-spacing: 0.015em;
+      line-height: 1.75;
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .frase-final {
+      font-size: clamp(0.7rem, 2vw, 0.95rem);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+    }
+
+    /* Énfasis especial — "Calcula." */
+    .enfasis {
+      display: block;
+      font-size: 1.55em;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-top: 0.35em;
+      text-shadow: 0 0 28px rgba(212,160,23,0.5);
+    }
+
+    /* ── Línea separadora decorativa ── */
+    .deco-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+    }
+
+    /* ── Botón final ── */
+    #btn-wrap {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      pointer-events: none;
+      margin-top: 2rem;
+    }
+    #btn-wrap.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .btn-explorar {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 5px;
+      font-family: 'Cinzel', Georgia, serif;
+      font-size: clamp(0.78rem, 2vw, 0.9rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+    }
+    .btn-explorar:hover {
+      background: rgba(212,160,23,0.12);
+      color: #fff;
+      box-shadow: 0 0 20px rgba(212,160,23,0.25);
+    }
+
+    /* ── Responsive overflow ── */
+    @media (max-height: 500px) {
+      .frase-lg { font-size: 1.1rem; }
+      .frase-md { font-size: 0.92rem; }
+      #stage    { padding: 1rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .star, .floater { animation: none !important; }
+      #frase-wrap, #btn-wrap { transition: none !important; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ══ Fondo: estrellas ══ -->
+  <div id="stars" aria-hidden="true"></div>
+
+  <!-- ══ Símbolos flotantes decorativos ══ -->
+  <div aria-hidden="true">
+    <span class="floater" style="left:7%;  top:12%; animation-duration:9s;  animation-delay:0s">🎲</span>
+    <span class="floater" style="right:8%; top:18%; animation-duration:11s; animation-delay:1.5s">♠</span>
+    <span class="floater" style="left:5%;  bottom:20%; animation-duration:10s; animation-delay:3s">♣</span>
+    <span class="floater" style="right:6%; bottom:15%; animation-duration:12s; animation-delay:0.8s">♦</span>
+    <span class="floater" style="left:50%; top:6%;  animation-duration:8s;  animation-delay:2s; font-size:1.4rem">♥</span>
+    <span class="floater" style="right:18%;top:72%; animation-duration:13s; animation-delay:4s;  font-size:1.2rem">🎲</span>
+    <span class="floater" style="left:14%;top:68%; animation-duration:9.5s;animation-delay:1s;  font-size:1.1rem">♠</span>
+  </div>
+
+  <!-- ══ Escenario central ══ -->
+  <div id="stage" role="main" aria-live="polite" aria-atomic="true">
+    <div class="deco-line" aria-hidden="true"></div>
+    <div id="frase-wrap">
+      <p id="frase-text" class="frase-lg"></p>
+    </div>
+    <div class="deco-line" aria-hidden="true"></div>
+
+    <div id="btn-wrap" aria-hidden="true">
+      <a class="btn-explorar" href="#" id="btn-explorar">
+        Comenzar la exploración &rarr;
+      </a>
+    </div>
+  </div>
+
+  <script>
+    /* ══ Estrellas ══ */
+    (function () {
+      const container = document.getElementById('stars');
+      const count = Math.min(120, Math.floor(window.innerWidth * window.innerHeight / 8000));
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const size = 0.8 + Math.random() * 1.8;
+        s.style.cssText = [
+          `left:${(Math.random() * 100).toFixed(2)}%`,
+          `top:${(Math.random() * 100).toFixed(2)}%`,
+          `width:${size.toFixed(2)}px`,
+          `height:${size.toFixed(2)}px`,
+          `animation-duration:${(2.5 + Math.random() * 3.5).toFixed(2)}s`,
+          `animation-delay:${(Math.random() * 5).toFixed(2)}s`,
+        ].join(';');
+        container.appendChild(s);
+      }
+    })();
+
+    /* ══ Secuencia de frases ══ */
+    const FRASES = [
+      {
+        html:  false,
+        texto: "Hasta ahora las reglas eran claras.",
+        clase: "frase-lg",
+        dur:   3200,
+      },
+      {
+        html:  false,
+        texto: "Estas tierras son diferentes.",
+        clase: "frase-lg",
+        dur:   3000,
+      },
+      {
+        html:  false,
+        texto: "¿Por qué se llaman Las Tierras sin Mapa?",
+        clase: "frase-lg",
+        dur:   3600,
+      },
+      {
+        html:  false,
+        texto: "Porque en probabilidad no podés saber exactamente qué va a pasar. Solo podés calcular qué tan probable es que pase.",
+        clase: "frase-md",
+        dur:   5200,
+      },
+      {
+        html:  false,
+        texto: "Un explorador que llegue al final va a poder responder preguntas que antes parecían imposibles.",
+        clase: "frase-md",
+        dur:   5000,
+      },
+      {
+        html:  false,
+        texto: "¿Vale la pena comprar un décimo de La Grande? ¿Por qué Mateo está equivocado cuando dice que si salieron cinco caras, la próxima tiene que ser cruz?",
+        clase: "frase-sm",
+        dur:   5800,
+      },
+      {
+        html:  true,
+        texto: 'El explorador de estas tierras no adivina.<span class="enfasis">Calcula.</span>',
+        clase: "frase-lg",
+        dur:   4200,
+      },
+      {
+        html:  false,
+        texto: "No tiene certeza. Tiene probabilidad.",
+        clase: "frase-lg",
+        dur:   3500,
+      },
+      {
+        html:  false,
+        texto: "Y eso, bien usado, es más poderoso que cualquier mapa.",
+        clase: "frase-md",
+        dur:   4200,
+      },
+      {
+        html:  false,
+        texto: "Reino Matemático · Las Tierras sin Mapa · 8.° EBI 2026",
+        clase: "frase-final",
+        dur:   -1,   /* -1 = frase final, no desaparece */
+        final: true,
+      },
+    ];
+
+    const wrap   = document.getElementById('frase-wrap');
+    const texto  = document.getElementById('frase-text');
+    const btnWrap = document.getElementById('btn-wrap');
+
+    const FADE_IN  = 1500;   /* ms */
+    const FADE_OUT = 900;    /* ms */
+    const GAP      = 280;    /* ms entre frases */
+
+    let idx = 0;
+
+    function mostrarFrase() {
+      if (idx >= FRASES.length) return;
+      const f = FRASES[idx];
+
+      /* Contenido */
+      texto.className = f.clase;
+      if (f.html) {
+        texto.innerHTML = f.texto;
+      } else {
+        texto.textContent = f.texto;
+      }
+
+      /* Fade in */
+      wrap.classList.remove('saliendo');
+      void wrap.offsetWidth; /* reflow para reiniciar transición */
+      wrap.classList.add('visible');
+
+      if (f.final) {
+        /* Última frase: queda visible y aparece el botón */
+        setTimeout(() => {
+          btnWrap.setAttribute('aria-hidden', 'false');
+          btnWrap.classList.add('visible');
+        }, FADE_IN + 1800);
+        return;
+      }
+
+      /* Esperar → fade out → siguiente */
+      setTimeout(() => {
+        wrap.classList.remove('visible');
+        wrap.classList.add('saliendo');
+        setTimeout(() => {
+          idx++;
+          mostrarFrase();
+        }, FADE_OUT + GAP);
+      }, FADE_IN + f.dur);
+    }
+
+    /* Pequeña pausa inicial antes de arrancar */
+    setTimeout(mostrarFrase, 800);
+  </script>
+</body>
+</html>

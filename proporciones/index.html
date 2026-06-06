@@ -323,7 +323,17 @@
       font-style: italic; margin-bottom: .2rem;
     }
 
-    .mission-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .75rem; }
+    .mission-list {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: .75rem;
+      max-height: min(62vh, 34rem);
+      overflow-y: auto;
+      padding-right: .35rem;
+      scrollbar-color: var(--gold) rgba(201,152,63,.1);
+    }
+    .mission-list::-webkit-scrollbar { width: .55rem; }
+    .mission-list::-webkit-scrollbar-track { background: rgba(201,152,63,.08); border-radius: 999px; }
+    .mission-list::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }
     .mission-item {
       display: flex; align-items: center;
       justify-content: space-between; gap: 1rem;

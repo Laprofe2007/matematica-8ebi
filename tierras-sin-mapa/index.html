@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Las Tierras sin Mapa | Reinos Matemáticos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --night:           #0D1B2A;
+      --night-mid:       #14273a;
+      --ink:             #FFFFFF;
+      --ink-mid:         rgba(255,255,255,0.78);
+      --ink-light:       rgba(255,255,255,0.56);
+      --gold:            #D4A017;
+      --amber:           #D4A017;
+      --green:           #1D6A4A;
+      --border-gold:     rgba(212,160,23,0.6);
+      --shadow:          rgba(0,0,0,0.32);
+      --font-title: "Cinzel", "Georgia", serif;
+      --font-body:  "Libre Baskerville", "Georgia", serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background-color: var(--night);
+      background-image:
+        radial-gradient(ellipse 75% 55% at 22% 16%, rgba(212,160,23,0.16), transparent 55%),
+        radial-gradient(ellipse 62% 48% at 84% 82%, rgba(29,106,74,0.24), transparent 58%),
+        linear-gradient(148deg, #0D1B2A 0%, #13243a 48%, #091521 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 28px,
+        rgba(212,160,23,0.045) 28px, rgba(212,160,23,0.045) 29px
+      );
+    }
+
+    .app-shell { position: relative; min-height: 100vh; z-index: 1; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: relative; z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      gap: 1rem; flex-wrap: wrap;
+    }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-title);
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .breadcrumb a   { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb .sep  { color: var(--ink-light); }
+    .breadcrumb .curr { color: var(--ink); opacity: .65; }
+
+    .seal {
+      width: 3rem; height: 3rem; border-radius: 50%;
+      border: 2px solid var(--gold);
+      display: grid; place-items: center;
+      font-family: var(--font-title); font-size: 1.1rem; color: var(--amber);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 2px 8px var(--shadow);
+      flex-shrink: 0;
+    }
+
+    .map-stage {
+      flex: 1; display: flex; align-items: stretch;
+      padding: 0 1.5rem 2rem;
+    }
+
+    .map-board {
+      position: relative; width: 100%;
+      aspect-ratio: 16/9;
+      background-color: #102238;
+      background-image:
+        radial-gradient(ellipse at 50% 30%, rgba(212,160,23,0.16), transparent 58%),
+        linear-gradient(to bottom right, #102238, #0b1725);
+      border-radius: 12px;
+      border: 2px solid var(--gold);
+      box-shadow: 0 4px 28px var(--shadow), 0 0 0 4px rgba(212,160,23,0.12);
+      overflow: hidden;
+    }
+
+    .title-block {
+      position: absolute; top: 1.5rem; left: 50%;
+      transform: translateX(-50%);
+      text-align: center; z-index: 5;
+      pointer-events: none; width: 90%;
+    }
+
+    .title-block h1 {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-weight: 800; color: var(--ink);
+      letter-spacing: 0.04em; line-height: 1.1;
+    }
+
+    .chronicles {
+      display: block;
+      font-family: var(--font-title);
+      font-size: clamp(0.55rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-top: 0.35rem;
+    }
+
+    .subtitle {
+      display: block;
+      font-size: clamp(0.65rem, 1.6vw, 0.85rem);
+      font-style: italic; color: var(--ink-light); margin-top: 0.2rem;
+    }
+
+    .cartography, .paths {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+    .cartography { z-index: 1; }
+    .paths       { z-index: 2; }
+
+    .territory-layer { position: absolute; inset: 0; z-index: 6; }
+
+    .territory {
+      position: absolute;
+      left: var(--x); top: var(--y);
+      transform: translate(-50%, -50%);
+      width: min(38vw, 10.5rem);
+      background: rgba(13,27,42,0.9);
+      border: 2px solid var(--gold);
+      border-radius: 8px;
+      padding: 0.7rem 0.85rem 0.6rem;
+      cursor: pointer; text-align: center;
+      font-family: var(--font-body);
+      color: var(--ink);
+      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+      box-shadow: 0 3px 14px var(--shadow);
+    }
+    .territory:hover, .territory:focus-visible {
+      transform: translate(-50%, calc(-50% - 4px));
+      background: rgba(20,39,58,0.96);
+      border-color: var(--ink);
+      box-shadow: 0 7px 22px var(--shadow);
+      outline: none;
+    }
+    .territory:active { transform: translate(-50%, calc(-50% + 1px)); }
+
+    .territory-icon   { display: block; font-size: 1.5rem; line-height: 1.2; margin-bottom: .25rem; }
+    .territory-name   {
+      display: block; font-family: var(--font-title);
+      font-size: clamp(.62rem, 1.6vw, .82rem); font-weight: 600;
+      color: var(--ink); letter-spacing: .02em; line-height: 1.3; margin-bottom: .2rem;
+    }
+    .territory-status {
+      display: block; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold); font-family: var(--font-title);
+    }
+
+    .legend {
+      position: absolute; bottom: 1rem; left: 1.2rem; z-index: 7;
+      font-size: .7rem; font-family: var(--font-title); color: var(--ink-mid);
+      display: flex; flex-direction: column; gap: .25rem; letter-spacing: .06em;
+    }
+    .compass {
+      position: absolute; bottom: 1rem; right: 1.2rem; z-index: 7;
+      width: 3rem; height: 3rem; border: 1px solid var(--gold);
+      border-radius: 50%; display: grid; place-items: center; opacity: .65;
+    }
+    .compass::before { content: "N"; font-family: var(--font-title); font-size: .75rem; color: var(--amber); }
+
+    .back-row {
+      display: flex; justify-content: center;
+      padding: .75rem 1rem 0;
+    }
+    .btn-all-kingdoms {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .55rem 1.25rem;
+      background: rgba(212,160,23,.08);
+      border: 1px solid rgba(212,160,23,.38);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .68rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .btn-all-kingdoms:hover {
+      background: rgba(212,160,23,.16);
+      border-color: rgba(212,160,23,.65);
+      color: var(--ink);
+    }
+
+    .footer-note {
+      text-align: center; font-size: .75rem;
+      color: var(--ink-light); padding: .75rem 1rem 1.5rem;
+    }
+
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(3px);
+      z-index: 100; padding: 1.5rem;
+      overflow-y: auto;
+      align-items: center; justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    #modalActividades.open { align-items: flex-start; }
+    #modalActividades .modal-misiones { margin-top: 2rem; margin-bottom: 2rem; }
+
+    .modal {
+      position: relative;
+      background: #102238;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      padding: 2.5rem 2rem 2rem;
+      width: 100%; max-width: 480px;
+      color: var(--ink);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+    .modal-misiones {
+      max-width: 720px;
+      background: #0f2135;
+    }
+    .modal-simulador {
+      max-width: 980px;
+    }
+
+    .modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; border: 1px solid var(--border-gold);
+      color: var(--amber); width: 2rem; height: 2rem;
+      border-radius: 3px; font-size: 1.2rem;
+      cursor: pointer; display: grid; place-items: center;
+      transition: background .2s, color .2s;
+    }
+    .modal-close:hover { background: rgba(212,160,23,.12); color: var(--ink); }
+
+    .modal h2 {
+      font-family: var(--font-title); font-size: 1.18rem;
+      color: var(--ink); letter-spacing: .03em; margin-bottom: .2rem;
+    }
+    .modal-tipo {
+      display: block; font-size: .7rem; font-family: var(--font-title);
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--amber); margin-bottom: 1rem;
+    }
+    .modal-desc {
+      font-size: .88rem; line-height: 1.65;
+      color: var(--ink-mid); margin-bottom: 1.25rem;
+    }
+
+    .resource-list { list-style: none; padding: 0; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: .4rem; }
+    .resource-list li {
+      font-size: .8rem; color: var(--ink-mid);
+      padding: .4rem .65rem;
+      background: rgba(212,160,23,.08);
+      border-left: 2px solid var(--gold); border-radius: 2px;
+    }
+    .res-tipo {
+      font-family: var(--font-title); font-size: .6rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-left: .5rem;
+    }
+
+    .modal-btn-row {
+      display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+    }
+    .modal-actions { display: contents; }
+
+    .btn-primary {
+      display: inline-block; padding: .58rem 1.35rem;
+      background: var(--gold); color: #0D1B2A;
+      border: none; border-radius: 5px;
+      font-family: var(--font-title); font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer; transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover { background: #e0b841; }
+
+    .btn-back-map {
+      display: inline-flex; align-items: center;
+      padding: .52rem .95rem;
+      background: transparent; border: 1px solid var(--border-gold);
+      border-radius: 5px; font-family: var(--font-title); font-size: .65rem;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-mid); cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+      white-space: nowrap;
+    }
+    .btn-back-map::before { content: '← '; }
+    .btn-back-map:hover { border-color: var(--gold); color: var(--amber); background: rgba(212,160,23,.06); }
+
+    .modal-rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .35; margin: 1.1rem 0 1.6rem;
+    }
+    .modal-intro {
+      font-size: .84rem; color: var(--ink-mid);
+      font-style: italic; margin-bottom: .2rem;
+    }
+
+    .mission-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      max-height: min(62vh, 34rem);
+      overflow-y: auto;
+      padding-right: .35rem;
+      scrollbar-color: var(--gold) rgba(255,255,255,.08);
+    }
+    .mission-list::-webkit-scrollbar { width: .55rem; }
+    .mission-list::-webkit-scrollbar-track { background: rgba(255,255,255,.08); border-radius: 999px; }
+    .mission-list::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 999px; }
+    .mission-item {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 1rem;
+      padding: .85rem 1.1rem;
+      background: rgba(212,160,23,.06);
+      border: 1px solid rgba(212,160,23,.28);
+      border-radius: 5px; flex-wrap: wrap;
+      transition: border-color .2s;
+    }
+    .mission-item:hover { border-color: var(--gold); }
+    .mission-item.locked { opacity: .62; }
+
+    .mission-info { flex: 1; min-width: 180px; }
+    .mission-num {
+      display: block; font-family: var(--font-title);
+      font-size: .57rem; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--amber); margin-bottom: .2rem;
+    }
+    .mission-name { font-family: var(--font-title); font-size: .84rem; color: var(--ink); letter-spacing: .02em; }
+    .mission-note { display: block; margin-top: .25rem; color: var(--ink-light); font-size: .72rem; line-height: 1.4; }
+
+    .mission-actions { display: flex; gap: .5rem; flex-wrap: wrap; flex-shrink: 0; }
+    .btn-mission {
+      display: inline-block; padding: .35rem .8rem;
+      background: transparent; border: 1px solid var(--border-gold);
+      border-radius: 3px; font-family: var(--font-title);
+      font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; white-space: nowrap;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .btn-mission:hover { background: rgba(212,160,23,.12); border-color: var(--gold); color: var(--ink); }
+    .btn-mission.btn-applet { background: rgba(29,106,74,.34); border-color: rgba(29,106,74,.9); color: var(--ink); }
+    .btn-mission.btn-applet:hover { background: rgba(29,106,74,.5); }
+    .btn-mission:disabled {
+      cursor: not-allowed;
+      opacity: .65;
+      color: var(--ink-light);
+    }
+    .simulator-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 935 / 549;
+      overflow: hidden;
+      border: 1px solid rgba(212,160,23,.35);
+      border-radius: 8px;
+      background: rgba(0,0,0,.25);
+      margin: 1rem 0 1.25rem;
+    }
+    .simulator-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .map-board { aspect-ratio: auto; min-height: 980px; }
+    }
+    @media (max-width: 580px) {
+      .map-board   { min-height: 1120px; border-radius: 0; }
+      .map-stage   { padding-inline: 0; }
+      .territory   { width: min(42vw, 11rem); }
+      .modal       { padding: 2rem 1.25rem; }
+      .mission-item { flex-direction: column; align-items: flex-start; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .001ms !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <main class="hero" aria-labelledby="page-title">
+
+    <header class="topbar">
+      <nav class="breadcrumb" aria-label="Navegación">
+        <a href="../index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <span class="curr">Las Tierras sin Mapa</span>
+      </nav>
+      <div class="seal" aria-hidden="true">8</div>
+    </header>
+
+    <section class="map-stage" aria-label="Mapa de Las Tierras sin Mapa">
+      <div class="map-board">
+
+        <div class="title-block">
+          <h1 id="page-title">Las Tierras sin Mapa</h1>
+          <span class="chronicles">Probabilidad y Estadística · Bloque 2</span>
+          <span class="subtitle">"El azar es el territorio y la probabilidad es tu brújula."</span>
+        </div>
+
+        <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.28"/>
+            </filter>
+            <linearGradient id="river" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%"   stop-color="#1D6A4A" stop-opacity="0.72"/>
+              <stop offset="100%" stop-color="#D4A017" stop-opacity="0.42"/>
+            </linearGradient>
+            <pattern id="stars" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="12" cy="18" r="1.2" fill="#D4A017" opacity="0.38"/>
+              <circle cx="44" cy="36" r="0.9" fill="#FFFFFF" opacity="0.25"/>
+              <circle cx="30" cy="8" r="0.7" fill="#FFFFFF" opacity="0.18"/>
+            </pattern>
+          </defs>
+
+          <rect width="1600" height="900" fill="url(#stars)"/>
+          <path d="M-40 710 C150 630 220 760 398 675 C580 590 560 455 730 425 C940 390 938 640 1120 590 C1298 542 1345 415 1644 440 L1644 940 L-40 940 Z"
+                fill="#1D6A4A" opacity="0.22"/>
+          <path d="M120 0 C260 150 230 250 370 330 C510 410 650 388 770 508 C890 630 830 740 940 900"
+                fill="none" stroke="url(#river)" stroke-width="40" opacity="0.36"/>
+          <path d="M120 0 C260 150 230 250 370 330 C510 410 650 388 770 508 C890 630 830 740 940 900"
+                fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.18"/>
+
+          <g filter="url(#softShadow)" opacity="0.75">
+            <path d="M1260 145 L1350 300 L1185 300 Z" fill="#41536b"/>
+            <path d="M1365 105 L1460 322 L1270 322 Z" fill="#34485f"/>
+            <path d="M1450 178 L1535 330 L1370 330 Z" fill="#4a5c74"/>
+            <path d="M1260 145 L1294 205 L1236 205 Z" fill="#D4A017" opacity="0.34"/>
+            <path d="M1365 105 L1400 170 L1330 170 Z" fill="#FFFFFF" opacity="0.32"/>
+          </g>
+
+          <g filter="url(#softShadow)" opacity="0.72">
+            <path d="M410 680 L500 850 L325 850 Z" fill="#35455a"/>
+            <path d="M525 635 L625 880 L408 880 Z" fill="#40546d"/>
+            <path d="M610 708 L695 882 L510 882 Z" fill="#2b3c51"/>
+          </g>
+
+          <g opacity="0.76">
+            <path d="M85 625 C180 555 300 572 360 650 C260 610 160 600 85 625 Z" fill="#1D6A4A"/>
+            <path d="M990 330 C1080 246 1228 270 1305 370 C1195 325 1070 325 990 330 Z" fill="#1D6A4A"/>
+            <path d="M1040 382 C1110 330 1220 338 1288 400 C1190 378 1110 374 1040 382 Z" fill="#2f855f"/>
+          </g>
+        </svg>
+
+        <svg class="paths" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M320 574 C460 500 505 445 610 398 C720 350 838 340 980 365 C1105 388 1200 330 1315 240"
+                fill="none" stroke="#D4A017" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.35"/>
+          <path d="M610 398 C685 498 773 562 900 608 C1030 655 1146 640 1294 620"
+                fill="none" stroke="#D4A017" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.29"/>
+          <path d="M900 608 C828 695 720 742 560 770"
+                fill="none" stroke="#D4A017" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.25"/>
+          <path d="M900 608 C1018 530 1114 486 1248 474"
+                fill="none" stroke="#D4A017" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.25"/>
+        </svg>
+
+        <div class="territory-layer" id="territoryLayer" aria-label="Territorios disponibles"></div>
+        <div class="legend" aria-label="Leyenda"><span><strong>Disponible</strong> — toca para ingresar</span></div>
+        <div class="compass" aria-hidden="true"></div>
+
+      </div>
+    </section>
+
+    <nav class="back-row" aria-label="Volver al portal">
+      <a class="btn-all-kingdoms" href="../index.html">&#8592; Todos los reinos</a>
+    </nav>
+
+    <p class="footer-note">Reinos Matemáticos &middot; Crónicas de los Exploradores de 8.º &middot; Liceo de Médanos</p>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true"
+     aria-labelledby="modalTitle" aria-describedby="modalDescription">
+  <article class="modal">
+    <button class="modal-close" type="button" id="modalClose" aria-label="Cerrar">×</button>
+    <h2 id="modalTitle"></h2>
+    <span class="modal-tipo" id="modalTipo"></span>
+    <p class="modal-desc" id="modalDescription"></p>
+    <ul class="resource-list" id="resourceList"></ul>
+    <div class="modal-btn-row">
+      <div class="modal-actions" id="modalActions"></div>
+      <button class="btn-back-map" type="button" id="modalBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
+<div class="modal-backdrop" id="modalActividades" role="dialog" aria-modal="true"
+     aria-labelledby="actividadesTitle" aria-describedby="actividadesDesc">
+  <article class="modal modal-misiones">
+    <button class="modal-close" type="button" id="actividadesClose" aria-label="Cerrar actividades">×</button>
+    <h2 id="actividadesTitle">Actividades del Explorador</h2>
+    <span class="modal-tipo">Práctica · 12 actividades</span>
+    <p class="modal-intro" id="actividadesDesc">Seleccioná una actividad para acceder a la ficha o al applet interactivo.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
+
+    <ol class="mission-list" aria-label="Lista de actividades" id="activityList"></ol>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="actividadesBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
+<div class="modal-backdrop" id="modalEvaluacion" role="dialog" aria-modal="true"
+     aria-labelledby="evaluacionTitle" aria-describedby="evaluacionDesc">
+  <article class="modal modal-misiones">
+    <button class="modal-close" type="button" id="evaluacionClose" aria-label="Cerrar evaluación">×</button>
+    <h2 id="evaluacionTitle">Evaluación del Reino</h2>
+    <span class="modal-tipo">Misiones bloqueadas</span>
+    <p class="modal-intro" id="evaluacionDesc">Disponible cuando tu docente lo indique.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
+    <ol class="mission-list" aria-label="Lista de evaluaciones">
+      <li class="mission-item locked">
+        <div class="mission-info">
+          <span class="mission-num">🔒 Evaluación 1</span>
+          <span class="mission-name">Mini-evaluación — Probabilidad (MC-S5)</span>
+          <span class="mission-note">Disponible cuando tu docente lo indique.</span>
+        </div>
+        <div class="mission-actions">
+          <button class="btn-mission" type="button" disabled>Bloqueada</button>
+        </div>
+      </li>
+      <li class="mission-item locked">
+        <div class="mission-info">
+          <span class="mission-num">🔒 Evaluación 2</span>
+          <span class="mission-name">Evaluación Integradora — Probabilidad (EI-S5)</span>
+          <span class="mission-note">Disponible cuando tu docente lo indique.</span>
+        </div>
+        <div class="mission-actions">
+          <button class="btn-mission" type="button" disabled>Bloqueada</button>
+        </div>
+      </li>
+    </ol>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="evaluacionBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
+<div class="modal-backdrop" id="modalSimulador" role="dialog" aria-modal="true"
+     aria-labelledby="simuladorTitle" aria-describedby="simuladorDesc">
+  <article class="modal modal-simulador">
+    <button class="modal-close" type="button" id="simuladorClose" aria-label="Cerrar simulador">×</button>
+    <h2 id="simuladorTitle">Simulador de dados</h2>
+    <span class="modal-tipo">GeoGebra</span>
+    <p class="modal-intro" id="simuladorDesc">Usá el applet para observar muchas repeticiones de un lanzamiento y comparar resultados experimentales.</p>
+    <div class="simulator-frame">
+      <iframe scrolling="no"
+        title="Simulacion del Lanzamiento de un Dado"
+        src="https://www.geogebra.org/material/iframe/id/TCGCtnWA/width/935/height/549/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false">
+      </iframe>
+    </div>
+    <div class="modal-btn-row">
+      <a class="btn-primary" href="https://www.geogebra.org/m/jxvpmsqb" target="_blank" rel="noopener">Abrir en GeoGebra</a>
+      <button class="btn-back-map" type="button" id="simuladorBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
+<script>
+  const territorios = [
+    {
+      id: "prologo", nombre: "El Prólogo", icono: "📜", tipo: "Introducción",
+      descripcion: "Antes de explorar, descubrí qué te espera en estas tierras.",
+      boton: "Leer el prólogo →", enlace: "./intro.html",
+      nuevaPestana: false, esActividades: false, esEvaluacion: false,
+      posicion: { desktop: { x: "16%", y: "44%" }, mobile: { x: "26%", y: "28%" } },
+      recursos: [{ etiqueta: "Prólogo narrativo", tipo: "HTML" }]
+    },
+    {
+      id: "biblioteca", nombre: "Biblioteca de las Tierras", icono: "📚", tipo: "Material teórico",
+      descripcion: "El libro de la secuencia. Leé el Capítulo 4 y completá el control de lectura.",
+      boton: "Abrir biblioteca →", enlace: null,
+      acciones: [
+        { texto: "Material teórico", enlace: "./Actividades/capitlulo%204%20mate%20porras.pdf" },
+        { texto: "Control de lectura", enlace: "./Actividades/Control_Lectura_Probabilidad_S5.pdf" }
+      ],
+      nuevaPestana: true, esActividades: false, esEvaluacion: false,
+      posicion: { desktop: { x: "74%", y: "34%" }, mobile: { x: "72%", y: "38%" } },
+      recursos: [{ etiqueta: "Capítulo 4 y control de lectura", tipo: "PDF" }]
+    },
+    {
+      id: "actividades", nombre: "Actividades", icono: "⚔️", tipo: "Práctica",
+      descripcion: "Doce actividades para recorrer el territorio del azar, los experimentos y la frecuencia.",
+      boton: "Ver actividades", enlace: null,
+      nuevaPestana: false, esActividades: true, esEvaluacion: false,
+      posicion: { desktop: { x: "38%", y: "64%" }, mobile: { x: "50%", y: "60%" } },
+      recursos: [{ etiqueta: "12 actividades disponibles", tipo: "Fichas" }]
+    },
+    {
+      id: "evaluacion", nombre: "Evaluación", icono: "🏆", tipo: "Evaluación",
+      descripcion: "Mini-evaluación y evaluación integradora del reino. Permanecen bloqueadas hasta que tu docente lo indique.",
+      boton: "Ver evaluación", enlace: null,
+      nuevaPestana: false, esActividades: false, esEvaluacion: true,
+      posicion: { desktop: { x: "80%", y: "68%" }, mobile: { x: "72%", y: "78%" } },
+      recursos: [{ etiqueta: "MC-S5 y EI-S5", tipo: "Bloqueadas" }]
+    }
+  ];
+
+  const actividades = [
+    { numero: "C34", nombre: "El desafío de los adivinos", enlace: "./Actividades/C34_Desafio_Adivinos.pdf" },
+    { numero: "C35", nombre: "Viñeta conceptual: cinco caras seguidas", enlace: "./Actividades/Vi%C3%B1eta%20conceptual.png" },
+    { numero: "C36", nombre: "El gran experimento del dado", enlace: "./Actividades/C36_Gran_Experimento_Dado.pdf", simuladorDado: true },
+    { numero: "C37", nombre: "¿Qué esperamos que pase? (tarea)", enlace: "./Actividades/C37_Dado_y_Moneda.pdf", enlaceTexto: "Actividad", deberes: "./Actividades/C37_Deberes.pdf", simuladorDado: true },
+    { numero: "C38", nombre: "Panini y las figuritas difíciles", enlace: "./Actividades/C38_Panini_Figuritas.pdf", applet: null },
+    { numero: "C39", nombre: "Del conteo a la proporción", enlace: "./Actividades/C39_Del_Conteo_a_la_Proporcion.pdf" },
+    { numero: "C40", nombre: "¿A dónde se dirige la frecuencia?", enlace: "./Actividades/C40_Hacia_la_Probabilidad.pdf", simuladorDado: true },
+    { numero: "C41-C42", nombre: "El mapa completo y los cazadores", enlace: "./Actividades/C41_C42_EspacioMuestral_Eventos.pdf" },
+    { numero: "C43", nombre: "La Gran Bisagra", enlace: "./Actividades/C43_Tres%20Formas%20de%20decir%20lo%20mismo.pdf" },
+    { numero: "C44", nombre: "Árbol, intersección e independencia", enlace: "./Actividades/C44_Arbol_Interseccion_Independencia.pdf" },
+    { numero: "C45", nombre: "Juegos de azar (tarea domiciliaria)", enlace: "./Actividades/C45_Juegos_de_Azar_5_versiones.pdf" },
+    { numero: "C46", nombre: "Probabilidad en contexto", enlace: "./Actividades/Probabilidad_en_Contexto.pdf" }
+  ];
+
+  const layer              = document.getElementById('territoryLayer');
+  const modalBackdrop      = document.getElementById('modalBackdrop');
+  const modalActividades   = document.getElementById('modalActividades');
+  const modalEvaluacion    = document.getElementById('modalEvaluacion');
+  const modalSimulador     = document.getElementById('modalSimulador');
+  const modalTitle         = document.getElementById('modalTitle');
+  const modalTipo          = document.getElementById('modalTipo');
+  const modalDesc          = document.getElementById('modalDescription');
+  const resourceList       = document.getElementById('resourceList');
+  const modalActions       = document.getElementById('modalActions');
+  const modalClose         = document.getElementById('modalClose');
+  const actividadesClose   = document.getElementById('actividadesClose');
+  const evaluacionClose    = document.getElementById('evaluacionClose');
+  const simuladorClose     = document.getElementById('simuladorClose');
+  const activityList       = document.getElementById('activityList');
+  let ultimoFoco = null;
+
+  function getPosition(t) {
+    return window.matchMedia("(max-width: 900px)").matches ? t.posicion.mobile : t.posicion.desktop;
+  }
+
+  function renderTerritorios() {
+    layer.innerHTML = "";
+    territorios.forEach((t, i) => {
+      const pos = getPosition(t);
+      const btn = document.createElement("button");
+      btn.className = "territory";
+      btn.type = "button";
+      btn.dataset.id = t.id;
+      btn.style.setProperty("--x", pos.x);
+      btn.style.setProperty("--y", pos.y);
+      btn.setAttribute("aria-label", `${t.nombre} — ${t.tipo}`);
+      btn.innerHTML = `
+        <span class="territory-icon" aria-hidden="true">${t.icono}</span>
+        <span class="territory-name">${t.nombre}</span>
+        <span class="territory-status">Disponible</span>`;
+      btn.addEventListener("click", () => abrirTerritorio(i));
+      layer.appendChild(btn);
+    });
+  }
+
+  function renderActividades() {
+    activityList.innerHTML = "";
+    actividades.forEach((actividad) => {
+      const li = document.createElement("li");
+      li.className = "mission-item";
+      li.innerHTML = `
+        <div class="mission-info">
+          <span class="mission-num">${actividad.numero}</span>
+          <span class="mission-name">${actividad.nombre}</span>
+        </div>
+        <div class="mission-actions">
+          ${actividad.enlace ? `<a class="btn-mission" href="${actividad.enlace}" target="_blank" rel="noopener">${actividad.enlaceTexto || "Ficha"}</a>` : `<button class="btn-mission" type="button" disabled>Proximamente</button>`}
+          ${actividad.deberes ? `<a class="btn-mission" href="${actividad.deberes}" target="_blank" rel="noopener">TD / Deberes</a>` : ""}
+          ${actividad.simuladorDado ? `<button class="btn-mission btn-applet" type="button" data-simulador-dados="true">Simulador de dados</button>` : ""}
+          ${actividad.applet ? `<a class="btn-mission btn-applet" href="${actividad.applet}" target="_blank" rel="noopener">Simulador Panini</a>` : actividad.numero === "C38" ? `<button class="btn-mission" type="button" disabled>Simulador proximamente</button>` : ""}
+        </div>`;
+      activityList.appendChild(li);
+    });
+    activityList.querySelectorAll('[data-simulador-dados="true"]').forEach((btn) => {
+      btn.addEventListener('click', abrirSimulador);
+    });
+  }
+
+  function abrirTerritorio(i) {
+    const t = territorios[i];
+    ultimoFoco = document.activeElement;
+    if (t.esActividades) {
+      modalActividades.classList.add('open');
+      actividadesClose.focus();
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    if (t.esEvaluacion) {
+      modalEvaluacion.classList.add('open');
+      evaluacionClose.focus();
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+    modalTitle.textContent = t.nombre;
+    modalTipo.textContent  = t.tipo;
+    modalDesc.textContent  = t.descripcion;
+    resourceList.innerHTML = "";
+    (t.recursos || []).forEach(r => {
+      const li = document.createElement("li");
+      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      resourceList.appendChild(li);
+    });
+    modalActions.innerHTML = "";
+    if (t.acciones) {
+      t.acciones.forEach((accion) => {
+        const a = document.createElement("a");
+        a.href = accion.enlace; a.className = "btn-primary"; a.textContent = accion.texto;
+        a.target = "_blank"; a.rel = "noopener";
+        modalActions.appendChild(a);
+      });
+    } else if (t.enlace) {
+      const a = document.createElement("a");
+      a.href = t.enlace; a.className = "btn-primary"; a.textContent = t.boton;
+      if (t.nuevaPestana) { a.target = "_blank"; a.rel = "noopener"; }
+      modalActions.appendChild(a);
+    }
+    modalBackdrop.classList.add('open');
+    modalClose.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function cerrarModal()       { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarActividades() { modalActividades.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarEvaluacion()  { modalEvaluacion.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function abrirSimulador()    { ultimoFoco = document.activeElement; modalSimulador.classList.add('open'); simuladorClose.focus(); document.body.style.overflow = 'hidden'; }
+  function cerrarSimulador()   { modalSimulador.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+
+  modalClose.addEventListener('click', cerrarModal);
+  document.getElementById('modalBackBtn').addEventListener('click', cerrarModal);
+  actividadesClose.addEventListener('click', cerrarActividades);
+  document.getElementById('actividadesBackBtn').addEventListener('click', cerrarActividades);
+  evaluacionClose.addEventListener('click', cerrarEvaluacion);
+  document.getElementById('evaluacionBackBtn').addEventListener('click', cerrarEvaluacion);
+  simuladorClose.addEventListener('click', cerrarSimulador);
+  document.getElementById('simuladorBackBtn').addEventListener('click', cerrarSimulador);
+  modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) cerrarModal(); });
+  modalActividades.addEventListener('click', e => { if (e.target === modalActividades) cerrarActividades(); });
+  modalEvaluacion.addEventListener('click', e => { if (e.target === modalEvaluacion) cerrarEvaluacion(); });
+  modalSimulador.addEventListener('click', e => { if (e.target === modalSimulador) cerrarSimulador(); });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (modalBackdrop.classList.contains('open')) cerrarModal();
+    if (modalActividades.classList.contains('open')) cerrarActividades();
+    if (modalEvaluacion.classList.contains('open')) cerrarEvaluacion();
+    if (modalSimulador.classList.contains('open')) cerrarSimulador();
+  });
+
+  function trapFocus(backdrop, e) {
+    const els = Array.from(backdrop.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+    if (!els.length) return;
+    if (e.shiftKey && document.activeElement === els[0]) { e.preventDefault(); els[els.length-1].focus(); }
+    else if (!e.shiftKey && document.activeElement === els[els.length-1]) { e.preventDefault(); els[0].focus(); }
+  }
+  modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBackdrop, e); });
+  modalActividades.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalActividades, e); });
+  modalEvaluacion.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalEvaluacion, e); });
+  modalSimulador.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalSimulador, e); });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });
+
+  renderTerritorios();
+  renderActividades();
+</script>
+</body>
+</html>

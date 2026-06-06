@@ -175,6 +175,7 @@
 
     .btn-explorar {
       display: inline-block;
+      margin: 0.35rem;
       padding: 0.85rem 2.2rem;
       background: transparent;
       border: 1px solid var(--gold);
@@ -192,6 +193,72 @@
       background: rgba(212,160,23,0.12);
       color: #fff;
       box-shadow: 0 0 20px rgba(212,160,23,0.25);
+    }
+    .btn-secundario {
+      color: rgba(255,255,255,0.82);
+      border-color: rgba(255,255,255,0.38);
+    }
+    .access-wrap {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 22;
+      text-align: right;
+    }
+    .access-wrap .btn-explorar {
+      padding: 0.6rem 1rem;
+      font-size: 0.68rem;
+      background: rgba(13,27,42,0.72);
+      backdrop-filter: blur(4px);
+    }
+
+    .texto-completo {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      overflow-y: auto;
+      padding: clamp(1.25rem, 4vw, 3rem);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(212,160,23,0.13), transparent 35%),
+        linear-gradient(180deg, #0D1B2A 0%, #08121f 100%);
+    }
+    .texto-completo.open { display: block; }
+    .texto-panel {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: clamp(1.4rem, 4vw, 2.4rem);
+      border: 1px solid rgba(212,160,23,0.45);
+      border-radius: 10px;
+      background: rgba(13,27,42,0.88);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.35);
+    }
+    .texto-panel h1 {
+      font-family: 'Cinzel', Georgia, serif;
+      color: var(--gold);
+      font-size: clamp(1.35rem, 4vw, 2.2rem);
+      letter-spacing: 0.06em;
+      margin: 0 0 1rem;
+    }
+    .texto-panel p {
+      font-size: clamp(1rem, 2.2vw, 1.18rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.9);
+      margin: 0 0 1rem;
+    }
+    .texto-panel .frase-final-estatica {
+      font-family: 'Cinzel', Georgia, serif;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      margin-top: 1.4rem;
+    }
+    .texto-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
     }
 
     /* ── Responsive overflow ── */
@@ -213,6 +280,12 @@
   <!-- ══ Fondo: estrellas ══ -->
   <div id="stars" aria-hidden="true"></div>
 
+  <div class="access-wrap">
+    <button class="btn-explorar btn-secundario" type="button" id="btn-texto-completo">
+      Leer el texto completo
+    </button>
+  </div>
+
   <!-- ══ Símbolos flotantes decorativos ══ -->
   <div aria-hidden="true">
     <span class="floater" style="left:7%;  top:12%; animation-duration:9s;  animation-delay:0s">🎲</span>
@@ -233,11 +306,31 @@
     <div class="deco-line" aria-hidden="true"></div>
 
     <div id="btn-wrap" aria-hidden="true">
-      <a class="btn-explorar" href="#" id="btn-explorar">
+      <a class="btn-explorar" href="./index.html" id="btn-explorar">
         Comenzar la exploración &rarr;
       </a>
     </div>
   </div>
+
+  <section class="texto-completo" id="texto-completo" aria-labelledby="texto-completo-title" aria-hidden="true">
+    <article class="texto-panel">
+      <h1 id="texto-completo-title">Las Tierras sin Mapa</h1>
+      <p>Hasta ahora las reglas eran claras.</p>
+      <p>Estas tierras son diferentes.</p>
+      <p>¿Por qué se llaman Las Tierras sin Mapa?</p>
+      <p>Porque en probabilidad no podés saber exactamente qué va a pasar. Solo podés calcular qué tan probable es que pase.</p>
+      <p>Un explorador que llegue al final va a poder responder preguntas que antes parecían imposibles.</p>
+      <p>¿Vale la pena comprar un décimo de La Grande? ¿Por qué Mateo está equivocado cuando dice que si salieron cinco caras, la próxima tiene que ser cruz?</p>
+      <p>El explorador de estas tierras no adivina. <strong>Calcula.</strong></p>
+      <p>No tiene certeza. Tiene probabilidad.</p>
+      <p>Y eso, bien usado, es más poderoso que cualquier mapa.</p>
+      <p class="frase-final-estatica">Reino Matemático · Las Tierras sin Mapa · 8.° EBI 2026</p>
+      <div class="texto-actions">
+        <a class="btn-explorar" href="./index.html">Comenzar la exploración &rarr;</a>
+        <button class="btn-explorar btn-secundario" type="button" id="btn-cerrar-texto">Volver al prólogo animado</button>
+      </div>
+    </article>
+  </section>
 
   <script>
     /* ══ Estrellas ══ */
@@ -328,6 +421,9 @@
     const wrap   = document.getElementById('frase-wrap');
     const texto  = document.getElementById('frase-text');
     const btnWrap = document.getElementById('btn-wrap');
+    const textoCompleto = document.getElementById('texto-completo');
+    const btnTextoCompleto = document.getElementById('btn-texto-completo');
+    const btnCerrarTexto = document.getElementById('btn-cerrar-texto');
 
     const FADE_IN  = 1500;   /* ms */
     const FADE_OUT = 900;    /* ms */
@@ -374,6 +470,20 @@
 
     /* Pequeña pausa inicial antes de arrancar */
     setTimeout(mostrarFrase, 800);
+
+    btnTextoCompleto.addEventListener('click', () => {
+      textoCompleto.classList.add('open');
+      textoCompleto.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      btnCerrarTexto.focus();
+    });
+
+    btnCerrarTexto.addEventListener('click', () => {
+      textoCompleto.classList.remove('open');
+      textoCompleto.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      btnTextoCompleto.focus();
+    });
   </script>
 </body>
 </html>

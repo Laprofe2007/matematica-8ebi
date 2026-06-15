@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Fabrica de Pintura - Proporcionalidad Directa</title>
+<title>La Fabrica de Pintura v4 - Proporcionalidad Directa</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#eef2f7;color:#1a1a2e;min-height:100vh}
@@ -43,10 +43,8 @@ input[type=range]{width:100%;accent-color:#2e6da4;cursor:pointer;height:5px}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{background:#1a3c5e;color:#fff;padding:8px 6px;text-align:center;font-size:12px}
 td{padding:7px 6px;text-align:center;border-bottom:1px solid #eee}
-tr.hl td{background:#e8f4e8;font-weight:bold}
-tr:not(.hl):nth-child(even) td{background:#f6f9ff}
+tr:nth-child(even) td{background:#f6f9ff}
 .kc{color:#2e6da4;font-weight:bold;font-family:monospace;font-size:14px}
-.ok{color:#2e7d32;font-size:12px}
 
 .comp-inner{background:#e8f4e8;border:2px solid #4caf50;border-radius:10px;padding:14px}
 .comp-head{font-size:13px;font-weight:bold;color:#2e7d32;margin-bottom:10px}
@@ -67,6 +65,47 @@ canvas{display:block;width:100%;height:auto}
 .eje-info{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:6px;padding:0 4px}
 
 .note{font-size:12px;color:#888;text-align:center;margin-top:8px}
+
+/* Botones de acción */
+.btn-agregar{
+  display:block;width:100%;margin-top:14px;
+  padding:10px 0;
+  background:linear-gradient(135deg,#1a7a4a,#27a865);
+  color:#fff;border:none;border-radius:8px;
+  font-size:14px;font-weight:bold;letter-spacing:.3px;
+  cursor:pointer;transition:opacity .2s,box-shadow .2s;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.btn-agregar:hover{opacity:.88;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+.btn-row{display:flex;gap:10px;margin-top:12px}
+
+.btn-recta{
+  flex:1;padding:9px 0;
+  background:linear-gradient(135deg,#1a3c5e,#2e6da4);
+  color:#fff;border:none;border-radius:8px;
+  font-size:13px;font-weight:bold;letter-spacing:.3px;
+  cursor:pointer;transition:opacity .2s,box-shadow .2s;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+}
+.btn-recta:disabled{
+  background:#b0b8c1;
+  cursor:not-allowed;
+  box-shadow:none;
+  opacity:.55;
+}
+.btn-recta:not(:disabled):hover{opacity:.88;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+
+.btn-reset{
+  flex:1;padding:9px 0;
+  background:transparent;
+  color:#b71c1c;
+  border:2px solid #e57373;
+  border-radius:8px;
+  font-size:13px;font-weight:bold;letter-spacing:.3px;
+  cursor:pointer;transition:background .2s,color .2s;
+}
+.btn-reset:hover{background:#ffebee;color:#b71c1c}
 
 @media(max-width:768px){
   .main{flex-direction:column}
@@ -111,6 +150,8 @@ canvas{display:block;width:100%;height:auto}
         </div>
         <input type="range" id="sb" min="1" max="20" value="4" oninput="upd()">
       </div>
+
+      <button class="btn-agregar" onclick="agregarPunto()">+ Agregar este punto al grafico</button>
     </div>
 
     <div class="card">
@@ -136,15 +177,16 @@ canvas{display:block;width:100%;height:auto}
           <label>Rojo (otra dupla)<input type="number" id="ca" min="1" max="20" value="3" oninput="upd()"></label>
           <label>Verde (otra dupla)<input type="number" id="cb" min="1" max="20" value="6" oninput="upd()"></label>
         </div>
-        <div class="comp-row">
-          <div class="mini-swatch" id="ms-mine"></div>
-          <div class="comp-kval">Mi dupla: k = <b id="ck-mine">2.000</b></div>
+        <div style="display:flex;gap:12px;margin-top:4px">
+          <div style="flex:1;text-align:center">
+            <div style="font-size:11px;color:#888;margin-bottom:5px">Mi receta</div>
+            <div class="mini-swatch" id="ms-mine" style="width:100%;height:52px;border-radius:9px"></div>
+          </div>
+          <div style="flex:1;text-align:center">
+            <div style="font-size:11px;color:#888;margin-bottom:5px">Otra dupla</div>
+            <div class="mini-swatch" id="ms-other" style="width:100%;height:52px;border-radius:9px"></div>
+          </div>
         </div>
-        <div class="comp-row">
-          <div class="mini-swatch" id="ms-other"></div>
-          <div class="comp-kval">Otra dupla: k = <b id="ck-other">2.000</b></div>
-        </div>
-        <div class="match si" id="match-result">Misma razon k - Produciran el mismo tono de pintura.</div>
       </div>
     </div>
 
@@ -154,41 +196,52 @@ canvas{display:block;width:100%;height:auto}
   <div class="col-right">
 
     <div class="card">
-      <div class="card-title">Tabla de escalas - cambia k?</div>
+      <div class="card-title">Tabla de valores - cambia k?</div>
       <table>
         <thead>
           <tr>
-            <th>Escala</th>
+            <th>Punto</th>
             <th>Rojo (litros)</th>
             <th>Verde (litros)</th>
             <th>k = verde / rojo</th>
-            <th>k cambia?</th>
           </tr>
         </thead>
-        <tbody id="tbody"></tbody>
+        <tbody id="tbody">
+          <tr><td colspan="4" style="color:#aaa;font-style:italic;padding:14px">Aun no hay datos. Usa los sliders y hace clic en "Agregar este punto".</td></tr>
+        </tbody>
       </table>
-      <p class="note">Observa que k es siempre el mismo valor aunque los litros cambien.</p>
     </div>
 
     <div class="card">
-      <div class="card-title">Grafico - recta proporcional</div>
-      <p style="font-size:12px;color:#666;margin-bottom:10px">
-        Cada punto es una escala de tu receta. La recta pasa por el origen con pendiente k = <span id="klbl">2.000</span>
-      </p>
-      <div id="grafico-wrap">
+      <div class="card-title">Grafico - puntos proporcionales</div>
+<div id="grafico-wrap">
         <canvas id="migrafico" width="700" height="460"></canvas>
       </div>
       <div class="eje-info">
         <span>Eje horizontal (x) = litros de pintura roja</span>
         <span>Eje vertical (y) = litros de pintura verde</span>
       </div>
-      <p class="note">La recta pasa por el origen. Por que tiene sentido que (0,0) sea parte de la relacion?</p>
+      <div class="btn-row">
+        <button class="btn-recta" id="btn-recta" onclick="verRecta()" disabled>Ver recta completa</button>
+        <button class="btn-reset" onclick="empezarDeNuevo()">Empezar de nuevo</button>
+      </div>
+      <p class="note" id="nota-recta">Agrega puntos con los sliders. La recta se habilita cuando hay 2 o mas puntos con la misma razon k.</p>
     </div>
 
   </div>
 </div>
 
 <script>
+// ── Estado ────────────────────────────────────────────────────────────────────
+var puntos = [];        // [{ a: rojo, b: verde }, ...]
+var rectaVisible = false;
+
+var COLORES_PUNTOS = [
+  "#5b8dd9","#1a3c5e","#2e8b57","#e67e22","#8e44ad",
+  "#c0392b","#16a085","#d35400","#2980b9","#27ae60",
+  "#f39c12","#7f8c8d","#1abc9c","#9b59b6","#e74c3c"
+];
+
 // ── Color helpers ────────────────────────────────────────────────────────────
 function rgbColor(a, b){
   var t = a + b;
@@ -200,7 +253,6 @@ function toHex(c){
   }).join('');
 }
 function colorName(k){
-  // k = verde/rojo
   if(k > 5.5)  return "Verde muy intenso";
   if(k > 2.5)  return "Verde intenso";
   if(k > 1.5)  return "Verde amarillento";
@@ -212,42 +264,106 @@ function colorName(k){
   return "Rojo intenso";
 }
 
+// ── Agregar punto ─────────────────────────────────────────────────────────────
+function agregarPunto(){
+  var a = +document.getElementById("sa").value;
+  var b = +document.getElementById("sb").value;
+  puntos.push({ a: a, b: b });
+  renderTabla();
+  dibujarGrafico();
+  actualizarBotones();
+}
+
 // ── Tabla ────────────────────────────────────────────────────────────────────
-function buildTable(a, b){
-  var escalas = [[0.5,"x 0.5"],[1,"x 1"],[2,"x 2"],[3,"x 3"],[4,"x 4"]];
-  var k = b/a, html = "";
-  escalas.forEach(function(e, i){
-    var ra = a*e[0], rb = b*e[0], ki = rb/ra;
-    var hl = (i===1) ? "class='hl'" : "";
-    html += "<tr "+hl+"><td><b>"+e[1]+"</b></td>"
-          + "<td>"+(Number.isInteger(ra)?ra:ra.toFixed(1))+"</td>"
-          + "<td>"+(Number.isInteger(rb)?rb:rb.toFixed(1))+"</td>"
-          + "<td class='kc'>"+ki.toFixed(3)+"</td>"
-          + "<td class='ok'>"+(Math.abs(ki-k)<0.001?"igual":"distinto")+"</td></tr>";
+function renderTabla(){
+  if(puntos.length === 0){
+    document.getElementById("tbody").innerHTML =
+      '<tr><td colspan="4" style="color:#aaa;font-style:italic;padding:14px">Aun no hay datos. Usa los sliders y hace clic en "Agregar este punto".</td></tr>';
+    return;
+  }
+  var html = "";
+  puntos.forEach(function(p, i){
+    var ki = p.b / p.a;
+    html += "<tr><td><b>#"+(i+1)+"</b></td>"
+          + "<td>"+(Number.isInteger(p.a) ? p.a : p.a.toFixed(1))+"</td>"
+          + "<td>"+(Number.isInteger(p.b) ? p.b : p.b.toFixed(1))+"</td>"
+          + "<td class='kc'>"+ki.toFixed(3)+"</td></tr>";
   });
   document.getElementById("tbody").innerHTML = html;
 }
 
+// ── Consistencia de k ─────────────────────────────────────────────────────────
+function kConsistente(){
+  if(puntos.length < 2) return false;
+  var k0 = puntos[0].b / puntos[0].a;
+  return puntos.every(function(p){
+    return Math.abs((p.b / p.a) - k0) < 0.001;
+  });
+}
+
+// ── Actualizar estado de botones ──────────────────────────────────────────────
+function actualizarBotones(){
+  var btnRecta = document.getElementById("btn-recta");
+  var nota = document.getElementById("nota-recta");
+  btnRecta.disabled = puntos.length < 2;
+
+  if(rectaVisible){
+    nota.textContent = "La recta y = kx esta visible. Los puntos se muestran sobre ella.";
+  } else if(puntos.length < 2){
+    nota.textContent = "Agrega al menos 2 puntos para poder trazar la recta.";
+  } else {
+    nota.textContent = "Ya podes presionar 'Ver recta completa'.";
+  }
+}
+
+// ── Ver recta ─────────────────────────────────────────────────────────────────
+function verRecta(){
+  if(puntos.length < 2) return;
+  if(!kConsistente()){
+    document.getElementById("nota-recta").textContent =
+      "Los puntos no se alinean en una recta unica. Revisa los valores de k en la tabla.";
+    return;
+  }
+  rectaVisible = true;
+  dibujarGrafico();
+  actualizarBotones();
+}
+
+// ── Empezar de nuevo ──────────────────────────────────────────────────────────
+function empezarDeNuevo(){
+  if(!confirm("¿Seguro que queres empezar de nuevo?")) return;
+  puntos = [];
+  rectaVisible = false;
+  renderTabla();
+  dibujarGrafico();
+  actualizarBotones();
+}
+
 // ── Grafico con Canvas nativo ─────────────────────────────────────────────────
-function dibujarGrafico(a, b){
+function dibujarGrafico(){
   var canvas = document.getElementById("migrafico");
   var ctx = canvas.getContext("2d");
   var W = canvas.width, H = canvas.height;
 
-  // Margenes
   var ml = 64, mr = 24, mt = 24, mb = 56;
   var gw = W - ml - mr;
   var gh = H - mt - mb;
 
   ctx.clearRect(0, 0, W, H);
 
-  // Maximo visible: el mayor de los puntos x4
-  var maxVal = Math.max(a, b) * 4;
-  // Redondear al siguiente multiplo de 5 para que la grilla quede limpia
+  // Escala: basada en los puntos cargados, o default 20
+  var maxVal = 10;
+  if(puntos.length > 0){
+    puntos.forEach(function(p){
+      maxVal = Math.max(maxVal, p.a, p.b);
+    });
+    maxVal = maxVal * 1.6;
+  } else {
+    maxVal = 20;
+  }
   var escala = Math.ceil(maxVal / 5) * 5;
   if(escala < 10) escala = 10;
 
-  // Conversion coordenadas matematicas a pixels
   function cx(xv){ return ml + (xv/escala)*gw; }
   function cy(yv){ return H - mb - (yv/escala)*gh; }
 
@@ -260,16 +376,8 @@ function dibujarGrafico(a, b){
   ctx.strokeStyle = "#e0e0e0";
   ctx.lineWidth = 1;
   for(var v = 0; v <= escala; v += step){
-    // vertical
-    ctx.beginPath();
-    ctx.moveTo(cx(v), mt);
-    ctx.lineTo(cx(v), H-mb);
-    ctx.stroke();
-    // horizontal
-    ctx.beginPath();
-    ctx.moveTo(ml, cy(v));
-    ctx.lineTo(W-mr, cy(v));
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx(v), mt);   ctx.lineTo(cx(v), H-mb); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(ml, cy(v));   ctx.lineTo(W-mr, cy(v)); ctx.stroke();
   }
 
   // Ejes
@@ -279,89 +387,77 @@ function dibujarGrafico(a, b){
   ctx.moveTo(ml, mt); ctx.lineTo(ml, H-mb); ctx.lineTo(W-mr, H-mb);
   ctx.stroke();
 
-  // Tickmarks y numeros en ejes
+  // Tickmarks y numeros
   ctx.fillStyle = "#555";
   ctx.font = "11px Arial";
   ctx.textAlign = "center";
   for(var v = 0; v <= escala; v += step){
-    // eje x
-    ctx.beginPath();
-    ctx.moveTo(cx(v), H-mb);
-    ctx.lineTo(cx(v), H-mb+5);
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx(v), H-mb); ctx.lineTo(cx(v), H-mb+5); ctx.stroke();
     ctx.fillText(v, cx(v), H-mb+17);
-    // eje y
-    ctx.beginPath();
-    ctx.moveTo(ml, cy(v));
-    ctx.lineTo(ml-5, cy(v));
-    ctx.stroke();
-    ctx.textAlign = "right";
-    ctx.fillText(v, ml-8, cy(v)+4);
-    ctx.textAlign = "center";
+    ctx.beginPath(); ctx.moveTo(ml, cy(v)); ctx.lineTo(ml-5, cy(v)); ctx.stroke();
+    ctx.textAlign = "right"; ctx.fillText(v, ml-8, cy(v)+4); ctx.textAlign = "center";
   }
 
-  // Recta proporcional (de origen al borde)
-  // y = k*x  con  k = b/a
-  var k = b/a;
-  // Encontrar el punto de corte con los bordes del area
-  var xEnd = escala, yEnd = k * escala;
-  if(yEnd > escala){ yEnd = escala; xEnd = yEnd/k; }
+  // Recta proporcional (solo si esta habilitada)
+  if(rectaVisible && puntos.length >= 2){
+    var k0 = puntos[0].b / puntos[0].a;
+    var xEnd = escala, yEnd = k0 * escala;
+    if(yEnd > escala){ yEnd = escala; xEnd = yEnd / k0; }
 
-  ctx.strokeStyle = "#c82828";
-  ctx.lineWidth = 2.5;
-  ctx.setLineDash([]);
-  ctx.beginPath();
-  ctx.moveTo(cx(0), cy(0));
-  ctx.lineTo(cx(xEnd), cy(yEnd));
-  ctx.stroke();
-
-  // Puntos a distintas escalas
-  var escalasP = [
-    [0.5,"x0.5","#5b8dd9"],
-    [1,  "x1",  "#1a3c5e"],
-    [2,  "x2",  "#2e8b57"],
-    [3,  "x3",  "#e67e22"],
-    [4,  "x4",  "#8e44ad"]
-  ];
-
-  escalasP.forEach(function(ep){
-    var px = a*ep[0], py = b*ep[0];
-    if(px > escala || py > escala) return; // fuera de rango
-    var pcx = cx(px), pcy = cy(py);
-
-    // Sombra
-    ctx.shadowColor = "rgba(0,0,0,0.15)";
-    ctx.shadowBlur = 4;
-    ctx.fillStyle = ep[2];
+    ctx.strokeStyle = "#c82828";
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([]);
     ctx.beginPath();
-    ctx.arc(pcx, pcy, 7, 0, 2*Math.PI);
+    ctx.moveTo(cx(0), cy(0));
+    ctx.lineTo(cx(xEnd), cy(yEnd));
+    ctx.stroke();
+
+    // Etiqueta de pendiente
+    var midX = Math.min(xEnd * 0.55, escala * 0.55);
+    var midY = k0 * midX;
+    if(midY <= escala && midX <= escala){
+      ctx.save();
+      ctx.translate(cx(midX), cy(midY));
+      var ang = Math.atan2(-(gh/escala)*k0, gw/escala);
+      ctx.rotate(ang);
+      ctx.fillStyle = "#c82828";
+      ctx.font = "bold 12px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("y = "+k0.toFixed(2)+" x", 0, -10);
+      ctx.restore();
+    }
+  }
+
+  // Puntos del usuario
+  puntos.forEach(function(p, i){
+    var px = p.a, py = p.b;
+    if(px > escala || py > escala) return;
+    var pcx = cx(px), pcy = cy(py);
+    var col = COLORES_PUNTOS[i % COLORES_PUNTOS.length];
+
+    ctx.shadowColor = "rgba(0,0,0,0.2)";
+    ctx.shadowBlur = 5;
+    ctx.fillStyle = col;
+    ctx.beginPath();
+    ctx.arc(pcx, pcy, 8, 0, 2*Math.PI);
     ctx.fill();
     ctx.shadowBlur = 0;
+
+    // Borde blanco para que resalten sobre la recta
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(pcx, pcy, 8, 0, 2*Math.PI);
+    ctx.stroke();
 
     // Etiqueta
     ctx.fillStyle = "#222";
     ctx.font = "bold 11px Arial";
     ctx.textAlign = "left";
-    var lx = pcx + 10, ly = pcy - 6;
-    // Ajustar si se sale por la derecha
-    if(lx + 60 > W-mr) lx = pcx - 65;
-    ctx.fillText(ep[1]+" ("+px.toFixed(1)+", "+py.toFixed(1)+")", lx, ly);
+    var lx = pcx + 12, ly = pcy - 6;
+    if(lx + 70 > W-mr) lx = pcx - 72;
+    ctx.fillText("#"+(i+1)+" ("+px+", "+py+")", lx, ly);
   });
-
-  // Etiqueta de pendiente en la recta
-  var midX = Math.min(a*2, escala*0.6);
-  var midY = k*midX;
-  if(midY <= escala && midX <= escala){
-    ctx.save();
-    ctx.translate(cx(midX), cy(midY));
-    var ang = Math.atan2(-(gh/escala)*k, gw/escala);
-    ctx.rotate(ang);
-    ctx.fillStyle = "#c82828";
-    ctx.font = "bold 12px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("y = "+k.toFixed(2)+" x", 0, -10);
-    ctx.restore();
-  }
 
   // Origen
   ctx.fillStyle = "#1a3c5e";
@@ -373,12 +469,19 @@ function dibujarGrafico(a, b){
   ctx.textAlign = "left";
   ctx.fillText("(0, 0)", cx(0)+8, cy(0)-6);
 
-  // Etiquetas de ejes dentro del grafico
+  // Mensaje si no hay puntos
+  if(puntos.length === 0){
+    ctx.fillStyle = "#ccc";
+    ctx.font = "14px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Usa los sliders y agrega puntos para verlos aqui.", ml + gw/2, mt + gh/2);
+  }
+
+  // Etiquetas de ejes
   ctx.fillStyle = "#888";
   ctx.font = "12px Arial";
   ctx.textAlign = "center";
   ctx.fillText("Rojo (litros)", ml + gw/2, H-mb+40);
-
   ctx.save();
   ctx.translate(14, mt + gh/2);
   ctx.rotate(-Math.PI/2);
@@ -387,7 +490,7 @@ function dibujarGrafico(a, b){
   ctx.restore();
 }
 
-// ── Main update ───────────────────────────────────────────────────────────────
+// ── Actualizacion en tiempo real (sliders / comparacion) ─────────────────────
 function upd(){
   var a = +document.getElementById("sa").value;
   var b = +document.getElementById("sb").value;
@@ -402,34 +505,21 @@ function upd(){
 
   document.getElementById("knum").textContent = k.toFixed(3);
   document.getElementById("kform").textContent = "= "+b+" / "+a;
-  document.getElementById("klbl").textContent = k.toFixed(3);
 
   var c = rgbColor(a, b);
   document.getElementById("swatch").style.backgroundColor = toHex(c);
   document.getElementById("sname").textContent = colorName(k);
 
-  buildTable(a, b);
-  dibujarGrafico(a, b);
-
-  // Comparacion
-  var ko = cb/ca;
-  var cm = rgbColor(a,b), co = rgbColor(ca,cb);
+  // Swatches de comparacion
+  var cm = rgbColor(a, b), co = rgbColor(Math.max(+(document.getElementById("ca").value)||1,1), Math.max(+(document.getElementById("cb").value)||1,1));
   document.getElementById("ms-mine").style.backgroundColor = toHex(cm);
   document.getElementById("ms-other").style.backgroundColor = toHex(co);
-  document.getElementById("ck-mine").textContent = k.toFixed(3);
-  document.getElementById("ck-other").textContent = ko.toFixed(3);
-
-  var mr = document.getElementById("match-result");
-  if(Math.abs(k-ko) < 0.001){
-    mr.className = "match si";
-    mr.textContent = "Misma razon k - Produciran el mismo tono de pintura.";
-  } else {
-    mr.className = "match no";
-    mr.textContent = "Razones distintas - tonos diferentes.";
-  }
 }
 
+// ── Inicio ────────────────────────────────────────────────────────────────────
 upd();
+dibujarGrafico();
+actualizarBotones();
 </script>
 </body>
 </html>

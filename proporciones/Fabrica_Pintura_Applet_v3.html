@@ -155,9 +155,9 @@ canvas{display:block;width:100%;height:auto}
     </div>
 
     <div class="card">
-      <div class="card-title">Razon constante k</div>
+      <div class="card-title">Tu valor de k</div>
       <div class="k-box">
-        <div class="k-lbl">k = verde / rojo (pendiente de la recta)</div>
+        <div class="k-lbl">k = verde / rojo</div>
         <div class="k-num" id="knum">2.000</div>
         <div class="k-form" id="kform">= 4 / 2</div>
       </div>
@@ -196,7 +196,7 @@ canvas{display:block;width:100%;height:auto}
   <div class="col-right">
 
     <div class="card">
-      <div class="card-title">Tabla de valores - cambia k?</div>
+      <div class="card-title">Tabla de valores</div>
       <table>
         <thead>
           <tr>
@@ -213,7 +213,7 @@ canvas{display:block;width:100%;height:auto}
     </div>
 
     <div class="card">
-      <div class="card-title">Grafico - puntos proporcionales</div>
+      <div class="card-title">Grafico</div>
 <div id="grafico-wrap">
         <canvas id="migrafico" width="700" height="460"></canvas>
       </div>
@@ -225,7 +225,7 @@ canvas{display:block;width:100%;height:auto}
         <button class="btn-recta" id="btn-recta" onclick="verRecta()" disabled>Ver recta completa</button>
         <button class="btn-reset" onclick="empezarDeNuevo()">Empezar de nuevo</button>
       </div>
-      <p class="note" id="nota-recta">Agrega puntos con los sliders. La recta se habilita cuando hay 2 o mas puntos con la misma razon k.</p>
+      <p class="note" id="nota-recta">Agrega al menos 2 puntos para habilitar el boton Ver recta completa.</p>
     </div>
 
   </div>
@@ -308,7 +308,7 @@ function actualizarBotones(){
   btnRecta.disabled = puntos.length < 2;
 
   if(rectaVisible){
-    nota.textContent = "La recta y = kx esta visible. Los puntos se muestran sobre ella.";
+    nota.textContent = "La recta esta visible. Observa donde cae cada punto.";
   } else if(puntos.length < 2){
     nota.textContent = "Agrega al menos 2 puntos para poder trazar la recta.";
   } else {
@@ -415,17 +415,6 @@ function dibujarGrafico(){
     // Etiqueta de pendiente
     var midX = Math.min(xEnd * 0.55, escala * 0.55);
     var midY = k0 * midX;
-    if(midY <= escala && midX <= escala){
-      ctx.save();
-      ctx.translate(cx(midX), cy(midY));
-      var ang = Math.atan2(-(gh/escala)*k0, gw/escala);
-      ctx.rotate(ang);
-      ctx.fillStyle = "#c82828";
-      ctx.font = "bold 12px Arial";
-      ctx.textAlign = "center";
-      ctx.fillText("y = "+k0.toFixed(2)+" x", 0, -10);
-      ctx.restore();
-    }
   }
 
   // Puntos del usuario

@@ -518,7 +518,7 @@
   <article class="modal modal-misiones">
     <button class="modal-close" type="button" id="misionesClose" aria-label="Cerrar misiones">×</button>
     <h2 id="misionesTitle">Misiones del Explorador</h2>
-    <span class="modal-tipo">Práctica · 7 misiones disponibles · 1 desafío bloqueado</span>
+    <span class="modal-tipo">Práctica · 7 misiones disponibles · desafío habilitado</span>
     <p class="modal-intro" id="misionesDesc">Seleccioná una misión para acceder a la ficha o al applet interactivo.</p>
     <div class="modal-rule" aria-hidden="true"></div>
 
@@ -594,7 +594,7 @@
           <span class="mission-name">Recorrido final</span>
         </div>
         <div class="mission-actions">
-          <button class="btn-mission" type="button" id="desafioBtn" aria-disabled="true">Bloqueado</button>
+          <button class="btn-mission btn-applet" type="button" id="desafioBtn">Abrir</button>
         </div>
       </li>
     </ol>
@@ -604,19 +604,18 @@
   </article>
 </div>
 
-<!-- Modal desafío bloqueado -->
+<!-- Modal desafío -->
 <div class="modal-backdrop" id="modalDesafio" role="dialog" aria-modal="true"
      aria-labelledby="desafioTitle" aria-describedby="desafioDesc">
   <article class="modal">
     <button class="modal-close" type="button" id="desafioClose" aria-label="Cerrar desafío">×</button>
     <h2 id="desafioTitle">Desafío del Explorador</h2>
-    <span class="modal-tipo">Misión bloqueada</span>
-    <p class="modal-intro" id="desafioDesc">Aún no has completado tu recorrido. Próximamente estará disponible tu desafío final.</p>
-    <p class="modal-intro">Esta misión será habilitada por la profesora cuando corresponda.</p>
+    <span class="modal-tipo">Misión habilitada</span>
+    <p class="modal-intro" id="desafioDesc">Elegí la instancia indicada por tu docente para completar el desafío del recorrido.</p>
     <div class="modal-rule" aria-hidden="true"></div>
     <div class="mission-actions">
-      <button class="btn-mission" type="button" disabled>Minievaluación</button>
-      <button class="btn-mission" type="button" disabled>Evaluación Integradora</button>
+      <a class="btn-mission" href="Actividades/S4_Mini_Eval_Estudiante_v2.pdf" target="_blank" rel="noopener">Minievaluación</a>
+      <a class="btn-mission btn-applet" href="Actividades/EvalIntegradora_S3_S4_v4.pdf" target="_blank" rel="noopener">Evaluación Integradora</a>
     </div>
     <div style="margin-top:1.5rem;">
       <button class="btn-back-map" type="button" id="desafioBackBtn">Volver al mapa</button>

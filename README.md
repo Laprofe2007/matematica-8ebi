@@ -134,3 +134,31 @@ background: #0D1B2A   /* azul noche */
 | Proporciones | ✅ Completo y publicado |
 | Las Tierras sin Mapa (Probabilidad) | ✅ Completo y publicado |
 | Siguientes reinos | 🔒 Placeholder en portal, se agregan durante el año |
+
+---
+
+## Actualización julio 2026
+
+El enlace principal para CREA sigue siendo:
+
+```text
+https://laprofe2007.github.io/matematica-8ebi/
+```
+
+Estado actualizado:
+
+| Reino | Estado julio 2026 |
+|---|---|
+| Proporciones | Publicado, con misiones, biblioteca, applets, bitácora y desafío habilitado |
+| Las Tierras sin Mapa | Publicado, con intro, biblioteca, actividades C34-C46, GeoGebra y simulador Panini |
+| Siguientes reinos | Pendientes de creación durante el curso |
+
+Notas de mantenimiento:
+
+- El desafío del Reino de las Proporciones ya está habilitado para estudiantes.
+- La mini-evaluación y la evaluación integradora de Proporciones están enlazadas desde el modal Desafío.
+- El Reino Las Tierras sin Mapa mantiene su carpeta propia con `index.html`, `intro.html`, `Simulador_Sobres_Panini2026.html` y `Actividades/`.
+- Si se reemplaza un PDF manteniendo el mismo nombre, alcanza con agregar, commitear y subir ese archivo.
+- Material docente o borradores no deben mostrarse en el sitio salvo decisión explícita.
+
+Ver también: [`ROADMAP.md`](ROADMAP.md).

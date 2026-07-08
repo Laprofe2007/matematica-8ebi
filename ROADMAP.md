@@ -31,7 +31,7 @@ Incluye:
 
 Pendientes posibles:
 
-- Decidir si `proporciones/Fabrica_Pintura_Applet_v4.html` debe publicarse, conectarse o quedar como borrador local.
+- `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para el reino de Funciones Lineales. Cuando se trabaje esa unidad, publicarlo como applet de ejemplo de recta y = kx. No publicar aun.
 - Decidir si la hoja docente de correccion de la evaluacion integradora debe subirse como respaldo interno o mantenerse fuera del sitio publico.
 
 ### Las Tierras sin Mapa

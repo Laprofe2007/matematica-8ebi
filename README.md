@@ -127,38 +127,58 @@ background: #0D1B2A   /* azul noche */
 
 ---
 
-## 📋 Estado actual (junio 2026)
+## 📋 Estado actual (julio 2026)
 
 | Reino | Estado |
 |---|---|
 | Proporciones | ✅ Completo y publicado |
 | Las Tierras sin Mapa (Probabilidad) | ✅ Completo y publicado |
+| Álgebra y las Funciones | ✅ Shell publicado — Prólogo + Misión I activos |
 | Siguientes reinos | 🔒 Placeholder en portal, se agregan durante el año |
 
 ---
 
-## Actualización julio 2026
+## Estructura completa de carpetas (julio 2026)
 
-El enlace principal para CREA sigue siendo:
-
-```text
-https://laprofe2007.github.io/matematica-8ebi/
+```
+raíz/
+├── index.html                              ← Portal de todos los reinos
+├── iconos_web/                             ← Iconos PNG compartidos
+├── imagenes para ejercicios/              ← Imágenes educativas
+│
+├── proporciones/                           ← Reino 1: Razones y Proporcionalidad
+│   ├── index.html
+│   ├── biblioteca.html
+│   ├── Fabrica_Pintura_Applet_v3.html      ← Applet activo (contenido v4)
+│   ├── Ciudad_Proporciones_Interactivo.html
+│   └── Actividades/                        ← 11 PDFs
+│
+├── tierras-sin-mapa/                       ← Reino 2: Probabilidad y Estadística
+│   ├── index.html
+│   ├── intro.html
+│   ├── Simulador_Sobres_Panini2026.html
+│   └── Actividades/                        ← 15 PDFs + 1 imagen
+│
+└── algebra-funciones/                      ← Reino 3: Álgebra y las Funciones
+    ├── index.html                          ← Mapa del reino (5 territorios)
+    ├── prologo/
+    │   └── index.html                      ← Crónica "El misterio del número sin nombre"
+    └── misiones/
+        └── mision-01/
+            ├── index.html                  ← Visor de ficha
+            └── Ficha_A-01_Las_letras_que_ya_conociamos.png
 ```
 
-Estado actualizado:
+---
 
-| Reino | Estado julio 2026 |
-|---|---|
-| Proporciones | Publicado, con misiones, biblioteca, applets, bitácora y desafío habilitado |
-| Las Tierras sin Mapa | Publicado, con intro, biblioteca, actividades C34-C46, GeoGebra y simulador Panini |
-| Siguientes reinos | Pendientes de creación durante el curso |
-
-Notas de mantenimiento:
+## Notas de mantenimiento
 
 - El desafío del Reino de las Proporciones ya está habilitado para estudiantes.
 - La mini-evaluación y la evaluación integradora de Proporciones están enlazadas desde el modal Desafío.
-- El Reino Las Tierras sin Mapa mantiene su carpeta propia con `index.html`, `intro.html`, `Simulador_Sobres_Panini2026.html` y `Actividades/`.
+- En `algebra-funciones/`: Biblioteca y Cierre/Desafío están bloqueados (borde punteado). Se desbloquean modificando `bloqueado: true → false` en el array `territorios[]` del `index.html`.
+- Para agregar una misión nueva al reino de Álgebra: crear `misiones/mision-0N/` con su `index.html` y PNG, luego cambiar `bloqueado: true → false` en el item correspondiente del modal de misiones.
 - Si se reemplaza un PDF manteniendo el mismo nombre, alcanza con agregar, commitear y subir ese archivo.
 - Material docente o borradores no deben mostrarse en el sitio salvo decisión explícita.
+- `Fabrica_Pintura_Applet_v4.html` existe solo en la PC local — reservado para el reino de Funciones Lineales.
 
 Ver también: [`ROADMAP.md`](ROADMAP.md).

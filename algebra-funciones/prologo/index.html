@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prólogo | Reino del Álgebra y las Funciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:    #2a1c12;
+      --ink-mid: #5c3820;
+      --gold:   #8a5e14;
+      --amber:  #7a4f0a;
+      --font-title: "Cinzel", "Georgia", serif;
+      --font-body:  "Libre Baskerville", "Georgia", serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: #fdf5e0;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.045;
+      background-image:
+        linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    .shell {
+      position: relative; z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 5rem;
+    }
+
+    /* ── Navegación ── */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 2.5rem; flex-wrap: wrap; gap: .75rem;
+    }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-title);
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .breadcrumb a { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb .sep  { color: rgba(42,28,18,.35); }
+    .breadcrumb .curr { color: var(--ink); opacity: .45; }
+
+    /* ── Encabezado ── */
+    .cronica-header {
+      text-align: center;
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(138,94,20,0.2);
+    }
+
+    .cronica-tag {
+      display: inline-block;
+      font-family: var(--font-title);
+      font-size: 0.62rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .cronica-header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 5vw, 2.4rem);
+      font-weight: 800; color: var(--amber);
+      letter-spacing: 0.04em; line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .cronica-header .subtitulo {
+      font-size: 0.88rem; font-style: italic;
+      color: var(--ink); opacity: 0.55;
+    }
+
+    /* ── Cuerpo del relato ── */
+    .relato { font-size: clamp(0.95rem, 2.2vw, 1.06rem); }
+
+    .relato p { margin-bottom: 1.4rem; }
+
+    .relato .pregunta {
+      display: block;
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 2.8vw, 1.2rem);
+      font-weight: 600;
+      color: var(--amber);
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid rgba(138,94,20,0.22);
+      border-bottom: 1px solid rgba(138,94,20,0.22);
+      line-height: 1.45;
+    }
+
+    .relato em { font-style: italic; color: var(--ink-mid); }
+    .relato strong { font-weight: 700; color: var(--amber); }
+
+    /* ── Cierre ── */
+    .cronica-cierre {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(138,94,20,0.15);
+      text-align: center;
+    }
+    .cronica-cierre .deco {
+      font-family: var(--font-title);
+      font-size: 0.65rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* ── Navegación inferior ── */
+    .nav-inferior {
+      margin-top: 3rem;
+      display: flex; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .55rem 1.2rem;
+      background: rgba(138,94,20,.07);
+      border: 1px solid rgba(138,94,20,.3);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .68rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-volver:hover {
+      background: rgba(138,94,20,.14);
+      border-color: rgba(138,94,20,.55);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <nav class="topbar" aria-label="Navegación">
+      <div class="breadcrumb">
+        <a href="../../index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <a href="../index.html">Álgebra y Funciones</a>
+        <span class="sep">/</span>
+        <span class="curr">Prólogo</span>
+      </div>
+    </nav>
+
+    <header class="cronica-header">
+      <span class="cronica-tag">Prólogo del Reino · Crónica</span>
+      <h1>El misterio del número sin nombre</h1>
+      <p class="subtitulo">Crónicas de los Exploradores de 8.º · Liceo de Médanos</p>
+    </header>
+
+    <article class="relato" aria-label="Crónica: El misterio del número sin nombre">
+
+      <p>Hace más de mil años, mucho antes de los cuadernos, de las calculadoras y de las pantallas, las personas ya resolvían problemas con números. Los comerciantes calculaban ganancias, los agricultores repartían tierras y cosechas, los constructores medían muros y canales.</p>
+
+      <p>Pero había un tipo de problema que traía verdaderos dolores de cabeza: los problemas donde aparecía un número que todavía nadie conocía.</p>
+
+      <p>Imaginen a un comerciante de aquella época diciendo: <em>"Si vendo todos mis sacos de trigo y después pago 15 monedas de impuesto, me quedan 40. ¿Cuánto valía mi trigo?"</em></p>
+
+      <span class="pregunta" role="note">¿Cómo hablar de un número que todavía no conocemos?</span>
+
+      <p>Esa era la gran pregunta. Durante siglos, la única forma fue escribir todo con palabras, en frases larguísimas. Los historiadores llaman a esa etapa <em>"álgebra retórica"</em>: un álgebra contada, sin símbolos.</p>
+
+      <p>Hasta que hace unos mil doscientos años, en la ciudad de Bagdad, un matemático llamado Muhammad ibn Musa al-Khwarizmi escribió un libro que cambió la historia. No era un libro de cuentos: era un libro de métodos. Enseñaba, paso a paso, cómo encontrar ese número desconocido en problemas de herencias, repartos y comercio.</p>
+
+      <p>Una palabra del título de ese libro era <em>al-jabr</em>, que significa algo así como <em>"restauración"</em>: volver a poner en orden una igualdad. Esa palabra viajó de idioma en idioma durante siglos, del árabe al latín y del latín a las lenguas modernas, hasta convertirse en la palabra que usamos hoy: <strong>álgebra</strong>.</p>
+
+      <p>Así que cada vez que decimos "álgebra" estamos pronunciando, sin darnos cuenta, una palabra árabe de hace más de mil años.</p>
+
+      <p>¿Y las letras? Acá viene lo curioso: al-Khwarizmi no usaba letras. Escribía todo con palabras, incluso las operaciones. Las letras llegaron mucho después. Durante siglos, distintos matemáticos fueron inventando abreviaturas para escribir menos, hasta que en el siglo XVI un matemático francés llamado François Viète ordenó esas ideas y armó un sistema completo: usar letras para representar números, tanto los que conocemos como los que no.</p>
+
+      <p>Eso cambió todo. Porque con una sola escritura ya no se resolvía un problema: se resolvían miles de problemas parecidos a la vez. Una letra podía representar cualquier número.</p>
+
+      <p>Una cosa más, quizá la más sorprendente. El nombre al-Khwarizmi se hizo tan famoso en Europa que los libros en latín lo escribían <em>"Algoritmi"</em>. Y de ahí nació otra palabra que ustedes escuchan todos los días: <strong>algoritmo</strong>. El algoritmo de YouTube, de TikTok, de Instagram. <strong>Álgebra</strong> y <strong>algoritmo</strong>: dos palabras, un mismo protagonista.</p>
+
+    </article>
+
+    <div class="cronica-cierre" aria-hidden="true">
+      <span class="deco">· · ·</span>
+    </div>
+
+    <nav class="nav-inferior" aria-label="Navegación de regreso">
+      <a class="btn-volver" href="../index.html">← Volver al mapa del reino</a>
+      <a class="btn-volver" href="../../index.html">← Todos los reinos</a>
+    </nav>
+
+  </div>
+</body>
+</html>

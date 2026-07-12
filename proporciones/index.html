@@ -623,6 +623,25 @@
   </article>
 </div>
 
+<!-- Modal Bitácora -->
+<div class="modal-backdrop" id="modalBitacora" role="dialog" aria-modal="true"
+     aria-labelledby="bitacoraTitle" aria-describedby="bitacoraDesc">
+  <article class="modal">
+    <button class="modal-close" type="button" id="bitacoraClose" aria-label="Cerrar bitácora">×</button>
+    <h2 id="bitacoraTitle">Bitácora del Explorador</h2>
+    <span class="modal-tipo">Registro de evaluación</span>
+    <p class="modal-intro" id="bitacoraDesc">Elegí el material indicado por tu docente.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
+    <div class="mission-actions">
+      <a class="btn-mission" href="Actividades/TD_Bitacora_Explorador.pdf" target="_blank" rel="noopener">Bitácora de trabajo</a>
+      <a class="btn-mission btn-applet" href="Bitacora_Cierre_Proporcionalidad.html" target="_blank" rel="noopener">Bitácora de cierre: Proporcionalidad</a>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="bitacoraBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
 <script>
   const territorios = [
     {
@@ -652,8 +671,8 @@
     {
       id: "bitacora", nombre: "Bitácora del Explorador", icono: "📓", tipo: "Registro de evaluación",
       descripcion: "Registro personal del recorrido de junio. Actividad transversal que se completa progresivamente.",
-      boton: "Abrir Bitácora", enlace: "Actividades/TD_Bitacora_Explorador.pdf",
-      nuevaPestana: true, esMisiones: false,
+      boton: "Abrir Bitácora", enlace: null,
+      nuevaPestana: true, esMisiones: false, esBitacoraModal: true,
       posicion: { desktop: { x: "80%", y: "68%" }, mobile: { x: "72%", y: "78%" } },
       recursos: [{ etiqueta: "Bitácora evaluativa", tipo: "PDF" }]
     }
@@ -663,6 +682,7 @@
   const modalBackdrop = document.getElementById('modalBackdrop');
   const modalMisiones = document.getElementById('modalMisiones');
   const modalDesafio  = document.getElementById('modalDesafio');
+  const modalBitacora = document.getElementById('modalBitacora');
   const modalTitle    = document.getElementById('modalTitle');
   const modalTipo     = document.getElementById('modalTipo');
   const modalDesc     = document.getElementById('modalDescription');
@@ -706,6 +726,12 @@
       document.body.style.overflow = 'hidden';
       return;
     }
+    if (t.esBitacoraModal) {
+      modalBitacora.classList.add('open');
+      document.getElementById('bitacoraClose').focus();
+      document.body.style.overflow = 'hidden';
+      return;
+    }
     modalTitle.textContent = t.nombre;
     modalTipo.textContent  = t.tipo;
     modalDesc.textContent  = t.descripcion;
@@ -731,6 +757,7 @@
   function cerrarMisiones() { modalMisiones.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
   function abrirDesafio()   { ultimoFoco = document.activeElement; modalDesafio.classList.add('open'); desafioClose.focus(); document.body.style.overflow = 'hidden'; }
   function cerrarDesafio()  { modalDesafio.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarBitacora() { modalBitacora.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
 
   modalClose.addEventListener('click', cerrarModal);
   document.getElementById('modalBackBtn').addEventListener('click', cerrarModal);
@@ -739,14 +766,18 @@
   desafioClose.addEventListener('click', cerrarDesafio);
   document.getElementById('desafioBackBtn').addEventListener('click', cerrarDesafio);
   document.getElementById('desafioBtn').addEventListener('click', abrirDesafio);
+  document.getElementById('bitacoraClose').addEventListener('click', cerrarBitacora);
+  document.getElementById('bitacoraBackBtn').addEventListener('click', cerrarBitacora);
   modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) cerrarModal(); });
   modalMisiones.addEventListener('click', e => { if (e.target === modalMisiones) cerrarMisiones(); });
   modalDesafio.addEventListener('click', e => { if (e.target === modalDesafio) cerrarDesafio(); });
+  modalBitacora.addEventListener('click', e => { if (e.target === modalBitacora) cerrarBitacora(); });
   document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;
     if (modalBackdrop.classList.contains('open')) cerrarModal();
     if (modalMisiones.classList.contains('open')) cerrarMisiones();
     if (modalDesafio.classList.contains('open')) cerrarDesafio();
+    if (modalBitacora.classList.contains('open')) cerrarBitacora();
   });
 
   function trapFocus(backdrop, e) {
@@ -758,6 +789,7 @@
   modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBackdrop, e); });
   modalMisiones.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalMisiones, e); });
   modalDesafio.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalDesafio, e); });
+  modalBitacora.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBitacora, e); });
 
   let resizeTimer;
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC-S6 Expresiones Algebraicas</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', Arial, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .header {
+    background: #1F3864;
+    color: white;
+    padding: 22px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header h1 { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.5px; }
+  .header .meta { font-size: 0.85rem; opacity: 0.8; text-align: right; line-height: 1.5; }
+  .consigna-global {
+    background: #EEF4FB;
+    border-left: 5px solid #2E75B6;
+    margin: 20px 24px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    color: #1F3864;
+    border-radius: 0 6px 6px 0;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 0 24px 24px;
+  }
+  .card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  .card-header {
+    padding: 12px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-number {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 800; color: white;
+    flex-shrink: 0;
+  }
+  .card-title { color: white; font-size: 1rem; font-weight: 800; }
+  .card-subtitle { color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 600; }
+  .card-body { padding: 14px 16px; flex: 1; background: white; font-size: 0.88rem; color: #333; }
+  .context-box {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    color: #444;
+    border: 1px solid #e0e0e0;
+  }
+  .context-box b { color: #1F3864; }
+  .preguntas { list-style: none; }
+  .preguntas li {
+    margin-bottom: 8px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .letra {
+    background: #1F3864;
+    color: white;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .respuesta {
+    border-bottom: 1.5px dotted #aaa;
+    flex: 1; min-height: 22px; margin-top: 2px;
+  }
+  .hint {
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: #2E75B6;
+    font-style: italic;
+    background: #EEF4FB;
+    border-radius: 4px;
+    padding: 6px 10px;
+  }
+  /* card 1 */
+  .c1 .card-header { background: #2E75B6; }
+  .c1 .letra { background: #2E75B6; }
+  /* card 2 */
+  .c2 .card-header { background: #1F7A4D; }
+  .c2 .letra { background: #1F7A4D; }
+  /* card 3 */
+  .c3 .card-header { background: #7B2D8B; }
+  .c3 .letra { background: #7B2D8B; }
+  /* card 4 */
+  .c4 .card-header { background: #C45900; }
+  .c4 .letra { background: #C45900; }
+  .tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 0.82rem;
+  }
+  .tabla th {
+    background: #2E75B6;
+    color: white;
+    padding: 5px 8px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .tabla td {
+    border: 1px solid #ccc;
+    padding: 5px 8px;
+    text-align: center;
+    background: #f5f9ff;
+  }
+  .tabla td.blank { background: white; border-bottom: 2px solid #1F3864; }
+  .footer {
+    background: #1F3864;
+    color: #BBCCDD;
+    font-size: 0.72rem;
+    text-align: center;
+    padding: 10px;
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>Mini Control S6 &mdash; Expresiones Algebraicas</h1>
+      <div style="margin-top:4px;font-size:0.8rem;opacity:0.7">Matem&aacute;tica 8.&deg; EBI &middot; Liceo de M&eacute;danos &middot; 2026</div>
+    </div>
+    <div class="meta">
+      Nombre: ___________________________<br>
+      Fecha: ____________&nbsp;&nbsp;&nbsp;Clase: ____
+    </div>
+  </div>
+
+  <div class="consigna-global">
+    Mostr&aacute; siempre el procedimiento. No alcanza con el resultado. Podés usar cualquier letra para las inc&oacute;gnitas.
+  </div>
+
+  <div class="grid">
+
+    <!-- CARD 1: Baldosas - generalización -->
+    <div class="card c1">
+      <div class="card-header">
+        <div class="card-number">1</div>
+        <div>
+          <div class="card-title">Las baldosas</div>
+          <div class="card-subtitle">Generalización de un patrón</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="context-box">
+          Cada figura tiene una fila de baldosas azules y una columna de baldosas blancas que se unen en una esquina.<br><br>
+          <b>Figura 1:</b> 1 baldosa &nbsp;&nbsp; <b>Figura 2:</b> 3 baldosas &nbsp;&nbsp; <b>Figura 3:</b> 5 baldosas &nbsp;&nbsp; <b>Figura 4:</b> 7 baldosas
+        </div>
+        <table class="tabla">
+          <tr><th>Figura (n)</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>10</th></tr>
+          <tr><td>Baldosas</td><td>1</td><td>3</td><td>5</td><td>7</td><td class="blank">&nbsp;</td><td class="blank">&nbsp;</td></tr>
+        </table>
+        <ul class="preguntas">
+          <li><span class="letra">a</span><span>Complet&aacute; la tabla.</span></li>
+          <li style="margin-top:6px;"><span class="letra">b</span><span>&#191;C&oacute;mo cambia la cantidad de baldosas de una figura a la siguiente?<div class="respuesta"></div></span></li>
+          <li><span class="letra">c</span><span>Escrib&iacute; una expresi&oacute;n para la cantidad de baldosas de la figura n.<div class="respuesta"></div></span></li>
+          <li><span class="letra">d</span><span>Verific&aacute; tu expresi&oacute;n con n = 3 y n = 10. Mostr&aacute; el c&aacute;lculo.<div class="respuesta"></div></span></li>
+        </ul>
+        <div class="hint">&#128161; &#191;Qu&eacute; parte siempre crece? &#191;Qu&eacute; parte nunca cambia?</div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Sueldo - expresión e inversa -->
+    <div class="card c2">
+      <div class="card-header">
+        <div class="card-number">2</div>
+        <div>
+          <div class="card-title">El sueldo desconocido</div>
+          <div class="card-subtitle">Expresi&oacute;n con parte fija &middot; pregunta inversa</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="context-box">
+          Luc&iacute;a empez&oacute; a trabajar. Su recibo de sueldo dice:<br><br>
+          <table class="tabla" style="margin:4px 0;">
+            <tr><td style="text-align:left;background:#f0f7f0;">Sueldo bruto</td><td style="background:#f0f7f0;"><b>$ x</b></td></tr>
+            <tr><td style="text-align:left;">Descuento BPS</td><td>&minus; $&nbsp;2.400</td></tr>
+            <tr><td style="text-align:left;">Descuento FONASA</td><td>&minus; $&nbsp;&nbsp;&nbsp;800</td></tr>
+            <tr><td style="text-align:left;">Otros descuentos</td><td>&minus; $&nbsp;&nbsp;&nbsp;700</td></tr>
+            <tr><td style="text-align:left;font-weight:700;">Sueldo l&iacute;quido</td><td><b>$ 11.100</b></td></tr>
+          </table>
+        </div>
+        <ul class="preguntas">
+          <li><span class="letra">a</span><span>&#191;Cu&aacute;nto suman los descuentos en total?<div class="respuesta"></div></span></li>
+          <li><span class="letra">b</span><span>Escrib&iacute; la expresi&oacute;n algebraica que representa el sueldo l&iacute;quido en funci&oacute;n de x.<div class="respuesta"></div></span></li>
+          <li><span class="letra">c</span><span>Si el sueldo l&iacute;quido es $11.100, &#191;cu&aacute;nto es el sueldo bruto (x)? Mostr&aacute; el procedimiento.<div class="respuesta"></div><div class="respuesta"></div></span></li>
+          <li><span class="letra">d</span><span>Comprob&aacute; reemplazando en tu expresi&oacute;n.<div class="respuesta"></div></span></li>
+        </ul>
+        <div class="hint">&#128161; A veces es m&aacute;s f&aacute;cil calcular al rev&eacute;s: si sab&eacute;s el resultado, &#191;c&oacute;mo recorr&eacute;s el camino inverso?</div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Caja misteriosa - planteo de expresión/ecuación -->
+    <div class="card c3">
+      <div class="card-header">
+        <div class="card-number">3</div>
+        <div>
+          <div class="card-title">La caja misteriosa</div>
+          <div class="card-subtitle">Plantear una expresi&oacute;n &middot; encontrar un valor</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="context-box">
+          En un juego de feria hay una caja con bolas rojas y bolas azules.<br>
+          &bull; La cantidad de bolas <b>rojas</b> es el <b>doble</b> de las azules.<br>
+          &bull; En total hay <b>18 bolas</b>.<br><br>
+          Vamos a representar con una letra la cantidad de bolas azules.
+        </div>
+        <ul class="preguntas">
+          <li><span class="letra">a</span><span>&#191;Qu&eacute; representa la letra que eleg&iacute;s?<div class="respuesta"></div></span></li>
+          <li><span class="letra">b</span><span>&#191;C&oacute;mo se pueden expresar las bolas rojas con esa letra?<div class="respuesta"></div></span></li>
+          <li><span class="letra">c</span><span>Escrib&iacute; una expresi&oacute;n que represente el total de bolas.<div class="respuesta"></div></span></li>
+          <li><span class="letra">d</span><span>&#191;Cu&aacute;ntas bolas hay de cada color? Mostr&aacute; c&oacute;mo lo averiguaste.<div class="respuesta"></div><div class="respuesta"></div></span></li>
+          <li><span class="letra">e</span><span>Comprob&aacute; tu respuesta.<div class="respuesta"></div></span></li>
+        </ul>
+        <div class="hint">&#128161; Eleg&iacute; una letra para lo que <b>no conocemos</b>. Puede ser x, a, n&hellip; cualquiera.</div>
+      </div>
+    </div>
+
+    <!-- CARD 4: Simplificación -->
+    <div class="card c4">
+      <div class="card-header">
+        <div class="card-number">4</div>
+        <div>
+          <div class="card-title">Simplificar y explicar</div>
+          <div class="card-subtitle">T&eacute;rminos semejantes &middot; verificaci&oacute;n</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="context-box">
+          Escrib&iacute; cada expresi&oacute;n de la forma m&aacute;s corta posible. Indic&aacute; qu&eacute; t&eacute;rminos juntaste.
+        </div>
+        <ul class="preguntas">
+          <li><span class="letra">a</span><span>5x + 3 + 2x &minus; 1<div class="respuesta"></div>Junt&eacute;: _______________</span></li>
+          <li style="margin-top:8px;"><span class="letra">b</span><span>4m &minus; m + 7 + 3m<div class="respuesta"></div>Junt&eacute;: _______________</span></li>
+          <li style="margin-top:8px;"><span class="letra">c</span><span>3a + 5b &minus; a + 2b<div class="respuesta"></div>Junt&eacute;: _______________</span></li>
+          <li style="margin-top:10px;"><span class="letra">d</span><span>Verific&aacute; tu respuesta del inciso <b>a</b> con x = 4. Las dos formas tienen que dar lo mismo.<div class="respuesta"></div><div class="respuesta"></div></span></li>
+        </ul>
+        <div class="hint">&#128161; Solo se juntan los t&eacute;rminos con la misma letra. 3x y 5b no se pueden sumar: son cosas distintas.</div>
+      </div>
+    </div>
+
+  </div><!-- fin grid -->
+
+  <div class="footer">
+    Fern&aacute;ndez, G. M. (2026). MC-S6 Expresiones Algebraicas. Reino Matem&aacute;tico. Crónicas de los Exploradores de 8.&deg;. Liceo de M&eacute;danos.
+  </div>
+</div>
+</body>
+</html>

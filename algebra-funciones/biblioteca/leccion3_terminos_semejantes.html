@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección 3 · Términos semejantes</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#0f2b1a;color:#eee;min-height:100vh}
+  header{background:linear-gradient(135deg,#145a32,#1e8449);padding:28px 24px 20px;text-align:center}
+  header h1{font-size:1.4rem;font-weight:800;color:#fff}
+  header p{color:#a9dfbf;font-size:0.85rem;margin-top:6px}
+  .progress-bar{background:#0a1f11;padding:10px 24px;display:flex;align-items:center;gap:12px}
+  .bar-track{flex:1;background:#17391f;border-radius:20px;height:8px}
+  .bar-fill{height:8px;border-radius:20px;background:linear-gradient(90deg,#27ae60,#82e0aa);transition:width 0.4s}
+  .score-pill{background:#17391f;color:#27ae60;font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .container{max-width:680px;margin:0 auto;padding:24px 16px}
+  .question{background:#17391f;border-radius:12px;padding:20px;margin-bottom:20px;border-left:4px solid #27ae60;opacity:0.4;pointer-events:none;transition:opacity 0.3s}
+  .question.active{opacity:1;pointer-events:all}
+  .question.done{opacity:1}
+  .question.done .options,.question.done .fill-wrap{pointer-events:none;opacity:0.75}
+  .q-num{font-size:0.72rem;font-weight:700;color:#82e0aa;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .q-text{font-size:1rem;line-height:1.5;margin-bottom:14px;color:#d5f5e3}
+  .q-context{background:#0a1f11;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:0.88rem;color:#a9dfbf;border:1px solid #1d5e2a}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .opt{background:#0a1f11;border:2px solid #1d5e2a;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:0.9rem;color:#a9dfbf;transition:all 0.15s;text-align:left}
+  .opt:hover{border-color:#27ae60;color:#fff;background:#12301a}
+  .opt.correct{border-color:#22c55e;background:#052e16;color:#86efac;pointer-events:none}
+  .opt.wrong{border-color:#ef4444;background:#2d0a0a;color:#fca5a5;pointer-events:none}
+  .fill-wrap{display:flex;gap:8px;align-items:center}
+  .fill-input{flex:1;background:#0a1f11;border:2px solid #1d5e2a;border-radius:8px;padding:10px 14px;font-size:1rem;color:#eee;outline:none;transition:border-color 0.2s;font-family:monospace}
+  .fill-input:focus{border-color:#27ae60}
+  .fill-input.correct{border-color:#22c55e;background:#052e16;color:#86efac}
+  .fill-input.wrong{border-color:#ef4444;background:#2d0a0a;color:#fca5a5}
+  .btn{background:#27ae60;color:white;border:none;border-radius:8px;padding:10px 20px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:background 0.2s}
+  .btn:hover{background:#1e8449}
+  .feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:0.88rem;display:none}
+  .feedback.show{display:block}
+  .feedback.ok{background:#052e16;border:1px solid #22c55e;color:#86efac}
+  .feedback.ko{background:#2d0a0a;border:1px solid #ef4444;color:#fca5a5}
+  .next-btn{margin-top:12px;width:100%}
+  .expr{font-family:monospace;font-size:1.05rem;background:#0a1f11;padding:4px 10px;border-radius:4px;color:#82e0aa;display:inline-block}
+  .finish-screen{display:none;text-align:center;padding:40px 20px}
+  .finish-screen.show{display:block}
+  .finish-circle{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#27ae60,#82e0aa);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#0a1f11;margin:0 auto 20px}
+  .finish-title{font-size:1.5rem;font-weight:800;color:#27ae60;margin-bottom:8px}
+  .finish-sub{color:#a9dfbf;font-size:0.9rem;line-height:1.5}
+  .retry-btn{margin-top:20px;background:#17391f;color:#27ae60;border:2px solid #27ae60;border-radius:8px;padding:10px 24px;font-size:0.9rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lección 3 · Términos semejantes</h1>
+  <p>S6 Expresiones Algebraicas · Matemática 8.° EBI · Reino Matemático 2026</p>
+</header>
+<div class="progress-bar">
+  <div class="bar-track"><div class="bar-fill" id="bar" style="width:0%"></div></div>
+  <div class="score-pill" id="score">0 / 5</div>
+</div>
+<div class="container">
+
+  <div class="question active" id="q1">
+    <div class="q-num">Pregunta 1 de 5</div>
+    <div class="q-text">En la expresión <span class="expr">4x + 3 + 2x</span>, ¿cuáles son los términos semejantes?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'q1',false)">4x y 3</button>
+      <button class="opt" onclick="checkOpt(this,'q1',true)">4x y 2x</button>
+      <button class="opt" onclick="checkOpt(this,'q1',false)">3 y 2x</button>
+      <button class="opt" onclick="checkOpt(this,'q1',false)">Los tres términos son semejantes.</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn next-btn" id="next1" style="display:none" onclick="next(1)">Siguiente →</button>
+  </div>
+
+  <div class="question" id="q2">
+    <div class="q-num">Pregunta 2 de 5</div>
+    <div class="q-text">Simplificá la expresión <span class="expr">4x + 3 + 2x</span></div>
+    <div class="fill-wrap">
+      <input class="fill-input" id="in2" placeholder="Resultado simplificado">
+      <button class="btn" onclick="checkFill('q2','in2',['6x+3','6x + 3'])">Verificar</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn next-btn" id="next2" style="display:none" onclick="next(2)">Siguiente →</button>
+  </div>
+
+  <div class="question" id="q3">
+    <div class="q-num">Pregunta 3 de 5</div>
+    <div class="q-text">Simplificá <span class="expr">5m − 2m + 4</span></div>
+    <div class="fill-wrap">
+      <input class="fill-input" id="in3" placeholder="Resultado simplificado">
+      <button class="btn" onclick="checkFill('q3','in3',['3m+4','3m + 4'])">Verificar</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn next-btn" id="next3" style="display:none" onclick="next(3)">Siguiente →</button>
+  </div>
+
+  <div class="question" id="q4">
+    <div class="q-num">Pregunta 4 de 5</div>
+    <div class="q-context">Un rectángulo tiene base 3x y altura 2. El perímetro se calcula sumando todos sus lados.</div>
+    <div class="q-text">¿Cuál es la forma simplificada del perímetro?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'q4',false)">5x + 2</button>
+      <button class="opt" onclick="checkOpt(this,'q4',false)">6x + 2</button>
+      <button class="opt" onclick="checkOpt(this,'q4',true)">6x + 4</button>
+      <button class="opt" onclick="checkOpt(this,'q4',false)">3x + 2</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn next-btn" id="next4" style="display:none" onclick="next(4)">Siguiente →</button>
+  </div>
+
+  <div class="question" id="q5">
+    <div class="q-num">Pregunta 5 de 5</div>
+    <div class="q-text">Simplificá <span class="expr">3a + 5b − a + 2b</span></div>
+    <div class="fill-wrap">
+      <input class="fill-input" id="in5" placeholder="Resultado simplificado">
+      <button class="btn" onclick="checkFill('q5','in5',['2a+7b','2a + 7b'])">Verificar</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn next-btn" id="next5" style="display:none" onclick="finish()">Ver resultados →</button>
+  </div>
+
+  <div class="finish-screen" id="finish">
+    <div class="finish-circle" id="fcirc">?</div>
+    <div class="finish-title" id="ftitle">¡Listo!</div>
+    <div class="finish-sub" id="fsub"></div>
+    <button class="retry-btn" onclick="location.reload()">Intentar de nuevo</button>
+  </div>
+</div>
+
+<script>
+let correct=0,total=5,current=1;
+const fb={
+  q1:{ok:"Correcto. Solo se juntan los términos con la misma parte literal. 4x y 2x tienen ambos la letra x.",ko:"Los términos semejantes son los que tienen la misma letra con el mismo exponente. El 3 es un número solo, no tiene letra, así que no se puede juntar con los que tienen x."},
+  q2:{ok:"Correcto. 4x + 2x = 6x; el 3 queda solo. Resultado: 6x + 3.",ko:"Juntá los que tienen x: 4x + 2x = 6x. El 3 no tiene x, entonces va solo. Resultado: 6x + 3."},
+  q3:{ok:"Correcto. 5m − 2m = 3m; el 4 queda solo.",ko:"Restá los términos con m: 5m − 2m = 3m. El 4 no tiene letra, queda como está."},
+  q4:{ok:"Correcto. P = 3x + 2 + 3x + 2 = 6x + 4.",ko:"El rectángulo tiene 4 lados: dos bases (3x cada una) y dos alturas (2 cada una). Suma: 3x+2+3x+2 = 6x+4."},
+  q5:{ok:"Correcto. 3a − a = 2a; 5b + 2b = 7b. Resultado: 2a + 7b.",ko:"Juntá las a por un lado y las b por otro. 3a − a = 2a; 5b + 2b = 7b. Como son letras distintas, no se mezclan entre sí."}
+};
+function updateBar(){document.getElementById('bar').style.width=(current-1)/total*100+'%';document.getElementById('score').textContent=correct+' / '+total;}
+function checkOpt(btn,qid,ok){
+  btn.parentElement.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const f=document.getElementById('fb'+qid.slice(1));
+  if(ok){btn.classList.add('correct');correct++;showFb(f,'ok',fb[qid].ok);}
+  else{btn.classList.add('wrong');showFb(f,'ko',fb[qid].ko);}
+  document.getElementById('next'+qid.slice(1)).style.display='block';
+  document.getElementById(qid).classList.add('done');
+}
+function checkFill(qid,inid,answers){
+  const inp=document.getElementById(inid);
+  const val=inp.value.trim().replace(/\s+/g,'').toLowerCase();
+  const f=document.getElementById('fb'+qid.slice(1));
+  inp.disabled=true;
+  const match=answers.some(a=>a.replace(/\s+/g,'').toLowerCase()===val);
+  if(match){inp.classList.add('correct');correct++;showFb(f,'ok',fb[qid].ok);}
+  else{inp.classList.add('wrong');showFb(f,'ko',fb[qid].ko);}
+  document.getElementById('next'+qid.slice(1)).style.display='block';
+  document.getElementById(qid).classList.add('done');
+}
+function showFb(el,type,text){el.textContent=text;el.className='feedback show '+type;}
+function next(n){current=n+1;updateBar();const nxt=document.getElementById('q'+current);if(nxt){nxt.classList.add('active');nxt.scrollIntoView({behavior:'smooth',block:'start'});}}
+function finish(){
+  document.getElementById('bar').style.width='100%';
+  document.getElementById('score').textContent=correct+' / '+total;
+  const fs=document.getElementById('finish');fs.classList.add('show');fs.scrollIntoView({behavior:'smooth'});
+  const pct=Math.round(correct/total*100);
+  document.getElementById('fcirc').textContent=correct+'/'+total;
+  document.getElementById('ftitle').textContent=pct>=80?'¡Muy bien!':pct>=60?'¡Bien!':'Seguí practicando';
+  document.getElementById('fsub').textContent=pct>=80?'Dominás la simplificación. ¡Estás listo para el mini control!':pct>=60?'Casi. Repasá los ejercicios que fallaste antes del MC-S6.':'Revisá la ficha A-06 y los ejemplos de perímetros con letras.';
+}
+updateBar();
+</script>
+</body>
+</html>

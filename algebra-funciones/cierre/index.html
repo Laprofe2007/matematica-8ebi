@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafío Final | Álgebra y Funciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:       #2a1c12;
+      --ink-mid:   #5c3820;
+      --ink-light: rgba(42,28,18,0.52);
+      --gold:      #8a5e14;
+      --amber:     #7a4f0a;
+      --font-title: "Cinzel","Georgia",serif;
+      --font-body:  "Libre Baskerville","Georgia",serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; font-family: var(--font-body); color: var(--ink); background: #fdf5e0; }
+    body::before {
+      content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.045;
+      background-image: linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .shell { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: .75rem; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-title); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .breadcrumb a { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb .sep  { color: rgba(42,28,18,.35); }
+    .breadcrumb .curr { color: var(--ink); opacity: .45; }
+
+    .page-header {
+      text-align: center;
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(138,94,20,0.2);
+    }
+    .page-tag {
+      display: inline-block; font-family: var(--font-title);
+      font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .page-header h1 {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 5vw, 2.2rem);
+      font-weight: 800; color: var(--amber);
+      letter-spacing: 0.04em; line-height: 1.2; margin-bottom: 0.5rem;
+    }
+    .page-header p { font-size: 0.88rem; font-style: italic; color: var(--ink-light); }
+
+    /* Tarjeta del mini control */
+    .mc-card {
+      background: #fff8ec;
+      border: 1px solid rgba(138,94,20,0.32);
+      border-radius: 10px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 2px 14px rgba(42,28,18,0.08);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .mc-icon { font-size: 2.4rem; line-height: 1; margin-bottom: 0.75rem; }
+    .mc-titulo {
+      font-family: var(--font-title); font-size: 1.1rem;
+      font-weight: 800; color: var(--amber);
+      letter-spacing: 0.04em; margin-bottom: 0.5rem;
+    }
+    .mc-desc {
+      font-size: 0.86rem; color: var(--ink-mid);
+      line-height: 1.6; margin-bottom: 1.5rem;
+    }
+
+    /* Botón habilitado */
+    .btn-mc-activo {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.5rem;
+      background: var(--amber); color: #fff8ec;
+      border: none; border-radius: 6px;
+      font-family: var(--font-title); font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-mc-activo:hover { background: var(--gold); }
+
+    /* Botón bloqueado */
+    .btn-mc-bloqueado {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.5rem;
+      background: rgba(138,94,20,0.07);
+      border: 1px dashed rgba(138,94,20,0.35);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ink-light);
+      cursor: not-allowed;
+    }
+    .aviso-bloqueo {
+      margin-top: 0.85rem;
+      font-size: 0.78rem; font-style: italic; color: var(--ink-light);
+    }
+
+    .btn-volver {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .55rem 1.2rem;
+      background: rgba(138,94,20,.07);
+      border: 1px solid rgba(138,94,20,.3);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .68rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-volver:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.55); }
+    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <nav class="topbar" aria-label="Navegación">
+      <div class="breadcrumb">
+        <a href="../../index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <a href="../index.html">Álgebra y Funciones</a>
+        <span class="sep">/</span>
+        <span class="curr">Desafío Final</span>
+      </div>
+    </nav>
+
+    <header class="page-header">
+      <span class="page-tag">Cierre · Secuencia 6</span>
+      <h1>Desafío Final</h1>
+      <p>Mini control de expresiones algebraicas.</p>
+    </header>
+
+    <div class="mc-card" id="mcCard">
+      <div class="mc-icon" aria-hidden="true">🏆</div>
+      <p class="mc-titulo">MC-S6: Mini control del territorio</p>
+      <p class="mc-desc">
+        Evaluación individual de cierre de la Secuencia 6.<br>
+        Se realiza después de la corrección de actividades en clase.
+      </p>
+      <div id="mcAccion"></div>
+    </div>
+
+    <nav class="nav-inferior" aria-label="Navegación de regreso">
+      <a class="btn-volver" href="../index.html">← Volver al mapa del reino</a>
+      <a class="btn-volver" href="../../index.html">← Todos los reinos</a>
+    </nav>
+
+  </div>
+
+  <script>
+    // Para habilitar el mini control: cambiá false por true y hacé push.
+    const MC_HABILITADO = false;
+
+    const accion = document.getElementById('mcAccion');
+    if (MC_HABILITADO) {
+      accion.innerHTML = '<a class="btn-mc-activo" href="mc_s6_actividades.html">Iniciar mini control →</a>';
+    } else {
+      accion.innerHTML = `
+        <span class="btn-mc-bloqueado" aria-disabled="true">🔒 No disponible aún</span>
+        <p class="aviso-bloqueo">Se habilita después de la corrección en clase.</p>`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección 1 · Variables y expresiones</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#0f1b35;color:#eee;min-height:100vh}
+  header{background:linear-gradient(135deg,#1F3864,#2E75B6);padding:28px 24px 20px;text-align:center}
+  header h1{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:0.5px}
+  header p{color:#adc8e6;font-size:0.85rem;margin-top:6px}
+  .progress-bar{background:#0d1628;padding:10px 24px;display:flex;align-items:center;gap:12px}
+  .bar-track{flex:1;background:#1a2e52;border-radius:20px;height:8px}
+  .bar-fill{height:8px;border-radius:20px;background:linear-gradient(90deg,#FFD700,#FFA500);transition:width 0.4s}
+  .score-pill{background:#1a2e52;color:#FFD700;font-size:0.8rem;font-weight:700;padding:4px 12px;border-radius:20px;white-space:nowrap}
+  .container{max-width:680px;margin:0 auto;padding:24px 16px}
+  .question{background:#1a2e52;border-radius:12px;padding:20px;margin-bottom:20px;border-left:4px solid #2E75B6;opacity:0.4;pointer-events:none;transition:opacity 0.3s}
+  .question.active{opacity:1;pointer-events:all}
+  .question.done{opacity:1}
+  .question.done .options,.question.done .fill-wrap{pointer-events:none;opacity:0.75}
+  .q-num{font-size:0.72rem;font-weight:700;color:#FFD700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .q-text{font-size:1rem;line-height:1.5;margin-bottom:14px;color:#dde8f5}
+  .q-context{background:#0f1b35;border-radius:8px;padding:12px 14px;margin-bottom:14px;font-size:0.88rem;color:#adc8e6;border:1px solid #2a3f6b}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .opt{background:#0f1b35;border:2px solid #2a3f6b;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:0.9rem;color:#cdd9ee;transition:all 0.15s;text-align:left}
+  .opt:hover{border-color:#2E75B6;color:#fff;background:#16274a}
+  .opt.correct{border-color:#22c55e;background:#052e16;color:#86efac;pointer-events:none}
+  .opt.wrong{border-color:#ef4444;background:#2d0a0a;color:#fca5a5;pointer-events:none}
+  .fill-wrap{display:flex;gap:8px;align-items:center}
+  .fill-input{flex:1;background:#0f1b35;border:2px solid #2a3f6b;border-radius:8px;padding:10px 14px;font-size:1rem;color:#eee;outline:none;transition:border-color 0.2s}
+  .fill-input:focus{border-color:#2E75B6}
+  .fill-input.correct{border-color:#22c55e;background:#052e16;color:#86efac}
+  .fill-input.wrong{border-color:#ef4444;background:#2d0a0a;color:#fca5a5}
+  .btn{background:#2E75B6;color:white;border:none;border-radius:8px;padding:10px 20px;font-size:0.9rem;font-weight:700;cursor:pointer;transition:background 0.2s}
+  .btn:hover{background:#1F3864}
+  .btn:disabled{opacity:0.4;cursor:not-allowed}
+  .feedback{margin-top:12px;padding:10px 14px;border-radius:8px;font-size:0.88rem;display:none}
+  .feedback.show{display:block}
+  .feedback.ok{background:#052e16;border:1px solid #22c55e;color:#86efac}
+  .feedback.ko{background:#2d0a0a;border:1px solid #ef4444;color:#fca5a5}
+  .next-btn{margin-top:12px;width:100%}
+  .finish-screen{display:none;text-align:center;padding:40px 20px}
+  .finish-screen.show{display:block}
+  .finish-circle{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#0f1b35;margin:0 auto 20px}
+  .finish-title{font-size:1.5rem;font-weight:800;color:#FFD700;margin-bottom:8px}
+  .finish-sub{color:#adc8e6;font-size:0.9rem;line-height:1.5}
+  .retry-btn{margin-top:20px;background:#1a2e52;color:#FFD700;border:2px solid #FFD700;border-radius:8px;padding:10px 24px;font-size:0.9rem;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lección 1 &middot; Variables y expresiones</h1>
+  <p>S6 Expresiones Algebraicas &middot; Matemática 8.° EBI &middot; Reino Matemático 2026</p>
+</header>
+<div class="progress-bar">
+  <div class="bar-track"><div class="bar-fill" id="bar" style="width:0%"></div></div>
+  <div class="score-pill" id="score">0 / 5</div>
+</div>
+<div class="container" id="main">
+
+  <!-- Q1 -->
+  <div class="question active" id="q1">
+    <div class="q-num">Pregunta 1 de 5</div>
+    <div class="q-context">En la expresión A = b × h, las tres letras son b, h y A.</div>
+    <div class="q-text">¿Cuál de estas afirmaciones es correcta?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'q1',false)">Solo A puede cambiar de valor.</button>
+      <button class="opt" onclick="checkOpt(this,'q1',true)">b y h pueden cambiar de valor; A depende de ellas.</button>
+      <button class="opt" onclick="checkOpt(this,'q1',false)">Ninguna letra puede cambiar; la expresión es siempre la misma.</button>
+      <button class="opt" onclick="checkOpt(this,'q1',false)">Las tres letras son constantes en cualquier situación.</button>
+    </div>
+    <div class="feedback" id="fb1"></div>
+    <button class="btn next-btn" id="next1" style="display:none" onclick="next(1)">Siguiente →</button>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question" id="q2">
+    <div class="q-num">Pregunta 2 de 5</div>
+    <div class="q-context">El patrón de cruces tiene 5, 9, 13, 17 cuadrados en las figuras 1, 2, 3 y 4.</div>
+    <div class="q-text">¿Cuántos cuadrados tiene la figura 10?</div>
+    <div class="fill-wrap">
+      <input class="fill-input" id="in2" type="number" placeholder="Tu respuesta">
+      <button class="btn" onclick="checkFill('q2','in2',['41'])">Verificar</button>
+    </div>
+    <div class="feedback" id="fb2"></div>
+    <button class="btn next-btn" id="next2" style="display:none" onclick="next(2)">Siguiente →</button>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question" id="q3">
+    <div class="q-num">Pregunta 3 de 5</div>
+    <div class="q-text">¿Cuál de estas expresiones representa la cantidad de cuadrados de la figura n del patrón de cruces (5, 9, 13, 17...)?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'q3',false)">5n</button>
+      <button class="opt" onclick="checkOpt(this,'q3',false)">n + 4</button>
+      <button class="opt" onclick="checkOpt(this,'q3',true)">4n + 1</button>
+      <button class="opt" onclick="checkOpt(this,'q3',false)">4n + 4</button>
+    </div>
+    <div class="feedback" id="fb3"></div>
+    <button class="btn next-btn" id="next3" style="display:none" onclick="next(3)">Siguiente →</button>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question" id="q4">
+    <div class="q-num">Pregunta 4 de 5</div>
+    <div class="q-context">La expresión del patrón de cruces es 4n + 1.</div>
+    <div class="q-text">¿Cuánto vale la expresión cuando n = 7?</div>
+    <div class="fill-wrap">
+      <input class="fill-input" id="in4" type="number" placeholder="Tu respuesta">
+      <button class="btn" onclick="checkFill('q4','in4',['29'])">Verificar</button>
+    </div>
+    <div class="feedback" id="fb4"></div>
+    <button class="btn next-btn" id="next4" style="display:none" onclick="next(4)">Siguiente →</button>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question" id="q5">
+    <div class="q-num">Pregunta 5 de 5</div>
+    <div class="q-text">Valentina escribe 4n + 1. Bruno escribe n + n + n + n + 1. ¿Son equivalentes?</div>
+    <div class="options">
+      <button class="opt" onclick="checkOpt(this,'q5',true)">Sí, porque para cualquier valor de n dan el mismo resultado.</button>
+      <button class="opt" onclick="checkOpt(this,'q5',false)">No, porque tienen una cantidad distinta de términos.</button>
+      <button class="opt" onclick="checkOpt(this,'q5',false)">Solo son iguales cuando n = 1.</button>
+      <button class="opt" onclick="checkOpt(this,'q5',false)">No se puede saber sin calcular todos los valores.</button>
+    </div>
+    <div class="feedback" id="fb5"></div>
+    <button class="btn next-btn" id="next5" style="display:none" onclick="finish()">Ver resultados →</button>
+  </div>
+
+  <!-- FINISH -->
+  <div class="finish-screen" id="finish">
+    <div class="finish-circle" id="fcirc">?</div>
+    <div class="finish-title" id="ftitle">¡Listo!</div>
+    <div class="finish-sub" id="fsub"></div>
+    <button class="retry-btn" onclick="location.reload()">Intentar de nuevo</button>
+  </div>
+</div>
+
+<script>
+let correct=0,total=5,current=1;
+const fbTexts={
+  q1:{ok:"Correcto. b y h son las variables independientes; A depende de ellas y cambia cuando ellas cambian.",ko:"No exactamente. b y h son las que podemos elegir libremente; A es el resultado que depende de ellas."},
+  q2:{ok:"¡Correcto! 4(10)+1=41.",ko:"Fijate en el patrón: cada figura suma 4 cuadrados más que la anterior. O usá la expresión 4n+1 con n=10."},
+  q3:{ok:"Correcto. 4n+1: la cruz tiene 1 cuadrado central y 4 brazos de n cuadrados cada uno.",ko:"Revisá con n=1: ¿cuánto da tu expresión? El patrón da 5 en la figura 1."},
+  q4:{ok:"Correcto. 4×7+1=28+1=29.",ko:"Reemplazá n=7 en 4n+1: calculá 4×7 primero, después sumá 1."},
+  q5:{ok:"Correcto. n+n+n+n = 4n, entonces n+n+n+n+1 = 4n+1. Son la misma expresión escrita de otra manera.",ko:"Probá con n=3: Bruno da 3+3+3+3+1=13. Valentina da 4×3+1=13. Siempre coinciden."}
+};
+function updateBar(){
+  document.getElementById('bar').style.width=(current-1)/total*100+'%';
+  document.getElementById('score').textContent=correct+' / '+total;
+}
+function checkOpt(btn,qid,isCorrect){
+  const fb=document.getElementById('fb'+qid.slice(1));
+  const nextBtn=document.getElementById('next'+qid.slice(1));
+  const btns=btn.parentElement.querySelectorAll('.opt');
+  btns.forEach(b=>b.disabled=true);
+  if(isCorrect){btn.classList.add('correct');correct++;showFb(fb,'ok',fbTexts[qid].ok);}
+  else{btn.classList.add('wrong');showFb(fb,'ko',fbTexts[qid].ko);}
+  nextBtn.style.display='block';
+  document.getElementById(qid).classList.add('done');
+}
+function checkFill(qid,inid,answers){
+  const inp=document.getElementById(inid);
+  const val=inp.value.trim();
+  const fb=document.getElementById('fb'+qid.slice(1));
+  const nextBtn=document.getElementById('next'+qid.slice(1));
+  inp.disabled=true;
+  if(answers.includes(val)){inp.classList.add('correct');correct++;showFb(fb,'ok',fbTexts[qid].ok);}
+  else{inp.classList.add('wrong');showFb(fb,'ko',fbTexts[qid].ko);}
+  nextBtn.style.display='block';
+  document.getElementById(qid).classList.add('done');
+}
+function showFb(el,type,text){el.textContent=text;el.className='feedback show '+type;}
+function next(n){
+  current=n+1;
+  updateBar();
+  if(current<=total){
+    const nxt=document.getElementById('q'+current);
+    if(nxt){nxt.classList.add('active');nxt.scrollIntoView({behavior:'smooth',block:'start'});}
+  }
+}
+function finish(){
+  document.getElementById('bar').style.width='100%';
+  document.getElementById('score').textContent=correct+' / '+total;
+  const fs=document.getElementById('finish');
+  fs.classList.add('show');
+  fs.scrollIntoView({behavior:'smooth'});
+  const pct=Math.round(correct/total*100);
+  document.getElementById('fcirc').textContent=correct+'/'+total;
+  document.getElementById('ftitle').textContent=pct>=80?'¡Muy bien!':pct>=60?'¡Bien!':'Seguí practicando';
+  document.getElementById('fsub').textContent=
+    pct>=80?'Dominás variables y expresiones algebraicas. ¡Listo para la siguiente lección!':
+    pct>=60?'Vas bien. Repasá las preguntas que fallaste antes de seguir.':
+    'Revisá las fichas A-01 y A-02 y volvé a intentarlo cuando estés listo.';
+}
+updateBar();
+</script>
+</body>
+</html>

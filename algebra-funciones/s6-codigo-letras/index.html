@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reino del Álgebra y las Funciones | Reinos Matemáticos</title>
+  <title>El Código de las Letras · Subreino 1 | Álgebra y Funciones</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
@@ -112,7 +112,7 @@
 
     .title-block h1 {
       font-family: var(--font-title);
-      font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+      font-size: clamp(1.4rem, 4vw, 2.8rem);
       font-weight: 800; color: var(--ink);
       letter-spacing: 0.04em; line-height: 1.1;
     }
@@ -120,83 +120,86 @@
     .chronicles {
       display: block;
       font-family: var(--font-title);
-      font-size: clamp(0.55rem, 1.5vw, 0.8rem);
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--ink-mid); margin-top: 0.35rem;
+      font-size: clamp(0.6rem, 1.4vw, 0.82rem);
+      color: var(--amber); letter-spacing: 0.12em;
+      text-transform: uppercase; margin-top: 0.4rem;
     }
 
     .subtitle {
       display: block;
-      font-size: clamp(0.65rem, 1.6vw, 0.85rem);
-      font-style: italic; color: var(--ink-light); margin-top: 0.2rem;
+      font-family: var(--font-body);
+      font-size: clamp(0.65rem, 1.3vw, 0.78rem);
+      color: var(--ink-mid); font-style: italic;
+      margin-top: 0.3rem; opacity: 0.75;
     }
 
-    .cartography, .paths {
-      position: absolute; inset: 0; width: 100%; height: 100%;
+    /* Territorios */
+    .territory-layer {
+      position: absolute; inset: 0;
+      pointer-events: none;
     }
-    .cartography { z-index: 1; }
-    .paths       { z-index: 2; }
-
-    .territory-layer { position: absolute; inset: 0; z-index: 6; }
 
     .territory {
       position: absolute;
-      left: var(--x); top: var(--y);
       transform: translate(-50%, -50%);
+      left: var(--x); top: var(--y);
       width: min(38vw, 10.5rem);
-      background: rgba(253,245,224,0.92);
-      border: 2px solid var(--gold);
+      background: var(--parchment-light);
+      border: 1px solid var(--border-gold);
       border-radius: 8px;
-      padding: 0.7rem 0.85rem 0.6rem;
-      cursor: pointer; text-align: center;
-      font-family: var(--font-body);
-      transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
-      box-shadow: 0 3px 14px var(--shadow);
+      padding: 0.7rem 0.9rem 0.6rem;
+      text-align: center;
+      cursor: pointer;
+      pointer-events: all;
+      box-shadow: 0 3px 12px var(--shadow);
+      transition: transform .18s, box-shadow .18s, border-color .18s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.25rem;
     }
-    .territory:hover, .territory:focus-visible {
-      transform: translate(-50%, calc(-50% - 4px));
-      background: rgba(255,250,232,0.98);
-      border-color: var(--amber);
-      box-shadow: 0 7px 22px var(--shadow);
-      outline: none;
+
+    .territory:hover:not(.locked) {
+      transform: translate(-50%, -50%) translateY(-3px);
+      box-shadow: 0 8px 24px var(--shadow);
+      border-color: var(--gold);
     }
-    .territory:active { transform: translate(-50%, calc(-50% + 1px)); }
 
     .territory.locked {
-      opacity: 0.52;
+      opacity: 0.42;
       cursor: default;
       border-style: dashed;
-      border-color: rgba(201,152,63,0.38);
+      background: rgba(253,245,224,0.6);
     }
-    .territory.locked:hover,
-    .territory.locked:focus-visible {
-      transform: translate(-50%, -50%);
-      background: rgba(253,245,224,0.92);
-      border-color: rgba(201,152,63,0.38);
-      box-shadow: 0 3px 14px var(--shadow);
-    }
-    .territory.locked .territory-status { color: var(--ink-light); }
 
-    .territory-icon   { display: block; font-size: 1.5rem; line-height: 1.2; margin-bottom: .25rem; }
-    .territory-name   {
-      display: block; font-family: var(--font-title);
-      font-size: clamp(.62rem, 1.6vw, .82rem); font-weight: 600;
-      color: var(--ink); letter-spacing: .02em; line-height: 1.3; margin-bottom: .2rem;
+    .territory-icon  { font-size: clamp(1.3rem, 3vw, 1.8rem); line-height: 1; }
+    .territory-name  {
+      font-family: var(--font-title);
+      font-size: clamp(0.52rem, 1.2vw, 0.72rem);
+      font-weight: 600; color: var(--ink);
+      letter-spacing: 0.04em; line-height: 1.25;
     }
     .territory-status {
-      display: block; font-size: .6rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--amber); font-family: var(--font-title);
+      font-family: var(--font-title);
+      font-size: clamp(0.44rem, 0.9vw, 0.58rem);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--amber); opacity: 0.8;
     }
 
+    /* Leyenda y compás */
     .legend {
-      position: absolute; bottom: 1rem; left: 1.2rem; z-index: 7;
-      font-size: .7rem; font-family: var(--font-title); color: var(--ink-mid);
-      display: flex; flex-direction: column; gap: .25rem; letter-spacing: .06em;
+      position: absolute; bottom: 1.2rem; right: 1.2rem;
+      font-family: var(--font-title);
+      font-size: clamp(0.48rem, 1vw, 0.62rem);
+      color: var(--ink-mid); letter-spacing: 0.08em;
+      display: flex; flex-direction: column; gap: 0.3rem;
+      text-align: right;
     }
+
     .compass {
-      position: absolute; bottom: 1rem; right: 1.2rem; z-index: 7;
-      width: 3rem; height: 3rem; border: 1px solid var(--gold);
-      border-radius: 50%; display: grid; place-items: center; opacity: .5;
+      position: absolute; bottom: 1.2rem; left: 1.5rem;
+      width: 2rem; height: 2rem;
+      border: 1.5px solid var(--border-gold);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 0.7rem; color: var(--amber);
     }
     .compass::before { content: "N"; font-family: var(--font-title); font-size: .75rem; color: var(--amber); }
 
@@ -204,7 +207,7 @@
       display: flex; justify-content: center;
       padding: .75rem 1rem 0;
     }
-    .btn-all-kingdoms {
+    .btn-back-kingdom {
       display: inline-flex; align-items: center; gap: .45rem;
       padding: .55rem 1.25rem;
       background: rgba(201,152,63,.08);
@@ -215,7 +218,7 @@
       color: var(--amber); text-decoration: none;
       transition: background .2s, border-color .2s, color .2s;
     }
-    .btn-all-kingdoms:hover {
+    .btn-back-kingdom:hover {
       background: rgba(201,152,63,.16);
       border-color: rgba(201,152,63,.65);
       color: var(--ink);
@@ -285,9 +288,7 @@
       letter-spacing: .12em; text-transform: uppercase; color: var(--amber); margin-left: .5rem;
     }
 
-    .modal-btn-row {
-      display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
-    }
+    .modal-btn-row { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
     .modal-actions { display: contents; }
 
     .btn-primary {
@@ -319,17 +320,13 @@
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       opacity: .35; margin: 1.1rem 0 1.6rem;
     }
-    .modal-intro {
-      font-size: .84rem; color: var(--ink-mid);
-      font-style: italic; margin-bottom: .2rem;
-    }
+    .modal-intro { font-size: .84rem; color: var(--ink-mid); font-style: italic; margin-bottom: .2rem; }
 
     .mission-list {
       list-style: none; padding: 0;
       display: flex; flex-direction: column; gap: .75rem;
       max-height: min(62vh, 34rem);
-      overflow-y: auto;
-      padding-right: .35rem;
+      overflow-y: auto; padding-right: .35rem;
       scrollbar-color: var(--gold) rgba(201,152,63,.1);
     }
     .mission-list::-webkit-scrollbar { width: .55rem; }
@@ -347,9 +344,7 @@
     }
     .mission-item:hover { border-color: var(--gold); }
     .mission-item.locked {
-      opacity: .5;
-      background: rgba(201,152,63,.03);
-      border-style: dashed;
+      opacity: .5; background: rgba(201,152,63,.03); border-style: dashed;
     }
     .mission-item.locked:hover { border-color: rgba(201,152,63,.28); }
 
@@ -374,16 +369,15 @@
 
     .locked-tag {
       font-family: var(--font-title); font-size: .58rem;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--ink-light);
+      letter-spacing: .14em; text-transform: uppercase; color: var(--ink-light);
     }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .map-board { aspect-ratio: auto; min-height: 1080px; }
+      .map-board { aspect-ratio: auto; min-height: 960px; }
     }
     @media (max-width: 580px) {
-      .map-board   { min-height: 1220px; border-radius: 0; }
+      .map-board   { min-height: 1080px; border-radius: 0; }
       .map-stage   { padding-inline: 0; }
       .territory   { width: min(42vw, 11rem); }
       .modal       { padding: 2rem 1.25rem; }
@@ -400,24 +394,27 @@
 
     <header class="topbar">
       <nav class="breadcrumb" aria-label="Navegación">
-        <a href="../index.html">Reinos Matemáticos</a>
+        <a href="../../index.html">Reinos Matemáticos</a>
         <span class="sep">/</span>
-        <span class="curr">Álgebra y Funciones</span>
+        <a href="../index.html">Álgebra y Funciones</a>
+        <span class="sep">/</span>
+        <span class="curr">El Código de las Letras</span>
       </nav>
-      <div class="seal" aria-hidden="true">8</div>
+      <div class="seal" aria-hidden="true">S1</div>
     </header>
 
-    <section class="map-stage" aria-label="Mapa del Reino del Álgebra y las Funciones">
+    <section class="map-stage" aria-label="Mapa del Subreino 1 — El Código de las Letras">
       <div class="map-board">
 
         <div class="title-block">
-          <h1 id="page-title">Reino del Álgebra y las Funciones</h1>
-          <span class="chronicles">Crónicas de los Exploradores de 8.º</span>
-          <span class="subtitle">"El territorio donde las letras guardan secretos matemáticos."</span>
+          <h1 id="page-title">El Código de las Letras</h1>
+          <span class="chronicles">Subreino 1 · Reino del Álgebra y las Funciones</span>
+          <span class="subtitle">"Variable, expresión algebraica, lenguaje algebraico, monomios y términos semejantes."</span>
         </div>
 
         <!-- Fondo cartográfico -->
-        <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+        <svg class="cartography" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"
+             style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
           <defs>
             <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
               <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#7a5528" flood-opacity="0.18"/>
@@ -437,80 +434,63 @@
           <path d="M-40 280 C200 240 320 360 520 300 C680 252 740 150 900 185 C1090 225 1180 105 1380 135 C1520 158 1560 240 1640 210"
                 fill="none" stroke="#a08040" stroke-width="2" opacity="0.16"/>
 
-          <!-- Río -->
           <path d="M1500 0 C1380 160 1260 200 1120 340 C980 476 900 540 760 640 C620 738 500 780 340 900"
-                fill="none" stroke="url(#river)" stroke-width="40" opacity="0.40"/>
+                fill="none" stroke="url(#river)" stroke-width="40" opacity="0.35"/>
           <path d="M1500 0 C1380 160 1260 200 1120 340 C980 476 900 540 760 640 C620 738 500 780 340 900"
-                fill="none" stroke="#d8f0ff" stroke-width="4" opacity="0.25"/>
+                fill="none" stroke="#d8f0ff" stroke-width="4" opacity="0.22"/>
 
           <rect width="1600" height="900" fill="url(#grain)"/>
 
-          <!-- Montañas noroeste -->
-          <g filter="url(#softShadow)" opacity="0.82">
-            <path d="M120 130 L195 290 L44 290 Z"  fill="#a09070"/>
-            <path d="M210 100 L298 310 L118 310 Z" fill="#907e62"/>
-            <path d="M315 160 L388 318 L228 318 Z" fill="#a89870"/>
-            <path d="M120 130 L142 184 L98 184 Z"  fill="#f0ead8" opacity="0.5"/>
-            <path d="M210 100 L238 160 L182 160 Z" fill="#f0ead8" opacity="0.48"/>
+          <g filter="url(#softShadow)" opacity="0.78">
+            <path d="M80 80 L155 240 L10 240 Z"  fill="#a09070"/>
+            <path d="M170 55 L258 265 L78 265 Z" fill="#907e62"/>
+            <path d="M270 120 L343 278 L183 278 Z" fill="#a89870"/>
+            <path d="M80 80 L102 134 L58 134 Z"  fill="#f0ead8" opacity="0.5"/>
+            <path d="M170 55 L198 115 L142 115 Z" fill="#f0ead8" opacity="0.48"/>
           </g>
 
-          <!-- Montañas sureste -->
-          <g filter="url(#softShadow)" opacity="0.75">
-            <path d="M1180 700 L1260 868 L1088 868 Z" fill="#988060"/>
-            <path d="M1280 660 L1374 898 L1170 898 Z" fill="#a88a68"/>
-            <path d="M1380 730 L1458 900 L1278 900 Z" fill="#907060"/>
+          <g filter="url(#softShadow)" opacity="0.7">
+            <path d="M1220 700 L1300 868 L1128 868 Z" fill="#988060"/>
+            <path d="M1320 660 L1414 898 L1210 898 Z" fill="#a88a68"/>
+            <path d="M1420 730 L1498 900 L1318 900 Z" fill="#907060"/>
           </g>
 
-          <!-- Bosques -->
-          <g opacity="0.7">
-            <path d="M680 610 C718 545 780 542 814 608 C768 574 724 576 680 610 Z" fill="#4a7250"/>
-            <path d="M648 658 C738 578 858 594 918 666 C824 626 722 622 648 658 Z" fill="#5a8258"/>
-            <path d="M400 250 C458 168 578 176 634 262 C562 212 470 212 400 250 Z" fill="#4e7855"/>
-            <path d="M352 304 C454 224 596 232 690 320 C576 276 452 276 352 304 Z" fill="#5a8860"/>
-          </g>
-
-          <!-- Pinos -->
-          <g opacity="0.58">
-            <path d="M706 636 l18 -58 l18 58 Z" fill="#3a6040"/>
-            <path d="M755 636 l20 -70 l22 70 Z" fill="#436848"/>
-            <path d="M802 640 l19 -60 l22 60 Z" fill="#3a6040"/>
-            <path d="M436 282 l22 -78 l25 78 Z" fill="#3e6845"/>
-            <path d="M492 290 l27 -88 l27 88 Z" fill="#4a7852"/>
-            <path d="M558 284 l24 -82 l28 82 Z" fill="#3e6845"/>
+          <g opacity="0.65">
+            <path d="M620 580 C658 515 720 512 754 578 C708 544 664 546 620 580 Z" fill="#4a7250"/>
+            <path d="M588 628 C678 548 798 564 858 636 C764 596 662 592 588 628 Z" fill="#5a8258"/>
           </g>
         </svg>
 
-        <!-- Caminos -->
-        <svg class="paths" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M260 420 C420 370 540 390 680 440 C820 490 920 560 1040 540"
+        <!-- Caminos entre territorios -->
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true"
+             style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;">
+          <!-- Misiones → Biblioteca -->
+          <path d="M608 522 C760 440 900 360 1120 270"
                 fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.38"/>
-          <path d="M680 440 C700 560 730 640 780 700 C830 760 920 790 1010 800"
+          <!-- Misiones → Desafío -->
+          <path d="M608 522 C500 580 420 640 352 684"
                 fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.32"/>
-          <path d="M260 420 C270 540 300 620 340 700 C380 778 440 810 520 830"
-                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.28"/>
-          <path d="M1040 540 C1100 460 1160 400 1260 360"
-                fill="none" stroke="#9a7040" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 30" opacity="0.28"/>
         </svg>
 
-        <div class="territory-layer" id="territoryLayer" aria-label="Territorios disponibles"></div>
-        <div class="legend" aria-label="Leyenda">
+        <div class="territory-layer" id="territoryLayer" aria-label="Territorios del subreino"></div>
+
+        <div class="legend" aria-label="Leyenda" style="position:absolute;bottom:1.2rem;right:1.2rem;font-family:var(--font-title);font-size:clamp(0.48rem,1vw,0.62rem);color:var(--ink-mid);letter-spacing:0.08em;display:flex;flex-direction:column;gap:0.3rem;text-align:right;">
           <span><strong>Disponible</strong> — tocá para ingresar</span>
-          <span style="opacity:.65">— — Próximamente</span>
         </div>
-        <div class="compass" aria-hidden="true"></div>
+        <div class="compass" aria-hidden="true" style="position:absolute;bottom:1.2rem;left:1.5rem;width:2rem;height:2rem;border:1.5px solid var(--border-gold);border-radius:50%;display:grid;place-items:center;font-size:0.7rem;color:var(--amber);font-family:var(--font-title);">N</div>
 
       </div>
     </section>
 
-    <nav class="back-row" aria-label="Volver al portal">
-      <a class="btn-all-kingdoms" href="../index.html">&#8592; Todos los reinos</a>
+    <nav class="back-row" aria-label="Volver al reino">
+      <a class="btn-back-kingdom" href="../index.html">&#8592; Volver al Reino del Álgebra y las Funciones</a>
     </nav>
 
     <p class="footer-note">Reinos Matemáticos &middot; Crónicas de los Exploradores de 8.º &middot; Liceo de Médanos</p>
   </main>
 </div>
 
-<!-- Modal detalle (Prólogo, Bitácora) -->
+<!-- Modal detalle -->
 <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true"
      aria-labelledby="modalTitle" aria-describedby="modalDescription">
   <article class="modal">
@@ -526,116 +506,153 @@
   </article>
 </div>
 
+<!-- Modal Misiones -->
+<div class="modal-backdrop" id="modalMisiones" role="dialog" aria-modal="true"
+     aria-labelledby="misionesTitle" aria-describedby="misionesDesc">
+  <article class="modal modal-misiones">
+    <button class="modal-close" type="button" id="misionesClose" aria-label="Cerrar misiones">×</button>
+    <h2 id="misionesTitle">Misiones del Explorador</h2>
+    <span class="modal-tipo">Práctica · 6 misiones disponibles</span>
+    <p class="modal-intro" id="misionesDesc">Seleccioná una misión para acceder a la ficha.</p>
+    <div class="modal-rule" aria-hidden="true"></div>
+
+    <ol class="mission-list" aria-label="Lista de misiones">
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión I · A-01</span>
+          <span class="mission-name">Las letras que ya conocíamos</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-01/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión II · A-02</span>
+          <span class="mission-name">Una escritura para cualquier figura</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-02/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión III · A-03</span>
+          <span class="mission-name">El intruso de las expresiones <span style="font-size:.6rem;color:var(--amber);font-family:var(--font-title);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem;">Deberes</span></span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-03/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión IV · A-04</span>
+          <span class="mission-name">Expresiones en acción</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-04/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión V · A-05</span>
+          <span class="mission-name">La tarifa del taxi</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-05/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item">
+        <div class="mission-info">
+          <span class="mission-num">Misión VI · A-06</span>
+          <span class="mission-name">Perímetros con letras</span>
+        </div>
+        <div class="mission-actions">
+          <a class="btn-mission" href="../misiones/mision-06/index.html" target="_blank" rel="noopener">Ver ficha</a>
+        </div>
+      </li>
+      <li class="mission-item locked" aria-label="Mini control bloqueado">
+        <div class="mission-info">
+          <span class="mission-num">MC-S6</span>
+          <span class="mission-name">Mini control del territorio</span>
+        </div>
+        <div class="mission-actions">
+          <span class="locked-tag">🔒 Se habilita después de la corrección en clase</span>
+        </div>
+      </li>
+    </ol>
+
+    <div style="margin-top:1.5rem;">
+      <button class="btn-back-map" type="button" id="misionesBackBtn">Volver al mapa</button>
+    </div>
+  </article>
+</div>
+
 <script>
   const territorios = [
     {
-      id: "prologo",
-      nombre: "Prólogo del Reino",
-      icono: "📜",
-      tipo: "Introducción · Todo el Reino",
-      descripcion: "La historia de una palabra árabe que viajó más de mil años hasta llegar a tu cuaderno. Este prólogo es el punto de partida de todo el Reino — compartido por todas las secuencias.",
-      boton: "Leer la Crónica",
-      enlace: "prologo/index.html",
-      nuevaPestana: false,
-      bloqueado: false,
-      posicion: {
-        desktop: { x: "16%", y: "42%" },
-        mobile:  { x: "26%", y: "22%" }
-      },
-      recursos: [{ etiqueta: "Crónica narrativa · compartida por todo el Reino", tipo: "Texto" }]
-    },
-    {
-      id: "bitacora",
-      nombre: "Bitácora del Explorador",
-      icono: "📓",
-      tipo: "Registro · Todo el Reino",
-      descripcion: "En este reino, tu bitácora es tu cuadernola de clase. Ahí registrás lo que explorás, lo que aprendés y lo que te preguntás en cada subreino. No hay sección digital — el registro de exploración lo hacés en papel.",
+      id: "misiones",
+      nombre: "Misiones del Explorador",
+      icono: "🧪",
+      tipo: "Práctica · Subreino 1",
+      descripcion: "Seis misiones sobre expresiones algebraicas: variables, patrones, lenguaje algebraico, monomios y términos semejantes.",
       boton: null,
       enlace: null,
       nuevaPestana: false,
+      esMisiones: true,
       bloqueado: false,
       posicion: {
-        desktop: { x: "78%", y: "68%" },
-        mobile:  { x: "72%", y: "72%" }
-      },
-      recursos: []
-    },
-    {
-      id: "s1",
-      nombre: "El Código de las Letras",
-      icono: "🔤",
-      tipo: "Subreino 1 · Expresiones Algebraicas",
-      descripcion: "Variables, expresiones algebraicas, lenguaje algebraico, monomios y términos semejantes. Ingresá al subreino para acceder a las Misiones, la Biblioteca y el Desafío Final.",
-      boton: "Entrar al Subreino 1",
-      enlace: "s6-codigo-letras/index.html",
-      nuevaPestana: false,
-      bloqueado: false,
-      posicion: {
-        desktop: { x: "44%", y: "56%" },
+        desktop: { x: "38%", y: "58%" },
         mobile:  { x: "50%", y: "52%" }
       },
-      recursos: [
-        { etiqueta: "6 Misiones · Biblioteca (4 lecciones) · Desafío Final", tipo: "Subreino" }
-      ]
-    },
-    {
-      id: "s7",
-      nombre: "El Equilibrio Oculto",
-      icono: "⚖️",
-      tipo: "Subreino 2 · Próximamente",
-      descripcion: "Ecuaciones y relaciones de equivalencia. El próximo subreino del Reino del Álgebra y las Funciones. Se habilitará durante el año.",
-      boton: null,
-      enlace: null,
-      nuevaPestana: false,
-      bloqueado: true,
-      posicion: {
-        desktop: { x: "50%", y: "18%" },
-        mobile:  { x: "50%", y: "14%" }
-      },
       recursos: []
     },
     {
-      id: "s8",
-      nombre: "Subreino 3",
-      icono: "📈",
-      tipo: "Subreino 3 · Próximamente",
-      descripcion: "Función lineal y el applet de la Fábrica de Pinturas. Se habilitará durante el año.",
-      boton: null,
-      enlace: null,
+      id: "biblioteca",
+      nombre: "Biblioteca del Explorador",
+      icono: "📖",
+      tipo: "Material teórico · Subreino 1",
+      descripcion: "Cuatro lecciones interactivas: variables y expresiones, lenguaje algebraico, términos semejantes, y monomios con PDF descargable.",
+      boton: "Ingresar a la Biblioteca",
+      enlace: "../biblioteca/index.html",
       nuevaPestana: false,
-      bloqueado: true,
+      esMisiones: false,
+      bloqueado: false,
       posicion: {
-        desktop: { x: "82%", y: "44%" },
-        mobile:  { x: "80%", y: "52%" }
+        desktop: { x: "70%", y: "28%" },
+        mobile:  { x: "72%", y: "32%" }
       },
-      recursos: []
+      recursos: [{ etiqueta: "4 lecciones interactivas", tipo: "HTML" }]
     },
     {
-      id: "s9",
-      nombre: "Subreino 4",
-      icono: "📐",
-      tipo: "Subreino 4 · Próximamente",
-      descripcion: "Función afín. Se habilitará durante el año.",
-      boton: null,
-      enlace: null,
+      id: "cierre",
+      nombre: "Desafío Final",
+      icono: "🏆",
+      tipo: "Evaluación · Subreino 1",
+      descripcion: "Mini control de cierre y resolución explicada. Se habilita después de la corrección en clase.",
+      boton: "Ir al Desafío Final",
+      enlace: "../cierre/index.html",
       nuevaPestana: false,
-      bloqueado: true,
+      esMisiones: false,
+      bloqueado: false,
       posicion: {
-        desktop: { x: "24%", y: "78%" },
-        mobile:  { x: "28%", y: "82%" }
+        desktop: { x: "22%", y: "74%" },
+        mobile:  { x: "26%", y: "76%" }
       },
-      recursos: []
+      recursos: [{ etiqueta: "MC-S6 + Resolución explicada", tipo: "Evaluación" }]
     }
   ];
 
   const layer         = document.getElementById('territoryLayer');
   const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalMisiones = document.getElementById('modalMisiones');
   const modalTitle    = document.getElementById('modalTitle');
   const modalTipo     = document.getElementById('modalTipo');
   const modalDesc     = document.getElementById('modalDescription');
   const resourceList  = document.getElementById('resourceList');
   const modalActions  = document.getElementById('modalActions');
   const modalClose    = document.getElementById('modalClose');
+  const misionesClose = document.getElementById('misionesClose');
   let ultimoFoco = null;
 
   function getPosition(t) {
@@ -669,6 +686,13 @@
     if (t.bloqueado) return;
     ultimoFoco = document.activeElement;
 
+    if (t.esMisiones) {
+      modalMisiones.classList.add('open');
+      misionesClose.focus();
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+
     modalTitle.textContent = t.nombre;
     modalTipo.textContent  = t.tipo;
     modalDesc.textContent  = t.descripcion;
@@ -692,23 +716,30 @@
     document.body.style.overflow = 'hidden';
   }
 
-  function cerrarModal() { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarModal()    { modalBackdrop.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
+  function cerrarMisiones() { modalMisiones.classList.remove('open'); document.body.style.overflow = ''; if (ultimoFoco) ultimoFoco.focus(); }
 
   modalClose.addEventListener('click', cerrarModal);
   document.getElementById('modalBackBtn').addEventListener('click', cerrarModal);
+  misionesClose.addEventListener('click', cerrarMisiones);
+  document.getElementById('misionesBackBtn').addEventListener('click', cerrarMisiones);
   modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) cerrarModal(); });
+  modalMisiones.addEventListener('click', e => { if (e.target === modalMisiones) cerrarMisiones(); });
 
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modalBackdrop.classList.contains('open')) cerrarModal();
+    if (e.key !== 'Escape') return;
+    if (modalBackdrop.classList.contains('open')) cerrarModal();
+    if (modalMisiones.classList.contains('open')) cerrarMisiones();
   });
 
-  function trapFocus(e) {
-    const els = Array.from(modalBackdrop.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
+  function trapFocus(backdrop, e) {
+    const els = Array.from(backdrop.querySelectorAll('a[href],button,[tabindex]:not([tabindex="-1"])')).filter(el => !el.disabled);
     if (!els.length) return;
     if (e.shiftKey && document.activeElement === els[0])                  { e.preventDefault(); els[els.length-1].focus(); }
     else if (!e.shiftKey && document.activeElement === els[els.length-1]) { e.preventDefault(); els[0].focus(); }
   }
-  modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(e); });
+  modalBackdrop.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalBackdrop, e); });
+  modalMisiones.addEventListener('keydown', e => { if (e.key === 'Tab') trapFocus(modalMisiones, e); });
 
   let resizeTimer;
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });

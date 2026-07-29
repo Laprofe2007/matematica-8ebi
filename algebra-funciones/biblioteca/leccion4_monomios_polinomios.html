@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección 4 · Monomios y definiciones clave</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#0f1b35;color:#eee;min-height:100vh}
+  header{background:linear-gradient(135deg,#1F3864,#2E75B6);padding:28px 24px 20px;text-align:center}
+  header h1{font-size:1.4rem;font-weight:800;color:#fff;letter-spacing:0.5px}
+  header p{color:#adc8e6;font-size:0.85rem;margin-top:6px}
+  .container{max-width:680px;margin:0 auto;padding:24px 16px 48px}
+
+  .intro-block{background:#1a2e52;border-radius:12px;padding:16px 20px;margin-bottom:28px;border-left:4px solid #2E75B6}
+  .intro-block p{font-size:0.88rem;color:#adc8e6;line-height:1.6}
+  .intro-block cite{display:block;margin-top:10px;font-size:0.78rem;color:#6b8ab0;font-style:italic}
+
+  .def-card{background:#1a2e52;border-radius:12px;padding:20px 22px;margin-bottom:16px;border-left:4px solid #FFD700}
+  .def-num{font-size:0.72rem;font-weight:700;color:#FFD700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .def-term{font-size:1.08rem;font-weight:800;color:#dde8f5;margin-bottom:10px}
+  .def-body{font-size:0.9rem;color:#c8d8f0;line-height:1.65;margin-bottom:12px}
+  .def-body strong{color:#fff}
+  .def-example{background:#0f1b35;border-radius:8px;padding:10px 14px;font-size:0.86rem;color:#adc8e6;border:1px solid #2a3f6b;line-height:1.5}
+  .def-example strong{color:#FFD700}
+  .def-example em{color:#f0c070;font-style:normal;font-weight:700}
+
+  .download-section{margin-top:32px;background:#132540;border-radius:12px;padding:22px 20px;text-align:center;border:1px solid #2a3f6b}
+  .download-section p{font-size:0.88rem;color:#adc8e6;margin-bottom:16px;line-height:1.5}
+  .btn-download{display:inline-flex;align-items:center;gap:8px;background:#2E75B6;color:#fff;font-weight:700;font-size:0.9rem;text-decoration:none;padding:12px 26px;border-radius:8px;box-shadow:0 4px 14px rgba(46,117,182,0.35);transition:background .2s}
+  .btn-download:hover{background:#1F3864}
+
+  .back-links{margin-top:28px;display:flex;justify-content:space-between;font-size:0.85rem;gap:1rem;flex-wrap:wrap}
+  .back-links a{color:#2E75B6;text-decoration:none;font-weight:700}
+  .back-links a:hover{text-decoration:underline}
+
+  footer{margin-top:36px;padding:14px;text-align:center;font-size:0.75rem;color:#4a6890;border-top:1px solid #1a2e52}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lección 4 &middot; Monomios y definiciones clave</h1>
+  <p>S6 Expresiones Algebraicas &middot; Matemática 8.&deg; EBI &middot; Reino Matemático 2026</p>
+</header>
+<div class="container">
+
+  <div class="intro-block">
+    <p>Estas definiciones forman el vocabulario básico del lenguaje algebraico. Leelas con atención; vas a necesitarlas para reconocer y operar con expresiones algebraicas.</p>
+    <cite>Fuente: Ochoviet, C. y Vitabar, F. <em>Matemática 2</em>. LOSA Ediciones, cap. 1.</cite>
+  </div>
+
+  <div class="def-card">
+    <div class="def-num">Definición 1</div>
+    <div class="def-term">Monomio</div>
+    <p class="def-body">Expresión algebraica formada por el producto de un <strong>coeficiente</strong> (un número) y una <strong>parte literal</strong> (una letra elevada a un exponente). Si el coeficiente es 1, se omite escribirlo.</p>
+    <div class="def-example">Ej.: en <strong>5a³</strong>, el coeficiente es <strong>5</strong> y la parte literal es <strong>a³</strong>.</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-num">Definición 2</div>
+    <div class="def-term">Signo y coeficiente</div>
+    <p class="def-body">El signo (<strong>+</strong> o <strong>−</strong>) que antecede a un término queda incorporado al coeficiente; no se separan. Son una sola unidad.</p>
+    <div class="def-example">Ej.: en <strong>4x² − 6x + 3</strong>, el término <strong>−6x</strong> tiene coeficiente <em>−6</em> (no 6).</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-num">Definición 3</div>
+    <div class="def-term">Monomios semejantes</div>
+    <p class="def-body">Dos o más monomios son <strong>semejantes</strong> cuando tienen la <strong>misma parte literal</strong> (misma variable y mismo exponente). No alcanza con que coincida solo el exponente.</p>
+    <div class="def-example">
+      <strong>3x³</strong> y <strong>4x³</strong> son semejantes (misma letra, mismo exponente).<br>
+      <strong>−7m⁴</strong> y <strong>1,2a⁴</strong> <em>no</em> son semejantes (diferente letra).
+    </div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-num">Definición 4</div>
+    <div class="def-term">Reducir monomios semejantes</div>
+    <p class="def-body">Sumar o restar monomios semejantes extrayendo como factor común la parte literal. El resultado es un monomio del mismo tipo.</p>
+    <div class="def-example">Ej.: <strong>3x³ + 4x³ = 7x³</strong></div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-num">Definición 5</div>
+    <div class="def-term">Valor numérico</div>
+    <p class="def-body">El número que se obtiene al <strong>sustituir la variable</strong> de una expresión algebraica por un valor determinado y resolver las operaciones indicadas.</p>
+    <div class="def-example">Ej.: si <strong>x = 1</strong>, el polinomio <strong>6x + 1</strong> toma valor numérico <em>7</em>.</div>
+  </div>
+
+  <div class="download-section">
+    <p>También podés ver o imprimir estas definiciones en PDF.</p>
+    <a class="btn-download" href="actividad4_definiciones.pdf" target="_blank" rel="noopener">↓ Ver / Descargar PDF</a>
+  </div>
+
+  <div class="back-links">
+    <a href="index.html">&larr; Volver a la Biblioteca</a>
+    <a href="../index.html">&larr; Mapa del reino</a>
+  </div>
+
+  <footer>Reinos Matemáticos &middot; Crónicas de los Exploradores de 8.&deg; &middot; Liceo de Médanos 2026</footer>
+</div>
+</body>
+</html>

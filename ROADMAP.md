@@ -53,22 +53,41 @@ Pendientes posibles:
 - Revisar periodicamente peso de PDFs e imagenes.
 - Habilitar o ajustar evaluaciones segun avance del curso.
 
+### Reino del Algebra y las Funciones
+
+Estado: publicado y funcional (julio 2026).
+
+Incluye:
+
+- Prologo narrativo: cronica "El misterio del numero sin nombre".
+- Biblioteca: 4 lecciones interactivas (variables y expresiones, lenguaje algebraico, terminos semejantes, monomios y definiciones clave). Leccion 4 incluye PDF descargable.
+- Misiones I a VI: fichas A-01 (PNG) y A-02 a A-06 (PDF con visor embed + descarga). Mision III rotulada como Deberes.
+- Cierre: gateway `cierre/index.html` con dos toggles independientes:
+  - `MC_HABILITADO = false` — controla el acceso al mini control interactivo.
+  - `RESOLUCION_HABILITADA = false` — controla la resolucion explicada (HTML + PDF descargable).
+- Mapa del reino: 5 territorios activos + 3 placeholders bloqueados (S7, S8, S9) para secuencias futuras.
+
+Pendientes:
+
+- Habilitar MC-S6: editar `MC_HABILITADO = false` → `true` y hacer push.
+- Habilitar resolucion: editar `RESOLUCION_HABILITADA = false` → `true` y hacer push (momento posterior).
+- Agregar bitacora PDF cuando este lista (carpeta `bitacora/` existe, sin contenido aun).
+- Rellenar contenido de S7, S8, S9 cuando corresponda (territorios ya planeados en el mapa).
+
 ## Proximas etapas sugeridas
 
-1. Consolidar Proporciones.
-   - Confirmar version definitiva del applet de Fabrica de Pintura.
-   - Mantener activos solo los enlaces visibles para estudiantes.
+1. Habilitar MC-S6 en Algebra y Funciones cuando corresponda.
+   - Editar `algebra-funciones/cierre/index.html`: cambiar `MC_HABILITADO = false` por `true`.
+   - Commit y push. Sin mas cambios necesarios.
 
-2. Consolidar Probabilidad.
-   - Revisar actividades en CREA contra los enlaces de GitHub Pages.
-   - Mantener simuladores visibles y faciles de abrir.
+2. Agregar bitacora al Reino de Algebra y Funciones.
+   - Crear `algebra-funciones/bitacora/index.html` con la pregunta guia y el PDF cuando este listo.
 
-3. Crear nuevos reinos.
-   - Definir tema.
+3. Crear nuevos reinos (Geometria, Funciones Lineales, etc.).
    - Crear carpeta propia.
-   - Crear `index.html`.
-   - Crear `Actividades/`.
-   - Agregar tarjeta en portal raiz.
+   - Crear `index.html` con el mapa del reino.
+   - Agregar tarjeta en portal raiz `index.html`.
+   - El applet `proporciones/Fabrica_Pintura_Applet_v4.html` (solo en PC local) es candidato para el reino de Funciones Lineales como ejemplo de recta y = kx.
 
 ## Convenciones de trabajo
 

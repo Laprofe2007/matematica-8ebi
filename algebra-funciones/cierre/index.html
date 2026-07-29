@@ -51,7 +51,7 @@
     }
     .page-header p { font-size: 0.88rem; font-style: italic; color: var(--ink-light); }
 
-    /* Tarjeta del mini control */
+    /* Tarjeta de sección */
     .mc-card {
       background: #fff8ec;
       border: 1px solid rgba(138,94,20,0.32);
@@ -59,7 +59,7 @@
       padding: 2rem 1.75rem;
       box-shadow: 0 2px 14px rgba(42,28,18,0.08);
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     .mc-icon { font-size: 2.4rem; line-height: 1; margin-bottom: 0.75rem; }
     .mc-titulo {
@@ -72,7 +72,7 @@
       line-height: 1.6; margin-bottom: 1.5rem;
     }
 
-    /* Botón habilitado */
+    /* Botón habilitado principal */
     .btn-mc-activo {
       display: inline-flex; align-items: center; gap: .5rem;
       padding: .65rem 1.5rem;
@@ -84,6 +84,22 @@
       transition: background .2s;
     }
     .btn-mc-activo:hover { background: var(--gold); }
+
+    /* Botón secundario (descarga PDF) */
+    .btn-mc-pdf {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .65rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(138,94,20,0.55);
+      border-radius: 6px;
+      font-family: var(--font-title); font-size: .72rem;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; cursor: pointer;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-mc-pdf:hover { background: rgba(138,94,20,0.08); border-color: var(--amber); }
+
+    .btn-group { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
 
     /* Botón bloqueado */
     .btn-mc-bloqueado {
@@ -136,6 +152,7 @@
       <p>Mini control de expresiones algebraicas.</p>
     </header>
 
+    <!-- Tarjeta MC-S6 -->
     <div class="mc-card" id="mcCard">
       <div class="mc-icon" aria-hidden="true">🏆</div>
       <p class="mc-titulo">MC-S6: Mini control del territorio</p>
@@ -146,6 +163,17 @@
       <div id="mcAccion"></div>
     </div>
 
+    <!-- Tarjeta Resolución -->
+    <div class="mc-card" id="resolCard">
+      <div class="mc-icon" aria-hidden="true">📝</div>
+      <p class="mc-titulo">Resolución explicada</p>
+      <p class="mc-desc">
+        Versión comentada del mini control con procedimientos y justificaciones.<br>
+        Se habilita después de la corrección del mini control.
+      </p>
+      <div id="resolAccion"></div>
+    </div>
+
     <nav class="nav-inferior" aria-label="Navegación de regreso">
       <a class="btn-volver" href="../index.html">← Volver al mapa del reino</a>
       <a class="btn-volver" href="../../index.html">← Todos los reinos</a>
@@ -154,8 +182,14 @@
   </div>
 
   <script>
+    // ── Habilitadores ──────────────────────────────────────────────
     // Para habilitar el mini control: cambiá false por true y hacé push.
     const MC_HABILITADO = false;
+
+    // Para habilitar la resolución (momento posterior, después de corregir):
+    // cambiá false por true y hacé push. Son independientes.
+    const RESOLUCION_HABILITADA = false;
+    // ──────────────────────────────────────────────────────────────
 
     const accion = document.getElementById('mcAccion');
     if (MC_HABILITADO) {
@@ -164,6 +198,19 @@
       accion.innerHTML = `
         <span class="btn-mc-bloqueado" aria-disabled="true">🔒 No disponible aún</span>
         <p class="aviso-bloqueo">Se habilita después de la corrección en clase.</p>`;
+    }
+
+    const resolAccion = document.getElementById('resolAccion');
+    if (RESOLUCION_HABILITADA) {
+      resolAccion.innerHTML = `
+        <div class="btn-group">
+          <a class="btn-mc-activo" href="mc_s6_resolucion_explicada.html">Ver resolución →</a>
+          <a class="btn-mc-pdf" href="mc_s6_resolucion_explicada.pdf" download>↓ Descargar PDF</a>
+        </div>`;
+    } else {
+      resolAccion.innerHTML = `
+        <span class="btn-mc-bloqueado" aria-disabled="true">🔒 No disponible aún</span>
+        <p class="aviso-bloqueo">Se habilita después de la corrección del mini control.</p>`;
     }
   </script>
 </body>

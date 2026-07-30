@@ -745,6 +745,14 @@
   window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(renderTerritorios, 200); });
 
   renderTerritorios();
+
+  if (window.location.hash === '#misiones') {
+    history.replaceState(null, '', window.location.pathname);
+    setTimeout(() => {
+      const idx = territorios.findIndex(t => t.id === 'misiones');
+      if (idx >= 0) abrirTerritorio(idx);
+    }, 200);
+  }
 </script>
 </body>
 </html>

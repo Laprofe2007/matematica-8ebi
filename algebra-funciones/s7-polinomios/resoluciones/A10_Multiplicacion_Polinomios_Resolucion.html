@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-10 · Multiplicación de polinomios — Resolución explicada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:#f4f2fb;color:#2c1a4d;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#5b2a86,#8e44ad);border-radius:16px;padding:26px 24px;color:#fff;margin-bottom:22px}
+  header .code{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  header h1{font-size:1.35rem;font-weight:900}
+  header p{font-size:.85rem;opacity:.9;margin-top:6px}
+  .section-title{font-weight:900;color:#5b2a86;font-size:1.02rem;margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
+  .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.92rem}
+  .note.warn{background:#fdf2e3;border-left-color:#e07b1f}
+  .note.info{background:#e7f3fb;border-left-color:#2680c2}
+  .note b{color:#5b2a86}
+  .note.warn b{color:#c0621a}
+  .panel{--accent:#8e44ad;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
+  .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .panel-num{background:var(--accent);color:#fff;font-weight:900;font-size:.85rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .panel-expr{font-weight:700;font-size:.98rem}
+  .eq-box{background:#241638;color:#f1e9fb;border-radius:8px;padding:10px 14px;font-weight:700;overflow-x:auto;white-space:nowrap;font-size:clamp(.82rem,2.2vw,1rem);margin:4px 0}
+  .eq-box .arrow{color:#c9a6ea;margin:0 8px}
+  .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:8px 12px;margin-top:8px;font-weight:800;color:#1e8449;font-size:.9rem}
+  .tabla{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:.88rem}
+  .tabla th{background:#5b2a86;color:#fff;padding:8px 10px;text-align:left}
+  .tabla td{padding:8px 10px;border-bottom:1px solid #e3d9f2}
+  .tabla tr:nth-child(even){background:#f8f5fd}
+  footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="code">A-10 · Secuencia 7 · Polinomios</div>
+  <h1>Multiplicación de polinomios — Resolución explicada</h1>
+  <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
+</header>
+
+<div class="section-title">Modelos resueltos en el libro (pág. 23)</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">Monomio × polinomio</div></div>
+  <div class="eq-box">2x(3x² − 5x − 9) <span class="arrow">=</span> 2x·3x² − 2x·5x − 2x·9 <span class="arrow">=</span> 6x³ − 10x² − 18x</div>
+  <div class="final-answer">Se aplica la propiedad distributiva: el monomio multiplica a cada término del polinomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">2</div><div class="panel-expr">Polinomio × polinomio</div></div>
+  <div class="eq-box">(−x+x²)(2x+3) <span class="arrow">=</span> −x(2x+3) + x²(2x+3) <span class="arrow">=</span> −2x²−3x+2x³+3x² <span class="arrow">=</span> 2x³ + x² − 3x</div>
+  <div class="final-answer">Cada término del primer polinomio multiplica a cada término del segundo; luego se reducen los semejantes.</div>
+</div>
+
+<div class="section-title">Problema de la piscina (pág. 23)</div>
+<div class="note">Piscina de profundidad 2,2 m; largo = x+2, ancho = x.</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">a</div><div class="panel-expr">¿Qué dimensiones (largo; ancho; profundidad) se ajustan al modelo largo = ancho + 2?</div></div>
+  <table class="tabla">
+    <tr><th>Opción</th><th>Largo; ancho; prof.</th><th>¿Cumple largo = ancho+2?</th></tr>
+    <tr><td>i.</td><td>8; 6; 2,2</td><td>Sí (6+2=8)</td></tr>
+    <tr><td>ii.</td><td>5,3; 3,3; 2,2</td><td>Sí (3,3+2=5,3)</td></tr>
+    <tr><td>iii.</td><td>6,4; 6,2; 2,2</td><td>No (6,2+2=8,2≠6,4)</td></tr>
+    <tr><td>iv.</td><td>4,2; 2,2; 2,2</td><td>Sí (2,2+2=4,2)</td></tr>
+  </table>
+  <div class="final-answer">Cumplen el modelo: i, ii y iv. No cumple: iii.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">b</div><div class="panel-expr">Fórmula del volumen en función de x</div></div>
+  <div class="eq-box">V = largo · ancho · profundidad = (x+2)·x·2,2 <span class="arrow">=</span> 2,2x² + 4,4x</div>
+  <div class="final-answer">V(x) = 2,2x² + 4,4x</div>
+</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">c</div><div class="panel-expr">Se usaron 44 litros de pintura (rendimiento 5 m²/l) para las 4 paredes laterales. ¿Qué valor de x se usó?</div></div>
+  <div class="eq-box">Área a pintar: 44 · 5 = 220 m²</div>
+  <div class="eq-box">Perímetro de la base: 2[(x+2)+x] = 4x+4 &nbsp;→&nbsp; Área lateral: (4x+4)·2,2 = 8,8x+8,8</div>
+  <div class="eq-box">8,8x + 8,8 = 220 <span class="arrow">→</span> 8,8x = 211,2 <span class="arrow">→</span> x = 24</div>
+  <div class="final-answer">x = 24 m (largo = 26 m, ancho = 24 m)</div>
+</div>
+
+<div class="note warn">
+  <b>Sobre el juego de fichas hexagonales (pág. 20-21):</b> es un material recortable de manipulación en pareja (encajar fichas donde el monomio rojo es el producto de los dos negros). No lleva resolución escrita porque cada partida genera un tablero distinto — se corrige en el momento verificando cada producto con la clase.
+</div>
+
+<div class="note info">
+  <b>Origen:</b> Ochoviet, C. y Vitabar, F. (2014). <i>Matemática 2</i>. Losa Ediciones, pág. 20-23 (Multiplicación de polinomios). Adaptación de resolución explicada: Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos.
+</div>
+
+<footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · A-10</footer>
+</div>
+</body>
+</html>

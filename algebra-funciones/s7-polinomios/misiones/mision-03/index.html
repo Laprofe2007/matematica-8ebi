@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-09 Refuerzo: suma y resta | Álgebra y Funciones</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #2a1c12; --ink-mid: #5c3820; --gold: #8a5e14; --amber: #7a4f0a; --font-title: "Cinzel","Georgia",serif; --font-body: "Libre Baskerville","Georgia",serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; font-family: var(--font-body); color: var(--ink); background: #fdf5e0; }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.045; background-image: linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+    .shell { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: .75rem; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-title); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .breadcrumb a { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb .sep { color: rgba(42,28,18,.35); }
+    .breadcrumb .curr { color: var(--ink); opacity: .45; }
+    .mision-header { margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(138,94,20,0.2); }
+    .mision-tag { display: inline-block; font-family: var(--font-title); font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .deberes-tag { font-size: 0.58rem; letter-spacing: 0.14em; color: var(--amber); background: rgba(138,94,20,.1); border: 1px solid rgba(138,94,20,.25); border-radius: 3px; padding: .15rem .45rem; margin-left: .5rem; vertical-align: middle; }
+    .mision-header h1 { font-family: var(--font-title); font-size: clamp(1.2rem, 4vw, 1.9rem); font-weight: 800; color: var(--amber); letter-spacing: 0.04em; line-height: 1.2; }
+    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); margin-bottom: 1.5rem; }
+    .ficha-wrap iframe { display: block; width: 100%; height: min(80vh, 900px); border: none; }
+    .acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn-descarga { display: inline-flex; align-items: center; gap: .45rem; padding: .58rem 1.25rem; background: var(--amber); color: #fff8ec; border: none; border-radius: 6px; font-family: var(--font-title); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s; }
+    .btn-descarga:hover { background: var(--gold); }
+    .btn-volver { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.2rem; background: rgba(138,94,20,.07); border: 1px solid rgba(138,94,20,.3); border-radius: 6px; font-family: var(--font-title); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s; }
+    .btn-volver:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.55); }
+    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Navegación">
+      <div class="breadcrumb">
+        <a href="../../../../index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <a href="../../../index.html">Álgebra y Funciones</a>
+        <span class="sep">/</span>
+        <a href="../../index.html#misiones">Misiones</a>
+        <span class="sep">/</span>
+        <span class="curr">Misión III</span>
+      </div>
+    </nav>
+    <header class="mision-header">
+      <span class="mision-tag">Misión III · A-09 <span class="deberes-tag">Deberes</span></span>
+      <h1>Refuerzo: suma y resta de polinomios</h1>
+    </header>
+    <div class="ficha-wrap">
+      <iframe src="A09_pag102_Deberes.pdf"
+              title="Ficha A-09: Refuerzo suma y resta">
+        <p style="padding:2rem;text-align:center;font-size:.88rem;color:#5c3820;">
+          Tu navegador no puede mostrar el PDF directamente.
+          <a href="A09_pag102_Deberes.pdf" target="_blank">Abrí la ficha en una nueva pestaña.</a>
+        </p>
+      </iframe>
+    </div>
+    <div class="acciones">
+      <a class="btn-descarga" href="A09_pag102_Deberes.pdf" download="A09_pag102_Deberes.pdf">↓ Descargar ficha</a>
+    </div>
+    <nav class="nav-inferior" aria-label="Navegación de regreso">
+      <a class="btn-volver" href="../../index.html#misiones">← Menú de misiones</a>
+      <a class="btn-volver" href="../../index.html">← Volver al subreino</a>
+    </nav>
+  </div>
+</body>
+</html>

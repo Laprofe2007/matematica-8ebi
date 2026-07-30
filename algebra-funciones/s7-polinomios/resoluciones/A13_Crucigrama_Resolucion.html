@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-13 · Crucigrama de cierre — Resolución explicada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:#f4f2fb;color:#2c1a4d;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#5b2a86,#8e44ad);border-radius:16px;padding:26px 24px;color:#fff;margin-bottom:22px}
+  header .code{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  header h1{font-size:1.35rem;font-weight:900}
+  header p{font-size:.85rem;opacity:.9;margin-top:6px}
+  .section-title{font-weight:900;color:#5b2a86;font-size:1.02rem;margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
+  .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.92rem}
+  .note.info{background:#e7f3fb;border-left-color:#2680c2}
+  .note b{color:#5b2a86}
+
+  .cw{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;max-width:340px;margin:0 auto 26px;background:#241638;padding:3px;border-radius:8px}
+  .cw .cell{background:#fff;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#5b2a86;border-radius:2px;position:relative}
+  .cw .cell.black{background:#241638}
+  .cw .cell.wide{font-size:.72rem}
+  .cw .lbl{position:absolute;top:2px;left:3px;font-size:.55rem;color:#a98fc4;font-weight:700}
+
+  .panel{--accent:#8e44ad;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
+  .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .panel-num{background:var(--accent);color:#fff;font-weight:900;font-size:.8rem;padding:3px 10px;border-radius:20px;flex-shrink:0}
+  .panel-expr{font-weight:700;font-size:.95rem}
+  .eq-box{background:#241638;color:#f1e9fb;border-radius:8px;padding:10px 14px;font-weight:700;overflow-x:auto;white-space:nowrap;font-size:clamp(.82rem,2.2vw,1rem);margin:4px 0}
+  .eq-box .arrow{color:#c9a6ea;margin:0 8px}
+  .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:8px 12px;margin-top:8px;font-weight:800;color:#1e8449;font-size:.9rem}
+  footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="code">A-13 · Secuencia 7 · Polinomios</div>
+  <h1>Crucigrama de cierre — Resolución explicada</h1>
+  <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
+</header>
+
+<div class="cw">
+  <div class="cell">1</div><div class="cell">2</div><div class="cell black"></div><div class="cell black"></div><div class="cell wide">5,5</div>
+  <div class="cell">0</div><div class="cell black"></div><div class="cell">−</div><div class="cell">2</div><div class="cell black"></div>
+  <div class="cell">4</div><div class="cell">3</div><div class="cell black"></div><div class="cell">5</div><div class="cell">9</div>
+  <div class="cell black"></div><div class="cell black"></div><div class="cell">2</div><div class="cell">6</div><div class="cell black"></div>
+  <div class="cell">1</div><div class="cell">2</div><div class="cell">1</div><div class="cell black"></div><div class="cell wide">4/7</div>
+</div>
+
+<div class="section-title">Horizontales</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">Una docena</div></div>
+  <div class="final-answer">12</div>
+</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">3</div><div class="panel-expr">2x − 11 = 0</div></div>
+  <div class="eq-box">2x = 11 <span class="arrow">→</span> x = 11/2</div>
+  <div class="final-answer">x = 5,5 (también se puede escribir como 11/2)</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">5</div><div class="panel-expr">x + 6 = 4</div></div>
+  <div class="eq-box">x = 4 − 6 <span class="arrow">→</span> x = −2</div>
+  <div class="final-answer">x = −2</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">7</div><div class="panel-expr">40 + 5 = x + 2</div></div>
+  <div class="eq-box">45 = x + 2 <span class="arrow">→</span> x = 43</div>
+  <div class="final-answer">x = 43</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">9</div><div class="panel-expr">El siguiente de 58</div></div>
+  <div class="final-answer">59</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">11</div><div class="panel-expr">Si le sumamos cuatro y dividimos el resultado entre 10, obtenemos el 3</div></div>
+  <div class="eq-box">(n + 4) ÷ 10 = 3 <span class="arrow">→</span> n + 4 = 30 <span class="arrow">→</span> n = 26</div>
+  <div class="final-answer">n = 26</div>
+</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">13</div><div class="panel-expr">Es un cuadrado perfecto</div></div>
+  <div class="eq-box">Debe terminar en 1 (por el cruce con la pista 11 vertical)</div>
+  <div class="final-answer">Respuesta usada en esta grilla: 121 (11²)</div>
+</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">16</div><div class="panel-expr">7x − 4 = 0</div></div>
+  <div class="eq-box">7x = 4 <span class="arrow">→</span> x = 4/7</div>
+  <div class="final-answer">x = 4/7 (también se puede escribir como 0,57 aproximadamente)</div>
+</div>
+
+<div class="section-title">Verticales</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">Sus cifras suman 5</div></div>
+  <div class="eq-box">Cruza con la pista 1 horizontal (empieza en 1) y con la pista 7 (termina en 4): 1 + ▢ + 4 = 5 <span class="arrow">→</span> ▢ = 0</div>
+  <div class="final-answer">104 (1+0+4=5)</div>
+</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">11</div><div class="panel-expr">x − 18 = 3</div></div>
+  <div class="eq-box">x = 3 + 18 <span class="arrow">→</span> x = 21</div>
+  <div class="final-answer">x = 21</div>
+</div>
+
+<div class="note">
+  <b>Sobre la pista 13 (cuadrado perfecto):</b> es una respuesta abierta, porque hay más de un número de tres cifras terminado en 1 que es un cuadrado perfecto. Algunos ejemplos: 121 (11²), 361 (19²), 441 (21²), 841 (29²) y 961 (31²). Cualquiera de estos es una respuesta válida para completar la grilla, siempre que respete que termina en 1.
+</div>
+
+<div class="note info">
+  <b>Recordatorio — ¿qué es un cuadrado perfecto?</b> Es un número que resulta de elevar al cuadrado un número entero. Por ejemplo, 121 es un cuadrado perfecto porque 11² = 11 × 11 = 121.
+</div>
+
+<div class="note info">
+  <b>Origen:</b> Ochoviet, C. y Vitabar, F. (2014). <i>Matemática 2</i>. Losa Ediciones, pág. 33. Adaptación de resolución explicada: Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos.
+</div>
+
+<footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · A-13</footer>
+</div>
+</body>
+</html>

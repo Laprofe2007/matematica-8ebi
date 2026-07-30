@@ -22,8 +22,11 @@
     .mision-tag { display: inline-block; font-family: var(--font-title); font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
     .deberes-tag { font-size: 0.58rem; letter-spacing: 0.14em; color: var(--amber); background: rgba(138,94,20,.1); border: 1px solid rgba(138,94,20,.25); border-radius: 3px; padding: .15rem .45rem; margin-left: .5rem; vertical-align: middle; }
     .mision-header h1 { font-family: var(--font-title); font-size: clamp(1.2rem, 4vw, 1.9rem); font-weight: 800; color: var(--amber); letter-spacing: 0.04em; line-height: 1.2; }
-    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); margin-bottom: 1.5rem; }
+    .fichas-grid { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); }
+    .ficha-label { font-family: var(--font-title); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-mid); padding: .5rem .75rem; border-bottom: 1px solid rgba(138,94,20,.12); background: rgba(253,245,224,.6); }
     .ficha-wrap iframe { display: block; width: 100%; height: min(80vh, 900px); border: none; }
+    .ficha-wrap img { display: block; width: 100%; height: auto; }
     .acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
     .btn-descarga { display: inline-flex; align-items: center; gap: .45rem; padding: .58rem 1.25rem; background: var(--amber); color: #fff8ec; border: none; border-radius: 6px; font-family: var(--font-title); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s; }
     .btn-descarga:hover { background: var(--gold); }
@@ -49,17 +52,27 @@
       <span class="mision-tag">Misión III · A-09 <span class="deberes-tag">Deberes</span></span>
       <h1>Refuerzo: suma y resta de polinomios</h1>
     </header>
-    <div class="ficha-wrap">
-      <iframe src="A09_pag102_Deberes.pdf"
-              title="Ficha A-09: Refuerzo suma y resta">
-        <p style="padding:2rem;text-align:center;font-size:.88rem;color:#5c3820;">
-          Tu navegador no puede mostrar el PDF directamente.
-          <a href="A09_pag102_Deberes.pdf" target="_blank">Abrí la ficha en una nueva pestaña.</a>
-        </p>
-      </iframe>
+    <div class="fichas-grid">
+      <div class="ficha-wrap">
+        <p class="ficha-label">Parte A — pág. 102 · Suma de polinomios</p>
+        <iframe src="A09_pag102_Deberes.pdf"
+                title="Ficha A-09 parte A: Suma de polinomios pág. 102">
+          <p style="padding:2rem;text-align:center;font-size:.88rem;color:#5c3820;">
+            Tu navegador no puede mostrar el PDF directamente.
+            <a href="A09_pag102_Deberes.pdf" target="_blank">Abrí la ficha en una nueva pestaña.</a>
+          </p>
+        </iframe>
+      </div>
+      <div class="ficha-wrap">
+        <p class="ficha-label">Parte B — pág. 103 · Resta de polinomios</p>
+        <img src="A09b_pag103_Deberes.png"
+             alt="Ficha A-09 parte B: Resta de polinomios pág. 103"
+             loading="lazy">
+      </div>
     </div>
     <div class="acciones">
-      <a class="btn-descarga" href="A09_pag102_Deberes.pdf" download="A09_pag102_Deberes.pdf">↓ Descargar ficha</a>
+      <a class="btn-descarga" href="A09_pag102_Deberes.pdf" download="A09_pag102_Deberes.pdf">↓ Descargar parte A</a>
+      <a class="btn-descarga" href="A09b_pag103_Deberes.png" download="A09b_pag103_Deberes.png">↓ Descargar parte B</a>
     </div>
     <nav class="nav-inferior" aria-label="Navegación de regreso">
       <a class="btn-volver" href="../../index.html#misiones">← Menú de misiones</a>

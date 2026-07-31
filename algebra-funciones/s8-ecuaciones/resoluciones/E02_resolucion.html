@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E02 · Resolución · Método de inversión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#2e6da4; --accent-dark:#1a3c5e; --ok:#4caf50; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+  .descarga{background:#fff;color:var(--accent-dark);font-weight:800;font-size:13px;border-radius:10px;padding:10px 16px;text-decoration:none;display:inline-block;white-space:nowrap}
+  .descarga:hover{background:#eef4fb}
+
+  .body{padding:26px 28px}
+
+  .retoma{background:#f5f9ff;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.55;margin-bottom:22px}
+  .retoma b{color:var(--accent-dark)}
+
+  .bloque{border:2px solid #e3ecf5;border-radius:14px;margin-bottom:24px;overflow:hidden}
+  .bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e8f1fb,#f5f9ff);padding:12px 18px;border-bottom:2px solid #e3ecf5}
+  .bloque-head h2{font-size:16px;color:var(--accent-dark)}
+  .bloque-body{padding:18px 20px}
+
+  .caminos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+  @media(max-width:600px){.caminos{grid-template-columns:1fr}}
+  .camino{border-radius:12px;padding:14px 16px;font-size:13.5px}
+  .camino.directo{background:#fdf6e8;border:1.5px solid #e0c98a}
+  .camino.inverso{background:#eef7ee;border:1.5px solid #a9d6a9}
+  .camino b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+  .camino.directo b{color:#8a5a00}
+  .camino.inverso b{color:#1c5e1c}
+  .paso-flecha{font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2}
+
+  .eq-box{background:#1a2233;color:#eaf1ff;border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.9;margin:10px 0}
+  .eq-box .step{opacity:.65;font-size:12px;font-family:'Nunito',sans-serif;margin-top:2px}
+
+  .final-answer{border:2px dashed var(--ok);background:#f1faf1;border-radius:12px;padding:10px 16px;margin-top:8px;font-size:14px;color:#1c5e1c;font-weight:700}
+
+  .item{border-top:1px dashed #e0e0e0;padding-top:14px;margin-top:14px}
+  .item:first-child{border-top:none;padding-top:0;margin-top:0}
+  .item-letra{display:inline-flex;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;font-size:12px;align-items:center;justify-content:center;margin-right:8px}
+  .item p{font-size:14px;margin-bottom:6px;display:inline}
+
+  .desafio{background:#f3edfb;border:1.5px dashed #9b7ec8;border-radius:12px;padding:12px 16px;font-size:13.5px;color:#4a2f6b;margin-top:16px}
+  .desafio b{display:block;margin-bottom:4px;color:#6a3fa0;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+
+  .nota-docente{background:#fdeeee;border:1.5px dashed #d98c8c;border-radius:12px;padding:12px 18px;margin-top:24px;font-size:13px;color:#7a2222}
+  .nota-docente b{display:block;margin-bottom:4px;text-transform:uppercase;font-size:11px;letter-spacing:.04em}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+      <h1>E02 · Resolución explicada · Método de inversión</h1>
+    </div>
+    <a class="descarga" href="../misiones/mision-02/E02_Metodo_de_inversion.pdf" download>Descargar ficha (PDF)</a>
+  </header>
+
+  <div class="body">
+
+    <div class="retoma">
+      Retomamos la ficha del taxi (bajada de bandera $50 más $60 por kilómetro): si el viaje costó $470,
+      ¿cuántos kilómetros recorrió? Ya resolviste esto de forma intuitiva y llegaste a 7 km. Ahora le
+      ponemos nombre al procedimiento.
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h2>Parte 1 y 2 · La ecuación y el método de inversión</h2></div>
+      <div class="bloque-body">
+        <div class="eq-box">50 + 60k = 470</div>
+        <p style="font-size:14px;color:#333;margin-bottom:6px">El método de inversión consiste en desandar lo
+        andado: se recorren las operaciones en orden inverso, cambiando cada operación por la contraria
+        (suma por resta, multiplicación por división).</p>
+
+        <div class="caminos">
+          <div class="camino directo">
+            <b>Camino directo</b>
+            <div class="paso-flecha">k → (×60) → 60k → (+50) → 50+60k = 470</div>
+          </div>
+          <div class="camino inverso">
+            <b>Camino inverso</b>
+            <div class="paso-flecha">470 → (−50) → 420 → (÷60) → k = 7</div>
+          </div>
+        </div>
+
+        <div class="final-answer">k = 7 &nbsp;·&nbsp; Verificación: 50 + 60 · 7 = 50 + 420 = 470. Por eso 7 es la solución (o raíz) de la ecuación.</div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h2>Parte 3 · Práctica del método</h2></div>
+      <div class="bloque-body">
+
+        <div class="item">
+          <span class="item-letra">a</span>
+          <p>x + 18 = 45</p>
+          <div class="eq-box">x = 45 − 18<div class="step">se resta 18 en ambos miembros</div>x = 27</div>
+          <div class="final-answer">x = 27 &nbsp;·&nbsp; Verificación: 27 + 18 = 45</div>
+        </div>
+
+        <div class="item">
+          <span class="item-letra">b</span>
+          <p>7c − 5 = 44</p>
+          <div class="eq-box">7c = 44 + 5 = 49<div class="step">se suma 5 en ambos miembros</div>c = 49 ÷ 7 = 7<div class="step">se divide entre 7</div></div>
+          <div class="final-answer">c = 7 &nbsp;·&nbsp; Verificación: 7 · 7 − 5 = 49 − 5 = 44</div>
+        </div>
+
+        <div class="item">
+          <span class="item-letra">c</span>
+          <p>Un plomero cobra $300 fijos más $150 por hora. Si en total cobró $1.050, ¿cuántas horas trabajó?</p>
+          <div class="eq-box">300 + 150h = 1050<div class="step">planteo</div>150h = 750<div class="step">se resta 300 en ambos miembros</div>h = 5<div class="step">se divide entre 150</div></div>
+          <div class="final-answer">h = 5 horas &nbsp;·&nbsp; Verificación: 300 + 150 · 5 = 300 + 750 = 1.050</div>
+        </div>
+
+        <div class="item">
+          <span class="item-letra">d</span>
+          <p>Un kiosco vende figuritas en sobres de 6 más 2 sueltas de regalo. Si Bruno juntó 92 figuritas, ¿cuántos sobres compró?</p>
+          <div class="eq-box">6s + 2 = 92<div class="step">planteo</div>6s = 90<div class="step">se resta 2 en ambos miembros</div>s = 15<div class="step">se divide entre 6</div></div>
+          <div class="final-answer">s = 15 sobres &nbsp;·&nbsp; Verificación: 6 · 15 + 2 = 90 + 2 = 92</div>
+        </div>
+
+        <div class="desafio">
+          <b>Desafío (opcional)</b>
+          8m + 6 = 41 → 8m = 35 → m = 35 ÷ 8 = 4,375. No es una solución natural: en un contexto de cantidad
+          de personas u objetos enteros, 4,375 no sería una respuesta válida. Conviene relacionarlo con el
+          caso de la valla de 74 listones de Ochoviet-Vitabar (pág. 25), donde la solución tampoco resultaba
+          un número natural.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Método de inversión adaptado de Ochoviet, C. y Vitabar, F. <i>Matemática 2</i>. Montevideo: LOSA Ediciones, pp. 24-26.
+  </footer>
+</div>
+</body>
+</html>

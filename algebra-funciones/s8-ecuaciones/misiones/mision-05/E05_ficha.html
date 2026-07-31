@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E05 · La granja y el hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#2e6da4;
+    --accent-dark:#1a3c5e;
+    --ok:#4caf50;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:26px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .body{padding:26px 28px}
+
+  .intro{background:#f5f9ff;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.55;margin-bottom:22px}
+
+  .img-slot{border:2px dashed #c7d3e0;border-radius:14px;background:#fafcff;color:#9aa8b8;font-size:12.5px;text-align:center;padding:26px 14px;margin:0 0 22px;font-weight:600}
+
+  .problema{border:2px solid #e3ecf5;border-radius:14px;margin-bottom:22px;overflow:hidden}
+  .problema-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e8f1fb,#f5f9ff);padding:12px 18px;border-bottom:2px solid #e3ecf5}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .problema-head h2{font-size:16px;color:var(--accent-dark)}
+  .problema-body{padding:16px 20px}
+  .enunciado{font-size:15px;line-height:1.6;color:#222;margin-bottom:14px}
+
+  .pasos{background:#fdf6e8;border-left:4px solid #e0a72e;border-radius:0 10px 10px 0;padding:12px 16px;font-size:13.5px;margin-bottom:12px}
+  .pasos b{color:#8a5a00}
+  .pasos ol{margin:6px 0 0 18px}
+  .pasos li{margin-bottom:2px}
+
+  .preguntas{margin-top:10px}
+  .preguntas p{font-weight:700;font-size:13.5px;color:var(--accent-dark);margin-bottom:6px}
+  .preguntas ol{margin-left:20px;font-size:14px;line-height:1.7}
+
+  .respuesta-space{border:1.5px dashed #ccd7e2;border-radius:10px;height:70px;margin-top:10px}
+
+  .desafio{background:#f3edfb;border:1.5px dashed #9b7ec8;border-radius:12px;padding:12px 16px;font-size:13.5px;color:#4a2f6b;margin-top:8px}
+  .desafio b{display:block;margin-bottom:4px;color:#6a3fa0;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .fuente b{color:#444}
+
+  @media print{
+    body{background:#fff;padding:0}
+    .wrap{box-shadow:none;border-radius:0}
+    .img-slot{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+    <h1>E05 · La granja y el hotel</h1>
+    <p>Planteo y resolución de ecuaciones a partir de problemas contextuales · 8.º EBI</p>
+  </header>
+
+  <div class="body">
+    <div class="intro">
+      Dos situaciones, un mismo camino: llamar <b>x</b> a lo que no conocés, traducir el enunciado a una ecuación
+      y resolverla paso a paso. Al final, comprobá siempre si tu respuesta tiene sentido en la situación real.
+    </div>
+
+
+<div class="img-slot" style="background:linear-gradient(135deg,#dff3ff,#fef9e8);color:#333;border-style:solid">
+<h3 style="margin-bottom:10px;font-size:22px">🏨 Hotel Sol del Río</h3>
+<div style="font-size:52px">🏨 🧳 🛏️🛏️</div>
+<p style="margin-top:10px;font-size:15px">
+En este hotel hay habitaciones simples y dobles.<br>
+Tu misión es descubrir cuántas hay de cada tipo.
+</p>
+<div style="display:flex;justify-content:center;gap:18px;margin-top:14px;flex-wrap:wrap">
+<div style="background:#fff;padding:10px 18px;border-radius:10px;border:2px solid #8ec5ff">🏠 34 habitaciones</div>
+<div style="background:#fff;padding:10px 18px;border-radius:10px;border:2px solid #8ec5ff">🛏️ 54 camas</div>
+</div>
+<p style="margin-top:14px">🦉 <b>Pista del Reino:</b> llamá <b>x</b> a lo que todavía no conocés.</p>
+</div>
+
+
+    <div class="problema">
+      <div class="problema-head">
+        <div class="num-badge">1</div>
+        <h2>El hotel de las habitaciones</h2>
+      </div>
+      <div class="problema-body">
+        <p class="enunciado">En un pequeño hotel hay 34 habitaciones simples y dobles. Si en total tiene 54 camas,
+        ¿cuántas habitaciones son simples y cuántas son dobles?</p>
+
+        <div class="pasos">
+          <b>Pasos sugeridos</b>
+          <ol>
+            <li>Entendé el problema: ¿qué datos tenés y qué te preguntan?</li>
+            <li>Llamá x al número de habitaciones simples. Expresá las dobles en función de x.</li>
+            <li>Planteá la ecuación con la información sobre el total de camas.</li>
+            <li>Resolvé y comprobá el resultado en el contexto del hotel.</li>
+          </ol>
+        </div>
+
+        <div class="preguntas">
+          <p>Resolvé</p>
+          <ol>
+            <li>Si x es el número de habitaciones simples, ¿cómo se escribe el número de habitaciones dobles?</li>
+            <li>Una habitación simple tiene 1 cama y una doble tiene 2 camas. Escribí la ecuación que representa el total de camas.</li>
+            <li>Resolvé la ecuación planteada.</li>
+            <li>¿Cuántas habitaciones simples y cuántas dobles hay? Comprobá que la cantidad de camas da 54.</li>
+          </ol>
+        </div>
+        <div class="respuesta-space"></div>
+      </div>
+    </div>
+
+
+<div class="img-slot" style="background:linear-gradient(135deg,#eefee6,#fffdf3);color:#333;border-style:solid">
+<h3 style="margin-bottom:10px;font-size:22px">🐔 La granja</h3>
+<div style="font-size:52px">🐔 🐇 🚜 🌾</div>
+<p style="margin-top:10px;font-size:15px">
+En esta granja viven gallinas y conejos.
+</p>
+<div style="display:flex;justify-content:center;gap:18px;margin-top:14px;flex-wrap:wrap">
+<div style="background:#fff;padding:10px 18px;border-radius:10px;border:2px solid #9ad27d">🐾 120 patas</div>
+<div style="background:#fff;padding:10px 18px;border-radius:10px;border:2px solid #9ad27d">🐾 50 animales</div>
+</div>
+<p style="margin-top:14px">💡 Comprobá siempre tu respuesta reemplazando el valor encontrado.</p>
+</div>
+
+
+    <div class="problema">
+      <div class="problema-head">
+        <div class="num-badge">2</div>
+        <h2>La granja de gallinas y conejos</h2>
+      </div>
+      <div class="problema-body">
+        <p class="enunciado">En una granja hay 50 animales entre gallinas y conejos. Entre todos los animales
+        suman 120 patas. ¿Cuántas gallinas hay en la granja?</p>
+
+        <div class="preguntas">
+          <p>Resolvé</p>
+          <ol>
+            <li>Llamá x al número de gallinas. ¿Cómo se expresa el número de conejos?</li>
+            <li>Una gallina tiene 2 patas y un conejo 4. Escribí la ecuación que representa el total de patas.</li>
+            <li>Resolvé la ecuación.</li>
+            <li>¿Cuántas gallinas y cuántos conejos hay? Comprobá el resultado.</li>
+          </ol>
+        </div>
+        <div class="respuesta-space"></div>
+
+        <div class="desafio">
+          <b>Desafío extra</b>
+          Si en la granja hubiera además 6 vacas (4 patas cada una) y el total de patas pasara a ser 144,
+          ¿qué ecuación permite calcular ahora el número de gallinas? Escribila, sin resolverla.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fuente"><b>Fuente:</b> Caro, R. <i>Matemáticas 2.º de ESO. Capítulo 10: Álgebra</i>.
+    Proyecto Marea Verde. www.apuntesmareaverde.org.es, pág. 259-260. Adaptación tipográfica para 8.º EBI 2026.</div>
+    <div>Fernández, G. M. (2026). Reino Matemático. Liceo de Médanos.</div>
+  </footer>
+</div>
+</body>
+</html>

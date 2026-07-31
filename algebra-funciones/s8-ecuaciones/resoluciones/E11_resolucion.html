@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E11 · Resolución · Melissa y Mariángel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#2e6da4; --accent-dark:#1a3c5e; --ok:#4caf50; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+
+  .body{padding:26px 28px}
+
+  .bloque{border:2px solid #e3ecf5;border-radius:14px;margin-bottom:24px;overflow:hidden}
+  .bloque-head{background:linear-gradient(135deg,#e8f1fb,#f5f9ff);padding:12px 18px;border-bottom:2px solid #e3ecf5}
+  .bloque-head h2{font-size:16px;color:var(--accent-dark)}
+  .bloque-body{padding:18px 20px}
+
+  .paso p{font-size:14px;line-height:1.55;color:#333;margin-bottom:6px}
+
+  .eq-box{background:#1a2233;color:#eaf1ff;border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.9;margin:8px 0}
+  .eq-box .step{opacity:.65;font-size:12px;font-family:'Nunito',sans-serif;margin-top:2px}
+
+  .final-answer{border:2px dashed var(--ok);background:#f1faf1;border-radius:12px;padding:10px 16px;margin-top:8px;font-size:14px;color:#1c5e1c;font-weight:700}
+  .final-answer span{display:block;font-weight:400;font-size:13px;color:#2c7a2c;margin-top:4px}
+
+  .comprobacion{background:#fff8e6;border-left:4px solid #e0a72e;border-radius:0 10px 10px 0;padding:10px 16px;margin-top:10px;font-size:13.5px;color:#5a4200}
+  .comprobacion b{color:#8a5a00}
+
+  .contextual{background:#f3edfb;border-left:4px solid #9b7ec8;border-radius:0 10px 10px 0;padding:10px 16px;margin-top:8px;font-size:13.5px;color:#4a2f6b}
+  .contextual b{color:#6a3fa0}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+    <h1>E11 · Resolución explicada</h1>
+  </header>
+
+  <div class="body">
+
+    <div class="bloque">
+      <div class="bloque-head"><h2>¿Se cumple dentro de 7 años?</h2></div>
+      <div class="bloque-body">
+        <p style="font-size:14px;color:#333;margin-bottom:8px">Antes de resolver, probamos la hipótesis
+        sustituyendo x = 7 en la ecuación 27 + x = 2(11 + x):</p>
+        <div class="eq-box">27 + 7 = 2(11 + 7)<div class="step">se sustituye x por 7</div>34 = 2 · 18<div class="step">se resuelve cada miembro</div>34 = 36</div>
+        <div class="comprobacion">
+          <b>No se cumple</b> 34 ≠ 36. Dentro de 7 años la condición todavía no se da. Hace falta resolver la
+          ecuación para encontrar el valor exacto de x.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><h2>Planteo y resolución</h2></div>
+      <div class="bloque-body">
+        <div class="paso">
+          <p>Dentro de x años, Melissa tendrá 27 + x años y Mariángel tendrá 11 + x años. La condición es
+          que la edad de Melissa sea el doble de la edad de Mariángel:</p>
+        </div>
+        <div class="eq-box">27 + x = 2(11 + x)</div>
+
+        <div class="eq-box">
+          27 + x = 22 + 2x<div class="step">se elimina el paréntesis</div>
+          27 − 22 = 2x − x<div class="step">se transponen los términos</div>
+          5 = x
+        </div>
+
+        <div class="final-answer">
+          x = 5
+          <span>Dentro de 5 años se cumple la condición.</span>
+        </div>
+
+        <div class="comprobacion">
+          <b>Comprobación matemática</b> 27 + 5 = 32 y 2(11 + 5) = 2 · 16 = 32. Ambos miembros dan 32: se
+          cumple la ecuación.
+        </div>
+        <div class="contextual">
+          <b>Comprobación contextual</b> Dentro de 5 años, Melissa tendrá 32 años y Mariángel 16 años. En
+          efecto, 32 es el doble de 16. Además, x = 5 es un número positivo y entero, algo esperable al
+          tratarse de una cantidad de años.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Problema de: Publicaciones Porras. <i>Matemática 8.° EBI</i>, Actividad 3.15, pág. 110.
+  </footer>
+</div>
+</body>
+</html>

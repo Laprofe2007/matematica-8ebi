@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lección 2 · Multiplicación (distributiva) | Biblioteca — El Mundo de los Polinomios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #2a1c12; --ink-mid: #5c3820; --gold: #8a5e14; --amber: #7a4f0a; --font-title: "Cinzel","Georgia",serif; --font-body: "Libre Baskerville","Georgia",serif; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; font-family: var(--font-body); color: var(--ink); background: #fdf5e0; }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.045; background-image: linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px); background-size: 48px 48px; }
+    .shell { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: .75rem; }
+    .breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-title); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .breadcrumb a { color: var(--amber); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb .sep { color: rgba(42,28,18,.35); }
+    .breadcrumb .curr { color: var(--ink); opacity: .45; }
+
+    .page-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(138,94,20,0.2); }
+    .page-tag { display: inline-block; font-family: var(--font-title); font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .page-header h1 { font-family: var(--font-title); font-size: clamp(1.1rem, 3.5vw, 1.7rem); font-weight: 800; color: var(--amber); letter-spacing: 0.04em; line-height: 1.25; }
+
+    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); margin-bottom: 1.25rem; }
+    .ficha-wrap img { display: block; width: 100%; height: auto; }
+
+    .acciones { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .btn-descarga { display: inline-flex; align-items: center; gap: .45rem; padding: .58rem 1.25rem; background: var(--amber); color: #fff8ec; border: none; border-radius: 6px; font-family: var(--font-title); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s; }
+    .btn-descarga:hover { background: var(--gold); }
+
+    .nav-lecciones {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: .75rem; flex-wrap: wrap;
+      padding: 1.25rem 1.5rem;
+      background: rgba(138,94,20,.05);
+      border: 1px solid rgba(138,94,20,.18);
+      border-radius: 8px; margin-bottom: 2rem;
+    }
+    .nav-lec-label { font-family: var(--font-title); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .2rem; }
+    .nav-lec-title { font-family: var(--font-title); font-size: .72rem; color: var(--ink); }
+    .btn-nav-lec {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .5rem 1rem; background: rgba(138,94,20,.07);
+      border: 1px solid rgba(138,94,20,.28); border-radius: 6px;
+      font-family: var(--font-title); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s;
+    }
+    .btn-nav-lec:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.5); }
+    .btn-nav-lec.primary { background: var(--amber); color: #fff8ec; border-color: var(--amber); }
+    .btn-nav-lec.primary:hover { background: var(--gold); border-color: var(--gold); }
+
+    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn-volver { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.2rem; background: rgba(138,94,20,.07); border: 1px solid rgba(138,94,20,.3); border-radius: 6px; font-family: var(--font-title); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s; }
+    .btn-volver:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.55); }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Navegación">
+      <div class="breadcrumb">
+        <a href="../../../index.html">Reinos Matemáticos</a>
+        <span class="sep">/</span>
+        <a href="../../index.html">Álgebra y Funciones</a>
+        <span class="sep">/</span>
+        <a href="../index.html">El Mundo de los Polinomios</a>
+        <span class="sep">/</span>
+        <a href="index.html">Biblioteca</a>
+        <span class="sep">/</span>
+        <span class="curr">Lección 2</span>
+      </div>
+    </nav>
+
+    <nav class="nav-lecciones" aria-label="Navegación entre lecciones">
+      <a class="btn-nav-lec" href="Leccion_Suma_Resta_Polinomios.html">
+        ← <span><span class="nav-lec-label">Lección 1</span><span class="nav-lec-title">Suma y resta — método en columna</span></span>
+      </a>
+      <a class="btn-nav-lec primary" href="Leccion_Multiplicacion_Polinomios.html">
+        <span><span class="nav-lec-label">Lección 3</span><span class="nav-lec-title">Multiplicación — método en columna</span></span> →
+      </a>
+    </nav>
+
+    <header class="page-header">
+      <span class="page-tag">Lección 2 · Biblioteca · Subreino 2</span>
+      <h1>Multiplicación de polinomios — propiedad distributiva · pág. 104</h1>
+    </header>
+
+    <div class="ficha-wrap">
+      <img src="pag104_Porras_Leccion.png"
+           alt="Lección pág. 104 Porras: Multiplicación de polinomios — propiedad distributiva"
+           loading="lazy">
+    </div>
+
+    <div class="acciones">
+      <a class="btn-descarga" href="pag104_Porras_Leccion.png" download="pag104_Porras_Leccion.png">↓ Descargar lección</a>
+    </div>
+
+    <nav class="nav-inferior" aria-label="Navegación de regreso">
+      <a class="btn-volver" href="index.html">← Volver a Biblioteca</a>
+      <a class="btn-volver" href="../index.html">← Volver al mapa del subreino</a>
+    </nav>
+  </div>
+</body>
+</html>

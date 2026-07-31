@@ -24,24 +24,42 @@
     .page-header h1 { font-family: var(--font-title); font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 800; color: var(--amber); letter-spacing: 0.04em; line-height: 1.2; }
     .page-header p { font-size: .88rem; color: var(--ink-mid); margin-top: .6rem; font-style: italic; }
 
-    .leccion { margin-bottom: 3rem; }
-    .leccion-header { margin-bottom: 1rem; padding-bottom: .75rem; border-bottom: 1px solid rgba(138,94,20,.12); }
-    .leccion-num { font-family: var(--font-title); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .3rem; }
-    .leccion-header h2 { font-family: var(--font-title); font-size: clamp(1rem, 3vw, 1.4rem); font-weight: 600; color: var(--ink); letter-spacing: .03em; }
+    .lecciones-grid { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
 
-    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); margin-bottom: 1rem; }
-    .ficha-wrap img { display: block; width: 100%; height: auto; }
-    .ficha-wrap iframe { display: block; width: 100%; height: min(80vh, 900px); border: none; }
+    .leccion-card {
+      display: flex; align-items: stretch; gap: 0;
+      background: #fff; border: 1px solid rgba(138,94,20,0.22);
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 14px rgba(42,28,18,0.06);
+      text-decoration: none; color: inherit;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .leccion-card:hover { box-shadow: 0 4px 24px rgba(42,28,18,0.13); border-color: rgba(138,94,20,0.45); }
 
-    .leccion-acciones { display: flex; gap: .75rem; flex-wrap: wrap; }
-    .btn-descarga { display: inline-flex; align-items: center; gap: .45rem; padding: .58rem 1.25rem; background: var(--amber); color: #fff8ec; border: none; border-radius: 6px; font-family: var(--font-title); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s; }
-    .btn-descarga:hover { background: var(--gold); }
+    .card-num {
+      display: flex; align-items: center; justify-content: center;
+      min-width: 3.2rem; width: 3.2rem;
+      background: rgba(138,94,20,0.07);
+      border-right: 1px solid rgba(138,94,20,0.15);
+      font-family: var(--font-title); font-size: 1rem; font-weight: 800;
+      color: var(--gold); letter-spacing: .04em;
+      flex-shrink: 0;
+    }
+    .card-body { padding: 1.1rem 1.4rem; flex: 1; }
+    .card-tag { display: block; font-family: var(--font-title); font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+    .card-title { font-family: var(--font-title); font-size: clamp(.85rem, 2.5vw, 1.05rem); font-weight: 600; color: var(--ink); line-height: 1.35; }
+    .card-sub { font-size: .78rem; color: var(--ink-mid); margin-top: .3rem; font-style: italic; }
+    .card-arrow {
+      display: flex; align-items: center; justify-content: center;
+      min-width: 2.5rem; padding-right: .75rem;
+      font-size: 1rem; color: var(--amber); opacity: .5;
+      transition: opacity .2s, transform .2s;
+    }
+    .leccion-card:hover .card-arrow { opacity: 1; transform: translateX(3px); }
 
+    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
     .btn-volver { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.2rem; background: rgba(138,94,20,.07); border: 1px solid rgba(138,94,20,.3); border-radius: 6px; font-family: var(--font-title); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s; }
     .btn-volver:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.55); }
-
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(138,94,20,.25), transparent); margin: 2rem 0; }
-    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 2rem; }
   </style>
 </head>
 <body>
@@ -61,46 +79,52 @@
     <header class="page-header">
       <span class="page-tag">Biblioteca · Subreino 2</span>
       <h1>Biblioteca del Explorador</h1>
-      <p>Material teórico sobre polinomios: clasificación, operaciones y productos notables.</p>
+      <p>Material teórico sobre polinomios: operaciones y productos notables.</p>
     </header>
 
-    <!-- Lección 1: pág. 104 Porras (PNG) -->
-    <section class="leccion" aria-labelledby="lec1-title">
-      <div class="leccion-header">
-        <span class="leccion-num">Lección 1</span>
-        <h2 id="lec1-title">Polinomios — pág. 104 (Porras)</h2>
-      </div>
-      <div class="ficha-wrap">
-        <img src="pag104_Porras_Leccion.png"
-             alt="Lección pág. 104 Porras: Polinomios"
-             loading="lazy">
-      </div>
-      <div class="leccion-acciones">
-        <a class="btn-descarga" href="pag104_Porras_Leccion.png" download="pag104_Porras_Leccion.png">↓ Descargar lección</a>
-      </div>
-    </section>
+    <nav class="lecciones-grid" aria-label="Lecciones de la biblioteca">
 
-    <div class="divider" aria-hidden="true"></div>
+      <a class="leccion-card" href="Leccion_Suma_Resta_Polinomios.html">
+        <div class="card-num">1</div>
+        <div class="card-body">
+          <span class="card-tag">Lección 1</span>
+          <span class="card-title">Suma y resta de polinomios</span>
+          <span class="card-sub">Método en columna</span>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
 
-    <!-- Lección 2: pág. 107 Producto Notable (PDF) -->
-    <section class="leccion" aria-labelledby="lec2-title">
-      <div class="leccion-header">
-        <span class="leccion-num">Lección 2</span>
-        <h2 id="lec2-title">Producto Notable — pág. 107 (Porras)</h2>
-      </div>
-      <div class="ficha-wrap">
-        <iframe src="pag107_Producto_Notable_Leccion.pdf"
-                title="Lección pág. 107: Producto Notable">
-          <p style="padding:2rem;text-align:center;font-size:.88rem;color:#5c3820;">
-            Tu navegador no puede mostrar el PDF directamente.
-            <a href="pag107_Producto_Notable_Leccion.pdf" target="_blank">Abrí la lección en una nueva pestaña.</a>
-          </p>
-        </iframe>
-      </div>
-      <div class="leccion-acciones">
-        <a class="btn-descarga" href="pag107_Producto_Notable_Leccion.pdf" download="pag107_Producto_Notable_Leccion.pdf">↓ Descargar lección</a>
-      </div>
-    </section>
+      <a class="leccion-card" href="leccion-2.html">
+        <div class="card-num">2</div>
+        <div class="card-body">
+          <span class="card-tag">Lección 2</span>
+          <span class="card-title">Multiplicación de polinomios — propiedad distributiva</span>
+          <span class="card-sub">Pág. 104</span>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <a class="leccion-card" href="Leccion_Multiplicacion_Polinomios.html">
+        <div class="card-num">3</div>
+        <div class="card-body">
+          <span class="card-tag">Lección 3</span>
+          <span class="card-title">Multiplicación de polinomios — método en columna</span>
+          <span class="card-sub">Forma alternativa</span>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+      <a class="leccion-card" href="leccion-4.html">
+        <div class="card-num">4</div>
+        <div class="card-body">
+          <span class="card-tag">Lección 4</span>
+          <span class="card-title">Cuadrado de un binomio · Producto notable</span>
+          <span class="card-sub">Pág. 107</span>
+        </div>
+        <div class="card-arrow">›</div>
+      </a>
+
+    </nav>
 
     <nav class="nav-inferior" aria-label="Navegación de regreso">
       <a class="btn-volver" href="../index.html">← Volver al mapa del subreino</a>

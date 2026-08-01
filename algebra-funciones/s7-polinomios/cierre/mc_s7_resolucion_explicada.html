@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resolución explicada · MC-S7 Polinomios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:#f4f2fb;color:#2c1a4d;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#5b2a86,#8e44ad);border-radius:16px;padding:26px 24px;color:#fff;margin-bottom:22px}
+  header .code{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  header h1{font-size:1.4rem;font-weight:900}
+  header p{font-size:.85rem;opacity:.9;margin-top:6px}
+
+  .section-title{font-weight:900;color:#5b2a86;font-size:1.05rem;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
+
+  .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:18px;font-size:.92rem}
+  .note.info{background:#e7f3fb;border-left-color:#2680c2}
+  .note.warn{background:#fdf2e3;border-left-color:#c0621a}
+  .note b{color:#5b2a86}
+
+  .panel{--accent:#8e44ad;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:20px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
+  .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  .panel-num{background:var(--accent);color:#fff;font-weight:900;font-size:.78rem;padding:3px 10px;border-radius:20px;flex-shrink:0}
+  .panel-title{font-weight:800;font-size:.95rem}
+  .panel-sub{font-size:.82rem;color:#7a6a94;margin-top:2px}
+
+  .step{margin:10px 0;font-size:.9rem}
+  .step b.tag{color:var(--accent);margin-right:4px}
+
+  .eq-box{background:#241638;color:#fff;border-radius:8px;padding:12px 16px;margin:10px 0;font-size:.92rem;font-weight:700;overflow-x:auto}
+  .eq-box div{padding:3px 0}
+  .eq-box .arrow{color:#c9a8ec;font-weight:400}
+
+  .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:10px 14px;margin-top:10px;font-weight:800;color:#1e8449;font-size:.92rem}
+
+  .verif{font-size:.87rem;color:#5a4a74;margin-top:8px}
+  .verif b{color:#2c1a4d}
+
+  footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="code">Resolución explicada · MC-S7</div>
+  <h1>Mini Control — Polinomios</h1>
+  <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
+</header>
+
+<div class="note">
+  Acá tenés la resolución completa de los 4 ejercicios del Mini Control. Compará tu procedimiento con el que se muestra, no solo el resultado final: la forma de llegar a la respuesta es lo que más se evalúa.
+</div>
+
+<div class="section-title">Ejercicio 1 — Clasificar y calcular</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">1a</div><div class="panel-title">Reducir y clasificar</div></div>
+  <div class="step">Antes de clasificar cualquier polinomio, primero hay que reducir los términos semejantes. Recién ahí se cuenta cuántos términos quedan.</div>
+  <div class="eq-box">
+    <div>4x³ − 2x² + 5x²  <span class="arrow">→ se reducen los dos términos en x²</span></div>
+    <div>= 4x³ + 3x²</div>
+  </div>
+  <div class="final-answer">4x³ + 3x²  →  binomio (2 términos)</div>
+
+  <div class="step" style="margin-top:16px">7a − 3a + 5  <span class="arrow">→ se reducen los dos términos en a</span></div>
+  <div class="eq-box"><div>= 4a + 5</div></div>
+  <div class="final-answer">4a + 5  →  binomio (2 términos)</div>
+
+  <div class="step" style="margin-top:16px">2x² + 3x − x² − 3x  <span class="arrow">→ se reducen los términos en x² entre sí, y los términos en x entre sí</span></div>
+  <div class="eq-box"><div>= (2x² − x²) + (3x − 3x)</div><div>= x² + 0</div></div>
+  <div class="final-answer">x²  →  monomio (1 término). Esta expresión estaba escrita con 4 términos, pero se reduce a uno solo.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">1b</div><div class="panel-title">Valor numérico de P(x) = 3x² − x + 4 para x = 2</div></div>
+  <div class="eq-box">
+    <div>P(2) = 3(2)² − 2 + 4</div>
+    <div>P(2) = 3(4) − 2 + 4</div>
+    <div>P(2) = 12 − 2 + 4</div>
+  </div>
+  <div class="final-answer">P(2) = 14</div>
+</div>
+
+<div class="note">
+  💡 Fijate que el inciso c parecía tener 4 términos, pero al reducir quedó en uno solo. Esto es lo mismo que trabajaste en A-07: la clasificación de un polinomio depende de su forma reducida, no de cómo estaba escrito al principio.
+</div>
+
+<div class="section-title">Ejercicio 2 — Suma, resta y polinomio opuesto</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">2</div><div class="panel-title">A = 4x² − 3x + 5    B = −4x² + 3x − 5</div></div>
+
+  <div class="step"><b class="tag">a.</b> Sumar A + B, término a término:</div>
+  <div class="eq-box">
+    <div>(4x² − 3x + 5) + (−4x² + 3x − 5)</div>
+    <div>= (4x² − 4x²) + (−3x + 3x) + (5 − 5)</div>
+    <div>= 0</div>
+  </div>
+  <div class="final-answer">A + B = 0 → polinomio nulo</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">b.</b> ¿Son A y B polinomios opuestos?</div>
+  <div class="final-answer">Sí. Dos polinomios son opuestos cuando su suma da el polinomio nulo, y eso es exactamente lo que pasó en el inciso a.</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">c.</b> Restar A − B. Para restar, se cambia el signo de cada término de B y se suma:</div>
+  <div class="eq-box">
+    <div>A − B = (4x² − 3x + 5) − (−4x² + 3x − 5)</div>
+    <div>= 4x² − 3x + 5 + 4x² − 3x + 5</div>
+    <div>= 8x² − 6x + 10</div>
+  </div>
+  <div class="final-answer">A − B = 8x² − 6x + 10</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">d.</b> Verificación con x = 1:</div>
+  <div class="verif">A(1) = 4 − 3 + 5 = <b>6</b> &nbsp;|&nbsp; B(1) = −4 + 3 − 5 = <b>−6</b> &nbsp;|&nbsp; A(1) − B(1) = 6 − (−6) = <b>12</b><br>
+  En la expresión desarrollada: 8(1)² − 6(1) + 10 = 8 − 6 + 10 = <b>12</b> ✓ coincide.</div>
+</div>
+
+<div class="note info">
+  💡 Restar un polinomio es lo mismo que sumar su opuesto: cambiás el signo de cada término del segundo polinomio y después sumás.
+</div>
+
+<div class="section-title">Ejercicio 3 — El cantero rectangular</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">3</div><div class="panel-title">Ancho (x+2) m, largo (x+6) m</div></div>
+
+  <div class="step"><b class="tag">a.</b> Área sin desarrollar: se multiplican los dos lados.</div>
+  <div class="eq-box"><div>A(x) = (x + 2)(x + 6)</div></div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">b.</b> Se desarrolla aplicando la propiedad distributiva (cada término del primero por cada término del segundo):</div>
+  <div class="eq-box">
+    <div>A(x) = x·x + x·6 + 2·x + 2·6</div>
+    <div>A(x) = x² + 6x + 2x + 12</div>
+    <div>A(x) = x² + 8x + 12</div>
+  </div>
+  <div class="final-answer">A(x) = x² + 8x + 12</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">c. y d.</b> Con x = 3, se calcula el área de las dos formas y se comparan:</div>
+  <div class="verif">Por los factores: (3+2)(3+6) = 5 × 9 = <b>45</b><br>
+  Por la expresión desarrollada: (3)² + 8(3) + 12 = 9 + 24 + 12 = <b>45</b><br>
+  Los dos resultados coinciden ✓</div>
+</div>
+
+<div class="note">
+  💡 Este tipo de resultado (x² + 8x + 12) lo vas a volver a encontrar cuando empecemos con ecuaciones: poder ir y venir entre la forma factorizada (x+2)(x+6) y la forma desarrollada x²+8x+12 va a ser una herramienta clave.
+</div>
+
+<div class="section-title">Ejercicio 4 — Cuadrado de binomio</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">4</div><div class="panel-title">(a + b)² = a² + 2ab + b²</div></div>
+
+  <div class="step"><b class="tag">a.</b> (x + 4)²  →  a = x, b = 4</div>
+  <div class="eq-box"><div>x² + 2(x)(4) + 4² = x² + 8x + 16</div></div>
+  <div class="final-answer">(x + 4)² = x² + 8x + 16</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">b.</b> (2x − 3)²  →  a = 2x, b = −3</div>
+  <div class="eq-box"><div>(2x)² + 2(2x)(−3) + (−3)² = 4x² − 12x + 9</div></div>
+  <div class="final-answer">(2x − 3)² = 4x² − 12x + 9</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">c.</b> Cuadrado de lado (x+5): su área es (x+5)²</div>
+  <div class="eq-box"><div>x² + 2(x)(5) + 5² = x² + 10x + 25</div></div>
+  <div class="final-answer">Área = x² + 10x + 25</div>
+
+  <div class="step" style="margin-top:16px"><b class="tag">d.</b> Con x = 2, se compara el cálculo directo con la expresión desarrollada:</div>
+  <div class="verif">Directo: (2+5)² = 7² = <b>49</b><br>
+  Desarrollada: (2)² + 10(2) + 25 = 4 + 20 + 25 = <b>49</b><br>
+  Coinciden ✓</div>
+</div>
+
+<div class="note warn">
+  💡 El error más frecuente en este ejercicio es olvidarse del término del medio: (a+b)² <b>no</b> es a²+b². Siempre hay un doble producto 2ab en el medio.
+</div>
+
+<div class="note info">
+  <b>Para autoevaluarte:</b> si resolviste correctamente al menos 3 de los 4 ejercicios mostrando el procedimiento completo, alcanzaste el objetivo de este Mini Control.
+</div>
+
+<div class="note info">
+  <b>Origen:</b> Fernández, G. M. (2026). MC-S7 Polinomios — Resolución explicada. Reino Matemático. Crónicas de los Exploradores de 8.°. Liceo de Médanos.
+</div>
+
+<footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · Resolución explicada MC-S7</footer>
+</div>
+</body>
+</html>

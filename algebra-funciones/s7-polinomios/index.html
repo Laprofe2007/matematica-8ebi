@@ -442,7 +442,7 @@
   <article class="modal modal-misiones">
     <button class="modal-close" type="button" id="misionesClose" aria-label="Cerrar misiones">×</button>
     <h2 id="misionesTitle">Misiones del Explorador</h2>
-    <span class="modal-tipo">Práctica · 7 misiones disponibles</span>
+    <span class="modal-tipo">Práctica · 5 misiones disponibles</span>
     <p class="modal-intro" id="misionesDesc">Seleccioná una misión para acceder a la ficha.</p>
     <div class="modal-rule" aria-hidden="true"></div>
 
@@ -467,16 +467,7 @@
       </li>
       <li class="mission-item">
         <div class="mission-info">
-          <span class="mission-num">Misión III · A-09</span>
-          <span class="mission-name">Refuerzo: suma y resta <span style="font-size:.6rem;color:var(--amber);font-family:var(--font-title);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem;">Deberes</span></span>
-        </div>
-        <div class="mission-actions">
-          <a class="btn-mission" href="misiones/mision-03/index.html" target="_blank" rel="noopener">Ver ficha</a>
-        </div>
-      </li>
-      <li class="mission-item">
-        <div class="mission-info">
-          <span class="mission-num">Misión IV · A-10</span>
+          <span class="mission-num">Misión III · A-10</span>
           <span class="mission-name">Multiplicación de polinomios</span>
         </div>
         <div class="mission-actions">
@@ -485,17 +476,8 @@
       </li>
       <li class="mission-item">
         <div class="mission-info">
-          <span class="mission-num">Misión V · A-11</span>
-          <span class="mission-name">Refuerzo: multiplicación <span style="font-size:.6rem;color:var(--amber);font-family:var(--font-title);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem;">Deberes</span></span>
-        </div>
-        <div class="mission-actions">
-          <a class="btn-mission" href="misiones/mision-05/index.html" target="_blank" rel="noopener">Ver ficha</a>
-        </div>
-      </li>
-      <li class="mission-item">
-        <div class="mission-info">
-          <span class="mission-num">Misión VI · A-12</span>
-          <span class="mission-name">El rectángulo y el cuadrado de binomio</span>
+          <span class="mission-num">Misión IV · A-11</span>
+          <span class="mission-name">Del rectángulo al cuadrado de un binomio</span>
         </div>
         <div class="mission-actions">
           <a class="btn-mission" href="misiones/mision-06/index.html" target="_blank" rel="noopener">Ver ficha</a>
@@ -503,20 +485,20 @@
       </li>
       <li class="mission-item">
         <div class="mission-info">
-          <span class="mission-num">Misión VII · A-13</span>
-          <span class="mission-name">Crucigrama algebraico <span style="font-size:.6rem;color:var(--amber);font-family:var(--font-title);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem;">Deberes</span></span>
+          <span class="mission-num">Misión V · A-12</span>
+          <span class="mission-name">Crucigrama de cierre <span style="font-size:.6rem;color:var(--amber);font-family:var(--font-title);letter-spacing:.1em;text-transform:uppercase;margin-left:.3rem;">Deberes</span></span>
         </div>
         <div class="mission-actions">
           <a class="btn-mission" href="misiones/mision-07/index.html" target="_blank" rel="noopener">Ver ficha</a>
         </div>
       </li>
-      <li class="mission-item locked" aria-label="Mini control bloqueado">
+      <li class="mission-item">
         <div class="mission-info">
           <span class="mission-num">MC-S7</span>
-          <span class="mission-name">Mini control del territorio</span>
+          <span class="mission-name">Control de operaciones con polinomios</span>
         </div>
         <div class="mission-actions">
-          <span class="locked-tag">🔒 Se habilita después de la corrección en clase</span>
+          <a class="btn-mission" href="cierre/index.html">Acceder →</a>
         </div>
       </li>
     </ol>
@@ -534,7 +516,7 @@
       nombre: "Misiones del Explorador",
       icono: "🧮",
       tipo: "Práctica · Subreino 2",
-      descripcion: "Siete misiones sobre polinomios: clasificación, suma, resta, multiplicación, cuadrado de binomio y crucigrama de cierre.",
+      descripcion: "Cinco misiones sobre polinomios: clasificación, suma y resta, multiplicación, del rectángulo al cuadrado de un binomio, y crucigrama de cierre.",
       boton: null,
       enlace: null,
       nuevaPestana: false,
@@ -568,12 +550,12 @@
       nombre: "Desafío Final",
       icono: "🏆",
       tipo: "Evaluación · Subreino 2",
-      descripcion: "Mini control de cierre. Se habilita después de la corrección en clase.",
-      boton: null,
-      enlace: null,
+      descripcion: "Mini control de operaciones con polinomios. Accedé al control y a la resolución explicada.",
+      boton: "Acceder al Desafío Final",
+      enlace: "cierre/index.html",
       nuevaPestana: false,
       esMisiones: false,
-      bloqueado: true,
+      bloqueado: false,
       posicion: {
         desktop: { x: "82%", y: "76%" },
         mobile:  { x: "78%", y: "80%" }

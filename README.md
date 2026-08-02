@@ -1,73 +1,157 @@
 # Reinos Matemáticos 2026
+
 **Proyecto web educativo — 8.º EBI · Liceo de Médanos, Uruguay**
 Autora pedagógica: Gabriela Michelle Fernández
 
 ---
 
-## 🌐 URL pública (GitHub Pages)
+## URL pública (GitHub Pages)
 
 ```
 https://laprofe2007.github.io/matematica-8ebi/
 ```
 
-Página de entrada: `index.html` en la raíz.
+Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom u otros documentos compartidos con estudiantes.
 
 ---
 
-## 🗂️ Estructura de carpetas
+## Estado actual (agosto 2026)
+
+| Reino | Subreino | Misiones | Biblioteca | Desafío / MC |
+|---|---|---|---|---|
+| Proporciones (S3/S4) | — | ✅ A-01 a A-08 | ✅ Con videos | ✅ Habilitado |
+| Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
+| Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | 🔒 MC no habilitado aún |
+| Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 4 lecciones | ✅ MC-S7 habilitado |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E11 | 🔒 Bloqueada | 🔒 Bloqueado |
+
+---
+
+## Interruptores de contenido bloqueado
+
+Para habilitar contenido, editar la constante en el archivo indicado y hacer push. Sin otros cambios.
+
+| Archivo | Constante | Estado actual | Efecto |
+|---|---|---|---|
+| `algebra-funciones/cierre/index.html` | `MC_HABILITADO` | `false` | Habilita el mini control S6 |
+| `algebra-funciones/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` | Habilita resolución S6 |
+| `algebra-funciones/s7-polinomios/cierre/index.html` | `MC_HABILITADO` | `true` ✅ | Ya habilitado |
+| `algebra-funciones/s7-polinomios/cierre/index.html` | `RESOLUCION_HABILITADA` | `true` ✅ | Ya habilitado |
+
+---
+
+## Estructura de carpetas completa
 
 ```
 raíz/
-├── index.html                          ← Portal de todos los reinos
-├── iconos_web/                         ← Iconos PNG compartidos (castillo, biblioteca, etc.)
-├── imagenes para ejercicios/           ← Imágenes educativas (infografías, ilustraciones)
+├── index.html                                        ← Portal de todos los reinos
+├── iconos_web/                                       ← Íconos PNG compartidos (castillo, biblioteca, cofre…)
+├── imagenes para ejercicios/                         ← Infografías y materiales visuales
 │
-├── proporciones/                       ← Reino 1: Razones y Proporcionalidad
-│   ├── index.html                      ← Mapa del reino (territorios interactivos)
-│   ├── biblioteca.html                 ← Material teórico con videos y teoría
-│   ├── Fabrica_Pintura_Applet_v3.html  ← Applet interactivo misión I
-│   ├── Ciudad_Proporciones_Interactivo.html ← Applet interactivo misión IV
-│   └── Actividades/                    ← PDFs de actividades del reino
-│       ├── Prologo_Reino_Razones_Proporciones.pdf
-│       ├── TD_Bitacora_Explorador.pdf
-│       ├── S4 Act1_Fabrica_Pintura_v3.pdf
-│       ├── S4_Act2_Mapa_Uruguay_Escala.pdf
-│       ├── S4_Act3_ElIntruso_v2.pdf
-│       ├── S4_Act4_CiudadProporciones.pdf
-│       ├── S4_Act5_ViajeEgresados_v2.pdf
-│       ├── S4_Act6_Clasificacion_v2.pdf
-│       ├── Act8_K_en_todos_lados_v2.pdf
-│       ├── S4_Mini_Eval_Estudiante_v2.pdf
-│       └── EvalIntegradora_S3_S4_v4.pdf
+├── proporciones/                                     ← Reino 1: Razones y Proporcionalidad
+│   ├── index.html                                    ← Mapa del reino
+│   ├── biblioteca.html                               ← Material teórico con videos
+│   ├── Bitacora_Cierre_Proporcionalidad.html
+│   ├── Fabrica_Pintura_Applet_v3.html                ← Applet activo en el sitio
+│   ├── Fabrica_Pintura_Applet_v4.html                ← Versión local, NO publicada (ver ROADMAP)
+│   ├── Ciudad_Proporciones_Interactivo.html
+│   └── Actividades/                                  ← 13 PDFs (estudiante + docente)
 │
-└── tierras-sin-mapa/                   ← Reino 2: Probabilidad y Estadística
-    ├── index.html                      ← Mapa del reino
-    ├── intro.html                      ← Intro animada (frases cinematográficas)
-    ├── Simulador_Sobres_Panini2026.html ← Simulador interactivo (C38)
-    └── Actividades/                    ← PDFs de actividades del reino
-        ├── capitlulo 4 mate porras.pdf ← Material teórico principal
-        ├── Control_Lectura_Probabilidad_S5.pdf
-        ├── C34_Desafio_Adivinos.pdf
-        ├── C36_Gran_Experimento_Dado.pdf
-        ├── C37_Dado_y_Moneda.pdf
-        ├── C37_Deberes.pdf
-        ├── C38_Panini_Figuritas.pdf
-        ├── C39_Del_Conteo_a_la_Proporcion.pdf
-        ├── C40_Hacia_la_Probabilidad.pdf
-        ├── C41_C42_EspacioMuestral_Eventos.pdf
-        ├── C43_Del factor k al porcentaje.pdf
-        ├── C44_Arbol_Interseccion_Independencia.pdf
-        ├── C45_Juegos_de_Azar_5_versiones.pdf
-        ├── C46_Evaluacion_Integradora_Probabilidad.pdf
-        ├── Probabilidad_en_Contexto.pdf
-        └── Viñeta conceptual.png
+├── tierras-sin-mapa/                                 ← Reino 2: Probabilidad y Estadística
+│   ├── index.html                                    ← Mapa del reino
+│   ├── intro.html                                    ← Intro animada con citas cinematográficas
+│   ├── Simulador_Sobres_Panini2026.html
+│   └── Actividades/                                  ← 16 PDFs + 1 imagen
+│
+└── algebra-funciones/                                ← Reino 3: Álgebra y las Funciones
+    ├── index.html                                    ← Mapa del reino (3 subreinos + placeholders)
+    ├── prologo/
+    │   └── index.html                                ← "El misterio del número sin nombre"
+    │
+    ├── biblioteca/                                   ← Biblioteca del reino — vinculada a S6
+    │   ├── index.html
+    │   ├── leccion1_variables_expresiones.html
+    │   ├── leccion2_lenguaje_algebraico.html
+    │   ├── leccion3_terminos_semejantes.html
+    │   ├── leccion4_monomios_polinomios.html
+    │   └── actividad4_definiciones.pdf
+    │
+    ├── misiones/                                     ← Misiones de S6 (A-01 a A-06)
+    │   ├── mision-01/  A-01 Las letras que ya conocíamos (PNG)
+    │   ├── mision-02/  A-02 Una escritura para cualquier figura (PDF)
+    │   ├── mision-03/  A-03 El intruso de las expresiones (PDF · Deberes)
+    │   ├── mision-04/  A-04 Expresiones en acción (PDF)
+    │   ├── mision-05/  A-05 La tarifa del taxi (PDF)
+    │   ├── mision-06/  A-06 Perímetros con letras (PDF)
+    │   └── resoluciones/
+    │       ├── A-01_A-02_Resolucion_Explicada.html
+    │       ├── A-04_Resolucion_Explicada.html
+    │       └── A-05_Resolucion_Explicada.html
+    │
+    ├── cierre/                                       ← Desafío Final S6
+    │   ├── index.html   (MC_HABILITADO=false · RESOLUCION_HABILITADA=false)
+    │   ├── mc_s6_actividades.html
+    │   ├── mc_s6_resolucion_explicada.html
+    │   └── mc_s6_resolucion_explicada.pdf
+    │
+    ├── s6-codigo-letras/
+    │   └── index.html                                ← Mapa del Subreino 1
+    │
+    ├── s7-polinomios/                                ← Subreino 2: El Mundo de los Polinomios
+    │   ├── index.html                                ← Mapa (5 misiones · Biblioteca · Desafío ✅)
+    │   ├── biblioteca/
+    │   │   ├── index.html                            ← Hub de 4 lecciones
+    │   │   ├── Leccion_Suma_Resta_Polinomios.html    Lección 1 — suma y resta en columna
+    │   │   ├── leccion-2.html                        Lección 2 — multiplicación · propiedad distributiva
+    │   │   ├── Leccion_Multiplicacion_Polinomios.html Lección 3 — multiplicación en columna
+    │   │   ├── leccion-4.html                        Lección 4 — cuadrado de un binomio · producto notable
+    │   │   ├── pag104_Porras_Leccion.png
+    │   │   └── pag107_Producto_Notable_Leccion.pdf
+    │   ├── misiones/
+    │   │   ├── mision-01/  A-07 Clasificación de polinomios (PDF) · resolución ✅
+    │   │   ├── mision-02/  A-08 Suma y resta (PDF) · resolución ✅
+    │   │   ├── mision-03/  A-09 Refuerzo suma/resta (PDF+PNG · Deberes · sin misión digital)
+    │   │   ├── mision-04/  A-10 Multiplicación (PDF) · resolución ✅
+    │   │   ├── mision-05/  [Refuerzo mult, sin código activo · archivos mantenidos]
+    │   │   ├── mision-06/  A-11 Del rectángulo al cuadrado de un binomio (PDF) · resolución ✅
+    │   │   └── mision-07/  A-12 Crucigrama de cierre (PDF · Deberes) · resolución ✅
+    │   ├── resoluciones/
+    │   │   ├── A07_Clasificacion_Polinomios_Resolucion.html
+    │   │   ├── A08_Suma_Resta_Polinomios_Resolucion.html
+    │   │   ├── A10_Multiplicacion_Polinomios_Resolucion.html
+    │   │   ├── A11_Cuadrado_Binomio_Resolucion.html
+    │   │   └── A12_Crucigrama_Resolucion.html
+    │   └── cierre/                                   ← Desafío Final S7
+    │       ├── index.html   (MC_HABILITADO=true · RESOLUCION_HABILITADA=true)
+    │       ├── mc_s7_polinomios.pdf
+    │       └── mc_s7_resolucion_explicada.html
+    │
+    └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
+        ├── index.html                                ← Mapa (11 misiones · Biblioteca 🔒 · Desafío 🔒)
+        ├── misiones/
+        │   ├── mision-01/  E01 — El pijama de la muerte (PNG)
+        │   ├── mision-02/  E02 — Método de inversión (PDF) · resolución ✅
+        │   ├── mision-03/  E03 — Práctica de ecuaciones (PDF)
+        │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución ✅
+        │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución ✅
+        │   ├── mision-06/  E11 — Ficha interactiva (HTML) · resolución ✅
+        │   ├── mision-07/  E06 — Baraja de ecuaciones (PDF estudiante)
+        │   ├── mision-08/  E07 — Bingo de ecuaciones (PDF estudiante)
+        │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (PDF)
+        │   ├── mision-10/  E09 — Ecuaciones · Porras (PDF)
+        │   └── mision-11/  E10 — Ecuaciones y problemas · Porras (PDF)
+        └── resoluciones/
+            ├── E02_resolucion.html
+            ├── E04_resolucion.html
+            ├── E05_resolucion.html
+            └── E11_resolucion.html
 ```
 
 ---
 
-## 🔗 URLs directas
+## URLs directas
 
-| Página | URL |
+| Página | Ruta |
 |---|---|
 | Portal (todos los reinos) | `/` |
 | Reino Proporciones — mapa | `/proporciones/index.html` |
@@ -77,125 +161,95 @@ raíz/
 | Las Tierras sin Mapa — intro | `/tierras-sin-mapa/intro.html` |
 | Las Tierras sin Mapa — mapa | `/tierras-sin-mapa/index.html` |
 | Simulador Panini | `/tierras-sin-mapa/Simulador_Sobres_Panini2026.html` |
+| Álgebra y Funciones — mapa | `/algebra-funciones/index.html` |
+| S6 — Código de Letras | `/algebra-funciones/s6-codigo-letras/index.html` |
+| S6 — Biblioteca | `/algebra-funciones/biblioteca/index.html` |
+| S6 — Desafío Final | `/algebra-funciones/cierre/index.html` |
+| S7 — El Mundo de los Polinomios | `/algebra-funciones/s7-polinomios/index.html` |
+| S7 — Biblioteca | `/algebra-funciones/s7-polinomios/biblioteca/index.html` |
+| S7 — Desafío Final (MC-S7) | `/algebra-funciones/s7-polinomios/cierre/index.html` |
+| S8 — El Equilibrio Oculto | `/algebra-funciones/s8-ecuaciones/index.html` |
 
 ---
 
-## 🏗️ Arquitectura técnica
+## Arquitectura técnica
 
-- **Tecnología**: HTML + CSS + JS puro. Sin frameworks, sin build tools.
-- **Despliegue**: GitHub Pages (rama `main`, carpeta raíz).
-- **Fuentes**: Cinzel (títulos) + Libre Baskerville (cuerpo) — Google Fonts.
-- **Nuevo reino**: crear carpeta `nombre-reino/` con su `index.html` y `Actividades/`, luego agregar tarjeta en `index.html` raíz.
+- **Tecnología**: HTML + CSS + JS puro. Sin frameworks, sin build tools, sin dependencias.
+- **Despliegue**: GitHub Pages, rama `main`, carpeta raíz. Push = publicación inmediata.
+- **Fuentes**: Cinzel (títulos) + Libre Baskerville (cuerpo) vía Google Fonts. Misiones y resoluciones usan Nunito.
+- **Repositorio**: `https://github.com/Laprofe2007/matematica-8ebi`
 
-### Mapa de reino (index.html de cada reino)
-- SVG cartográfico con territorios posicionados con `--x` / `--y` CSS vars
-- Array JS `territorios[]` controla nombre, icono, posición, enlace y tipo de modal
-- Sistema de modales: detalle (para PDFs/páginas) + actividades (lista con scroll) + evaluación (bloqueada) + simulador GeoGebra (en tierras-sin-mapa)
-- Focus trap + Escape key + click en backdrop para cerrar modales
-- Responsive: posiciones desktop/mobile en cada territorio
+### Patrón de subreino (cómo funciona el mapa interactivo)
+
+- El `index.html` de cada subreino tiene un array JS `territorios[]` con: nombre, ícono, descripción, posición (desktop/mobile), enlace, estado (bloqueado o no).
+- Territorios de tipo `esMisiones: true` abren el modal de misiones (lista con scroll).
+- Territorios normales abren un modal de detalle con botón de acción.
+- Posicionamiento: `--x` / `--y` CSS custom properties + `transform: translate(-50%, -50%)`.
+- Sistema de modales: cierra con Escape, clic en fondo, o botón ×. Focus trap para accesibilidad.
+- Responsive: cada territorio tiene posición `desktop` y `mobile` independiente.
+
+### Patrón de cierre / Desafío Final
+
+Cada cierre tiene un `index.html` con dos constantes JS:
+```js
+const MC_HABILITADO = false;        // Cambiá a true para habilitar el mini control
+const RESOLUCION_HABILITADA = false; // Cambiá a true para habilitar la resolución
+```
+Son independientes. El contenido aparece o se muestra bloqueado según el valor.
 
 ### Paleta de colores
-**Portal y biblioteca** (fondo claro):
+
+**Portal, bibliotecas, misiones, resoluciones** (fondo pergamino claro):
 ```css
-background: #fdf5e0   /* pergamino claro */
---ink:   #2a1c12      /* texto principal */
---gold:  #8a5e14      /* subtítulos, bordes */
---amber: #7a4f0a      /* títulos h1/h2 */
+background: #fdf5e0
+--ink:   #2a1c12
+--gold:  #8a5e14
+--amber: #7a4f0a
 ```
 
-**Mapas de reinos** (fondo cálido dorado):
+**Mapas de subreinos** (fondo dorado cálido):
 ```css
-background: #f2e2b0   /* pergamino dorado */
+background: #f2e2b0 / #f0e0b0
+--gold:  #c9983f
+--amber: #b07828
 ```
 
-**Tierras sin Mapa** (fondo oscuro):
+**Las Tierras sin Mapa** (fondo oscuro noche):
 ```css
-background: #0D1B2A   /* azul noche */
---gold:  #D4A017      /* dorado brillante */
+background: #0D1B2A
+--gold:  #D4A017
+```
+
+**Resoluciones explicadas** (Nunito, fondo lila claro):
+```css
+background: #f4f2fb
+color: #2c1a4d
+header: linear-gradient(135deg, #5b2a86, #8e44ad)
 ```
 
 ---
 
-## ⚠️ Reglas de diseño (no cambiar)
+## Reglas de diseño (no cambiar sin revisar)
 
-- Fuentes: siempre Cinzel + Libre Baskerville
-- Biblioteca y portal: fondo CLARO — el oscuro hace ilegible el texto
-- Videos YouTube: nunca usar `?wmode=opaque` — causa Error 153
-- Imágenes: hospedar en el repo, nunca URLs de Ceibal/Schoology (requieren login)
-- Cada reino: su propia carpeta con todo adentro
-- `index.html` raíz: solo navegación entre reinos, sin actividades ni teoría
-
----
-
-## 📋 Estado actual (julio 2026)
-
-| Reino | Estado |
-|---|---|
-| Proporciones | ✅ Completo y publicado |
-| Las Tierras sin Mapa (Probabilidad) | ✅ Completo y publicado |
-| Álgebra y las Funciones | ✅ Completo — 6 misiones, biblioteca y cierre activos |
-| Siguientes reinos | 🔒 Placeholder en portal, se agregan durante el año |
+- Fuentes de subreinos y portal: siempre Cinzel + Libre Baskerville.
+- Misiones y resoluciones: Nunito.
+- Bibliotecas y portal: fondo CLARO — el oscuro hace ilegible el texto de estudio.
+- Videos YouTube: nunca usar `?wmode=opaque` — causa Error 153 en dispositivos CREA.
+- Imágenes: alojar en el repositorio. Nunca URLs de Ceibal o Schoology (requieren login).
+- Cada subreino: su propia carpeta (`s6-`, `s7-`, `s8-`). Los recursos van adentro.
+- Versiones docente / material interno: NO publicar en el sitio sin decisión explícita.
+- No agregar botones "volver" ni "siguiente misión" entre páginas de misiones.
 
 ---
 
-## Estructura completa de carpetas (julio 2026)
+## Reglas de git para este repositorio
 
-```
-raíz/
-├── index.html                                  ← Portal de todos los reinos
-├── iconos_web/                                 ← Iconos PNG compartidos
-├── imagenes para ejercicios/                  ← Imágenes educativas
-│
-├── proporciones/                               ← Reino 1: Razones y Proporcionalidad
-│   ├── index.html
-│   ├── biblioteca.html
-│   ├── Bitacora_Cierre_Proporcionalidad.html
-│   ├── Fabrica_Pintura_Applet_v3.html          ← Applet activo (contenido v4)
-│   ├── Ciudad_Proporciones_Interactivo.html
-│   └── Actividades/                            ← 11 PDFs
-│
-├── tierras-sin-mapa/                           ← Reino 2: Probabilidad y Estadística
-│   ├── index.html
-│   ├── intro.html
-│   ├── Simulador_Sobres_Panini2026.html
-│   └── Actividades/                            ← 15 PDFs + 1 imagen
-│
-└── algebra-funciones/                          ← Reino 3: Álgebra y las Funciones
-    ├── index.html                              ← Mapa del reino (5 territorios activos + 3 placeholders)
-    ├── prologo/
-    │   └── index.html                          ← Crónica "El misterio del número sin nombre"
-    ├── biblioteca/
-    │   ├── index.html                          ← Índice de lecciones
-    │   ├── leccion1_variables_expresiones.html
-    │   ├── leccion2_lenguaje_algebraico.html
-    │   ├── leccion3_terminos_semejantes.html
-    │   ├── leccion4_monomios_polinomios.html   ← Monomio, coeficiente, semejantes, valor numérico
-    │   └── actividad4_definiciones.pdf         ← PDF descargable de la Lección 4
-    ├── misiones/
-    │   ├── mision-01/  ← A-01 Las letras que ya conocíamos (PNG)
-    │   ├── mision-02/  ← A-02 Una escritura para cualquier figura (PDF)
-    │   ├── mision-03/  ← A-03 El intruso de las expresiones (PDF · Deberes)
-    │   ├── mision-04/  ← A-04 Expresiones en acción (PDF)
-    │   ├── mision-05/  ← A-05 La tarifa del taxi (PDF)
-    │   └── mision-06/  ← A-06 Perímetros con letras (PDF)
-    └── cierre/
-        ├── index.html                          ← Gateway con MC_HABILITADO y RESOLUCION_HABILITADA
-        ├── mc_s6_actividades.html              ← Mini control interactivo (v2)
-        ├── mc_s6_resolucion_explicada.html     ← Resolución comentada (bloqueada por separado)
-        └── mc_s6_resolucion_explicada.pdf      ← PDF descargable de la resolución
-```
+Archivos que **nunca se deben agregar al staging**:
+
+- `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para reino futuro de Funciones Lineales
+- `proporciones/Actividades/hoja docente Correccion a_S3_S4_v4.pdf` — uso interno docente
+- `proporciones/Actividades/S4_Act5_ViajeEgresados_v2.pdf` — versión en revisión
 
 ---
 
-## Notas de mantenimiento
-
-- El desafío del Reino de las Proporciones ya está habilitado para estudiantes.
-- La mini-evaluación y la evaluación integradora de Proporciones están enlazadas desde el modal Desafío.
-- **Habilitar el mini control MC-S6**: en `algebra-funciones/cierre/index.html` cambiá `const MC_HABILITADO = false` por `true` y hacé push.
-- **Habilitar la resolución explicada** (momento posterior): en el mismo archivo cambiá `const RESOLUCION_HABILITADA = false` por `true` y hacé push. Son independientes.
-- La Misión III (A-03) está rotulada como "Deberes" en el modal y en su página visor.
-- Si se reemplaza un PDF manteniendo el mismo nombre, alcanza con agregar, commitear y subir ese archivo.
-- Material docente o borradores no deben mostrarse en el sitio salvo decisión explícita.
-- `Fabrica_Pintura_Applet_v4.html` existe solo en la PC local — reservado para el reino de Funciones Lineales.
-
-Ver también: [`ROADMAP.md`](ROADMAP.md).
+Ver también: [`ROADMAP.md`](ROADMAP.md) · [`CHANGELOG.md`](CHANGELOG.md)

@@ -22,7 +22,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Proporciones (S3/S4) | — | ✅ A-01 a A-08 | ✅ Con videos | ✅ Habilitado |
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | 🔒 MC no habilitado aún |
-| Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 4 lecciones | ✅ MC-S7 habilitado |
+| Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 | Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E11 | 🔒 Bloqueada | 🔒 Bloqueado |
 
 ---
@@ -35,8 +35,8 @@ Para habilitar contenido, editar la constante en el archivo indicado y hacer pus
 |---|---|---|---|
 | `algebra-funciones/cierre/index.html` | `MC_HABILITADO` | `false` | Habilita el mini control S6 |
 | `algebra-funciones/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` | Habilita resolución S6 |
-| `algebra-funciones/s7-polinomios/cierre/index.html` | `MC_HABILITADO` | `true` ✅ | Ya habilitado |
-| `algebra-funciones/s7-polinomios/cierre/index.html` | `RESOLUCION_HABILITADA` | `true` ✅ | Ya habilitado |
+| `algebra-funciones/s7-polinomios/cierre/index.html` | `MC_HABILITADO` | `false` 🔒 | Bloqueado hasta nueva habilitación |
+| `algebra-funciones/s7-polinomios/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` 🔒 | Bloqueado hasta corrección en clase |
 
 ---
 
@@ -100,11 +100,12 @@ raíz/
     ├── s7-polinomios/                                ← Subreino 2: El Mundo de los Polinomios
     │   ├── index.html                                ← Mapa (5 misiones · Biblioteca · Desafío ✅)
     │   ├── biblioteca/
-    │   │   ├── index.html                            ← Hub de 4 lecciones
+    │   │   ├── index.html                            ← Hub de 5 lecciones
     │   │   ├── Leccion_Suma_Resta_Polinomios.html    Lección 1 — suma y resta en columna
     │   │   ├── leccion-2.html                        Lección 2 — multiplicación · propiedad distributiva
     │   │   ├── Leccion_Multiplicacion_Polinomios.html Lección 3 — multiplicación en columna
     │   │   ├── leccion-4.html                        Lección 4 — cuadrado de un binomio · producto notable
+    │   │   ├── leccion-5.html                        Lección 5 — cuadrado de un binomio · versión gráfica
     │   │   ├── pag104_Porras_Leccion.png
     │   │   └── pag107_Producto_Notable_Leccion.pdf
     │   ├── misiones/

@@ -5,6 +5,41 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-08-04
+
+### S7 Biblioteca: Lección 5 — Cuadrado de un binomio versión gráfica (`36c5a8d`)
+
+- Creada `s7-polinomios/biblioteca/leccion-5.html`: demostración visual por áreas del (a+b)².
+- Hub `biblioteca/index.html` actualizado con tarjeta de Lección 5.
+- `leccion-4.html` actualizada con botón "Siguiente → Lección 5".
+
+### S8 menú: reubicar Freudenthal (E-08) a posición III (`e2d4131`)
+
+- E-08 (Freudenthal) pasa de Misión IX a Misión III, inmediatamente después de E-02.
+- Misiones III–IX renumeradas en consecuencia; hrefs a carpetas sin cambios.
+
+### S7 cierre: deshabilitar MC-S7 (`e2d4131`)
+
+- `MC_HABILITADO` → `false`. `RESOLUCION_HABILITADA` ya estaba en `false`.
+
+### S6 cierre: correcciones MC-S6 (`9069fe1`)
+
+- `mc_s6_resolucion_explicada.html`: eliminado inciso d (verificación x=4) de tarjeta 4.
+- `mc_s6_actividades.html`: tarjeta 3 abierta — sin preasignar la letra a "bolas azules".
+- `cierre/index.html`: botón descarga `MC_S6_v3_final.pdf` agregado al MC; botón PDF eliminado de la resolución.
+- `MC_S6_v3_final.pdf` publicado; `mc_s6_resolucion_explicada.pdf` eliminado del repo.
+
+### S7: mision-05 eliminada y Ochoviet reservado en S8 (`991b640`, `1ecd78c`)
+
+- Carpeta `mision-05` (refuerzo mult huérfano) eliminada de S7.
+- `areas_rectangulo_Ochoviet.pdf` (Ochoviet-Vitabar, actividad áreas con dos letras) guardado en `s8-ecuaciones/` sin código asignado.
+
+### S7 cierre: bloquear resolución (`556774c`)
+
+- `RESOLUCION_HABILITADA` → `false` en cierre S7 (MC sigue accesible mientras se corrige en clase).
+
+---
+
 ## 2026-07-31
 
 ### S7 — Renumeración de actividades e integración del MC-S7 (`dd09b57`)

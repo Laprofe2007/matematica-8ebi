@@ -8,6 +8,11 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Prioridad alta (próximos pasos inmediatos)
 
+### S7 — El Mundo de los Polinomios
+
+- [ ] **Habilitar MC-S7** cuando corresponda: `cierre/index.html`, `MC_HABILITADO = false` → `true`.
+- [ ] **Habilitar resolución MC-S7** en momento posterior: `RESOLUCION_HABILITADA = false` → `true`.
+
 ### S8 — El Equilibrio Oculto (Ecuaciones)
 
 - [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML).
@@ -18,8 +23,8 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ### S6 — Código de Letras
 
-- [ ] **Habilitar MC-S6**: en `algebra-funciones/cierre/index.html` cambiar `MC_HABILITADO = false` → `true` y hacer push.
-- [ ] **Habilitar resolución MC-S6**: mismo archivo, `RESOLUCION_HABILITADA = false` → `true`. Se hace en momento posterior, después de corregir en clase.
+- [ ] **Habilitar MC-S6**: `algebra-funciones/cierre/index.html`, `MC_HABILITADO = false` → `true`.
+- [ ] **Habilitar resolución MC-S6**: mismo archivo, `RESOLUCION_HABILITADA = false` → `true`. Momento posterior, después de corregir en clase.
 - [ ] **Resolución A-06**: habilitarla cuando esté lista (actualmente sin archivo en resoluciones/).
 - [ ] **Resolución A-03**: habilitarla cuando esté lista (actualmente sin archivo).
 

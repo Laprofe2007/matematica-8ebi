@@ -13,6 +13,7 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 - [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML).
 - [ ] **Crear biblioteca de S8** — hub con lecciones sobre ecuaciones (mismo patrón que S7).
 - [ ] **Crear cierre de S8** (MC-S8) — `cierre/index.html` con `MC_HABILITADO=false` y `RESOLUCION_HABILITADA=false`.
+- [ ] **Integrar `areas_rectangulo_Ochoviet.pdf`** como misión formal en S7: está guardado en `s7-polinomios/misiones/mision-06/` como material de apoyo para A-11 "Del rectángulo al cuadrado de un binomio" (Ochoviet-Vitabar pág. 32 + Porras Act. 3.12 pág. 107). Sin código ni numeración asignada aún.
 - [ ] **Habilitar Desafío Final S8** en el mapa del subreino (actualmente bloqueado).
 
 ### S6 — Código de Letras

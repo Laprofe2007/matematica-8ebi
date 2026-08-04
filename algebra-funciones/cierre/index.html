@@ -193,7 +193,11 @@
 
     const accion = document.getElementById('mcAccion');
     if (MC_HABILITADO) {
-      accion.innerHTML = '<a class="btn-mc-activo" href="mc_s6_actividades.html">Iniciar mini control →</a>';
+      accion.innerHTML = `
+        <div class="btn-group">
+          <a class="btn-mc-activo" href="mc_s6_actividades.html">Iniciar mini control →</a>
+          <a class="btn-mc-pdf" href="MC_S6_v3_final.pdf" download>↓ Descargar PDF</a>
+        </div>`;
     } else {
       accion.innerHTML = `
         <span class="btn-mc-bloqueado" aria-disabled="true">🔒 No disponible aún</span>
@@ -202,11 +206,7 @@
 
     const resolAccion = document.getElementById('resolAccion');
     if (RESOLUCION_HABILITADA) {
-      resolAccion.innerHTML = `
-        <div class="btn-group">
-          <a class="btn-mc-activo" href="mc_s6_resolucion_explicada.html">Ver resolución →</a>
-          <a class="btn-mc-pdf" href="mc_s6_resolucion_explicada.pdf" download>↓ Descargar PDF</a>
-        </div>`;
+      resolAccion.innerHTML = `<a class="btn-mc-activo" href="mc_s6_resolucion_explicada.html">Ver resolución →</a>`;
     } else {
       resolAccion.innerHTML = `
         <span class="btn-mc-bloqueado" aria-disabled="true">🔒 No disponible aún</span>

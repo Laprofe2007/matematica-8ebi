@@ -15,16 +15,21 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ### S8 — El Equilibrio Oculto (Ecuaciones)
 
-- [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML).
-- [ ] **Crear biblioteca de S8** — hub con lecciones sobre ecuaciones (mismo patrón que S7).
-- [ ] **Crear cierre de S8** (MC-S8) — `cierre/index.html` con `MC_HABILITADO=false` y `RESOLUCION_HABILITADA=false`.
-- [ ] **Integrar `areas_rectangulo_Ochoviet.pdf`** como misión formal en S8: guardado en `s8-ecuaciones/` sin código E-XX todavía. Actividad de áreas de rectángulo con expresión analítica usando dos letras (Ochoviet-Vitabar). Se integra cuando se planifique esa parte de la secuencia.
+S8 completamente armada pedagógicamente (14 fichas E01-E13 + MC-S8, Biblioteca L1/L2). Pendiente: subir a GitHub lo que está listo localmente.
+
+- [ ] **Publicar Biblioteca S8** — `Biblioteca_L1_Lenguaje_y_equivalencia.html` y `Biblioteca_L2_Metodo_de_Polya.html` están en la raíz local sin commitear. Mover a `s8-ecuaciones/biblioteca/` y crear hub.
+- [ ] **Publicar MC-S8** — `cierre/index.html` + archivos del mini control. Confirmar ubicación local del archivo antes de subir.
+- [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML en repo).
 - [ ] **Habilitar Desafío Final S8** en el mapa del subreino (actualmente bloqueado).
+
+### S7 — Área de rectángulo (Ochoviet)
+
+- [ ] **`areas_rectangulo_Ochoviet.pdf`** movido a `s7-polinomios/misiones/mision-06/` — material de apoyo para A-11 "Del rectángulo al cuadrado de un binomio" (Ochoviet-Vitabar pág. 32). Sin código de actividad adicional asignado; se usa como material complementario de la misión existente.
 
 ### S6 — Código de Letras
 
-- [ ] **Habilitar MC-S6**: `algebra-funciones/cierre/index.html`, `MC_HABILITADO = false` → `true`.
-- [ ] **Habilitar resolución MC-S6**: mismo archivo, `RESOLUCION_HABILITADA = false` → `true`. Momento posterior, después de corregir en clase.
+- [x] **MC-S6 aplicado en clase** (~clase 42) y corregido. ✓
+- [ ] **Habilitar resolución MC-S6**: `cierre/index.html`, `RESOLUCION_HABILITADA = false` → `true`. Hacer cuando corresponda después de la corrección.
 - [ ] **Resolución A-06**: habilitarla cuando esté lista (actualmente sin archivo en resoluciones/).
 - [ ] **Resolución A-03**: habilitarla cuando esté lista (actualmente sin archivo).
 

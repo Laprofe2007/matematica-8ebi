@@ -5,6 +5,18 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-08-05
+
+### S8 Biblioteca: publicadas L1 y L2 + E02 resolución actualizada (`1b24d3f`)
+
+- Creada `s8-ecuaciones/biblioteca/` con hub `index.html` (patrón S7 — Cinzel, fondo pergamino).
+- L1 — Lenguaje y equivalencia de ecuaciones: vocabulario, miembros, incógnitas, grado, los tres casos.
+- L2 — El método de Polya: cuatro fases ilustradas con ejemplo del taxi de E02.
+- `E02_resolucion.html` reemplazada por versión corregida (ruta al PDF de ficha ajustada a `../misiones/mision-02/`).
+- Pendiente: cierre S8 (MC-S8) y desbloqueo de Biblioteca en el mapa del subreino.
+
+---
+
 ## 2026-08-04
 
 ### S7 Biblioteca: Lección 5 — Cuadrado de un binomio versión gráfica (`36c5a8d`)

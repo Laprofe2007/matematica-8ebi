@@ -15,10 +15,11 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ### S8 — El Equilibrio Oculto (Ecuaciones)
 
-S8 completamente armada pedagógicamente (14 fichas E01-E13 + MC-S8, Biblioteca L1/L2). Pendiente: subir a GitHub lo que está listo localmente.
+S8 completamente armada pedagógicamente (14 fichas E01-E13 + MC-S8, Biblioteca L1/L2). En curso: publicar lo que falta.
 
-- [ ] **Publicar Biblioteca S8** — `Biblioteca_L1_Lenguaje_y_equivalencia.html` y `Biblioteca_L2_Metodo_de_Polya.html` están en la raíz local sin commitear. Mover a `s8-ecuaciones/biblioteca/` y crear hub.
-- [ ] **Publicar MC-S8** — `cierre/index.html` + archivos del mini control. Confirmar ubicación local del archivo antes de subir.
+- [x] **Biblioteca S8 publicada** — hub + L1 + L2 en `s8-ecuaciones/biblioteca/`. ✓
+- [ ] **Publicar MC-S8** — `cierre/index.html` + `MC-S8_ficha.html` + `MC-S8_resolucion.html`. Archivos en preparación local, se suben cuando estén en la carpeta del proyecto.
+- [ ] **Desbloquear Biblioteca S8 en el mapa del subreino** — cuando corresponda, actualizar `territorios[]` en `s8-ecuaciones/index.html` para quitar bloqueo de la Biblioteca.
 - [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML en repo).
 - [ ] **Habilitar Desafío Final S8** en el mapa del subreino (actualmente bloqueado).
 

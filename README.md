@@ -23,7 +23,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | 🔒 MC no habilitado aún |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E11 | 🔒 Bloqueada | 🔒 Bloqueado |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E11 | ✅ 2 lecciones | 🔒 Bloqueado |
 
 ---
 
@@ -128,7 +128,11 @@ raíz/
     │       └── mc_s7_resolucion_explicada.html
     │
     └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
-        ├── index.html                                ← Mapa (11 misiones · Biblioteca 🔒 · Desafío 🔒)
+        ├── index.html                                ← Mapa (11 misiones · Biblioteca ✅ · Desafío 🔒)
+        ├── biblioteca/
+        │   ├── index.html                            ← Hub de 2 lecciones
+        │   ├── Biblioteca_L1_Lenguaje_y_equivalencia.html  Lección 1 — vocabulario y equivalencia
+        │   └── Biblioteca_L2_Metodo_de_Polya.html          Lección 2 — método de Polya
         ├── misiones/
         │   ├── mision-01/  E01 — El pijama de la muerte (PNG)
         │   ├── mision-02/  E02 — Método de inversión (PDF) · resolución ✅

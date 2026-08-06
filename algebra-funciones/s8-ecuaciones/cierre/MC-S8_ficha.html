@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MC-S8 · Control de Ecuaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#a02334; --accent-dark:#5c0e1a; --ok:#4caf50; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:26px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .datos{display:flex;gap:18px;flex-wrap:wrap;padding:14px 28px;background:#fdf1f2;border-bottom:2px solid #f3d9dc;font-size:13px;color:#5c0e1a}
+  .datos span b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;opacity:.7}
+
+  .body{padding:26px 28px}
+
+  .bloque{border:2px solid #f3d9dc;border-radius:14px;margin-bottom:20px;overflow:hidden}
+  .bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#fbe4e7,#fdf4f5);padding:12px 18px;border-bottom:2px solid #f3d9dc}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .bloque-head h2{font-size:15.5px;color:var(--accent-dark)}
+  .puntaje{margin-left:auto;font-size:12px;color:#8a2a38;font-weight:700}
+  .bloque-body{padding:16px 20px}
+
+  .consigna{font-size:14px;line-height:1.6;color:#333;margin-bottom:10px}
+  .formula{background:#241419;color:#fbe4e7;border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:16px;text-align:center;margin:8px 0}
+
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+  th{background:var(--accent);color:#fff;padding:7px;text-align:center;font-size:12px}
+  td{padding:16px 8px;text-align:center;border:1px solid #f3d9dc;vertical-align:top}
+
+  .respuesta-space{border:1.5px dashed #ccd7e2;border-radius:10px;height:70px;margin-top:8px}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+    <h1>MC-S8 · Control de Ecuaciones</h1>
+    <p>Mini Control de cierre · 8.º EBI</p>
+  </header>
+
+  <div class="datos">
+    <span><b>Nombre</b>_______________________</span>
+    <span><b>Fecha</b>____/____/2026</span>
+    <span><b>Grupo</b>__________</span>
+  </div>
+
+  <div class="body">
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">1</div>
+        <h2>Resolvé las siguientes ecuaciones</h2>
+        <div class="puntaje">3 pts</div>
+      </div>
+      <div class="bloque-body">
+        <table>
+          <tr><th>a</th><th>b</th><th>c</th></tr>
+          <tr>
+            <td><div class="formula">12m = 48</div></td>
+            <td><div class="formula">3h + 4 = 25</div></td>
+            <td><div class="formula">2x + (4x + 6) = 3x + (x + 2)</div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">2</div>
+        <h2>Conjunto solución</h2>
+        <div class="puntaje">1 pt</div>
+      </div>
+      <div class="bloque-body">
+        <div class="consigna">Escribí el conjunto solución de cada una de las tres ecuaciones del Ejercicio 1, usando notación de conjuntos (por ejemplo S = {2}).</div>
+        <div class="respuesta-space"></div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">3</div>
+        <h2>Melissa y Mariángel</h2>
+        <div class="puntaje">3 pts</div>
+      </div>
+      <div class="bloque-body">
+        <div class="consigna">
+          Melissa tiene 27 años y Mariángel tiene 11 años. ¿Dentro de cuántos años la edad de Melissa
+          será el doble de la edad de Mariángel? Planteá la ecuación, resolvela y comprobá el resultado.
+        </div>
+        <div class="respuesta-space" style="height:110px"></div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">4</div>
+        <h2>Un número desconocido</h2>
+        <div class="puntaje">3 pts</div>
+      </div>
+      <div class="bloque-body">
+        <div class="consigna">
+          El doble de un número aumentado en cinco es igual al número disminuido en 3. Determiná el
+          valor de dicho número. Planteá la ecuación y comprobá el resultado.
+        </div>
+        <div class="respuesta-space" style="height:110px"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <b>Fuente de los ítems:</b> Ejercicio 1 — Publicaciones Porras, Act. 3.17.A.3, 3.18.A.2 y 3.19.A.1
+    (pág. 113-115). Ejercicio 2 — notación de conjunto solución, Publicaciones Porras, pág. 112. Ejercicio 3 —
+    Publicaciones Porras, Act. 3.15, pág. 110, ítem C.2. Ejercicio 4 — Publicaciones Porras, Act. 3.17.D.1, pág. 113.
+    Fernández, G. M. (2026). Reino Matemático. Liceo de Médanos.
+  </footer>
+</div>
+</body>
+</html>

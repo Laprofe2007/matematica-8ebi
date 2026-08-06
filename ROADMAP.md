@@ -15,13 +15,15 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ### S8 — El Equilibrio Oculto (Ecuaciones)
 
-S8 completamente armada pedagógicamente (14 fichas E01-E13 + MC-S8, Biblioteca L1/L2). En curso: publicar lo que falta.
+S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendiente habilitar en clase.
 
-- [x] **Biblioteca S8 publicada** — hub + L1 + L2 en `s8-ecuaciones/biblioteca/`. ✓
-- [ ] **Publicar MC-S8** — `cierre/index.html` + `MC-S8_ficha.html` + `MC-S8_resolucion.html`. Archivos en preparación local, se suben cuando estén en la carpeta del proyecto.
-- [ ] **Desbloquear Biblioteca S8 en el mapa del subreino** — cuando corresponda, actualizar `territorios[]` en `s8-ecuaciones/index.html` para quitar bloqueo de la Biblioteca.
-- [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E09, E10 aún sin HTML en repo).
-- [ ] **Habilitar Desafío Final S8** en el mapa del subreino (actualmente bloqueado).
+- [x] **Biblioteca S8** — 3 lecciones + hub en `s8-ecuaciones/biblioteca/`. ✓
+- [x] **Biblioteca desbloqueada en el mapa** — territorio activo, enlace a `biblioteca/index.html`. ✓
+- [x] **Cierre S8 publicado** — `s8-ecuaciones/cierre/` con `index.html`, ficha y resolución. ✓
+- [ ] **Habilitar MC-S8** cuando corresponda: `cierre/index.html`, `MC_HABILITADO = false` → `true`.
+- [ ] **Habilitar resolución MC-S8** en momento posterior: `RESOLUCION_HABILITADA = false` → `true`.
+- [ ] **Habilitar Desafío Final S8 en el mapa** — `s8-ecuaciones/index.html`, territorio `desafio`: `bloqueado: false`, `enlace: "cierre/index.html"`.
+- [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E10 aún sin HTML en repo).
 
 ### S7 — Área de rectángulo (Ochoviet)
 

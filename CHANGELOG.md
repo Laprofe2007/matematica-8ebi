@@ -7,6 +7,13 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ## 2026-08-05
 
+### S8 cierre, biblioteca y misiones: segunda tanda (`TBD`)
+
+- Creada `s8-ecuaciones/cierre/` con `index.html` (patrón S7: MC_HABILITADO=false, RESOLUCION_HABILITADA=false), `MC-S8_ficha.html` y `MC-S8_resolucion.html`.
+- Biblioteca S8: agregada Lección 1 — Introducción a las ecuaciones; lecciones renumeradas (anterior L1→L2, anterior L2→L3). Hub actualizado con los tres títulos.
+- `E11_ficha.html` corregida: eliminado el cuadro "trampa" que revelaba la ecuación antes del planteo del estudiante en el ítem 2.
+- Mapa S8 (`index.html`): Biblioteca desbloqueada; E-09 eliminado del menú de misiones (pasa a Biblioteca); E-10 renombrado a Misión X; VIII=Bingo (E-07), IX=Baraja (E-06); contador actualizado a 10 misiones.
+
 ### S8 Biblioteca: publicadas L1 y L2 + E02 resolución actualizada (`1b24d3f`)
 
 - Creada `s8-ecuaciones/biblioteca/` con hub `index.html` (patrón S7 — Cinzel, fondo pergamino).

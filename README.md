@@ -23,7 +23,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | 🔒 MC no habilitado aún |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E11 | ✅ 2 lecciones | 🔒 Bloqueado |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E10 (10 misiones) | ✅ 3 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 
 ---
 
@@ -128,11 +128,16 @@ raíz/
     │       └── mc_s7_resolucion_explicada.html
     │
     └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
-        ├── index.html                                ← Mapa (11 misiones · Biblioteca ✅ · Desafío 🔒)
+        ├── index.html                                ← Mapa (10 misiones · Biblioteca ✅ · Desafío 🔒)
         ├── biblioteca/
-        │   ├── index.html                            ← Hub de 2 lecciones
-        │   ├── Biblioteca_L1_Lenguaje_y_equivalencia.html  Lección 1 — vocabulario y equivalencia
-        │   └── Biblioteca_L2_Metodo_de_Polya.html          Lección 2 — método de Polya
+        │   ├── index.html                            ← Hub de 3 lecciones
+        │   ├── Biblioteca_L1_Introduccion_a_las_ecuaciones.html  Lección 1 — introducción
+        │   ├── Biblioteca_L1_Lenguaje_y_equivalencia.html        Lección 2 — vocabulario y equivalencia
+        │   └── Biblioteca_L2_Metodo_de_Polya.html                Lección 3 — método de Polya
+        ├── cierre/                                   ← Desafío Final S8
+        │   ├── index.html   (MC_HABILITADO=false · RESOLUCION_HABILITADA=false)
+        │   ├── MC-S8_ficha.html
+        │   └── MC-S8_resolucion.html
         ├── misiones/
         │   ├── mision-01/  E01 — El pijama de la muerte (PNG)
         │   ├── mision-02/  E02 — Método de inversión (PDF) · resolución ✅
@@ -143,7 +148,7 @@ raíz/
         │   ├── mision-07/  E06 — Baraja de ecuaciones (PDF estudiante)
         │   ├── mision-08/  E07 — Bingo de ecuaciones (PDF estudiante)
         │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (PDF)
-        │   ├── mision-10/  E09 — Ecuaciones · Porras (PDF)
+        │   ├── mision-10/  E09 — Ecuaciones · Porras (PDF · archivado, sin enlace en misiones)
         │   └── mision-11/  E10 — Ecuaciones y problemas · Porras (PDF)
         └── resoluciones/
             ├── E02_resolucion.html

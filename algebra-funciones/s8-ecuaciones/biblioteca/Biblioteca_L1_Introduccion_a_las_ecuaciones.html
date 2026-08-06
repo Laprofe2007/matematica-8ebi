@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblioteca · Introducción a las ecuaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#1f3a5f; --accent-dark:#122539; --ok:#4caf50; --warn:#e0a72e; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:26px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .body{padding:26px 28px}
+
+  .intro{background:#eaf0f7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+
+  .bloque{border:2px solid #dbe4ee;border-radius:14px;margin-bottom:22px;overflow:hidden}
+  .bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e4ebf3,#f3f6fa);padding:12px 18px;border-bottom:2px solid #dbe4ee}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .bloque-head h2{font-size:16px;color:var(--accent-dark)}
+  .bloque-body{padding:18px 20px}
+
+  .paso p{font-size:14px;line-height:1.6;color:#333;margin-bottom:8px}
+  .def{background:#f3f7fb;border:1.5px dashed #b7c8dc;border-radius:12px;padding:12px 16px;margin:10px 0;font-size:14px;color:#1f3a5f}
+  .def b{color:var(--accent-dark)}
+
+  .formula{background:#132339;color:#dcecff;border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:16px;text-align:center;margin:10px 0}
+
+  .aplic{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  @media(max-width:640px){.aplic{grid-template-columns:1fr}}
+  .aplic-card{border:2px solid #dbe4ee;border-radius:12px;padding:12px 14px}
+  .aplic-card h3{font-size:12.5px;color:var(--accent-dark);margin-bottom:5px;text-transform:uppercase;letter-spacing:.03em}
+  .aplic-card p{font-size:12.5px;color:#555;line-height:1.5}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px}
+  th{background:var(--accent);color:#fff;padding:8px;text-align:center}
+  td{padding:9px 8px;text-align:center;border:1px solid #dbe4ee;font-family:'JetBrains Mono',monospace}
+
+  .clave{background:#fdf6e8;border-left:4px solid var(--warn);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13.5px;margin-top:10px}
+  .clave b{color:#8a5a00}
+
+  .conexion{background:#f3edfb;border:1.5px dashed #9b7ec8;border-radius:12px;padding:14px 18px;margin-top:8px;font-size:14px;color:#4a2f6b;line-height:1.6}
+  .conexion b{display:block;margin-bottom:6px;color:#6a3fa0;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Biblioteca</div>
+    <h1>Introducción a las ecuaciones</h1>
+    <p>Lección teórica · qué es una ecuación de primer grado, antes de resolverla · 8.º EBI</p>
+  </header>
+
+  <div class="body">
+    <div class="intro">
+      Antes de entrar en el vocabulario detallado (eso lo ves en la próxima lección), conviene tener una
+      idea general de qué es una ecuación de primer grado, para qué se usa y qué formas puede tomar.
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">1</div>
+        <h2>Las ecuaciones en la vida cotidiana</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="paso"><p>Las ecuaciones no son solo un tema de la clase de Matemática: se usan en
+        situaciones cotidianas para resolver problemas, tomar decisiones informadas y organizar tareas de
+        forma eficiente.</p></div>
+        <div class="aplic">
+          <div class="aplic-card">
+            <h3>Tecnología</h3>
+            <p>Se utilizan en el desarrollo de software, algoritmos y en la programación de dispositivos y
+            aplicaciones.</p>
+          </div>
+          <div class="aplic-card">
+            <h3>Educación</h3>
+            <p>Son parte integral en diversos campos del conocimiento, no solo en Matemática.</p>
+          </div>
+          <div class="aplic-card">
+            <h3>Cocina y recetas</h3>
+            <p>Permiten ajustar las cantidades de ingredientes en una receta para adaptarlas al número de
+            porciones deseadas.</p>
+          </div>
+          <div class="aplic-card">
+            <h3>Finanzas personales</h3>
+            <p>Se utilizan para calcular préstamos, hipotecas, tasas de interés, inversiones y presupuestos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">2</div>
+        <h2>Ecuación de primer grado con una incógnita</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="def">
+          Una ecuación de primer grado con una incógnita se puede escribir de la forma <b>ax + b = c</b>, con
+          a ≠ 0 y la incógnita representada por una letra (habitualmente "x").
+        </div>
+        <div class="paso"><p>Según cómo estén acomodados los términos, te vas a encontrar con distintas
+        formas de la misma idea:</p></div>
+        <table>
+          <tr><th>Forma</th><th>Ejemplo</th></tr>
+          <tr><td>ax ± b = c</td><td>3x − 6 = 9</td></tr>
+          <tr><td>ax ± b = cx ± d</td><td>−2x + 7 = 4x + 1</td></tr>
+          <tr><td>a(dx ± b) = c(ex ± d)</td><td>4(7x − 1) = −5(3x + 6)</td></tr>
+          <tr><td>(a/b)x ± c = (c/d)x ± e</td><td>(7/2)x + 3 = (−2/5)x − 4</td></tr>
+          <tr><td>(cx ± d)/f = a/b</td><td>(8x + 6)/2 = −3/2</td></tr>
+        </table>
+        <div class="clave">
+          <b>Idea clave</b> aunque estas ecuaciones se vean distintas por fuera (con paréntesis, fracciones,
+          la incógnita en los dos miembros), todas son ecuaciones de primer grado con una incógnita: se
+          resuelven con las mismas herramientas.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">3</div>
+        <h2>Resolver una ecuación</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="def">
+          Resolver una ecuación es encontrar el valor (o los valores) de la incógnita que hacen cierta la
+          igualdad. Ese valor es la <b>solución</b>, y para encontrarla se transforma la ecuación en otras
+          <b>equivalentes</b> más simples, hasta despejar la incógnita.
+        </div>
+        <div class="formula">ax + b = c</div>
+      </div>
+    </div>
+
+    <div class="conexion">
+      <b>Para pensar y responder</b>
+      Esta lección te dio el panorama general: qué es una ecuación, para qué sirve y qué formas puede tomar.
+      En la próxima lección ("Lenguaje y equivalencia de ecuaciones") vas a ver en detalle el vocabulario
+      (miembros, incógnita, grado), cómo se transforma una ecuación en otra equivalente, y los tres casos
+      posibles del conjunto solución (única, sin solución, infinitas).
+    </div>
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Contenido adaptado de: Publicaciones Porras. <i>Matemática 8.° EBI</i>, pág. 112.
+  </footer>
+</div>
+</body>
+</html>

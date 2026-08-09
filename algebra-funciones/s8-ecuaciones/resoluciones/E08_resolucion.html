@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E08 · Resolución · Ir hacia atrás</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#2e6da4; --accent-dark:#1a3c5e; --ok:#4caf50; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .body{padding:26px 28px}
+
+  .bloque{border:2px solid #e3ecf5;border-radius:14px;margin-bottom:22px;overflow:hidden}
+  .bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e8f1fb,#f5f9ff);padding:12px 18px;border-bottom:2px solid #e3ecf5}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .bloque-head h2{font-size:16px;color:var(--accent-dark)}
+  .bloque-body{padding:16px 20px}
+
+  .cadena{background:#241a33;color:#f1e8fb;border-radius:10px;padding:12px 16px;font-family:'JetBrains Mono',monospace;font-size:14px;margin-bottom:12px;overflow-x:auto;white-space:nowrap}
+  .final-answer{border:2px dashed var(--ok);background:#f1faf1;border-radius:12px;padding:10px 16px;margin-bottom:8px;font-size:13.5px;color:#1c5e1c;font-weight:700}
+  .explicacion{font-size:13.5px;color:#333;line-height:1.6;margin-top:6px}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+    <h1>E08 · Resolución</h1>
+    <p>Ir hacia atrás — operaciones inversas · 8.º EBI</p>
+  </header>
+
+  <div class="body">
+    <div class="bloque">
+      <div class="bloque-head"><div class="num-badge">10</div><h2>Cadena de Pat</h2></div>
+      <div class="bloque-body">
+        <div class="cadena">? →(+4)→ 6 →(×10)→ 60 →(−2)→ 58 →(÷2)→ 29</div>
+        <div class="final-answer">a) Entrada = 2</div>
+        <div class="explicacion">
+          Se deshace cada operación en orden inverso, empezando desde 29 y aplicando la operación opuesta a
+          cada flecha, de derecha a izquierda: primero se deshace ÷2 (con ×2), después −2 (con +2), después
+          ×10 (con ÷10) y por último +4 (con −4).
+        </div>
+        <div class="cadena" style="margin-top:12px">29 →(×2)→ 58 →(+2)→ 60 →(÷10)→ 6 →(−4)→ 2</div>
+        <div class="final-answer">b) Números de la cadena inversa: ×2 · +2 · ÷10 · −4</div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head"><div class="num-badge">11</div><h2>Cadena de Kris</h2></div>
+      <div class="bloque-body">
+        <div class="cadena">? →(+3)→ 18 →(÷6)→ 3 →(+5)→ 8 →(−2)→ 6</div>
+        <div class="final-answer">a) Entrada = 15</div>
+        <div class="explicacion">
+          Mismo razonamiento: se deshacen las cuatro operaciones en orden inverso, empezando desde 6.
+        </div>
+        <div class="cadena" style="margin-top:12px">6 →(+2)→ 8 →(−5)→ 3 →(×6)→ 18 →(−3)→ 15</div>
+        <div class="final-answer">b) Cadena inversa: +2 · −5 · ×6 · −3</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Actividad adaptada de Freudenthal Institute. <i>Expressions and Formulas</i>, pág. 28.
+  </footer>
+</div>
+</body>
+</html>

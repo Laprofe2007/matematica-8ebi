@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E03 · Resolución · Ecuaciones de primer grado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#2e6da4; --accent-dark:#1a3c5e; --ok:#4caf50; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:860px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .body{padding:26px 28px}
+
+  .intro{background:#f5f9ff;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14px;line-height:1.55;margin-bottom:24px}
+
+  .parte{border:2px solid #e9e0f5;border-radius:14px;margin-bottom:28px;overflow:hidden}
+  .parte-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e8f1fb,#f5f9ff);padding:12px 18px;border-bottom:2px solid #e3ecf5}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .parte-head h2{font-size:16px;color:var(--accent-dark)}
+  .parte-body{padding:18px 20px}
+
+  .ejemplo-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:var(--accent-dark);margin-bottom:8px}
+  .eq-box{background:#241a33;color:#f1e8fb;border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.9;margin-bottom:6px}
+  .eq-box .step{opacity:.65;font-size:11.5px;font-family:'Nunito',sans-serif;margin-top:2px}
+  .final-answer{border:2px dashed var(--ok);background:#f1faf1;border-radius:12px;padding:8px 14px;margin-bottom:18px;font-size:13.5px;color:#1c5e1c;font-weight:700}
+
+  .clave-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#555;margin:14px 0 8px}
+  table.clave{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.clave th{background:#eef2f7;color:var(--accent-dark);padding:6px 8px;text-align:left;border:1px solid #dbe4ee}
+  table.clave td{padding:6px 8px;border:1px solid #dbe4ee;font-family:'JetBrains Mono',monospace}
+  table.clave td.num{font-family:'Nunito',sans-serif;font-weight:700;color:#777;width:24px;text-align:center}
+  .niveles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.niveles{grid-template-columns:1fr}}
+  .sin-sol{color:#a33;font-weight:700}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Ecuaciones</div>
+    <h1>E03 · Resolución</h1>
+    <p>Un ejemplo resuelto en detalle por parte, y la clave de respuestas para el resto · 8.º EBI</p>
+  </header>
+
+  <div class="body">
+    <div class="intro">
+      Para cada parte se resuelve un ejemplo completo, paso a paso. El resto de los ítems se corrige con la
+      tabla de respuestas: comprobá tu procedimiento contra el conjunto solución indicado.
+    </div>
+
+    <div class="parte">
+      <div class="parte-head"><div class="num-badge">1</div><h2>Parte 1 · Transposición de términos</h2></div>
+      <div class="parte-body">
+        <div class="ejemplo-label">Ejemplo resuelto (Nivel 2, ítem 3)</div>
+        <div class="eq-box">
+          2x + 8 = ⁻14<div class="step">ecuación original</div>
+          2x = ⁻14 − 8<div class="step">transposición de términos: el +8 pasa a restar</div>
+          2x = ⁻22<div class="step">se reduce</div>
+          x = ⁻22 / 2<div class="step">el factor 2 pasa a dividir</div>
+          x = ⁻11
+        </div>
+        <div class="final-answer">S = {⁻11}</div>
+
+        <div class="clave-label">Clave de respuestas</div>
+        <div class="niveles">
+          <table class="clave">
+            <tr><th colspan="2">Nivel 1</th></tr>
+            <tr><td class="num">1</td><td>S = {5}</td></tr>
+            <tr><td class="num">2</td><td>S = {⁻7}</td></tr>
+            <tr><td class="num">3</td><td>S = {4}</td></tr>
+            <tr><td class="num">4</td><td>S = {14}</td></tr>
+            <tr><td class="num">5</td><td>S = {⁻9/2}</td></tr>
+            <tr><td class="num">6</td><td>S = {⁻16/7}</td></tr>
+            <tr><td class="num">7</td><td>S = {⁻7/2}</td></tr>
+            <tr><td class="num">8</td><td>S = {11/3}</td></tr>
+            <tr><td class="num">9</td><td>S = {1/6}</td></tr>
+            <tr><td class="num">10</td><td>S = {⁻10}</td></tr>
+            <tr><td class="num">11</td><td>S = {8/5}</td></tr>
+            <tr><td class="num">12</td><td>S = {3/130}</td></tr>
+          </table>
+          <table class="clave">
+            <tr><th colspan="2">Nivel 2</th></tr>
+            <tr><td class="num">1</td><td>S = {5}</td></tr>
+            <tr><td class="num">2</td><td>S = {7}</td></tr>
+            <tr><td class="num">3</td><td>S = {⁻11}</td></tr>
+            <tr><td class="num">4</td><td>S = {8}</td></tr>
+            <tr><td class="num">5</td><td>S = {⁻13/3}</td></tr>
+            <tr><td class="num">6</td><td>S = {⁻3/2}</td></tr>
+            <tr><td class="num">7</td><td>S = {10/3}</td></tr>
+            <tr><td class="num">8</td><td>S = {3}</td></tr>
+            <tr><td class="num">9</td><td>S = {17/6}</td></tr>
+            <tr><td class="num">10</td><td>S = {⁻5/9}</td></tr>
+            <tr><td class="num">11</td><td>S = {⁻32}</td></tr>
+            <tr><td class="num">12</td><td>S = {1/10}</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="parte">
+      <div class="parte-head"><div class="num-badge">2</div><h2>Parte 2 · Eliminación de paréntesis</h2></div>
+      <div class="parte-body">
+        <div class="ejemplo-label">Ejemplo resuelto (Nivel 1, ítem 2)</div>
+        <div class="eq-box">
+          6x − (2x + 15) = ⁻29<div class="step">ecuación original</div>
+          6x − 2x − 15 = ⁻29<div class="step">se elimina el paréntesis (signo negativo adelante: cambian los signos de adentro)</div>
+          6x − 2x = ⁻29 + 15<div class="step">transposición de términos</div>
+          4x = ⁻14<div class="step">se reducen los términos semejantes</div>
+          x = ⁻14 / 4<div class="step">el factor 4 pasa a dividir</div>
+          x = ⁻7/2
+        </div>
+        <div class="final-answer">S = {⁻7/2}</div>
+
+        <div class="clave-label">Clave de respuestas</div>
+        <div class="niveles">
+          <table class="clave">
+            <tr><th colspan="2">Nivel 1</th></tr>
+            <tr><td class="num">1</td><td>S = {1}</td></tr>
+            <tr><td class="num">2</td><td>S = {⁻7/2}</td></tr>
+            <tr><td class="num">3</td><td>S = {2}</td></tr>
+            <tr><td class="num">4</td><td>S = {13/8}</td></tr>
+            <tr><td class="num">5</td><td>S = {⁻8}</td></tr>
+            <tr><td class="num">6</td><td class="sin-sol">S = { } (sin solución: ⁻6n se cancela y queda 4=16, falso)</td></tr>
+            <tr><td class="num">7</td><td>S = {⁻10/3}</td></tr>
+            <tr><td class="num">8</td><td>S = {⁻7}</td></tr>
+            <tr><td class="num">9</td><td>S = {2}</td></tr>
+            <tr><td class="num">10</td><td>S = {⁻108/5}</td></tr>
+            <tr><td class="num">11</td><td>S = {⁻7/6}</td></tr>
+            <tr><td class="num">12</td><td>S = {65/126}</td></tr>
+          </table>
+          <table class="clave">
+            <tr><th colspan="2">Nivel 2</th></tr>
+            <tr><td class="num">1</td><td>S = {10/3}</td></tr>
+            <tr><td class="num">2</td><td>S = {8}</td></tr>
+            <tr><td class="num">3</td><td>S = {5}</td></tr>
+            <tr><td class="num">4</td><td>S = {1}</td></tr>
+            <tr><td class="num">5</td><td>S = {⁻4}</td></tr>
+            <tr><td class="num">6</td><td>S = {2}</td></tr>
+            <tr><td class="num">7</td><td>S = {1}</td></tr>
+            <tr><td class="num">8</td><td>S = {19/4}</td></tr>
+            <tr><td class="num">9</td><td>S = {⁻67/18}</td></tr>
+            <tr><td class="num">10</td><td>S = {⁻16/27}</td></tr>
+            <tr><td class="num">11</td><td>S = {5/2}</td></tr>
+            <tr><td class="num">12</td><td>S = {⁻5/7}</td></tr>
+          </table>
+        </div>
+        <div style="margin-top:10px;font-size:12.5px;color:#777">
+          Nota docente: el ítem 6 de Nivel 1 es un caso "sin solución" (los términos con n se cancelan y queda
+          una igualdad falsa). Buen momento para reconectar con la lección de Biblioteca sobre los tres casos
+          del conjunto solución.
+        </div>
+      </div>
+    </div>
+
+    <div class="parte">
+      <div class="parte-head"><div class="num-badge">3</div><h2>Parte 3 · Paréntesis con signo negativo</h2></div>
+      <div class="parte-body">
+        <div class="ejemplo-label">Ejemplo resuelto (Nivel 1, ítem 4)</div>
+        <div class="eq-box">
+          8x − (4x + 5) = ⁻3x + (4x − 4)<div class="step">ecuación original</div>
+          8x − 4x − 5 = ⁻3x + 4x − 4<div class="step">se eliminan los paréntesis</div>
+          8x − 4x + 3x − 4x = ⁻4 + 5<div class="step">transposición de términos</div>
+          3x = 1<div class="step">se reducen los términos semejantes</div>
+          x = 1/3
+        </div>
+        <div class="final-answer">S = {1/3}</div>
+
+        <div class="clave-label">Clave de respuestas — Nivel 1</div>
+        <table class="clave" style="max-width:400px">
+          <tr><td class="num">1</td><td>S = {⁻2}</td></tr>
+          <tr><td class="num">2</td><td>S = {⁻1/13}</td></tr>
+          <tr><td class="num">3</td><td>S = {7}</td></tr>
+          <tr><td class="num">4</td><td>S = {1/3}</td></tr>
+          <tr><td class="num">5</td><td>S = {⁻2}</td></tr>
+          <tr><td class="num">6</td><td>S = {23/7}</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Actividad adaptada de Publicaciones Porras. <i>Matemática 8.° EBI</i>, Actividades 3.17-3.19, pág. 113-115.
+  </footer>
+</div>
+</body>
+</html>

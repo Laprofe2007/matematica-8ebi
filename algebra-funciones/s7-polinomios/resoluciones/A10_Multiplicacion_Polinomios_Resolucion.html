@@ -15,10 +15,8 @@
   header p{font-size:.85rem;opacity:.9;margin-top:6px}
   .section-title{font-weight:900;color:#5b2a86;font-size:1.02rem;margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
   .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.92rem}
-  .note.warn{background:#fdf2e3;border-left-color:#e07b1f}
   .note.info{background:#e7f3fb;border-left-color:#2680c2}
   .note b{color:#5b2a86}
-  .note.warn b{color:#c0621a}
   .panel{--accent:#8e44ad;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
   .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
   .panel-num{background:var(--accent);color:#fff;font-weight:900;font-size:.85rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -26,10 +24,6 @@
   .eq-box{background:#241638;color:#f1e9fb;border-radius:8px;padding:10px 14px;font-weight:700;overflow-x:auto;white-space:nowrap;font-size:clamp(.82rem,2.2vw,1rem);margin:4px 0}
   .eq-box .arrow{color:#c9a6ea;margin:0 8px}
   .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:8px 12px;margin-top:8px;font-weight:800;color:#1e8449;font-size:.9rem}
-  .tabla{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:.88rem}
-  .tabla th{background:#5b2a86;color:#fff;padding:8px 10px;text-align:left}
-  .tabla td{padding:8px 10px;border-bottom:1px solid #e3d9f2}
-  .tabla tr:nth-child(even){background:#f8f5fd}
   footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
 </style>
 </head>
@@ -42,51 +36,77 @@
   <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
 </header>
 
-<div class="section-title">Modelos resueltos en el libro (pág. 23)</div>
+<div class="note">
+  Los dos modelos resueltos (monomio × polinomio, polinomio × polinomio) ya están desarrollados paso a paso en la ficha. Acá están las respuestas de la práctica y del problema de la piscina.
+</div>
+
+<div class="section-title">Parte 1 — Actividad de práctica</div>
 
 <div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">Monomio × polinomio</div></div>
-  <div class="eq-box">2x(3x² − 5x − 9) <span class="arrow">=</span> 2x·3x² − 2x·5x − 2x·9 <span class="arrow">=</span> 6x³ − 10x² − 18x</div>
-  <div class="final-answer">Se aplica la propiedad distributiva: el monomio multiplica a cada término del polinomio.</div>
+  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">5x(2x² + 3x − 1)</div></div>
+  <div class="eq-box">5x·2x² + 5x·3x + 5x·(−1) <span class="arrow">=</span> 10x³ + 15x² − 5x</div>
+  <div class="final-answer">Resultado: 10x³ + 15x² − 5x</div>
 </div>
 
 <div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head"><div class="panel-num">2</div><div class="panel-expr">Polinomio × polinomio</div></div>
-  <div class="eq-box">(−x+x²)(2x+3) <span class="arrow">=</span> −x(2x+3) + x²(2x+3) <span class="arrow">=</span> −2x²−3x+2x³+3x² <span class="arrow">=</span> 2x³ + x² − 3x</div>
-  <div class="final-answer">Cada término del primer polinomio multiplica a cada término del segundo; luego se reducen los semejantes.</div>
+  <div class="panel-head"><div class="panel-num">2</div><div class="panel-expr">−3m²(4m − 2m² + 5)</div></div>
+  <div class="eq-box">−3m²·4m + (−3m²)·(−2m²) + (−3m²)·5 <span class="arrow">=</span> 6m⁴ − 12m³ − 15m²</div>
+  <div class="final-answer">Resultado: 6m⁴ − 12m³ − 15m²</div>
 </div>
-
-<div class="section-title">Problema de la piscina (pág. 23)</div>
-<div class="note">Piscina de profundidad 2,2 m; largo = x+2, ancho = x.</div>
 
 <div class="panel" style="--accent:#c0621a">
-  <div class="panel-head"><div class="panel-num">a</div><div class="panel-expr">¿Qué dimensiones (largo; ancho; profundidad) se ajustan al modelo largo = ancho + 2?</div></div>
-  <table class="tabla">
-    <tr><th>Opción</th><th>Largo; ancho; prof.</th><th>¿Cumple largo = ancho+2?</th></tr>
-    <tr><td>i.</td><td>8; 6; 2,2</td><td>Sí (6+2=8)</td></tr>
-    <tr><td>ii.</td><td>5,3; 3,3; 2,2</td><td>Sí (3,3+2=5,3)</td></tr>
-    <tr><td>iii.</td><td>6,4; 6,2; 2,2</td><td>No (6,2+2=8,2≠6,4)</td></tr>
-    <tr><td>iv.</td><td>4,2; 2,2; 2,2</td><td>Sí (2,2+2=4,2)</td></tr>
-  </table>
-  <div class="final-answer">Cumplen el modelo: i, ii y iv. No cumple: iii.</div>
+  <div class="panel-head"><div class="panel-num">3</div><div class="panel-expr">(x + 6)(x − 2)</div></div>
+  <div class="eq-box">x²−2x+6x−12 <span class="arrow">=</span> x² + 4x − 12</div>
+  <div class="final-answer">Resultado: x² + 4x − 12</div>
 </div>
 
-<div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head"><div class="panel-num">b</div><div class="panel-expr">Fórmula del volumen en función de x</div></div>
-  <div class="eq-box">V = largo · ancho · profundidad = (x+2)·x·2,2 <span class="arrow">=</span> 2,2x² + 4,4x</div>
-  <div class="final-answer">V(x) = 2,2x² + 4,4x</div>
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">4</div><div class="panel-expr">(3a − 1)(2a + 5)</div></div>
+  <div class="eq-box">6a²+15a−2a−5 <span class="arrow">=</span> 6a² + 13a − 5</div>
+  <div class="final-answer">Resultado: 6a² + 13a − 5</div>
+</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">5</div><div class="panel-expr">(2y − 3)(2y + 3)</div></div>
+  <div class="eq-box">4y² + 6y − 6y − 9 <span class="arrow">=</span> 4y² − 9</div>
+  <div class="final-answer">Resultado: 4y² − 9 (diferencia de cuadrados: el término del medio se cancela)</div>
+</div>
+
+<div class="panel" style="--accent:#c0621a">
+  <div class="panel-head"><div class="panel-num">6</div><div class="panel-expr">(x + 2)(x² − 3x + 4)</div></div>
+  <div class="eq-box">x³−3x²+4x + 2x²−6x+8 <span class="arrow">=</span> x³ − x² − 2x + 8</div>
+  <div class="final-answer">Resultado: x³ − x² − 2x + 8</div>
+</div>
+
+<div class="section-title">Parte 2 — Problema de aplicación: La piscina</div>
+<div class="note">Rectángulo: largo (x+5) m, ancho (x+2) m, profundidad constante 2 m.</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">a</div><div class="panel-expr">A(x) = (x+5)(x+2)</div></div>
+  <div class="eq-box">x²+2x+5x+10 <span class="arrow">=</span> x² + 7x + 10</div>
+  <div class="final-answer">A(x) = x² + 7x + 10</div>
 </div>
 
 <div class="panel" style="--accent:#8e44ad">
-  <div class="panel-head"><div class="panel-num">c</div><div class="panel-expr">Se usaron 44 litros de pintura (rendimiento 5 m²/l) para las 4 paredes laterales. ¿Qué valor de x se usó?</div></div>
-  <div class="eq-box">Área a pintar: 44 · 5 = 220 m²</div>
-  <div class="eq-box">Perímetro de la base: 2[(x+2)+x] = 4x+4 &nbsp;→&nbsp; Área lateral: (4x+4)·2,2 = 8,8x+8,8</div>
-  <div class="eq-box">8,8x + 8,8 = 220 <span class="arrow">→</span> 8,8x = 211,2 <span class="arrow">→</span> x = 24</div>
-  <div class="final-answer">x = 24 m (largo = 26 m, ancho = 24 m)</div>
+  <div class="panel-head"><div class="panel-num">b</div><div class="panel-expr">V(x) = A(x) · 2</div></div>
+  <div class="eq-box">2(x²+7x+10) <span class="arrow">=</span> 2x² + 14x + 20</div>
+  <div class="final-answer">V(x) = 2x² + 14x + 20</div>
+</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">c</div><div class="panel-expr">150(4x + 14) = 3900</div></div>
+  <div class="eq-box">600x + 2100 = 3900 <span class="arrow">→</span> 600x = 1800 <span class="arrow">→</span> x = 3</div>
+  <div class="final-answer">x = 3</div>
+</div>
+
+<div class="panel" style="--accent:#8e44ad">
+  <div class="panel-head"><div class="panel-num">d</div><div class="panel-expr">Volumen con x = 3</div></div>
+  <div class="eq-box">V(3) = 2(3²) + 14(3) + 20 <span class="arrow">=</span> 18 + 42 + 20</div>
+  <div class="final-answer">V(3) = 80 m³</div>
 </div>
 
 <div class="note info">
-  <b>Origen:</b> Ochoviet, C. y Vitabar, F. (2014). <i>Matemática 2</i>. Losa Ediciones, pág. 20-23 (Multiplicación de polinomios). Adaptación de resolución explicada: Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos.
+  <b>Origen:</b> Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos. Elaboración propia; se conserva la estructura de modelos resueltos seguidos de un problema de volumen, inspirada en el enfoque de Ochoviet y Vitabar (2014), sin reproducir su texto ni sus ejemplos.
 </div>
 
 <footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · A-10</footer>

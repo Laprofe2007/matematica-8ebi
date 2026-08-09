@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A-08 Pública — Suma y resta de polinomios | Secuencia 7 Pública</title>
+<title>A-08 — Suma y resta de polinomios | Secuencia 7</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
   :root{
     --paper:#fdf5e0; --ink:#2a1c12; --ink-mid:#5c3820;
     --gold:#8a5e14; --amber:#7a4f0a; --line:#d9c69a;
-    --bg-actividad:#f6e9c9; --bg-nota:#f2ddb0; --bg-alt:#f0e6d0;
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',serif;line-height:1.65;}
@@ -21,41 +20,19 @@
   .subtitle{font-style:italic;color:var(--ink-mid);font-size:1rem;}
 
   .panel{border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:20px;}
-  .panel h2{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--ink);margin-top:0;margin-bottom:6px;padding-bottom:10px;border-bottom:2px solid var(--gold);}
-  .panel .parte-intro{font-size:.94rem;color:var(--ink-mid);margin-bottom:14px;}
-  .panel-actividad{background:var(--bg-actividad);}
-  .panel-nota{background:var(--bg-nota);}
-  .panel-alt{background:var(--bg-alt);}
+  .panel img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);}
 
-  /* Listas cortas sin "=" (tipo A-07): sí pueden ir en varias columnas */
-  .items-grid{display:grid;grid-template-columns:repeat(1,1fr);gap:12px;}
-  @media (min-width:560px){.items-grid{grid-template-columns:repeat(2,1fr);}}
-  /* Ítems tipo "expresión = ___": SIEMPRE una sola columna, ancho completo. Nunca en grilla multi-columna: la expresión se corta y el "=" queda huérfano. Regla general del proyecto. */
-  .eq-list{display:flex;flex-direction:column;gap:12px;}
-  .item-row{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(42,28,18,0.12);}
-  .item-num{background:var(--amber); color:#fff; font-family:'Cinzel',serif; font-weight:700; font-size:1.05rem; display:flex; align-items:center; justify-content:center; min-width:2.4rem; padding:0 6px;}
-  .item-expr{background:#fffdf8; color:var(--ink); font-size:1.1rem; font-weight:600; padding:10px 12px; flex:1; display:flex; align-items:center; gap:8px;}
-  .item-expr .igual{color:var(--gold); font-weight:700;}
-  .item-expr .blanco{display:inline-block; min-width:70px; border-bottom:2px solid var(--ink-mid);}
-
-  .pares-grid{display:grid;grid-template-columns:1fr;gap:12px;}
-  @media (min-width:560px){.pares-grid{grid-template-columns:repeat(2,1fr);}}
-  .par-card{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:12px 14px;}
-  .par-letra{display:inline-block;background:var(--gold);color:#fff;font-family:'Cinzel',serif;font-weight:700;font-size:.85rem;width:1.8rem;height:1.8rem;border-radius:50%;text-align:center;line-height:1.8rem;margin-right:8px;}
-  .par-expr{font-size:1.05rem;font-weight:600;}
-  .par-resp{margin-top:8px;font-size:.85rem;color:var(--ink-mid);}
-  .par-resp .blanco{display:inline-block;min-width:60px;border-bottom:2px solid var(--ink-mid);}
-
-  .match-table{width:100%;border-collapse:separate;border-spacing:0 10px;}
-  .match-table td{padding:10px 14px;background:#fffdf8;border:1px solid var(--line);font-size:1.05rem;font-weight:600;}
-  .match-table td:first-child{border-radius:8px 0 0 8px;}
-  .match-table td:last-child{border-radius:0 8px 8px 0;text-align:center;color:var(--ink-mid);font-weight:400;font-style:italic;}
-  .col-resultado{background:#f4ead2 !important;font-style:italic;color:var(--ink-mid);}
-
-  .nota-texto{font-size:.98rem; color:var(--ink); line-height:1.7;}
-  .nota-texto strong{color:var(--amber);}
+  .acciones{display:flex;gap:.75rem;flex-wrap:wrap;margin:18px 0 30px;}
+  .btn-accion{display:inline-flex;align-items:center;gap:.45rem;padding:.58rem 1.25rem;background:var(--amber);color:#fff8ec;border:none;border-radius:6px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s;}
+  .btn-accion:hover{background:var(--gold);}
+  .btn-accion.outline{background:transparent;color:var(--amber);border:1px solid var(--amber);}
+  .btn-accion.outline:hover{background:rgba(138,94,20,.08);}
 
   .licencia{font-size:.8rem;color:var(--ink-mid);text-align:center;margin-top:28px;padding-top:16px;border-top:1px solid var(--line);}
+
+  @media print{
+    .breadcrumb,.acciones{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -67,56 +44,13 @@
     <div class="subtitle">Sumá, restá y reconocé polinomios opuestos. Cuatro partes, cada una con su consigna.</div>
   </div>
 
-  <div class="panel panel-actividad">
-    <h2>Actividad de práctica — Parte 1: Sumas</h2>
-    <div class="parte-intro">Resolvé cada suma de polinomios.</div>
-    <div class="eq-list">
-      <div class="item-row"><span class="item-num">1</span><span class="item-expr">(2x² + 4x) + (3x² − x) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">2</span><span class="item-expr">(−5m + 8) + (5m − 8) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">3</span><span class="item-expr">(7y³ − 2y + 5) + (−3y³ + 2y − 5) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-alt">
-    <h2>Parte 2: ¿Son polinomios opuestos?</h2>
-    <div class="parte-intro">Para cada par, indicá si son opuestos (su suma da el polinomio nulo) o no.</div>
-    <div class="pares-grid">
-      <div class="par-card"><span class="par-letra">a</span><span class="par-expr">3x + 5&nbsp;&nbsp;y&nbsp;&nbsp;−3x − 5</span><div class="par-resp">¿Opuestos? <span class="blanco">&nbsp;</span></div></div>
-      <div class="par-card"><span class="par-letra">b</span><span class="par-expr">4y² − 2&nbsp;&nbsp;y&nbsp;&nbsp;−4y² + 2</span><div class="par-resp">¿Opuestos? <span class="blanco">&nbsp;</span></div></div>
-      <div class="par-card"><span class="par-letra">c</span><span class="par-expr">7a − 1&nbsp;&nbsp;y&nbsp;&nbsp;−7a − 1</span><div class="par-resp">¿Opuestos? <span class="blanco">&nbsp;</span></div></div>
-      <div class="par-card"><span class="par-letra">d</span><span class="par-expr">2m + 3n&nbsp;&nbsp;y&nbsp;&nbsp;−2m − 3n</span><div class="par-resp">¿Opuestos? <span class="blanco">&nbsp;</span></div></div>
-    </div>
-  </div>
-
-  <div class="panel panel-actividad">
-    <h2>Parte 3: Perímetro con lados algebraicos</h2>
-    <div class="parte-intro">Un rectángulo tiene lados (3x + 1) y (2x − 4).</div>
-    <div class="eq-list">
-      <div class="item-row"><span class="item-num">a</span><span class="item-expr">Escribí la expresión del perímetro P en función de x <span class="igual">=</span> <span class="blanco" style="min-width:140px;">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">b</span><span class="item-expr">Calculá P si x = 5 <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-alt">
-    <h2>Parte 4: Unir cada resta con su resultado</h2>
-    <div class="parte-intro">Cuatro restas de polinomios y sus resultados, en distinto orden. Unilos correctamente.</div>
-    <table class="match-table">
-      <tr><td>(5x² + 3x) − (2x² + x)</td><td class="col-resultado">4y³ − y</td></tr>
-      <tr><td>(4a − 7) − (a − 7)</td><td class="col-resultado">3a</td></tr>
-      <tr><td>6y³ − (2y³ + y)</td><td class="col-resultado">2m²</td></tr>
-      <tr><td>(3m² − 2m + 1) − (m² − 2m + 1)</td><td class="col-resultado">3x² + 2x</td></tr>
-    </table>
-  </div>
-
-  <div class="panel panel-nota">
-    <h2>Nota docente</h2>
-    <div class="nota-texto"><strong>Ojo:</strong> al restar, el signo menos afecta a <em>todos</em> los términos del segundo polinomio, no solo al primero. Te puede servir pensar la resta como una suma del opuesto.</div>
-  </div>
-
   <div class="panel">
-    <h2>Hoja ilustrada</h2>
-    <img src="A08_HojaAlumno_Imprimir.png" alt="Hoja del alumno A-08: suma y resta de polinomios, versión ilustrada" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-    <div class="imagen-nota" style="font-size:.85rem;color:var(--ink-mid);text-align:center;font-style:italic;margin-top:10px;">Versión ilustrada para completar a mano, con el mismo contenido verificado arriba.</div>
+    <img src="A08_HojaAlumno_Imprimir.png" alt="Hoja del alumno A-08: suma y resta de polinomios" loading="lazy">
+  </div>
+
+  <div class="acciones">
+    <a class="btn-accion" href="A08_HojaAlumno_Imprimir.png" download>⬇ Descargar imagen</a>
+    <button class="btn-accion outline" type="button" onclick="window.print()">🖨 Imprimir</button>
   </div>
 
   <div class="licencia">

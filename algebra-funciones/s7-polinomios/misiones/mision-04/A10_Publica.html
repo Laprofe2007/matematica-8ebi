@@ -9,7 +9,6 @@
   :root{
     --paper:#fdf5e0; --ink:#2a1c12; --ink-mid:#5c3820;
     --gold:#8a5e14; --amber:#7a4f0a; --line:#d9c69a;
-    --bg-actividad:#f6e9c9; --bg-nota:#f2ddb0; --bg-alt:#f0e6d0;
   }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',serif;line-height:1.65;}
@@ -21,32 +20,19 @@
   .subtitle{font-style:italic;color:var(--ink-mid);font-size:1rem;}
 
   .panel{border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:20px;}
-  .panel h2{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--ink);margin-top:0;margin-bottom:6px;padding-bottom:10px;border-bottom:2px solid var(--gold);}
-  .panel .parte-intro{font-size:.94rem;color:var(--ink-mid);margin-bottom:14px;}
-  .panel-actividad{background:var(--bg-actividad);}
-  .panel-nota{background:var(--bg-nota);}
-  .panel-alt{background:var(--bg-alt);}
+  .panel img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);}
 
-  .modelo-pasos{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
-  .modelo-paso{display:flex;gap:10px;padding:6px 0;font-size:clamp(.9rem,3.2vw,1.05rem);white-space:nowrap;overflow-x:auto;}
-  .modelo-paso:not(:last-child){border-bottom:1px dashed var(--line);}
-  .modelo-etiqueta{flex:0 0 auto;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--amber);min-width:110px;padding-top:2px;}
-  .modelo-expr{font-weight:600;color:var(--ink);}
-  .modelo-expr strong{color:var(--amber);}
-
-  .eq-list{display:flex;flex-direction:column;gap:12px;}
-  .item-row{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(42,28,18,0.12);}
-  .item-num{background:var(--amber); color:#fff; font-family:'Cinzel',serif; font-weight:700; font-size:1.05rem; display:flex; align-items:center; justify-content:center; min-width:2.4rem; padding:0 6px;}
-  .item-expr{background:#fffdf8; color:var(--ink); font-size:clamp(.92rem,3.2vw,1.1rem); font-weight:600; padding:10px 12px; flex:1; display:flex; align-items:center; gap:8px; white-space:nowrap; overflow-x:auto;}
-  .item-expr .igual{color:var(--gold); font-weight:700;}
-  .item-expr .blanco{display:inline-block; min-width:70px; border-bottom:2px solid var(--ink-mid);}
-
-  .problema-intro{background:#fffdf8;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:12px;font-size:.96rem;}
-
-  .nota-texto{font-size:.98rem; color:var(--ink); line-height:1.7;}
-  .nota-texto strong{color:var(--amber);}
+  .acciones{display:flex;gap:.75rem;flex-wrap:wrap;margin:18px 0 30px;}
+  .btn-accion{display:inline-flex;align-items:center;gap:.45rem;padding:.58rem 1.25rem;background:var(--amber);color:#fff8ec;border:none;border-radius:6px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s;}
+  .btn-accion:hover{background:var(--gold);}
+  .btn-accion.outline{background:transparent;color:var(--amber);border:1px solid var(--amber);}
+  .btn-accion.outline:hover{background:rgba(138,94,20,.08);}
 
   .licencia{font-size:.8rem;color:var(--ink-mid);text-align:center;margin-top:28px;padding-top:16px;border-top:1px solid var(--line);}
+
+  @media print{
+    .breadcrumb,.acciones{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -58,58 +44,13 @@
     <div class="subtitle">Estudiá los dos modelos resueltos, practicá con los ítems y después aplicá todo al problema de la piscina.</div>
   </div>
 
-  <div class="panel panel-actividad">
-    <h2>Modelo resuelto 1 — Monomio por polinomio</h2>
-    <div class="modelo-pasos">
-      <div class="modelo-paso"><span class="modelo-etiqueta">Planteo</span><span class="modelo-expr">4x · (3x² − 2x + 5)</span></div>
-      <div class="modelo-paso"><span class="modelo-etiqueta">Distribuir</span><span class="modelo-expr">4x·3x² + 4x·(−2x) + 4x·5</span></div>
-      <div class="modelo-paso"><span class="modelo-etiqueta">Multiplicar</span><span class="modelo-expr"><strong>12x³ − 8x² + 20x</strong></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-alt">
-    <h2>Modelo resuelto 2 — Polinomio por polinomio</h2>
-    <div class="modelo-pasos">
-      <div class="modelo-paso"><span class="modelo-etiqueta">Planteo</span><span class="modelo-expr">(2x − 3)(x + 4)</span></div>
-      <div class="modelo-paso"><span class="modelo-etiqueta">Distribuir</span><span class="modelo-expr">2x·x + 2x·4 + (−3)·x + (−3)·4</span></div>
-      <div class="modelo-paso"><span class="modelo-etiqueta">Multiplicar</span><span class="modelo-expr">2x² + 8x − 3x − 12</span></div>
-      <div class="modelo-paso"><span class="modelo-etiqueta">Reducir</span><span class="modelo-expr"><strong>2x² + 5x − 12</strong></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-actividad">
-    <h2>Actividad de práctica</h2>
-    <div class="parte-intro">Aplicá lo visto en los dos modelos para resolver estas multiplicaciones.</div>
-    <div class="eq-list">
-      <div class="item-row"><span class="item-num">1</span><span class="item-expr">5x(2x² + 3x − 1) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">2</span><span class="item-expr">−3m²(4m − 2m² + 5) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">3</span><span class="item-expr">(x + 6)(x − 2) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">4</span><span class="item-expr">(3a − 1)(2a + 5) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">5</span><span class="item-expr">(2y − 3)(2y + 3) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">6</span><span class="item-expr">(x + 2)(x² − 3x + 4) <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-alt">
-    <h2>Problema de aplicación — La piscina</h2>
-    <div class="problema-intro">Se construye una piscina rectangular. El largo mide (x + 5) metros, el ancho mide (x + 2) metros, y la profundidad es constante: 2 metros.</div>
-    <div class="eq-list">
-      <div class="item-row"><span class="item-num">a</span><span class="item-expr">Área de la base: A(x) = (x + 5)(x + 2). Desarrollala <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">b</span><span class="item-expr">Volumen: V(x) = A(x) · 2. Desarrollalo <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">c</span><span class="item-expr">Pintar el borde cuesta $150 por metro de perímetro P(x) = 4x + 14. Si el presupuesto es $3900, planteá y resolvé 150(4x + 14) = 3900 <span class="igual">→ x =</span> <span class="blanco">&nbsp;</span></span></div>
-      <div class="item-row"><span class="item-num">d</span><span class="item-expr">Con el valor de x hallado en c), calculá el volumen en m³ <span class="igual">=</span> <span class="blanco">&nbsp;</span></span></div>
-    </div>
-  </div>
-
-  <div class="panel panel-nota">
-    <h2>Nota docente</h2>
-    <div class="nota-texto"><strong>Ojo:</strong> el orden importa. Primero resolvé la ecuación de la parte c) para encontrar x — ese valor es el que después vas a usar en d) para calcular el volumen. Si te da un x que no tiene sentido para una medida (negativo, por ejemplo), revisá el planteo de la ecuación.</div>
-  </div>
-
   <div class="panel">
-    <h2>Hoja ilustrada</h2>
-    <img src="A10_HojaAlumno_Imprimir.png" alt="Hoja del alumno A-10: práctica y diagrama de la piscina en perspectiva isométrica" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);" loading="lazy">
-    <div style="font-size:.85rem;color:var(--ink-mid);text-align:center;font-style:italic;margin-top:10px;">Versión ilustrada con el diagrama de la piscina en 3D, mismo contenido verificado arriba.</div>
+    <img src="A10_HojaAlumno_Imprimir.png" alt="Hoja del alumno A-10: multiplicación de polinomios y problema de la piscina" loading="lazy">
+  </div>
+
+  <div class="acciones">
+    <a class="btn-accion" href="A10_HojaAlumno_Imprimir.png" download>⬇ Descargar imagen</a>
+    <button class="btn-accion outline" type="button" onclick="window.print()">🖨 Imprimir</button>
   </div>
 
   <div class="licencia">

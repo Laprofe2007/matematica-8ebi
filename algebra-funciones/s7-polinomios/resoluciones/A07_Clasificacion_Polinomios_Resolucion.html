@@ -35,12 +35,7 @@
 
   .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:8px 12px;margin-top:8px;font-weight:800;color:#1e8449;font-size:.9rem}
 
-  .glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0}
-  .glossary div{background:#fff;border-radius:8px;padding:10px 12px;font-size:.85rem;border:1px solid #e3d9f2}
-  .glossary b{color:#5b2a86;display:block;margin-bottom:2px}
-
   footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
-  @media(max-width:520px){.glossary{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -53,168 +48,93 @@
 </header>
 
 <div class="note warn">
-  <b>La trampa de esta ficha:</b> muchas expresiones parecen tener varios términos, pero antes de clasificar hay que <b>reducir los términos semejantes</b>. Recién ahí se cuenta cuántos términos quedan. Varias de las siguientes se reducen a un solo término aunque a primera vista no lo parezca.
-</div>
-
-<div class="glossary">
-  <div><b>Monomio</b>Un solo término.</div>
-  <div><b>Binomio</b>Dos términos no semejantes.</div>
-  <div><b>Trinomio</b>Tres términos no semejantes.</div>
-  <div><b>Polinomio</b>Cuatro o más términos no semejantes.</div>
-</div>
-
-<div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head">
-    <div class="panel-num">1</div>
-    <div class="panel-expr">2x − 4x² + 2x</div>
-    <div class="panel-tag tag-bi">Binomio</div>
-  </div>
-  <div class="eq-box">2x + 2x − 4x² <span class="arrow">→</span> 4x − 4x²</div>
-  <div class="final-answer">Quedan 2 términos no semejantes (4x y −4x²) → Binomio.</div>
+  <b>La trampa de esta ficha:</b> varios ítems parecen tener más términos de los que realmente tienen. Antes de clasificar hay que <b>reducir los términos semejantes</b> — recién ahí se cuenta cuántos términos quedan.
 </div>
 
 <div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">2</div>
-    <div class="panel-expr">4x² + x² − 8x²</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">(4 + 1 − 8)x² <span class="arrow">→</span> −3x²</div>
-  <div class="final-answer">Los tres términos son semejantes y se reducen a uno solo → Monomio.</div>
+  <div class="panel-head"><div class="panel-num">1</div><div class="panel-expr">5x³</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="final-answer">Ya está reducida: 1 solo término → Monomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">2</div><div class="panel-expr">3x² + 2</div><div class="panel-tag tag-bi">Binomio</div></div>
+  <div class="final-answer">Ya está reducida: 2 términos no semejantes → Binomio.</div>
 </div>
 
 <div class="panel" style="--accent:#c0621a">
-  <div class="panel-head">
-    <div class="panel-num">3</div>
-    <div class="panel-expr">8 + 8m + 8m²</div>
-    <div class="panel-tag tag-tri">Trinomio</div>
-  </div>
-  <div class="eq-box">8&nbsp;·&nbsp;1  <span class="arrow">·</span>  8m  <span class="arrow">·</span>  8m² — ningún par es semejante</div>
-  <div class="final-answer">Ya está reducida: 3 términos no semejantes (constante, m, m²) → Trinomio.</div>
-</div>
-
-<div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head">
-    <div class="panel-num">4</div>
-    <div class="panel-expr">11x² + 6x² + 2x</div>
-    <div class="panel-tag tag-bi">Binomio</div>
-  </div>
-  <div class="eq-box">(11 + 6)x² + 2x <span class="arrow">→</span> 17x² + 2x</div>
-  <div class="final-answer">Quedan 2 términos no semejantes → Binomio.</div>
-</div>
-
-<div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">5</div>
-    <div class="panel-expr">x + 5x² − x</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">(x − x) + 5x² <span class="arrow">→</span> 5x²</div>
-  <div class="final-answer">x y −x se cancelan → Monomio.</div>
+  <div class="panel-head"><div class="panel-num">3</div><div class="panel-expr">x² + 3x + 5</div><div class="panel-tag tag-tri">Trinomio</div></div>
+  <div class="final-answer">Ya está reducida: 3 términos no semejantes → Trinomio.</div>
 </div>
 
 <div class="panel" style="--accent:#8e44ad">
-  <div class="panel-head">
-    <div class="panel-num">6</div>
-    <div class="panel-expr">5 + 2x − y + 4x²</div>
-    <div class="panel-tag tag-poli">Polinomio</div>
-  </div>
-  <div class="eq-box">4 términos, todos con parte literal distinta (constante, x, y, x²)</div>
+  <div class="panel-head"><div class="panel-num">4</div><div class="panel-expr">4x⁴ + 2x² + x − 7</div><div class="panel-tag tag-poli">Polinomio</div></div>
   <div class="final-answer">Ya está reducida: 4 términos no semejantes → Polinomio.</div>
 </div>
 
 <div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">7</div>
-    <div class="panel-expr">−2m + 6n + (−6n) + m</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">(−2m + m) + (6n − 6n) <span class="arrow">→</span> −m + 0 <span class="arrow">→</span> −m</div>
-  <div class="final-answer">Las n se cancelan entre sí → Monomio.</div>
+  <div class="panel-head"><div class="panel-num">5</div><div class="panel-expr">−8y</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="final-answer">Ya está reducida: 1 solo término → Monomio.</div>
 </div>
 
-<div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">8</div>
-    <div class="panel-expr">−yx³ − 5x³y</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">yx³ y x³y tienen la misma parte literal <span class="arrow">→</span> −x³y − 5x³y = −6x³y</div>
-  <div class="final-answer">El orden de las letras no cambia la parte literal → semejantes → Monomio.</div>
-</div>
-
-<div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">9</div>
-    <div class="panel-expr">−4m³n² + 5n²m³ + 7m³nn</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">m³n², n²m³ y m³nn (=m³n²) son la misma parte literal <span class="arrow">→</span> (−4+5+7)m³n² = 8m³n²</div>
-  <div class="final-answer">Los tres términos son semejantes → Monomio.</div>
-</div>
-
-<div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">10</div>
-    <div class="panel-expr">3x³y · yx² + x⁵y²</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">3x³y·yx² = 3x⁵y²  <span class="arrow">→</span>  3x⁵y² + x⁵y² = 4x⁵y²</div>
-  <div class="final-answer">Primero se multiplica, después se reduce → Monomio.</div>
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">6</div><div class="panel-expr">7a − 4</div><div class="panel-tag tag-bi">Binomio</div></div>
+  <div class="final-answer">Ya está reducida: 2 términos no semejantes → Binomio.</div>
 </div>
 
 <div class="panel" style="--accent:#c0621a">
-  <div class="panel-head">
-    <div class="panel-num">11</div>
-    <div class="panel-expr">−7mn² + m²n + 10mn</div>
-    <div class="panel-tag tag-tri">Trinomio</div>
-  </div>
-  <div class="eq-box">mn², m²n y mn tienen partes literales distintas — no hay semejantes</div>
-  <div class="final-answer">Ya está reducida: 3 términos no semejantes → Trinomio.</div>
-</div>
-
-<div class="panel" style="--accent:#c0621a">
-  <div class="panel-head">
-    <div class="panel-num">12</div>
-    <div class="panel-expr">−x³z² + 4zx − 1</div>
-    <div class="panel-tag tag-tri">Trinomio</div>
-  </div>
-  <div class="eq-box">x³z², zx y la constante −1 son todos distintos entre sí</div>
+  <div class="panel-head"><div class="panel-num">7</div><div class="panel-expr">x³ − x² + 4x</div><div class="panel-tag tag-tri">Trinomio</div></div>
   <div class="final-answer">Ya está reducida: 3 términos no semejantes → Trinomio.</div>
 </div>
 
 <div class="panel" style="--accent:#8e44ad">
-  <div class="panel-head">
-    <div class="panel-num">13</div>
-    <div class="panel-expr">m⁴ − 2m³ + m² + 3m − 1</div>
-    <div class="panel-tag tag-poli">Polinomio</div>
-  </div>
-  <div class="eq-box">5 términos, cada uno con un exponente distinto de m</div>
-  <div class="final-answer">Ya está reducida: 5 términos no semejantes → Polinomio.</div>
+  <div class="panel-head"><div class="panel-num">8</div><div class="panel-expr">6m³ + 3m² − 2m + 1</div><div class="panel-tag tag-poli">Polinomio</div></div>
+  <div class="final-answer">Ya está reducida: 4 términos no semejantes → Polinomio.</div>
 </div>
 
 <div class="panel" style="--accent:#1a56b0">
-  <div class="panel-head">
-    <div class="panel-num">14</div>
-    <div class="panel-expr">6p² + 2·(1/5)</div>
-    <div class="panel-tag tag-bi">Binomio</div>
-  </div>
-  <div class="eq-box">6p² + 2/5 — ya reducida</div>
-  <div class="final-answer">2 términos no semejantes (6p² y 2/5) → Binomio.</div>
+  <div class="panel-head"><div class="panel-num">9</div><div class="panel-expr">3x + 5x − 2</div><div class="panel-tag tag-bi">Binomio</div></div>
+  <div class="eq-box">3x + 5x − 2 <span class="arrow">→</span> 8x − 2</div>
+  <div class="final-answer">3x y 5x son semejantes → quedan 2 términos → Binomio.</div>
 </div>
 
 <div class="panel" style="--accent:#1e8449">
-  <div class="panel-head">
-    <div class="panel-num">15</div>
-    <div class="panel-expr">11a² + 14aa − 2a⁴ ÷ a²</div>
-    <div class="panel-tag tag-mono">Monomio</div>
-  </div>
-  <div class="eq-box">14aa = 14a²; primero la división: 2a⁴÷a² = 2a² <span class="arrow">→</span> 11a² + 14a² − 2a² = 23a²</div>
-  <div class="final-answer">Jerarquía de operaciones + reducción → Monomio.</div>
+  <div class="panel-head"><div class="panel-num">10</div><div class="panel-expr">4x² − 4x² + 7</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="eq-box">4x² − 4x² + 7 <span class="arrow">→</span> 0 + 7 <span class="arrow">→</span> 7</div>
+  <div class="final-answer">4x² y −4x² se cancelan → queda solo la constante → Monomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">11</div><div class="panel-expr">2a + 3b − a + b</div><div class="panel-tag tag-bi">Binomio</div></div>
+  <div class="eq-box">(2a − a) + (3b + b) <span class="arrow">→</span> a + 4b</div>
+  <div class="final-answer">Quedan 2 términos no semejantes (a y 4b) → Binomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1a56b0">
+  <div class="panel-head"><div class="panel-num">12</div><div class="panel-expr">5x² + 3x − 2x² + x</div><div class="panel-tag tag-bi">Binomio</div></div>
+  <div class="eq-box">(5x² − 2x²) + (3x + x) <span class="arrow">→</span> 3x² + 4x</div>
+  <div class="final-answer">Quedan 2 términos no semejantes → Binomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">13</div><div class="panel-expr">7m − 7m + 3m²</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="eq-box">7m − 7m + 3m² <span class="arrow">→</span> 0 + 3m² <span class="arrow">→</span> 3m²</div>
+  <div class="final-answer">7m y −7m se cancelan → Monomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">14</div><div class="panel-expr">x + x + x</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="eq-box">x + x + x <span class="arrow">→</span> 3x</div>
+  <div class="final-answer">Los tres términos son semejantes → Monomio.</div>
+</div>
+
+<div class="panel" style="--accent:#1e8449">
+  <div class="panel-head"><div class="panel-num">15</div><div class="panel-expr">6y² + 3y − 3y − 2y²</div><div class="panel-tag tag-mono">Monomio</div></div>
+  <div class="eq-box">(6y² − 2y²) + (3y − 3y) <span class="arrow">→</span> 4y² + 0 <span class="arrow">→</span> 4y²</div>
+  <div class="final-answer">3y y −3y se cancelan → queda un solo término → Monomio.</div>
 </div>
 
 <div class="note info">
-  <b>Origen:</b> Porras, M. (2024). <i>Matemática 8</i>. Publicaciones Porras, Actividad 3.8, pág. 101. Adaptación de resolución explicada: Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos.
+  <b>Origen:</b> Fernández, G. M. (2026), Reino Matemático. Crónicas de los Exploradores de 8.°, Liceo de Médanos. Elaboración propia, inspirada en el enfoque de clasificación de polinomios de Porras (2024), sin reproducir su texto ni sus ítems.
 </div>
 
 <footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · A-07</footer>

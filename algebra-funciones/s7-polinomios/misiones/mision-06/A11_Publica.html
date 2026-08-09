@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A-11 — Del rectángulo al cuadrado de un binomio | Secuencia 7</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+  :root{
+    --paper:#fdf5e0; --ink:#2a1c12; --ink-mid:#5c3820;
+    --gold:#8a5e14; --amber:#7a4f0a; --line:#d9c69a;
+    --bg-actividad:#f6e9c9; --bg-nota:#f2ddb0; --bg-alt:#f0e6d0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',serif;line-height:1.65;}
+  .shell{max-width:820px;margin:0 auto;padding:32px 24px 64px;}
+  .breadcrumb{font-size:.82rem;color:var(--ink-mid);margin-bottom:18px;}
+  .page-header{border-bottom:3px double var(--gold);padding-bottom:18px;margin-bottom:26px;}
+  .page-tag{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .page-header h1{font-family:'Cinzel',serif;font-size:1.7rem;margin:0 0 8px;color:var(--ink);}
+  .subtitle{font-style:italic;color:var(--ink-mid);font-size:1rem;}
+
+  .panel{border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin-bottom:20px;}
+  .panel h2{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--ink);margin-top:0;margin-bottom:6px;padding-bottom:10px;border-bottom:2px solid var(--gold);}
+  .panel .parte-intro{font-size:.94rem;color:var(--ink-mid);margin-bottom:14px;}
+  .panel-actividad{background:var(--bg-actividad);}
+  .panel-nota{background:var(--bg-nota);}
+  .panel-alt{background:var(--bg-alt);}
+
+  .item-list{display:flex;flex-direction:column;gap:10px;}
+  .item{font-size:.98rem;}
+
+  .eq-list{display:flex;flex-direction:column;gap:12px;}
+  .item-row{display:flex;align-items:stretch;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(42,28,18,0.12);}
+  .item-num{background:var(--amber); color:#fff; font-family:'Cinzel',serif; font-weight:700; font-size:1.05rem; display:flex; align-items:center; justify-content:center; min-width:2.4rem; padding:0 6px;}
+  .item-expr{background:#fffdf8; color:var(--ink); font-size:clamp(.92rem,3.2vw,1.1rem); font-weight:600; padding:10px 12px; flex:1; display:flex; align-items:center; gap:8px;}
+
+  .nota-texto{font-size:.98rem; color:var(--ink); line-height:1.7;}
+  .nota-texto strong{color:var(--amber);}
+
+  .imagen-nota{font-size:.85rem;color:var(--ink-mid);text-align:center;font-style:italic;margin-top:10px;}
+
+  .licencia{font-size:.8rem;color:var(--ink-mid);text-align:center;margin-top:28px;padding-top:16px;border-top:1px solid var(--line);}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="breadcrumb">Reino Matemático · Secuencia 7 / A-11</div>
+  <div class="page-header">
+    <div class="page-tag">A-11 · Actividad de construcción conceptual + práctica · Elaboración propia</div>
+    <h1>Del rectángulo al cuadrado de un binomio</h1>
+    <div class="subtitle">Vamos a deducir una fórmula muy usada en álgebra a partir de una figura geométrica, en vez de memorizarla directamente.</div>
+  </div>
+
+  <div class="panel panel-actividad">
+    <h2>Parte 1 — El puente geométrico</h2>
+    <div class="parte-intro">Dibujá un cuadrado grande de lado (a + b). Sobre cada lado, marcá dos segmentos: uno de longitud a y otro de longitud b, y trazá las líneas correspondientes para dividir el cuadrado en 4 regiones internas (dos cuadrados y dos rectángulos).</div>
+    <div class="item-list">
+      <div class="item">a) ¿Cuál es el área total del cuadrado grande, expresada como (a + b)²?</div>
+      <div class="item">b) Escribí el área de cada una de las 4 regiones internas, según sus lados.</div>
+      <div class="item">c) Sumá las 4 áreas parciales. ¿Qué expresión obtenés?</div>
+      <div class="item">d) Compará el resultado de c) con (a + b)². ¿Qué fórmula queda demostrada?</div>
+    </div>
+  </div>
+
+  <div class="panel panel-nota">
+    <h2>Recordatorio</h2>
+    <div class="nota-texto">(a + b)² <strong>no</strong> es igual a a² + b². Al cuadrado de un binomio le falta el término del medio: <strong>(a + b)² = a² + 2ab + b²</strong>.</div>
+  </div>
+
+  <div class="panel panel-actividad">
+    <h2>Parte 2 — Actividad de práctica</h2>
+    <div class="parte-intro">Aplicá la fórmula (a + b)² = a² + 2ab + b² (o su versión con resta) para desarrollar cada expresión:</div>
+    <div class="eq-list">
+      <div class="item-row"><span class="item-num">1</span><span class="item-expr">(x + 3)²</span></div>
+      <div class="item-row"><span class="item-num">2</span><span class="item-expr">(y − 2)²</span></div>
+      <div class="item-row"><span class="item-num">3</span><span class="item-expr">(2a + 1)²</span></div>
+      <div class="item-row"><span class="item-num">4</span><span class="item-expr">(3m − 4)²</span></div>
+      <div class="item-row"><span class="item-num">5</span><span class="item-expr">(x + 5)²</span></div>
+      <div class="item-row"><span class="item-num">6</span><span class="item-expr">(2x − 3)²</span></div>
+      <div class="item-row"><span class="item-num">7</span><span class="item-expr">(4a + 2b)²</span></div>
+      <div class="item-row"><span class="item-num">8</span><span class="item-expr">(5x − y)²</span></div>
+      <div class="item-row"><span class="item-num">9</span><span class="item-expr">(a + ½)²</span></div>
+      <div class="item-row"><span class="item-num">10</span><span class="item-expr">(⅓x − 2)²</span></div>
+      <div class="item-row"><span class="item-num">11</span><span class="item-expr">(2m + ⅔n)²</span></div>
+      <div class="item-row"><span class="item-num">12</span><span class="item-expr">(¾a − ⅕b)²</span></div>
+    </div>
+  </div>
+
+  <div class="panel panel-alt">
+    <h2>Cierre</h2>
+    <div class="nota-texto">En tus palabras: ¿por qué el término 2ab aparece dos veces en la figura geométrica de la Parte 1?</div>
+  </div>
+
+  <div class="panel">
+    <h2>Hoja ilustrada</h2>
+    <img src="A11_HojaAlumno_Imprimir.png" alt="Hoja del alumno A-11: puente geométrico y actividad de práctica, versión ilustrada" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--line);" loading="lazy">
+    <div class="imagen-nota">Versión ilustrada para completar a mano, con el mismo contenido verificado arriba.</div>
+  </div>
+
+  <div class="licencia">
+    A-11 · Secuencia 7 (Polinomios) · Matemática 8.° EBI · Gabriela Fernández · 2026 · Elaboración propia; conserva el puente geométrico hacia el cuadrado de binomio, inspirado en Ochoviet y Vitabar (2014, pág. 32) y en la práctica graduada de Porras (2024, pág. 107) — sin reproducir su texto ni sus ítems. CC BY-NC-SA 4.0.
+  </div>
+</div>
+</body>
+</html>

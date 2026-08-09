@@ -5,6 +5,31 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-08-09
+
+### S7 — Fichas públicas simplificadas y resoluciones corregidas (`0e91f94`)
+
+- A07–A11_Publica.html: cada ficha muestra solo título, imagen ilustrada (HojaAlumno) con botones descargar/imprimir, y cita de fuente — sin contenido duplicado en texto.
+- Resoluciones A07, A08, A10, A11 reconstruidas con las respuestas verificadas de los ítems Plan B públicos (las versiones anteriores resolvían ejercicios del libro con copyright).
+
+### S7 — Fichas públicas completas, imágenes ilustradas y limpieza de fuentes (`183376e`, `0ce8d76`)
+
+- A07/A08/A09_Publica.html actualizados (panel "Hoja ilustrada" al final); A10/A11_Publica.html trackeados por primera vez.
+- Imágenes A07–A11_HojaAlumno_Imprimir.png desplegadas en cada carpeta de misión.
+- Fuentes originales eliminadas del repo y archivadas en `Secuencia 7\Actividades`: A07_pag101_Porras.pdf, A08_pag17-19_vitabar.pdf, A09_pag102_Deberes.pdf, A09b_pag103_Deberes.png, A10_pag20-23_multiplicacion.pdf, A11_Cuadrado_Binomio.pdf.
+- index.html de misiones 01–04 y 06 actualizados: cargan la ficha por iframe en vez del PDF original.
+- mision-07/A12_Publica.html eliminado del working tree (A-12 dado de baja definitivamente).
+
+### S7 — Limpieza de A-12, lecciones rediseñadas y huérfanos (`87273b5`, `3877121`)
+
+- leccion-2.html: reemplazada con versión rediseñada (mismo tratamiento visual que L4/L5); ya no usa pag104_Porras_Leccion.png.
+- leccion-4.html y leccion-5.html: reemplazadas con versiones del staging público.
+- leccion-5.html: href del botón "← Lección 4" corregido (apuntaba a nombre de archivo de staging, no al del Reino).
+- A-12 (Crucigrama) dado de baja: mision-07/ eliminada, A12_Crucigrama_Resolucion.html eliminada, Misión V removida del modal, contador 5→4 misiones, descripción actualizada.
+- pag104_Porras_Leccion.png y pag107_Producto_Notable_Leccion.pdf eliminados del repo (ya sin referencias).
+
+---
+
 ## 2026-08-05
 
 ### S8 cierre, biblioteca y misiones: segunda tanda (`TBD`)

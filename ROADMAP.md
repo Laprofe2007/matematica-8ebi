@@ -10,8 +10,15 @@ Ver el historial de cambios en [`CHANGELOG.md`](CHANGELOG.md).
 
 ### S7 — El Mundo de los Polinomios
 
+S7 completamente armada pedagógicamente. Fichas públicas, imágenes ilustradas, resoluciones y biblioteca (5 lecciones) publicadas.
+
+- [x] **Fichas A07–A11 simplificadas** — solo imagen + botones, sin contenido duplicado. ✓
+- [x] **Resoluciones A07/A08/A10/A11 corregidas** — respuestas de los ítems Plan B públicos. ✓
+- [x] **Biblioteca S7** — 5 lecciones en `s7-polinomios/biblioteca/`. ✓
+- [x] **A-12 dado de baja** — mision-07 eliminada del repo; 4 misiones activas. ✓
 - [ ] **Habilitar MC-S7** cuando corresponda: `cierre/index.html`, `MC_HABILITADO = false` → `true`.
 - [ ] **Habilitar resolución MC-S7** en momento posterior: `RESOLUCION_HABILITADA = false` → `true`.
+- [ ] **Resolución A-09**: sin archivo (es tarea domiciliaria, sin clave de respuesta — mantener así salvo decisión expresa).
 
 ### S8 — El Equilibrio Oculto (Ecuaciones)
 
@@ -25,14 +32,10 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 - [ ] **Habilitar Desafío Final S8 en el mapa** — `s8-ecuaciones/index.html`, territorio `desafio`: `bloqueado: false`, `enlace: "cierre/index.html"`.
 - [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E10 aún sin HTML en repo).
 
-### S7 — Área de rectángulo (Ochoviet)
-
-- [ ] **`areas_rectangulo_Ochoviet.pdf`** movido a `s7-polinomios/misiones/mision-06/` — material de apoyo para A-11 "Del rectángulo al cuadrado de un binomio" (Ochoviet-Vitabar pág. 32). Sin código de actividad adicional asignado; se usa como material complementario de la misión existente.
-
 ### S6 — Código de Letras
 
 - [x] **MC-S6 aplicado en clase** (~clase 42) y corregido. ✓
-- [ ] **Habilitar resolución MC-S6**: `cierre/index.html`, `RESOLUCION_HABILITADA = false` → `true`. Hacer cuando corresponda después de la corrección.
+- [x] **MC-S6 y resolución habilitados**: ambos toggles `true`. ✓
 - [ ] **Resolución A-06**: habilitarla cuando esté lista (actualmente sin archivo en resoluciones/).
 - [ ] **Resolución A-03**: habilitarla cuando esté lista (actualmente sin archivo).
 

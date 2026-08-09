@@ -2,250 +2,126 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lección 5 — Cuadrado de un binomio, la versión gráfica | Biblioteca S7</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biblioteca · Cuadrado de un binomio — la versión gráfica</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:#f4f2fb;color:#2c1a4d;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#5b2a86,#8e44ad);border-radius:16px;padding:26px 24px;color:#fff;margin-bottom:22px}
+  header .code{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  header h1{font-size:1.4rem;font-weight:900}
+  header p{font-size:.85rem;opacity:.9;margin-top:6px}
 
-  :root{
-    --paper:#fdf5e0;
-    --ink:#2a1c12;
-    --ink-mid:#5c3820;
-    --gold:#8a5e14;
-    --amber:#7a4f0a;
-    --line:#d9c69a;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Libre Baskerville', serif;
-    line-height:1.65;
-  }
-  .shell{
-    max-width:900px;
-    margin:0 auto;
-    padding:32px 24px 64px;
-  }
-  .breadcrumb{
-    font-size:.82rem;
-    color:var(--ink-mid);
-    margin-bottom:18px;
-    letter-spacing:.02em;
-  }
-  .nav-lecciones{
-    display:inline-block;
-    margin-bottom:24px;
-    padding:10px 16px;
-    border:1px solid var(--line);
-    border-radius:8px;
-    background:#fbf0d6;
-    font-size:.9rem;
-  }
-  .nav-lecciones a{color:var(--amber); text-decoration:none; font-weight:700;}
-  .nav-lecciones a:hover{text-decoration:underline;}
+  .section-title{font-weight:900;color:#5b2a86;font-size:1.05rem;margin:28px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
 
-  .page-header{
-    border-bottom:3px double var(--gold);
-    padding-bottom:18px;
-    margin-bottom:28px;
-  }
-  .page-tag{
-    font-family:'Cinzel', serif;
-    font-size:.78rem;
-    letter-spacing:.12em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:6px;
-  }
-  .page-header h1{
-    font-family:'Cinzel', serif;
-    font-size:1.9rem;
-    margin:0 0 8px;
-    color:var(--ink);
-  }
-  .subtitle{
-    font-style:italic;
-    color:var(--ink-mid);
-    font-size:1.02rem;
-  }
+  .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:18px;font-size:.92rem}
+  .note.info{background:#e7f3fb;border-left-color:#2680c2}
+  .note b{color:#5b2a86}
 
-  .panel{
-    background:#fbf0d6;
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:22px 26px;
-    margin-bottom:22px;
-  }
-  .panel h2{
-    font-family:'Cinzel', serif;
-    font-size:1.15rem;
-    color:var(--amber);
-    margin-top:0;
-    border-bottom:1px solid var(--line);
-    padding-bottom:8px;
-  }
+  .panel{--accent:#8e44ad;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:20px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
+  .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+  .panel-title{font-weight:800;font-size:.98rem;color:#5b2a86}
+  .panel p{font-size:.9rem;margin-bottom:8px}
+  .panel p:last-child{margin-bottom:0}
 
-  .diagrama-wrap{
-    text-align:center;
-    margin:18px 0;
-  }
-  .diagrama-wrap svg{max-width:320px; width:100%; height:auto;}
-  .caption{
-    font-size:.88rem;
-    color:var(--ink-mid);
-    font-style:italic;
-    text-align:center;
-    margin-top:10px;
-  }
+  .diagrama-wrap{text-align:center;margin:14px 0}
+  .diagrama-wrap svg{max-width:300px;width:100%;height:auto}
+  .caption{font-size:.85rem;color:#7a6a94;font-style:italic;text-align:center;margin-top:10px}
 
-  .pasos{
-    list-style:none;
-    counter-reset:paso;
-    padding:0;
-    margin:16px 0;
-  }
-  .pasos li{
-    counter-increment:paso;
-    position:relative;
-    padding:6px 0 6px 46px;
-    margin-bottom:8px;
-  }
+  .pasos{list-style:none;counter-reset:paso;padding:0;margin:10px 0}
+  .pasos li{counter-increment:paso;position:relative;padding:8px 0 8px 46px;margin-bottom:6px;background:#f8f5fd;border-radius:8px;font-size:.9rem}
   .pasos li::before{
     content:counter(paso);
-    position:absolute;
-    left:0; top:4px;
-    width:30px; height:30px;
-    border-radius:50%;
-    background:var(--amber);
-    color:var(--paper);
-    font-family:'Cinzel', serif;
-    font-weight:700;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:.9rem;
+    position:absolute; left:8px; top:8px;
+    width:28px;height:28px;border-radius:50%;
+    background:#8e44ad;color:#fff;font-weight:900;
+    display:flex;align-items:center;justify-content:center;font-size:.85rem;
   }
 
-  .formula-grande{
-    text-align:center;
-    font-family:'Cinzel', serif;
-    font-size:1.7rem;
-    color:var(--ink);
-    background:#f4e4b8;
-    border:2px solid var(--gold);
-    border-radius:10px;
-    padding:22px;
-    margin:26px 0;
-    letter-spacing:.03em;
-  }
+  .formula-grande{text-align:center;font-weight:900;font-size:1.5rem;color:#2c1a4d;background:#fff;border:2px solid #8e44ad;border-radius:12px;padding:20px;margin:22px 0;letter-spacing:.02em}
 
-  .nota{
-    background:#f4e4b8;
-    border-left:4px solid var(--amber);
-    padding:14px 18px;
-    border-radius:0 8px 8px 0;
-    font-size:.94rem;
-    color:var(--ink-mid);
-  }
+  footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
 
-  .nav-inferior{
-    display:flex;
-    justify-content:space-between;
-    gap:12px;
-    margin-top:36px;
-    padding-top:20px;
-    border-top:1px solid var(--line);
-    flex-wrap:wrap;
-  }
-  .btn-volver{
-    display:inline-block;
-    padding:10px 18px;
-    border:1px solid var(--gold);
-    border-radius:8px;
-    color:var(--amber);
-    text-decoration:none;
-    font-size:.9rem;
-    font-weight:700;
-  }
-  .btn-volver:hover{background:var(--amber); color:var(--paper);}
+  nav.pie{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1rem;border-top:1px solid #e3d9f2}
+  nav.pie a{display:inline-flex;align-items:center;gap:.35rem;padding:.45rem 1rem;background:#f0eafd;border:1px solid #b79ee0;border-radius:6px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:700;color:#5b2a86;text-decoration:none}
+  nav.pie a.prev{background:#8e44ad;border-color:#8e44ad;color:#fff}
 </style>
 </head>
 <body>
-<div class="shell">
+<div class="wrap">
 
-  <div class="breadcrumb">
-    Reinos Matemáticos / Álgebra y Funciones / El Mundo de los Polinomios / Biblioteca / Lección 5
+<header>
+  <div class="code">Biblioteca · Secuencia 7 · Polinomios</div>
+  <h1>Cuadrado de un binomio — la versión gráfica</h1>
+  <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
+</header>
+
+<div class="note">
+  Complemento visual de la Lección 4: la misma propiedad, vista ahora como el área de un cuadrado.
+</div>
+
+<div class="panel">
+  <div class="panel-head"><div class="panel-title">De un rectángulo a un cuadrado</div></div>
+  <p>En la Lección 4 dedujimos la fórmula del cuadrado de un binomio. Ahora vamos a mirar esa misma propiedad de otra forma: como el área de un cuadrado completo, dividido en cuatro partes.</p>
+  <p>Esta es una forma muy antigua de mostrar por qué <strong>(a + b)² no es a² + b²</strong>: cuando armamos el cuadrado, aparecen dos rectángulos extra que no podemos ignorar.</p>
+</div>
+
+<div class="section-title">El diagrama</div>
+
+<div class="panel">
+  <div class="diagrama-wrap">
+    <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="40" width="220" height="220" fill="#c9d9f0" stroke="#1a56b0" stroke-width="2"/>
+      <text x="150" y="160" font-family="Nunito, sans-serif" font-weight="900" font-size="26" fill="#1a56b0" text-anchor="middle">a²</text>
+
+      <rect x="260" y="40" width="80" height="220" fill="#f5dcc0" stroke="#c0621a" stroke-width="2"/>
+      <text x="300" y="160" font-family="Nunito, sans-serif" font-weight="900" font-size="20" fill="#c0621a" text-anchor="middle">ab</text>
+
+      <rect x="40" y="260" width="220" height="80" fill="#f5dcc0" stroke="#c0621a" stroke-width="2"/>
+      <text x="150" y="305" font-family="Nunito, sans-serif" font-weight="900" font-size="20" fill="#c0621a" text-anchor="middle">ab</text>
+
+      <rect x="260" y="260" width="80" height="80" fill="#c8e9d3" stroke="#1e8449" stroke-width="2"/>
+      <text x="300" y="305" font-family="Nunito, sans-serif" font-weight="900" font-size="20" fill="#1e8449" text-anchor="middle">b²</text>
+
+      <text x="150" y="28" font-family="Nunito, sans-serif" font-weight="700" font-size="16" fill="#5b2a86" text-anchor="middle">a</text>
+      <text x="300" y="28" font-family="Nunito, sans-serif" font-weight="700" font-size="16" fill="#5b2a86" text-anchor="middle">b</text>
+      <text x="18" y="155" font-family="Nunito, sans-serif" font-weight="700" font-size="16" fill="#5b2a86" text-anchor="middle">a</text>
+      <text x="18" y="305" font-family="Nunito, sans-serif" font-weight="700" font-size="16" fill="#5b2a86" text-anchor="middle">b</text>
+    </svg>
+    <div class="caption">Cuadrado de lado (a + b), dividido en cuatro regiones: un cuadrado de lado a, un cuadrado de lado b, y dos rectángulos de lados a y b.</div>
   </div>
+</div>
 
-  <div class="nav-lecciones">
-    ← <a href="leccion-4.html">Lección 4 — Cuadrado de un binomio — Producto notable</a>
-  </div>
+<div class="section-title">Planteo de la fórmula</div>
 
-  <div class="page-header">
-    <div class="page-tag">Lección 5 · Biblioteca · Subreino 2</div>
-    <h1>Cuadrado de un binomio — la versión gráfica</h1>
-    <div class="subtitle">Complemento visual de la Lección 4: la misma propiedad, vista como área de un cuadrado</div>
-  </div>
+<div class="panel">
+  <ol class="pasos">
+    <li>El cuadrado grande tiene lado (a + b), así que su área total es (a + b)².</li>
+    <li>Esa misma área es la suma de las cuatro regiones internas: a² + ab + ab + b².</li>
+    <li>Los dos rectángulos son iguales (ab + ab = 2ab), así que el área total es a² + 2ab + b².</li>
+  </ol>
+</div>
 
-  <div class="panel">
-    <h2>De un rectángulo a un cuadrado</h2>
-    <p>En la Lección 4 dedujimos la fórmula del cuadrado de un binomio usando un rectángulo. Ahora vamos a mirar esa misma propiedad de otra forma: como el área de un cuadrado completo, dividido en cuatro partes.</p>
-    <p>Esta es una forma muy antigua de mostrar por qué <strong>(a + b)² no es a² + b²</strong>: cuando armamos el cuadrado, aparecen dos rectángulos extra que no podemos ignorar.</p>
-  </div>
+<div class="formula-grande">(a + b)² = a² + 2ab + b²</div>
 
-  <div class="panel">
-    <h2>El diagrama</h2>
-    <div class="diagrama-wrap">
-      <svg viewBox="0 0 380 380" xmlns="http://www.w3.org/2000/svg">
-        <rect x="40" y="40" width="220" height="220" fill="#e8c874" stroke="#7a4f0a" stroke-width="2"/>
-        <text x="150" y="160" font-family="Cinzel, serif" font-size="26" fill="#2a1c12" text-anchor="middle">a²</text>
+<div class="panel">
+  <div class="panel-head"><div class="panel-title">Equivalencia entre las dos formas</div></div>
+  <p>Este diagrama muestra exactamente lo mismo que dedujimos en la Lección 4: no hay dos formas distintas de la fórmula, hay dos formas distintas de <em>verla</em>.</p>
+</div>
 
-        <rect x="260" y="40" width="80" height="220" fill="#d9a441" stroke="#7a4f0a" stroke-width="2"/>
-        <text x="300" y="160" font-family="Cinzel, serif" font-size="20" fill="#2a1c12" text-anchor="middle">ab</text>
+<div class="note" style="background:#fdf2e3;border-left-color:#c0621a">
+  <b>Cuidado con el error más común:</b> (a + b)² <u>no</u> es igual a a² + b². Falta el término del medio, 2ab, que en este diagrama son justamente los dos rectángulos que aparecen al armar el cuadrado grande.
+</div>
 
-        <rect x="40" y="260" width="220" height="80" fill="#d9a441" stroke="#7a4f0a" stroke-width="2"/>
-        <text x="150" y="305" font-family="Cinzel, serif" font-size="20" fill="#2a1c12" text-anchor="middle">ab</text>
+<footer>Reino Matemático · Bloque 3A — Biblioteca · Secuencia 7 (Polinomios)</footer>
 
-        <rect x="260" y="260" width="80" height="80" fill="#c98a30" stroke="#7a4f0a" stroke-width="2"/>
-        <text x="300" y="305" font-family="Cinzel, serif" font-size="20" fill="#2a1c12" text-anchor="middle">b²</text>
-
-        <text x="150" y="28" font-family="Libre Baskerville, serif" font-size="16" fill="#5c3820" text-anchor="middle">a</text>
-        <text x="300" y="28" font-family="Libre Baskerville, serif" font-size="16" fill="#5c3820" text-anchor="middle">b</text>
-        <text x="18" y="155" font-family="Libre Baskerville, serif" font-size="16" fill="#5c3820" text-anchor="middle">a</text>
-        <text x="18" y="305" font-family="Libre Baskerville, serif" font-size="16" fill="#5c3820" text-anchor="middle">b</text>
-      </svg>
-      <div class="caption">Cuadrado de lado (a + b), dividido en cuatro regiones: un cuadrado de lado a, un cuadrado de lado b, y dos rectángulos de lados a y b.</div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>Planteo de la fórmula</h2>
-    <ol class="pasos">
-      <li>El cuadrado grande tiene lado (a + b), así que su área total es (a + b)².</li>
-      <li>Esa misma área es la suma de las cuatro regiones internas: a² + ab + ab + b².</li>
-      <li>Los dos rectángulos son iguales (ab + ab = 2ab), así que el área total es a² + 2ab + b².</li>
-    </ol>
-  </div>
-
-  <div class="formula-grande">
-    (a + b)² = a² + 2ab + b²
-  </div>
-
-  <div class="panel">
-    <h2>Equivalencia entre las dos formas</h2>
-    <p>Este diagrama muestra exactamente lo mismo que dedujimos con el rectángulo en la Lección 4: no hay dos formas distintas de la fórmula, hay dos formas distintas de <em>verla</em>.</p>
-    <div class="nota">
-      <strong>Cuidado con el error más común:</strong> (a + b)² <u>no</u> es igual a a² + b². Falta el término del medio, 2ab, que en este diagrama son justamente los dos rectángulos que aparecen al armar el cuadrado grande.
-    </div>
-  </div>
-
-  <div class="nav-inferior">
-    <a href="index.html" class="btn-volver">← Volver a Biblioteca</a>
-    <a href="../index.html" class="btn-volver">← Volver al Subreino</a>
-  </div>
-
+<nav class="pie">
+  <a href="index.html">← Biblioteca</a>
+  <a href="../index.html">← Mapa del subreino</a>
+  <a href="leccion-4-cuadrado-binomio.html" class="prev">← Lección 4</a>
+</nav>
 </div>
 </body>
 </html>

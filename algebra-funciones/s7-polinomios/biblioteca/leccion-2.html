@@ -1,105 +1,330 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lección 2 · Multiplicación (distributiva) | Biblioteca — El Mundo de los Polinomios</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <style>
-    :root { --ink: #2a1c12; --ink-mid: #5c3820; --gold: #8a5e14; --amber: #7a4f0a; --font-title: "Cinzel","Georgia",serif; --font-body: "Libre Baskerville","Georgia",serif; }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height: 100vh; font-family: var(--font-body); color: var(--ink); background: #fdf5e0; }
-    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.045; background-image: linear-gradient(rgba(42,28,18,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(42,28,18,0.06) 1px, transparent 1px); background-size: 48px 48px; }
-    .shell { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
-    .topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: .75rem; }
-    .breadcrumb { display: flex; align-items: center; gap: 0.4rem; font-family: var(--font-title); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .breadcrumb a { color: var(--amber); text-decoration: none; transition: color .2s; }
-    .breadcrumb a:hover { color: var(--gold); }
-    .breadcrumb .sep { color: rgba(42,28,18,.35); }
-    .breadcrumb .curr { color: var(--ink); opacity: .45; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 2 — Multiplicación de polinomios: propiedad distributiva | Biblioteca S7</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+  :root{
+    --paper:#fdf5e0; --ink:#2a1c12; --ink-mid:#5c3820;
+    --gold:#8a5e14; --amber:#7a4f0a; --line:#d9c69a;
+    --c-proc:#8a5e14;   --c-proc-bg:#f6ecd4;
+    --c-expr:#2f6f76;   --c-expr-bg:#e6efee;
+    --c-interp:#a34a3e; --c-interp-bg:#f5e3de;
+    --c1:#2f6f76; --c2:#a34a3e;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Libre Baskerville',serif;line-height:1.6;}
+  .shell{max-width:960px;margin:0 auto;padding:32px 24px 64px;}
+  .breadcrumb{font-size:.82rem;color:var(--ink-mid);margin-bottom:18px;}
+  .nav-lecciones{display:inline-block;margin-bottom:24px;padding:10px 16px;border:1px solid var(--line);border-radius:8px;background:#fbf0d6;font-size:.9rem;}
+  .nav-lecciones a{color:var(--amber);text-decoration:none;font-weight:700;}
+  .nav-lecciones a:hover{text-decoration:underline;}
+  .page-header{border-bottom:3px double var(--gold);padding-bottom:18px;margin-bottom:26px;}
+  .page-tag{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .page-header h1{font-family:'Cinzel',serif;font-size:1.75rem;margin:0 0 8px;color:var(--ink);}
+  .subtitle{font-style:italic;color:var(--ink-mid);font-size:1rem;}
 
-    .page-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(138,94,20,0.2); }
-    .page-tag { display: inline-block; font-family: var(--font-title); font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
-    .page-header h1 { font-family: var(--font-title); font-size: clamp(1.1rem, 3.5vw, 1.7rem); font-weight: 800; color: var(--amber); letter-spacing: 0.04em; line-height: 1.25; }
+  .intro{background:#fbf0d6;border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin-bottom:26px;font-size:1rem;}
 
-    .ficha-wrap { background: #fff; border: 1px solid rgba(138,94,20,0.22); border-radius: 10px; overflow: hidden; box-shadow: 0 2px 14px rgba(42,28,18,0.08); margin-bottom: 1.25rem; }
-    .ficha-wrap img { display: block; width: 100%; height: auto; }
+  .seccion-tag{font-family:'Cinzel',serif;font-size:1.05rem;color:var(--ink);letter-spacing:.04em;margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--gold);}
 
-    .acciones { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .btn-descarga { display: inline-flex; align-items: center; gap: .45rem; padding: .58rem 1.25rem; background: var(--amber); color: #fff8ec; border: none; border-radius: 6px; font-family: var(--font-title); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background .2s; }
-    .btn-descarga:hover { background: var(--gold); }
+  .trio{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:22px;}
+  @media (min-width:760px){.trio{grid-template-columns:repeat(3,1fr);}}
+  .caja{border-radius:10px;padding:16px 18px;border:2px solid;}
+  .caja-tit{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;font-weight:700;}
+  .caja-proc{background:var(--c-proc-bg);border-color:var(--c-proc);}
+  .caja-proc .caja-tit{color:var(--c-proc);}
+  .caja-expr{background:var(--c-expr-bg);border-color:var(--c-expr);}
+  .caja-expr .caja-tit{color:var(--c-expr);}
+  .caja-interp{background:var(--c-interp-bg);border-color:var(--c-interp);}
+  .caja-interp .caja-tit{color:var(--c-interp);}
+  .caja p{margin:0;font-size:.94rem;}
 
-    .nav-lecciones {
-      display: flex; justify-content: space-between; align-items: center;
-      gap: .75rem; flex-wrap: wrap;
-      padding: 1.25rem 1.5rem;
-      background: rgba(138,94,20,.05);
-      border: 1px solid rgba(138,94,20,.18);
-      border-radius: 8px; margin-bottom: 2rem;
-    }
-    .nav-lec-label { font-family: var(--font-title); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: .2rem; }
-    .nav-lec-title { font-family: var(--font-title); font-size: .72rem; color: var(--ink); }
-    .btn-nav-lec {
-      display: inline-flex; align-items: center; gap: .4rem;
-      padding: .5rem 1rem; background: rgba(138,94,20,.07);
-      border: 1px solid rgba(138,94,20,.28); border-radius: 6px;
-      font-family: var(--font-title); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s;
-    }
-    .btn-nav-lec:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.5); }
-    .btn-nav-lec.primary { background: var(--amber); color: #fff8ec; border-color: var(--amber); }
-    .btn-nav-lec.primary:hover { background: var(--gold); border-color: var(--gold); }
+  .area-svg{display:block;margin:8px auto 0;}
 
-    .nav-inferior { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn-volver { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.2rem; background: rgba(138,94,20,.07); border: 1px solid rgba(138,94,20,.3); border-radius: 6px; font-family: var(--font-title); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--amber); text-decoration: none; transition: background .2s, border-color .2s; }
-    .btn-volver:hover { background: rgba(138,94,20,.14); border-color: rgba(138,94,20,.55); }
-  </style>
+  /* Cajas con flechas de distribución (siempre una sola línea, nunca se corta) */
+  .arc-wrap{position:relative;padding-top:34px;overflow-x:auto;overflow-y:visible;}
+  .arc-svg{position:absolute;top:0;left:0;width:100%;height:34px;overflow:visible;pointer-events:none;}
+  .arc-line{white-space:nowrap;font-weight:700;font-size:clamp(.95rem,3.6vw,1.15rem);padding-bottom:2px;}
+  .term{padding:0 1px;}
+  .term.o-c1{color:var(--c1);}
+  .term.o-c2{color:var(--c2);}
+
+  .ejemplos{display:grid;grid-template-columns:1fr;gap:18px;margin-bottom:8px;}
+  @media (min-width:760px){.ejemplos{grid-template-columns:1fr 1fr;}}
+  .ejemplo{border:2px solid var(--line);border-radius:10px;overflow:hidden;}
+  .ejemplo-tit{font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--amber);padding:8px 14px;}
+  .paso{border-top:1px solid var(--line);}
+  .paso-expr{padding:12px 14px;font-size:clamp(.85rem,3.2vw,1.02rem);background:#fffdf8;text-align:center;white-space:nowrap;overflow-x:auto;}
+  .paso-proc{padding:8px 14px;font-size:.82rem;font-style:italic;color:var(--c-expr);background:var(--c-expr-bg);text-align:center;}
+
+  .nota-texto{background:#f2ddb0;border-left:4px solid var(--amber);padding:14px 18px;border-radius:0 8px 8px 0;font-size:.94rem;color:var(--ink);margin-top:28px;}
+
+  .nav-inferior{display:flex;justify-content:space-between;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--line);flex-wrap:wrap;}
+  .btn-volver{display:inline-block;padding:10px 18px;border:1px solid var(--gold);border-radius:8px;color:var(--amber);text-decoration:none;font-size:.9rem;font-weight:700;}
+  .btn-volver:hover{background:var(--amber);color:var(--paper);}
+
+  .licencia{font-size:.8rem;color:var(--ink-mid);text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--line);}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <nav class="topbar" aria-label="Navegación">
-      <div class="breadcrumb">
-        <a href="../../../index.html">Reinos Matemáticos</a>
-        <span class="sep">/</span>
-        <a href="../../index.html">Álgebra y Funciones</a>
-        <span class="sep">/</span>
-        <a href="../index.html">El Mundo de los Polinomios</a>
-        <span class="sep">/</span>
-        <a href="index.html">Biblioteca</a>
-        <span class="sep">/</span>
-        <span class="curr">Lección 2</span>
-      </div>
-    </nav>
+<div class="shell">
 
-    <nav class="nav-lecciones" aria-label="Navegación entre lecciones">
-      <a class="btn-nav-lec" href="Leccion_Suma_Resta_Polinomios.html">
-        ← <span><span class="nav-lec-label">Lección 1</span><span class="nav-lec-title">Suma y resta — método en columna</span></span>
-      </a>
-      <a class="btn-nav-lec primary" href="Leccion_Multiplicacion_Polinomios.html">
-        <span><span class="nav-lec-label">Lección 3</span><span class="nav-lec-title">Multiplicación — método en columna</span></span> →
-      </a>
-    </nav>
+  <div class="breadcrumb">Reinos Matemáticos / Álgebra y Funciones / El Mundo de los Polinomios / Biblioteca / Lección 2</div>
 
-    <header class="page-header">
-      <span class="page-tag">Lección 2 · Biblioteca · Subreino 2</span>
-      <h1>Multiplicación de polinomios — propiedad distributiva</h1>
-    </header>
-
-    <div class="ficha-wrap">
-      <img src="pag104_Porras_Leccion.png"
-           alt="Multiplicación de polinomios — propiedad distributiva · Porras"
-           loading="lazy">
-    </div>
-
-    <div class="acciones">
-      <a class="btn-descarga" href="pag104_Porras_Leccion.png" download="pag104_Porras_Leccion.png">↓ Descargar lección</a>
-    </div>
-
-    <nav class="nav-inferior" aria-label="Navegación de regreso">
-      <a class="btn-volver" href="index.html">← Volver a Biblioteca</a>
-      <a class="btn-volver" href="../index.html">← Volver al mapa del subreino</a>
-    </nav>
+  <div class="nav-lecciones">
+    ← <a href="Leccion_Suma_Resta_Polinomios.html">Lección 1 — Suma y resta de polinomios</a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <a href="Leccion_Multiplicacion_Polinomios.html">Lección 3 — Multiplicación, método en columna</a> →
   </div>
+
+  <div class="page-header">
+    <div class="page-tag">Lección 2 · Biblioteca · Subreino 2</div>
+    <h1>Multiplicación de polinomios — propiedad distributiva</h1>
+    <div class="subtitle">Cómo multiplicar un monomio por un polinomio, y un polinomio por otro polinomio, aplicando la propiedad distributiva. Las flechas de colores muestran qué término se multiplica con cuál.</div>
+  </div>
+
+  <div class="intro">
+    Multiplicar polinomios es una operación algebraica en la que se multiplican dos o más polinomios entre sí, para obtener un nuevo polinomio como resultado. La herramienta central para hacerlo es la propiedad distributiva: cada término de un factor se multiplica por cada término del otro. Las flechas de colores indican, paso a paso, qué término "reparte" hacia cuáles.
+  </div>
+
+  <div class="seccion-tag">Multiplicación de un monomio por un polinomio</div>
+
+  <div class="trio">
+    <div class="caja caja-proc">
+      <div class="caja-tit">Procedimiento</div>
+      <p>Para multiplicar un monomio por un polinomio, se multiplica el monomio por cada término del polinomio.</p>
+    </div>
+    <div class="caja caja-expr">
+      <div class="caja-tit">Expresión algebraica</div>
+      <div class="arc-wrap" id="arc-f1">
+        <svg class="arc-svg" id="svg-f1"></svg>
+        <div class="arc-line">
+          <span class="term o-c1" id="f1-o1">x</span>(<span class="term" id="f1-d1">y</span> + <span class="term" id="f1-d2">z</span>) = <span class="term o-c1">xy</span> + <span class="term o-c1">xz</span>
+        </div>
+      </div>
+    </div>
+    <div class="caja caja-interp">
+      <div class="caja-tit">Interpretación gráfica</div>
+      <svg class="area-svg" viewBox="0 0 220 130" width="220" height="130">
+        <text x="60" y="14" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">y</text>
+        <text x="160" y="14" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">z</text>
+        <text x="10" y="75" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">x</text>
+        <rect x="20" y="20" width="80" height="90" fill="#f6ecd4" stroke="#a34a3e" stroke-width="2"/>
+        <rect x="100" y="20" width="100" height="90" fill="#efe0d8" stroke="#a34a3e" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ejemplos">
+    <div class="ejemplo">
+      <div class="ejemplo-tit">Ejemplo 1</div>
+      <div class="paso">
+        <div class="arc-wrap" id="arc-e1" style="padding:34px 14px 12px;background:#fffdf8;">
+          <svg class="arc-svg" id="svg-e1"></svg>
+          <div class="arc-line"><span class="term o-c1" id="e1-o1">3x</span>(<span class="term" id="e1-d1">2x²</span> <span class="term" id="e1-d2">− 5x</span> <span class="term" id="e1-d3">+ 4</span>)</div>
+        </div>
+      </div>
+      <div class="paso"><div class="paso-proc">Se aplica la propiedad distributiva respecto a la suma.</div><div class="paso-expr">3x · 2x² + 3x · (−5x) + 3x · 4</div></div>
+      <div class="paso"><div class="paso-proc">Se multiplican los monomios.</div><div class="paso-expr"><strong>6x³ − 15x² + 12x</strong></div></div>
+    </div>
+    <div class="ejemplo">
+      <div class="ejemplo-tit">Ejemplo 2</div>
+      <div class="paso">
+        <div class="arc-wrap" id="arc-e2" style="padding:34px 14px 12px;background:#fffdf8;">
+          <svg class="arc-svg" id="svg-e2"></svg>
+          <div class="arc-line"><span class="term o-c1" id="e2-o1">−2m²</span>(<span class="term" id="e2-d1">5m³</span> <span class="term" id="e2-d2">− 3m</span> <span class="term" id="e2-d3">+ ⅓</span>)</div>
+        </div>
+      </div>
+      <div class="paso"><div class="paso-proc">Se aplica la propiedad distributiva respecto a la suma.</div><div class="paso-expr">−2m² · 5m³ + (−2m²) · (−3m) + (−2m²) · (⅓)</div></div>
+      <div class="paso"><div class="paso-proc">Se multiplican los monomios.</div><div class="paso-expr"><strong>−10m⁵ + 6m³ − ⅔m²</strong></div></div>
+    </div>
+  </div>
+
+  <div class="seccion-tag">Multiplicación de un polinomio por otro polinomio</div>
+
+  <div class="trio">
+    <div class="caja caja-proc">
+      <div class="caja-tit">Procedimiento</div>
+      <p>Para multiplicar dos polinomios, se distribuye cada término del primero a cada término del segundo, y luego se suman o restan los términos semejantes.</p>
+    </div>
+    <div class="caja caja-expr">
+      <div class="caja-tit">Expresión algebraica</div>
+      <div class="arc-wrap" id="arc-f2">
+        <svg class="arc-svg" id="svg-f2"></svg>
+        <div class="arc-line">
+          (<span class="term o-c1" id="f2-o1">a</span> <span class="term o-c2" id="f2-o2">+ b</span>)(<span class="term" id="f2-d1">x</span> <span class="term" id="f2-d2">+ y</span>) = <span class="term o-c1">ax</span>+<span class="term o-c1">ay</span>+<span class="term o-c2">bx</span>+<span class="term o-c2">by</span>
+        </div>
+      </div>
+    </div>
+    <div class="caja caja-interp">
+      <div class="caja-tit">Interpretación gráfica</div>
+      <svg class="area-svg" viewBox="0 0 220 130" width="220" height="130">
+        <text x="60" y="14" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">x</text>
+        <text x="160" y="14" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">y</text>
+        <text x="10" y="55" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">a</text>
+        <text x="10" y="95" text-anchor="middle" font-family="Cinzel, serif" font-size="13" fill="#5c3820">b</text>
+        <rect x="20" y="20" width="80" height="45" fill="#f6ecd4" stroke="#a34a3e" stroke-width="2"/>
+        <rect x="100" y="20" width="100" height="45" fill="#efe0d8" stroke="#a34a3e" stroke-width="2"/>
+        <rect x="20" y="65" width="80" height="45" fill="#efe0d8" stroke="#a34a3e" stroke-width="2"/>
+        <rect x="100" y="65" width="100" height="45" fill="#f6ecd4" stroke="#a34a3e" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="ejemplos">
+    <div class="ejemplo">
+      <div class="ejemplo-tit">Ejemplo 1</div>
+      <div class="paso">
+        <div class="arc-wrap" id="arc-e3" style="padding:34px 14px 12px;background:#fffdf8;">
+          <svg class="arc-svg" id="svg-e3"></svg>
+          <div class="arc-line">(<span class="term o-c1" id="e3-o1">3x</span> <span class="term o-c2" id="e3-o2">+ 2</span>)(<span class="term" id="e3-d1">2x</span> <span class="term" id="e3-d2">− 5</span>)</div>
+        </div>
+      </div>
+      <div class="paso"><div class="paso-proc">Se distribuye cada término del primer polinomio.</div><div class="paso-expr">3x · 2x + 3x · (−5) + 2 · 2x + 2 · (−5)</div></div>
+      <div class="paso"><div class="paso-proc">Se multiplican los monomios.</div><div class="paso-expr">6x² − 15x + 4x − 10</div></div>
+      <div class="paso"><div class="paso-proc">Se suman los términos semejantes.</div><div class="paso-expr"><strong>6x² − 11x − 10</strong></div></div>
+    </div>
+    <div class="ejemplo">
+      <div class="ejemplo-tit">Ejemplo 2</div>
+      <div class="paso">
+        <div class="arc-wrap" id="arc-e4" style="padding:34px 14px 12px;background:#fffdf8;">
+          <svg class="arc-svg" id="svg-e4"></svg>
+          <div class="arc-line">(<span class="term o-c1" id="e4-o1">2a</span> <span class="term o-c2" id="e4-o2">− 3b</span>)(<span class="term" id="e4-d1">a</span> <span class="term" id="e4-d2">+ 4b</span> <span class="term" id="e4-d3">− 2</span>)</div>
+        </div>
+      </div>
+      <div class="paso"><div class="paso-proc">Se distribuye cada término del primer polinomio.</div><div class="paso-expr">2a·a + 2a·4b + 2a·(−2) + (−3b)·a + (−3b)·4b + (−3b)·(−2)</div></div>
+      <div class="paso"><div class="paso-proc">Se multiplican los monomios.</div><div class="paso-expr">2a² + 8ab − 4a − 3ab − 12b² + 6b</div></div>
+      <div class="paso"><div class="paso-proc">Se suman los términos semejantes.</div><div class="paso-expr"><strong>2a² + 5ab − 4a − 12b² + 6b</strong></div></div>
+    </div>
+  </div>
+
+  <div class="nota-texto"><strong>Ojo:</strong> el error más frecuente es olvidar distribuir a alguno de los términos. Contá siempre cuántas flechas salen de cada término del primer factor — esa es la cantidad de productos parciales que tenés que calcular antes de sumar los términos semejantes.</div>
+
+  <div class="licencia">
+    Fernández, G. M. (2026). <em>Multiplicación de polinomios — propiedad distributiva</em>. Reino Matemático, Secuencia 7. Elaboración propia; estructura y organización de la explicación (procedimiento / expresión algebraica / interpretación gráfica, con flechas de distribución y ejemplos resueltos paso a paso) inspirada en el desarrollo pedagógico estándar de este contenido, tal como se presenta en Porras, M. (2024), <em>Matemática 8</em>, Publicaciones Porras, pág. 104 — sin reproducir su texto, ejemplos ni imagen.
+  </div>
+
+  <div class="nav-inferior">
+    <a href="index.html" class="btn-volver">← Volver a Biblioteca</a>
+    <a href="../index.html" class="btn-volver">← Volver al Subreino</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var CONFIG = [
+    { box: "arc-f1", svg: "svg-f1", arcs: [
+      { from: "f1-o1", to: "f1-d1", color: "var(--c1)" },
+      { from: "f1-o1", to: "f1-d2", color: "var(--c1)" },
+    ]},
+    { box: "arc-f2", svg: "svg-f2", arcs: [
+      { from: "f2-o1", to: "f2-d1", color: "var(--c1)" },
+      { from: "f2-o1", to: "f2-d2", color: "var(--c1)" },
+      { from: "f2-o2", to: "f2-d1", color: "var(--c2)" },
+      { from: "f2-o2", to: "f2-d2", color: "var(--c2)" },
+    ]},
+    { box: "arc-e1", svg: "svg-e1", arcs: [
+      { from: "e1-o1", to: "e1-d1", color: "var(--c1)" },
+      { from: "e1-o1", to: "e1-d2", color: "var(--c1)" },
+      { from: "e1-o1", to: "e1-d3", color: "var(--c1)" },
+    ]},
+    { box: "arc-e2", svg: "svg-e2", arcs: [
+      { from: "e2-o1", to: "e2-d1", color: "var(--c1)" },
+      { from: "e2-o1", to: "e2-d2", color: "var(--c1)" },
+      { from: "e2-o1", to: "e2-d3", color: "var(--c1)" },
+    ]},
+    { box: "arc-e3", svg: "svg-e3", arcs: [
+      { from: "e3-o1", to: "e3-d1", color: "var(--c1)" },
+      { from: "e3-o1", to: "e3-d2", color: "var(--c1)" },
+      { from: "e3-o2", to: "e3-d1", color: "var(--c2)" },
+      { from: "e3-o2", to: "e3-d2", color: "var(--c2)" },
+    ]},
+    { box: "arc-e4", svg: "svg-e4", arcs: [
+      { from: "e4-o1", to: "e4-d1", color: "var(--c1)" },
+      { from: "e4-o1", to: "e4-d2", color: "var(--c1)" },
+      { from: "e4-o1", to: "e4-d3", color: "var(--c1)" },
+      { from: "e4-o2", to: "e4-d1", color: "var(--c2)" },
+      { from: "e4-o2", to: "e4-d2", color: "var(--c2)" },
+      { from: "e4-o2", to: "e4-d3", color: "var(--c2)" },
+    ]},
+  ];
+
+  function resolveColor(c){
+    if (c.indexOf("var(") === 0){
+      var name = c.slice(4, -1).trim();
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+    return c;
+  }
+
+  function drawAll(){
+    CONFIG.forEach(function(cfg){
+      var box = document.getElementById(cfg.box);
+      var svg = document.getElementById(cfg.svg);
+      if (!box || !svg) return;
+      var boxRect = box.getBoundingClientRect();
+      svg.innerHTML = "";
+      svg.setAttribute("viewBox", "0 0 " + boxRect.width + " 34");
+      svg.setAttribute("preserveAspectRatio", "none");
+
+      cfg.arcs.forEach(function(arc, idx){
+        var fromEl = document.getElementById(arc.from);
+        var toEl = document.getElementById(arc.to);
+        if (!fromEl || !toEl) return;
+        var fr = fromEl.getBoundingClientRect();
+        var tr = toEl.getBoundingClientRect();
+        var startX = fr.left + fr.width/2 - boxRect.left;
+        var endX = tr.left + tr.width/2 - boxRect.left;
+        var baseY = 32;
+        var liftBase = 6;
+        var lift = liftBase + (idx % 3) * 8;
+        var ctrlY = baseY - lift - Math.min(24, Math.abs(endX-startX) * 0.18);
+        var color = resolveColor(arc.color);
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        var d = "M " + startX + " " + baseY + " Q " + ((startX+endX)/2) + " " + ctrlY + " " + endX + " " + baseY;
+        path.setAttribute("d", d);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", color);
+        path.setAttribute("stroke-width", "2");
+        path.setAttribute("marker-end", "url(#arrow-" + cfg.svg + ")");
+        svg.appendChild(path);
+      });
+
+      var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      cfg.arcs.forEach(function(arc){
+        var color = resolveColor(arc.color);
+        var mid = "arrow-" + cfg.svg + "-" + color.replace("#","");
+      });
+      // marker de flecha unica por svg (usa el color del ultimo arco como aprox; suficiente visualmente)
+      var marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arrow-" + cfg.svg);
+      marker.setAttribute("markerWidth", "6");
+      marker.setAttribute("markerHeight", "6");
+      marker.setAttribute("refX", "4");
+      marker.setAttribute("refY", "3");
+      marker.setAttribute("orient", "auto");
+      var mpath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      mpath.setAttribute("d", "M0,0 L6,3 L0,6 Z");
+      mpath.setAttribute("fill", "#5c3820");
+      marker.appendChild(mpath);
+      defs.appendChild(marker);
+      svg.insertBefore(defs, svg.firstChild);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", drawAll);
+  } else {
+    drawAll();
+  }
+  window.addEventListener("load", drawAll);
+  window.addEventListener("resize", drawAll);
+})();
+</script>
+
 </body>
 </html>

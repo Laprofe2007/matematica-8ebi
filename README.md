@@ -17,12 +17,14 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 
 ## Estado actual (agosto 2026)
 
+> Actualización documental 2026-08-10: se alineó este README con el ROADMAP vigente. Propósito: reflejar que MC-S6 y su resolución están habilitadas, que A-12 no forma parte de S7 y que MC-S8 permanece bloqueada. Reversión: `git restore README.md` antes del commit, o revertir el commit correspondiente si ya fue publicado.
+
 | Reino | Subreino | Misiones | Biblioteca | Desafío / MC |
 |---|---|---|---|---|
 | Proporciones (S3/S4) | — | ✅ A-01 a A-08 | ✅ Con videos | ✅ Habilitado |
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
-| Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | 🔒 MC no habilitado aún |
-| Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11, A-12 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
+| Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
+| Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 | Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E10 (10 misiones) | ✅ 3 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 
 ---
@@ -33,10 +35,12 @@ Para habilitar contenido, editar la constante en el archivo indicado y hacer pus
 
 | Archivo | Constante | Estado actual | Efecto |
 |---|---|---|---|
-| `algebra-funciones/cierre/index.html` | `MC_HABILITADO` | `false` | Habilita el mini control S6 |
-| `algebra-funciones/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` | Habilita resolución S6 |
+| `algebra-funciones/cierre/index.html` | `MC_HABILITADO` | `true` ✅ | Mini control S6 habilitado |
+| `algebra-funciones/cierre/index.html` | `RESOLUCION_HABILITADA` | `true` ✅ | Resolución S6 habilitada |
 | `algebra-funciones/s7-polinomios/cierre/index.html` | `MC_HABILITADO` | `false` 🔒 | Bloqueado hasta nueva habilitación |
 | `algebra-funciones/s7-polinomios/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` 🔒 | Bloqueado hasta corrección en clase |
+| `algebra-funciones/s8-ecuaciones/cierre/index.html` | `MC_HABILITADO` | `false` 🔒 | Bloqueado hasta nueva habilitación |
+| `algebra-funciones/s8-ecuaciones/cierre/index.html` | `RESOLUCION_HABILITADA` | `false` 🔒 | Bloqueado hasta corrección en clase |
 
 ---
 
@@ -89,7 +93,7 @@ raíz/
     │       └── A-05_Resolucion_Explicada.html
     │
     ├── cierre/                                       ← Desafío Final S6
-    │   ├── index.html   (MC_HABILITADO=false · RESOLUCION_HABILITADA=false)
+    │   ├── index.html   (MC_HABILITADO=true · RESOLUCION_HABILITADA=true)
     │   ├── mc_s6_actividades.html
     │   ├── mc_s6_resolucion_explicada.html
     │   └── mc_s6_resolucion_explicada.pdf
@@ -98,7 +102,7 @@ raíz/
     │   └── index.html                                ← Mapa del Subreino 1
     │
     ├── s7-polinomios/                                ← Subreino 2: El Mundo de los Polinomios
-    │   ├── index.html                                ← Mapa (5 misiones · Biblioteca · Desafío ✅)
+    │   ├── index.html                                ← Mapa (4 misiones activas · Biblioteca · Desafío 🔒)
     │   ├── biblioteca/
     │   │   ├── index.html                            ← Hub de 5 lecciones
     │   │   ├── Leccion_Suma_Resta_Polinomios.html    Lección 1 — suma y resta en columna
@@ -114,16 +118,14 @@ raíz/
     │   │   ├── mision-03/  A-09 Refuerzo suma/resta (PDF+PNG · Deberes · sin misión digital)
     │   │   ├── mision-04/  A-10 Multiplicación (PDF) · resolución ✅
     │   │   ├── mision-05/  [Refuerzo mult, sin código activo · archivos mantenidos]
-    │   │   ├── mision-06/  A-11 Del rectángulo al cuadrado de un binomio (PDF) · resolución ✅
-    │   │   └── mision-07/  A-12 Crucigrama de cierre (PDF · Deberes) · resolución ✅
+    │   │   └── mision-06/  A-11 Del rectángulo al cuadrado de un binomio (PDF) · resolución ✅
     │   ├── resoluciones/
     │   │   ├── A07_Clasificacion_Polinomios_Resolucion.html
     │   │   ├── A08_Suma_Resta_Polinomios_Resolucion.html
     │   │   ├── A10_Multiplicacion_Polinomios_Resolucion.html
-    │   │   ├── A11_Cuadrado_Binomio_Resolucion.html
-    │   │   └── A12_Crucigrama_Resolucion.html
+    │   │   └── A11_Cuadrado_Binomio_Resolucion.html
     │   └── cierre/                                   ← Desafío Final S7
-    │       ├── index.html   (MC_HABILITADO=true · RESOLUCION_HABILITADA=true)
+    │       ├── index.html   (MC_HABILITADO=false · RESOLUCION_HABILITADA=false)
     │       ├── mc_s7_polinomios.pdf
     │       └── mc_s7_resolucion_explicada.html
     │

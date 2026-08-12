@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A-10a · Multiplicación de polinomios (práctica graduada) — Resolución explicada</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',sans-serif;background:#f4f2fb;color:#2c1a4d;line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+  header{background:linear-gradient(135deg,#5b2a86,#8e44ad);border-radius:16px;padding:26px 24px;color:#fff;margin-bottom:22px}
+  header .code{display:inline-block;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:800;letter-spacing:.5px;margin-bottom:8px}
+  header h1{font-size:1.35rem;font-weight:900}
+  header p{font-size:.85rem;opacity:.9;margin-top:6px}
+  .section-title{font-weight:900;color:#5b2a86;font-size:1.02rem;margin:26px 0 12px;padding-bottom:6px;border-bottom:2px solid #e3d9f2}
+  .note{background:#eee6fb;border-left:4px solid #8e44ad;border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:.92rem}
+  .note.info{background:#e7f3fb;border-left-color:#2680c2}
+  .note b{color:#5b2a86}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .item{background:#fff;border-radius:10px;padding:10px 12px;border-left:4px solid var(--accent,#8e44ad);box-shadow:0 1px 4px rgba(60,20,90,.06)}
+  .item .num{font-weight:900;color:var(--accent,#8e44ad);font-size:.75rem}
+  .item .expr{font-weight:700;font-size:.88rem;margin:2px 0 6px}
+  .item .res{font-family:'Nunito',sans-serif;font-weight:700;color:#1e8449;font-size:.86rem;background:#eafaf0;border-radius:6px;padding:5px 8px}
+  .n1 .item{--accent:#1a56b0}
+  .n2 .item{--accent:#1e8449}
+  .n3 .item{--accent:#8e44ad}
+  .panel{--accent:#c0621a;background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px;border-left:5px solid var(--accent);box-shadow:0 2px 6px rgba(60,20,90,.06)}
+  .panel-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .panel-expr{font-weight:700;font-size:.98rem}
+  .eq-box{background:#241638;color:#f1e9fb;border-radius:8px;padding:10px 14px;font-weight:700;overflow-x:auto;white-space:nowrap;font-size:clamp(.82rem,2.2vw,1rem);margin:4px 0}
+  .final-answer{border:2px dashed #27ae60;background:#eafaf0;border-radius:8px;padding:8px 12px;margin-top:8px;font-weight:800;color:#1e8449;font-size:.9rem}
+  @media(max-width:600px){.grid{grid-template-columns:1fr}}
+  footer{margin-top:24px;font-size:.78rem;color:#7a6a94;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="code">A-10a · Secuencia 7 · Polinomios</div>
+  <h1>Multiplicación de polinomios (práctica graduada) — Resolución explicada</h1>
+  <p>Matemática 8.° EBI · Reino Matemático 2026 · Liceo de Médanos</p>
+</header>
+
+<div class="note">
+  Hoja docente de corrección para A-10a. Selección de 18 ítems y el problema de aplicación de la Actividad 3.11 de Porras (2024), citando la fuente conforme a su licencia de reproducción parcial.
+</div>
+
+<div class="section-title">Nivel 1 — Monomio por polinomio</div>
+<div class="grid n1">
+  <div class="item"><div class="num">1</div><div class="expr">7x · (−x + 2)</div><div class="res">−7x² + 14x</div></div>
+  <div class="item"><div class="num">2</div><div class="expr">6n² · (2n² − n + 2)</div><div class="res">12n⁴ − 6n³ + 12n²</div></div>
+  <div class="item"><div class="num">3</div><div class="expr">−8m · (−4 + m + m³)</div><div class="res">−8m⁴ − 8m² + 32m</div></div>
+  <div class="item"><div class="num">4</div><div class="expr">(3 + x³) · 4x²</div><div class="res">4x⁵ + 12x²</div></div>
+  <div class="item"><div class="num">5</div><div class="expr">−k² · (5 + 3k + 2k²)</div><div class="res">−2k⁴ − 3k³ − 5k²</div></div>
+  <div class="item"><div class="num">6</div><div class="expr">4x² · (5xy² − x³)</div><div class="res">−4x⁵ + 20x³y²</div></div>
+</div>
+
+<div class="section-title">Nivel 2 — Polinomio por polinomio</div>
+<div class="grid n2">
+  <div class="item"><div class="num">1</div><div class="expr">(1 − 2a)(2a + 3 − a²)</div><div class="res">2a³ − 5a² − 4a + 3</div></div>
+  <div class="item"><div class="num">2</div><div class="expr">(a + b)(a − b − 1)</div><div class="res">a² − a − b² − b</div></div>
+  <div class="item"><div class="num">3</div><div class="expr">(−5x − 4)(−x + 1)</div><div class="res">5x² − x − 4</div></div>
+  <div class="item"><div class="num">4</div><div class="expr">(−6m − 2)(5 − 2m)</div><div class="res">12m² − 26m − 10</div></div>
+  <div class="item"><div class="num">5</div><div class="expr">(6n + 2)(−n² + 2n + 2)</div><div class="res">−6n³ + 10n² + 16n + 4</div></div>
+  <div class="item"><div class="num">6</div><div class="expr">(5x + 3)(4x³ − 4x² − 2x + 6)</div><div class="res">20x⁴ − 8x³ − 22x² + 24x + 18</div></div>
+</div>
+
+<div class="section-title">Nivel 3 — Combinado (distributiva + reducción)</div>
+<div class="grid n3">
+  <div class="item"><div class="num">1</div><div class="expr">2x(3x + 4y) − 10xy</div><div class="res">6x² − 2xy</div></div>
+  <div class="item"><div class="num">2</div><div class="expr">−4x²(1 − 2x) + 3x²</div><div class="res">8x³ − x²</div></div>
+  <div class="item"><div class="num">3</div><div class="expr">2x(x + 1) + x(2 − x)</div><div class="res">x² + 4x</div></div>
+  <div class="item"><div class="num">4</div><div class="expr">(2x − 3) · 3x + 2x(1 − 2x)</div><div class="res">2x² − 7x</div></div>
+  <div class="item"><div class="num">5</div><div class="expr">x(1 − 2x + x²) + 5(x − 1)</div><div class="res">x³ − 2x² + 6x − 5</div></div>
+  <div class="item"><div class="num">6</div><div class="expr">(2x − 3)(x + 2) − (x + 1)(2 − 3x)</div><div class="res">5x² + 2x − 8</div></div>
+</div>
+
+<div class="section-title">Problema de aplicación — El prisma</div>
+<div class="note">Prisma recto de medidas 8x + 1, 3x y 3x + 4. Volumen: V = l · a · h.</div>
+
+<div class="panel">
+  <div class="panel-head"><div class="panel-expr">V(x) = (8x + 1) · 3x · (3x + 4)</div></div>
+  <div class="eq-box">3x·(8x+1) = 24x² + 3x <span style="color:#c9a6ea;margin:0 8px">→</span> (24x² + 3x)(3x + 4)</div>
+  <div class="eq-box">72x³ + 96x² + 9x² + 12x <span style="color:#c9a6ea;margin:0 8px">=</span> 72x³ + 105x² + 12x</div>
+  <div class="final-answer">V(x) = 72x³ + 105x² + 12x</div>
+</div>
+
+<div class="note info">
+  <b>Origen:</b> Porras, F. (2024). Matemática 8°, Actividad 3.11, págs. 105-106. Publicaciones Porras. Selección de ítems citando la fuente, conforme a la licencia de reproducción parcial de la editorial.
+</div>
+
+<footer>Reino Matemático · Bloque 3A — Secuencia 7 (Polinomios) · A-10a</footer>
+</div>
+</body>
+</html>

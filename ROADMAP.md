@@ -24,13 +24,14 @@ S7 completamente armada pedagógicamente. Fichas públicas, imágenes ilustradas
 
 S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendiente habilitar en clase.
 
-- [x] **Biblioteca S8** — 3 lecciones + hub en `s8-ecuaciones/biblioteca/`. ✓
+- [x] **Biblioteca S8** — 5 lecciones + hub en `s8-ecuaciones/biblioteca/`. ✓
 - [x] **Biblioteca desbloqueada en el mapa** — territorio activo, enlace a `biblioteca/index.html`. ✓
 - [x] **Cierre S8 publicado** — `s8-ecuaciones/cierre/` con `index.html`, ficha y resolución. ✓
 - [ ] **Habilitar MC-S8** cuando corresponda: `cierre/index.html`, `MC_HABILITADO = false` → `true`.
 - [ ] **Habilitar resolución MC-S8** en momento posterior: `RESOLUCION_HABILITADA = false` → `true`.
 - [ ] **Habilitar Desafío Final S8 en el mapa** — `s8-ecuaciones/index.html`, territorio `desafio`: `bloqueado: false`, `enlace: "cierre/index.html"`.
-- [ ] **Habilitar resoluciones restantes** cuando estén disponibles (E03, E06, E07, E08, E10 aún sin HTML en repo).
+- [x] **Resoluciones E01–E05, E08, E10, E11** publicadas en `resoluciones/`. ✓
+- [x] **E06/E07 retiradas** del reino por decisión docente (calendario). Carpetas mision-07/08 eliminadas. ✓
 
 ### S6 — Código de Letras
 
@@ -67,7 +68,7 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 | Applet v4 Fábrica de Pintura | Publicar en S9 / mantener local | Pendiente — NO publicar hasta decidir |
 | Simulador Panini 2027 | Actualizar temporada o mantener 2026 | Para el año siguiente |
 | Cierre Las Tierras sin Mapa | ¿Crear cierre interactivo? | Sin decidir |
-| Material docente E06/E07 | Versión profe oculta en el sitio | Mantener así |
+| Material docente E06/E07 | Actividades retiradas del reino (decisión 2026-09-17) | Cerrado |
 
 ---
 

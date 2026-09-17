@@ -15,9 +15,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 
 ---
 
-## Estado actual (agosto 2026)
-
-> Actualización documental 2026-08-10: se alineó este README con el ROADMAP vigente. Propósito: reflejar que MC-S6 y su resolución están habilitadas, que A-12 no forma parte de S7 y que MC-S8 permanece bloqueada. Reversión: `git restore README.md` antes del commit, o revertir el commit correspondiente si ya fue publicado.
+## Estado actual (septiembre 2026)
 
 | Reino | Subreino | Misiones | Biblioteca | Desafío / MC |
 |---|---|---|---|---|
@@ -25,7 +23,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ E01 a E10 (10 misiones) | ✅ 3 lecciones | 🔒 MC bloqueado · resolución bloqueada |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 8 misiones activas (E06/E07 retiradas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 
 ---
 
@@ -115,13 +113,14 @@ raíz/
     │   ├── misiones/
     │   │   ├── mision-01/  A-07 Clasificación de polinomios (PDF) · resolución ✅
     │   │   ├── mision-02/  A-08 Suma y resta (PDF) · resolución ✅
-    │   │   ├── mision-03/  A-09 Refuerzo suma/resta (PDF+PNG · Deberes · sin misión digital)
+    │   │   ├── mision-03/  A-08b Refuerzo suma/resta (PNG · Deberes) · soluciones ✅
     │   │   ├── mision-04/  A-10 Multiplicación (PDF) · resolución ✅
     │   │   ├── mision-05/  [Refuerzo mult, sin código activo · archivos mantenidos]
     │   │   └── mision-06/  A-11 Del rectángulo al cuadrado de un binomio (PDF) · resolución ✅
     │   ├── resoluciones/
     │   │   ├── A07_Clasificacion_Polinomios_Resolucion.html
     │   │   ├── A08_Suma_Resta_Polinomios_Resolucion.html
+    │   │   ├── A08b_Soluciones.html
     │   │   ├── A10_Multiplicacion_Polinomios_Resolucion.html
     │   │   └── A11_Cuadrado_Binomio_Resolucion.html
     │   └── cierre/                                   ← Desafío Final S7
@@ -130,32 +129,36 @@ raíz/
     │       └── mc_s7_resolucion_explicada.html
     │
     └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
-        ├── index.html                                ← Mapa (10 misiones · Biblioteca ✅ · Desafío 🔒)
+        ├── index.html                                ← Mapa (8 misiones · Biblioteca ✅ · Desafío 🔒)
         ├── biblioteca/
-        │   ├── index.html                            ← Hub de 3 lecciones
+        │   ├── index.html                            ← Hub de 5 lecciones
         │   ├── Biblioteca_L1_Introduccion_a_las_ecuaciones.html  Lección 1 — introducción
         │   ├── Biblioteca_L1_Lenguaje_y_equivalencia.html        Lección 2 — vocabulario y equivalencia
-        │   └── Biblioteca_L2_Metodo_de_Polya.html                Lección 3 — método de Polya
+        │   ├── Biblioteca_Transformar_ecuaciones.html            Lección 3 — transformaciones de ecuaciones
+        │   ├── Biblioteca_L2_Metodo_de_Polya.html                Lección 4 — método de Polya
+        │   └── Biblioteca_Que_camino_conviene.html               Lección 5 — ¿qué camino conviene?
         ├── cierre/                                   ← Desafío Final S8
         │   ├── index.html   (MC_HABILITADO=false · RESOLUCION_HABILITADA=false)
         │   ├── MC-S8_ficha.html
         │   └── MC-S8_resolucion.html
         ├── misiones/
-        │   ├── mision-01/  E01 — El pijama de la muerte (PNG)
-        │   ├── mision-02/  E02 — Método de inversión (PDF) · resolución ✅
-        │   ├── mision-03/  E03 — Práctica de ecuaciones (PDF)
+        │   ├── mision-01/  E01 — El pijama de la muerte (PNG) · resolución ✅
+        │   ├── mision-02/  E02 — Método de inversión (HTML ficha) · resolución ✅
+        │   ├── mision-03/  E03 — Práctica de ecuaciones (PNG) · resolución ✅
         │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución ✅
         │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución ✅
-        │   ├── mision-06/  E11 — Ficha interactiva (HTML) · resolución ✅
-        │   ├── mision-07/  E06 — Baraja de ecuaciones (PDF estudiante)
-        │   ├── mision-08/  E07 — Bingo de ecuaciones (PDF estudiante)
-        │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (PDF)
-        │   ├── mision-10/  E09 — Ecuaciones · Porras (PDF · archivado, sin enlace en misiones)
-        │   └── mision-11/  E10 — Ecuaciones y problemas · Porras (PDF)
+        │   ├── mision-06/  E11 — Melissa y Mariángel (HTML ficha) · resolución ✅
+        │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (HTML ficha) · resolución ✅
+        │   ├── mision-10/  E09 — Ecuaciones · Porras (archivado, sin enlace en misiones)
+        │   └── mision-11/  E10 — Ecuaciones y problemas · Porras (HTML ficha) · resolución ✅
         └── resoluciones/
+            ├── E01_resolucion.html
             ├── E02_resolucion.html
+            ├── E03_resolucion.html
             ├── E04_resolucion.html
             ├── E05_resolucion.html
+            ├── E08_resolucion.html
+            ├── E10_resolucion.html
             └── E11_resolucion.html
 ```
 
@@ -250,7 +253,8 @@ header: linear-gradient(135deg, #5b2a86, #8e44ad)
 - Imágenes: alojar en el repositorio. Nunca URLs de Ceibal o Schoology (requieren login).
 - Cada subreino: su propia carpeta (`s6-`, `s7-`, `s8-`). Los recursos van adentro.
 - Versiones docente / material interno: NO publicar en el sitio sin decisión explícita.
-- No agregar botones "volver" ni "siguiente misión" entre páginas de misiones.
+- No agregar botones "siguiente misión" / "misión anterior" entre páginas de misiones (la navegación es vía el mapa).
+- Las páginas de Biblioteca sí tienen botones "← Biblioteca" y "← Volver al subreino" al pie.
 
 ---
 

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resolución de clase · Las estalagmitas de la cueva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{ --accent:#1f3a5f; --accent-dark:#122539; --ok:#4caf50; --warn:#e0a72e; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+  .wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+  header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+  .kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+  header h1{font-size:26px;margin:4px 0 6px;font-weight:800}
+  header p{font-size:13px;opacity:.85}
+
+  .body{padding:26px 28px}
+
+  .intro{background:#eaf0f7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+
+  .bloque{border:2px solid #dbe4ee;border-radius:14px;margin-bottom:22px;overflow:hidden}
+  .bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e4ebf3,#f3f6fa);padding:12px 18px;border-bottom:2px solid #dbe4ee}
+  .num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .bloque-head h2{font-size:16px;color:var(--accent-dark)}
+  .bloque-body{padding:18px 20px}
+
+  .paso p{font-size:14px;line-height:1.6;color:#333;margin-bottom:8px}
+  .def{background:#f3f7fb;border:1.5px dashed #b7c8dc;border-radius:12px;padding:12px 16px;margin:10px 0;font-size:14px;color:#1f3a5f}
+  .def b{color:var(--accent-dark)}
+
+  .formula{background:#132339;color:#dcecff;border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:16px;text-align:center;margin:10px 0}
+
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th{background:var(--accent);color:#fff;padding:8px;text-align:center}
+  td{padding:9px 8px;text-align:center;border:1px solid #dbe4ee}
+
+  .resol td:first-child{font-family:'JetBrains Mono',monospace;font-size:14px;text-align:right;width:52%;color:#132339}
+  .resol td:last-child{text-align:left;font-size:13px;color:#555}
+
+  .eq-box{background:#132339;color:#dcecff;border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.9;margin:8px 0}
+  .eq-box .step{opacity:.65;font-size:12px;font-family:'Nunito',sans-serif;margin-top:2px}
+
+  .clave{background:#fdf6e8;border-left:4px solid var(--warn);border-radius:0 10px 10px 0;padding:12px 16px;font-size:13.5px;margin-top:10px}
+  .clave b{color:#8a5a00}
+
+  .conexion{background:#f3edfb;border:1.5px dashed #9b7ec8;border-radius:12px;padding:14px 18px;margin-top:8px;font-size:14px;color:#4a2f6b;line-height:1.6}
+  .conexion b{display:block;margin-bottom:6px;color:#6a3fa0;text-transform:uppercase;font-size:11.5px;letter-spacing:.04em}
+
+  footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Reino del Álgebra y las Funciones · Secuencia 8 · Resolución de clase</div>
+    <h1>Las estalagmitas de la cueva</h1>
+    <p>Resolución de la actividad E12 · ecuación con la incógnita en los dos miembros · 8.º EBI</p>
+  </header>
+
+  <div class="body">
+    <div class="intro">
+      Esta es la resolución del trabajo de las dos clases que ocupó la ficha E12: la clase en que se modelizó
+      la situación y se constató que el método de camino inverso no alcanzaba, y la clase en que se construyó
+      la herramienta que faltaba. Queda acá lo que se escribió en el pizarrón, para quien necesite volver a
+      leerlo o completar apuntes.
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">1</div>
+        <h2>La situación y su modelización</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="paso">
+          <p>Dos estalagmitas crecen en la misma cueva. La estalagmita A mide hoy 350 cm y crece 10 cm por
+          siglo. La estalagmita B mide hoy 80 cm y crece 20 cm por siglo. La pregunta es dentro de cuánto
+          tiempo van a tener la misma altura.</p>
+        </div>
+        <table>
+          <tr><th>Qué se nombra</th><th>Cómo se escribe</th></tr>
+          <tr><td>La incógnita</td><td>x = cantidad de siglos que transcurren</td></tr>
+          <tr><td>Altura de A al cabo de x siglos</td><td>350 + 10x</td></tr>
+          <tr><td>Altura de B al cabo de x siglos</td><td>80 + 20x</td></tr>
+          <tr><td>La condición del problema</td><td>las dos alturas son iguales</td></tr>
+        </table>
+        <div class="formula">350 + 10x = 80 + 20x</div>
+        <div class="clave">
+          <b>La pregunta previa de la ficha</b> al cabo de 5 siglos A mide 400 cm y B mide 180 cm. La
+          diferencia es de 220 cm, así que el momento buscado está muy lejos de los 5 siglos. Probar valores
+          uno por uno hasta acertar no es un camino razonable acá: por eso hace falta resolver la ecuación.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">2</div>
+        <h2>Por qué el camino inverso no alcanza</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="paso">
+          <p>Hasta esta actividad, todas las ecuaciones de la secuencia se resolvían deshaciendo una cadena de
+          operaciones: se leía qué se le había hecho a la incógnita y se aplicaba la operación inversa en el
+          orden contrario.</p>
+        </div>
+        <div class="def">
+          <b>El obstáculo, tal como quedó formulado en el pizarrón.</b> En esta ecuación la incógnita aparece
+          en los dos miembros. No hay una única cadena de operaciones aplicada a la incógnita, así que no hay
+          una cadena única que deshacer. El método de camino inverso fue el correcto para todas las ecuaciones
+          anteriores y sigue siéndolo; lo que ocurre es que esta ecuación no tiene la forma que ese método
+          necesita.
+        </div>
+        <div class="paso">
+          <p>De ahí salió la pregunta que abrió la clase siguiente: ¿qué se le puede hacer a esta ecuación
+          para convertirla en una que sí sepamos resolver?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">3</div>
+        <h2>Ecuaciones equivalentes</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="def">
+          <b>Definición.</b> Dos ecuaciones son <b>equivalentes</b> cuando tienen exactamente el mismo
+          conjunto solución.
+        </div>
+        <div class="paso">
+          <p>Para saber qué transformaciones producen una ecuación equivalente se trabajó con cuatro
+          ecuaciones sencillas, resueltas todas por camino inverso:</p>
+        </div>
+        <table>
+          <tr><th>Ecuación</th><th>Cómo se resuelve</th><th>Cuánto da x</th></tr>
+          <tr><td>x = 5</td><td>no requiere acción</td><td>5</td></tr>
+          <tr><td>x + 3 = 8</td><td>8 − 3</td><td>5</td></tr>
+          <tr><td>2x = 10</td><td>10 ÷ 2</td><td>5</td></tr>
+          <tr><td>x + 3 = 5</td><td>5 − 3</td><td>2</td></tr>
+        </table>
+        <div class="paso">
+          <p>Las tres primeras tienen la misma solución: son equivalentes entre sí. La cuarta no. Lo que
+          distingue a unas de la otra se ve escribiendo el renglón del medio, el que muestra la operación
+          antes de calcular el resultado:</p>
+        </div>
+        <div class="eq-box">
+          x = 5
+          <div class="step">se suma 3 en los dos miembros</div>
+          x + 3 = 5 + 3
+          <div class="step">y recién ahí se calcula</div>
+          x + 3 = 8
+        </div>
+        <div class="eq-box">
+          x = 5
+          <div class="step">se multiplica por 2 en los dos miembros</div>
+          x · 2 = 5 · 2
+          <div class="step">y recién ahí se calcula</div>
+          2x = 10
+        </div>
+        <div class="eq-box">
+          x = 5
+          <div class="step">se suma 3 en un solo miembro: falta el + 3 del otro</div>
+          x + 3 = 5
+          <div class="step">la solución dejó de ser 5</div>
+          x = 2
+        </div>
+        <div class="def">
+          <b>Operaciones que mantienen la equivalencia.</b> Sumar o restar la misma cantidad en los
+          <b>dos</b> miembros. Multiplicar o dividir los <b>dos</b> miembros por la misma cantidad, siempre
+          que no sea cero.
+        </div>
+        <div class="clave">
+          <b>La verificación es el juez</b> si al sustituir el resultado en la ecuación original los dos
+          miembros no dan lo mismo, en algún paso se rompió la equivalencia.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">4</div>
+        <h2>La resolución de la ecuación</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="paso">
+          <p>Con la regla escrita al lado, la pregunta sobre la ecuación del problema fue una sola: qué
+          operación, aplicada a los dos miembros, deja la incógnita en un solo miembro. Cada renglón se
+          escribe con su justificación en la columna de la derecha.</p>
+        </div>
+        <table class="resol">
+          <tr><th>Ecuación</th><th>Qué se hizo</th></tr>
+          <tr><td>350 + 10x = 80 + 20x</td><td>ecuación del problema</td></tr>
+          <tr><td>350 = 80 + 10x</td><td>se resta 10x en los dos miembros</td></tr>
+          <tr><td>270 = 10x</td><td>se resta 80 en los dos miembros</td></tr>
+          <tr><td>27 = x</td><td>se dividen los dos miembros entre 10</td></tr>
+          <tr><td>S = {27}</td><td>conjunto solución</td></tr>
+        </table>
+        <div class="def">
+          <b>Todas estas ecuaciones son equivalentes entre sí.</b> Cada renglón es una ecuación distinta de
+          la anterior, y sin embargo tiene el mismo conjunto solución, porque cada transformación se aplicó a
+          los dos miembros. Eso es lo que autoriza a seguir trabajando con el renglón nuevo y a responder con
+          el resultado del último.
+        </div>
+        <div class="clave">
+          <b>No hay un único camino</b> restando 20x en lugar de 10x se obtiene 350 − 10x = 80, que también es
+          equivalente y también conduce a x = 27. Deja la incógnita en el otro miembro, y nada más.
+        </div>
+      </div>
+    </div>
+
+    <div class="bloque">
+      <div class="bloque-head">
+        <div class="num-badge">5</div>
+        <h2>Comprobación y respuesta</h2>
+      </div>
+      <div class="bloque-body">
+        <div class="paso">
+          <p>Comprobar es sustituir el valor obtenido en el enunciado del problema, no en una de las
+          ecuaciones transformadas.</p>
+        </div>
+        <div class="eq-box">
+          altura de A: 350 + 10 · 27 = 350 + 270 = 620
+          <div class="step">altura de B: 80 + 20 · 27 = 80 + 540 = 620</div>
+          620 = 620 → las dos alturas coinciden
+        </div>
+        <div class="def">
+          <b>Respuesta.</b> Las dos estalagmitas van a tener la misma altura al cabo de <b>27 siglos</b>, es
+          decir <b>2.700 años</b>, y en ese momento las dos van a medir <b>620 cm</b>.
+        </div>
+        <div class="clave">
+          <b>El error más frecuente</b> operar en un solo miembro. No se detecta mirando el renglón, se detecta
+          al comprobar: si las dos alturas no coinciden, el valor obtenido no es solución de la ecuación
+          original y hay que revisar en qué paso se rompió la equivalencia.
+        </div>
+      </div>
+    </div>
+
+    <div class="conexion">
+      <b>Qué queda de esta clase</b>
+      Ya no hace falta que la incógnita esté en un solo miembro para poder resolver. Frente a una ecuación que
+      no tiene la forma conocida, la pregunta no es qué método aplicar, sino qué operación aplicada a los dos
+      miembros la convierte en una ecuación equivalente más simple. La verificación decide si la
+      transformación fue legítima.
+    </div>
+  </div>
+
+  <footer>
+    Fernández, G. M. (2026). <i>Reino Matemático. Crónicas de los Exploradores de 8.</i> Liceo de Médanos.
+    Resolución de clase correspondiente a la actividad E12, de elaboración propia. El tratamiento de la
+    equivalencia de ecuaciones como criterio de validación sigue a Filloy, E. y Rojano, T. (1989). Solving
+    equations: The transition from arithmetic to algebra. <i>For the Learning of Mathematics, 9</i>(2),
+    19-25, y a Kieran, C. (1992). The learning and teaching of school algebra. En D. A. Grouws (Ed.),
+    <i>Handbook of research on mathematics teaching and learning</i> (pp. 390-419). Macmillan.
+  </footer>
+</div>
+</body>
+</html>

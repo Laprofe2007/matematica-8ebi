@@ -72,6 +72,30 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 
 ---
 
+## Mejoras S8 — diferidas para después del curso 2026
+
+**Estado: anotado, no ejecutar durante el curso 2026.** Acordado el 6/10/2026.
+
+Los códigos de las fichas se dejan como están. El orden de las misiones del Reino es el de origen de la secuencia y se mantiene para este curso. El número de carpeta de misión no sigue al código de la ficha: las carpetas se numeraron por orden de creación. No se renumera nada; el número de misión se maneja como se pueda para no romper el sitio.
+
+### Secuencia lógica de referencia
+
+Problema que da lugar a la aparición de la ecuación → método → prácticas del método → problema que da lugar a la aparición de la segunda serie → método nuevo → práctica → problemas de contextualización, donde el estudiante arma y elige el método → evaluación.
+
+El criterio que organiza todo esto es que no haya superposición en la introducción de dos métodos. En S8 la cantidad de problemas de práctica quedó bien calibrada. El desvío respecto de esta secuencia se debió a que la clase de visita de didáctica se preparó sobre la marcha, en el medio de la unidad, y al tiempo efectivamente disponible.
+
+### Ajustes a realizar cuando termine el curso
+
+1. **Separar E03 Práctica graduada en tres fichas independientes.** La Parte 1 usa inversión y debe ir después del método de inversión. Las Partes 2 y 3 usan los dos métodos y deben ir después de introducir la transposición.
+
+2. **Mover E12 Las estalagmitas de la cueva antes de las Partes 2 y 3 de E03.** E12 es el problema que introduce la necesidad del método nuevo, así que su lugar lógico es antes de la práctica que lo aplica. Implica además cambiar el código dentro de la propia ficha ilustrada, no solo en el sitio.
+
+3. **Revisar la ubicación de E04 y E05.** Hipótesis a analizar: E04 Jo y la consola de videojuegos funcionaría mejor a continuación de Pijama Death (E01), como alternativa o como refuerzo de esa ficha, en lugar de quedar como práctica de contextualización al final. Hay que verificar que el cambio no genere superposición en la introducción de métodos.
+
+> Estos tres ajustes son solo del Reino. No afectan al Fichero de Actividades ni a la Secuencia didáctica de 2026, que quedan como registro de lo efectivamente implementado.
+
+---
+
 ## Archivos que nunca deben subirse a git
 
 - `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para S9

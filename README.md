@@ -23,7 +23,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 8 misiones activas (E06/E07 retiradas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 10 misiones activas (E06/E07 retiradas; E12 y E13 agregadas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 
 ---
 
@@ -129,7 +129,7 @@ raíz/
     │       └── mc_s7_resolucion_explicada.html
     │
     └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
-        ├── index.html                                ← Mapa (8 misiones · Biblioteca ✅ · Desafío 🔒)
+        ├── index.html                                ← Mapa (10 misiones · Biblioteca ✅ · Desafío 🔒)
         ├── biblioteca/
         │   ├── index.html                            ← Hub de 5 lecciones
         │   ├── Biblioteca_L1_Introduccion_a_las_ecuaciones.html  Lección 1 — introducción
@@ -145,12 +145,13 @@ raíz/
         │   ├── mision-01/  E01 — El pijama de la muerte (PNG) · resolución ✅
         │   ├── mision-02/  E02 — Método de inversión (HTML ficha) · resolución ✅
         │   ├── mision-03/  E03 — Práctica de ecuaciones (PNG) · resolución ✅
-        │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución ✅
-        │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución ✅
-        │   ├── mision-06/  E11 — Melissa y Mariángel (HTML ficha) · resolución ✅
+        │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución 🔒
+        │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución 🔒
+        │   ├── mision-06/  E11 — Melissa y Mariángel (HTML ficha) · resolución 🔒
         │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (HTML ficha) · resolución ✅
-        │   ├── mision-10/  E09 — Ecuaciones · Porras (archivado, sin enlace en misiones)
-        │   └── mision-11/  E10 — Ecuaciones y problemas · Porras (HTML ficha) · resolución ✅
+        │   ├── mision-10/  E12 — Las estalagmitas de la cueva (PNG) · resolución ✅
+        │   ├── mision-11/  E10 — Ecuaciones y problemas · Porras (HTML ficha) · resolución 🔒
+        │   └── mision-12/  E13 — El salario de José y Ana (PNG) · resolución 🔒
         └── resoluciones/
             ├── E01_resolucion.html
             ├── E02_resolucion.html

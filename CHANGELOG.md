@@ -5,6 +5,19 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-10-10
+
+### S4 y S5 — Etiquetas, bloqueo de S5 y retiro de materiales docentes y con copyright
+
+- `proporciones/index.html`: «Act 8 · K en todos lados» pasa a «Misión VII · k en todos lados»; la tarjeta del mapa indica 7 misiones, igual que el modal.
+- `proporciones/Actividades/S4 Act1_Fabrica_Pintura_v3_Hoja docente.pdf` eliminado (hoja docente).
+- `index.html`: Las Tierras sin Mapa (S5) queda como tarjeta bloqueada, «Disponible cuando tu docente lo indique». Sus páginas se conservan.
+- `tierras-sin-mapa/Actividades/C46_Hoja_Docente_Correccion_Ajustada.pdf` eliminado (hoja docente).
+- `tierras-sin-mapa/Actividades/capitlulo 4 mate porras.pdf` eliminado (capítulo escaneado del libro). En la Biblioteca, «Material teórico» queda como «Próximamente» hasta contar con una lección HTML.
+- ROADMAP: nueva sección «Mejoras futuras».
+
+---
+
 ## 2026-08-09
 
 ### S7 — Fichas públicas simplificadas y resoluciones corregidas (`0e91f94`)

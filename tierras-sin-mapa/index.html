@@ -595,15 +595,15 @@
     },
     {
       id: "biblioteca", nombre: "Biblioteca de las Tierras", icono: "📚", tipo: "Material teórico",
-      descripcion: "El libro de la secuencia. Leé el Capítulo 4 y completá el control de lectura.",
+      descripcion: "El material teórico de la secuencia y el control de lectura. La lección de probabilidad estará disponible próximamente.",
       boton: "Abrir biblioteca →", enlace: null,
       acciones: [
-        { texto: "Material teórico", enlace: "./Actividades/capitlulo%204%20mate%20porras.pdf" },
+        { texto: "Material teórico · Próximamente", enlace: null },
         { texto: "Control de lectura", enlace: "./Actividades/Control_Lectura_Probabilidad_S5.pdf" }
       ],
       nuevaPestana: true, esActividades: false, esEvaluacion: false,
       posicion: { desktop: { x: "74%", y: "34%" }, mobile: { x: "72%", y: "38%" } },
-      recursos: [{ etiqueta: "Capítulo 4 y control de lectura", tipo: "PDF" }]
+      recursos: [{ etiqueta: "Material teórico (próximamente) y control de lectura", tipo: "PDF" }]
     },
     {
       id: "actividades", nombre: "Actividades", icono: "⚔️", tipo: "Práctica",
@@ -729,6 +729,12 @@
     modalActions.innerHTML = "";
     if (t.acciones) {
       t.acciones.forEach((accion) => {
+        if (!accion.enlace) {
+          const b = document.createElement("button");
+          b.type = "button"; b.className = "btn-mission"; b.disabled = true; b.textContent = accion.texto;
+          modalActions.appendChild(b);
+          return;
+        }
         const a = document.createElement("a");
         a.href = accion.enlace; a.className = "btn-primary"; a.textContent = accion.texto;
         a.target = "_blank"; a.rel = "noopener";

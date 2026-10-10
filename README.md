@@ -20,7 +20,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Reino | Subreino | Misiones | Biblioteca | Desafío / MC |
 |---|---|---|---|---|
 | Proporciones (S3/S4) | — | ✅ A-01 a A-08 | ✅ Con videos | ✅ Habilitado |
-| Las Tierras sin Mapa (S5) | — | ✅ C34 a C46 | ✅ Con teoría | 🔒 Pendiente |
+| Las Tierras sin Mapa (S5) | — | 🔒 Reino bloqueado en el índice (C34 a C46 publicadas, sin implementar en clase) | 🔒 Teoría próximamente | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 | Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 10 misiones activas (E06/E07 retiradas; E12 y E13 agregadas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |

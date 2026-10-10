@@ -61,6 +61,18 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 
 ---
 
+## Mejoras futuras
+
+Pedidas por la docente el 10/10/2026. Quedan anotadas; no se ejecutan ahora.
+
+- [ ] **Reinos de S1 y S2 (período diagnóstico):** actividades, encuestas y demás materiales del diagnóstico.
+- [ ] **Reino de S3 Porcentajes (Bloque 1):** publicar sus actividades (B01 a B10).
+- [ ] **S4-08 a S4-14 en el Reino de las Proporciones:** cuadernillo «Actividades de Proporcionalidad — Contexto Uruguayo 2026».
+- [ ] **Lección HTML de probabilidad** para la Biblioteca de Las Tierras sin Mapa, que reemplace al capítulo escaneado del libro retirado del repo el 10/10/2026. Mientras tanto, el botón «Material teórico» figura como «Próximamente». Revisar también que el Control de lectura (`Control_Lectura_Probabilidad_S5.pdf`) siga siendo coherente con la nueva lección.
+- [ ] **S5 Probabilidad bloqueada hasta nueva indicación:** la tarjeta de Las Tierras sin Mapa figura bloqueada en el índice general (`index.html`). Las páginas del reino se conservan; para habilitarlo, restaurar el enlace de la tarjeta.
+
+---
+
 ## Decisiones abiertas
 
 | Tema | Opciones | Estado |

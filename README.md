@@ -276,7 +276,7 @@ header: linear-gradient(135deg, #5b2a86, #8e44ad)
 
 Archivos que **nunca se deben agregar al staging**:
 
-- `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para reino futuro de Funciones Lineales
+- `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para subreino de Funciones (S9)
 - `proporciones/Actividades/hoja docente Correccion a_S3_S4_v4.pdf` — uso interno docente
 - `proporciones/Actividades/S4_Act5_ViajeEgresados_v2.pdf` — versión en revisión
 

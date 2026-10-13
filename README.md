@@ -24,7 +24,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
 | Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 10 misiones activas (E06/E07 retiradas; E12 y E13 agregadas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S9 — Funciones Lineales | 🔧 En preparación — carpeta creada, F10 en respaldo | — | — |
+| Álgebra y Funciones | S9 · Funciones | 🔧 En preparación — F12 en misiones; biblioteca y cierre pendientes | — | — |
 
 ---
 
@@ -129,13 +129,12 @@ raíz/
     │       ├── mc_s7_polinomios.pdf
     │       └── mc_s7_resolucion_explicada.html
     │
-    ├── s9-funciones-lineales/                        ← Subreino 4: en preparación (sin index.html todavía)
-    │   ├── actividades/
-    │   │   ├── F10_ficha.html        ← Versión unificada "El salario de José y Ana" (4 partes; es la que irá al Reino)
-    │   │   └── F10_v1_ficha.html     ← Versión original "El salario de José" (2 partes; respaldo — ver nota abajo)
+    ├── s9-funciones/                                 ← Subreino 4: El Taller de las Máquinas
+    │   ├── index.html                                ← Mapa del subreino (bloqueado en el mapa del reino)
+    │   ├── misiones/
+    │   │   └── mision-01/  F12 — El Generador de funciones (HTML ficha) · resolución 🔒
     │   └── resoluciones/
-    │       ├── F10_resolucion.html   ← Resolución de la versión unificada
-    │       └── F10_v1_resolucion.html ← Resolución de la versión original
+    │       └── F12_resolucion.html   ← Preparada; se enlazará cuando se habilite
     │
     └── s8-ecuaciones/                                ← Subreino 3: El Equilibrio Oculto
         ├── index.html                                ← Mapa (10 misiones · Biblioteca ✅ · Desafío 🔒)
@@ -161,15 +160,20 @@ raíz/
         │   ├── mision-10/  E12 — Las estalagmitas de la cueva (PNG) · resolución ✅
         │   ├── mision-11/  E10 — Ecuaciones y problemas · Porras (HTML ficha) · resolución 🔒
         │   └── mision-12/  E13 — El salario de José y Ana (PNG) · resolución 🔒
-        └── resoluciones/
-            ├── E01_resolucion.html
-            ├── E02_resolucion.html
-            ├── E03_resolucion.html
-            ├── E04_resolucion.html
-            ├── E05_resolucion.html
-            ├── E08_resolucion.html
-            ├── E10_resolucion.html
-            └── E11_resolucion.html
+        ├── resoluciones/
+        │   ├── E01_resolucion.html
+        │   ├── E02_resolucion.html
+        │   ├── E03_resolucion.html
+        │   ├── E04_resolucion.html
+        │   ├── E05_resolucion.html
+        │   ├── E08_resolucion.html
+        │   ├── E10_resolucion.html
+        │   └── E11_resolucion.html
+        └── respaldo/                                 ← Versiones alternativas de E13 para dividirla en dos fichas. No están enlazadas en el sitio.
+            ├── F10_v1_ficha.html     El salario de José (versión original, 2 partes)
+            ├── F10_v1_resolucion.html
+            ├── F11_ficha.html        El salario de Ana (continuación)
+            └── F11_resolucion.html
 ```
 
 ---
@@ -275,21 +279,6 @@ Archivos que **nunca se deben agregar al staging**:
 - `proporciones/Fabrica_Pintura_Applet_v4.html` — reservado para reino futuro de Funciones Lineales
 - `proporciones/Actividades/hoja docente Correccion a_S3_S4_v4.pdf` — uso interno docente
 - `proporciones/Actividades/S4_Act5_ViajeEgresados_v2.pdf` — versión en revisión
-
----
-
-## Nota sobre las dos versiones de F10 (S9)
-
-La actividad F10 existe en dos versiones dentro del repo, ambas en `s9-funciones-lineales/`. **Ninguna está publicada ni enlazada en el sitio todavía.**
-
-| Archivo | Título | Contenido | Estado |
-|---|---|---|---|
-| `actividades/F10_ficha.html` | El salario de **José y Ana** | 4 partes: calcular salario · averiguar cantidad vendida · tabla comparativa de los dos esquemas · encontrar el punto de encuentro resolviendo f(x)=g(x) | **Versión unificada — la que irá al Reino cuando se arme S9** |
-| `actividades/F10_v1_ficha.html` | El salario de **José** | 2 partes: calcular salario · averiguar cantidad vendida (solo la función de José; no aparece Ana) | Versión original — **respaldo** |
-| `resoluciones/F10_resolucion.html` | Resolución de la versión unificada | Resuelve las 4 partes, incluye tabla y punto de encuentro | Va con la versión unificada |
-| `resoluciones/F10_v1_resolucion.html` | Resolución de la versión original | Resuelve solo las 2 partes de la v1 | Va con el respaldo |
-
-**Por qué se conservan las dos.** La planificación original tenía F10 y F11 como dos actividades consecutivas, una para José solo y otra sumando a Ana. Por razones de tiempo durante el curso 2026 se decidió unificar todo en una sola ficha (la versión "José y Ana"). La versión original (`v1`) se guarda en el repo porque si en algún momento se quiere volver a la planificación de dos fichas separadas, o modificar el recorrido, los archivos ya están listos sin necesidad de reconstruirlos desde cero.
 
 ---
 

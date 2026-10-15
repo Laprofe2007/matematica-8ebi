@@ -23,7 +23,7 @@ Esa URL debe mantenerse estable. Puede estar publicada en CREA, Google Classroom
 | Las Tierras sin Mapa (S5) | — | 🔒 Reino bloqueado en el índice (C34 a C46 publicadas, sin implementar en clase) | 🔒 Teoría próximamente | 🔒 Pendiente |
 | Álgebra y Funciones | S6 — Código de Letras | ✅ A-01 a A-06 | ✅ 4 lecciones | ✅ MC y resolución habilitadas |
 | Álgebra y Funciones | S7 — El Mundo de los Polinomios | ✅ A-07, A-08, A-10, A-11 | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
-| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 10 misiones activas (E06/E07 retiradas; E12 y E13 agregadas) | ✅ 5 lecciones | 🔒 MC bloqueado · resolución bloqueada |
+| Álgebra y Funciones | S8 — El Equilibrio Oculto | ✅ 10 misiones activas (E06/E07 retiradas; E12 y E13 agregadas) | ✅ 5 lecciones | 🔒 MC bloqueado · 🔒 resolución bloqueada · ✅ E04 y E05 con resolución habilitada |
 | Álgebra y Funciones | S9 · Funciones | 🔧 En preparación — F12 en misiones; biblioteca y cierre pendientes | — | — |
 
 ---
@@ -153,8 +153,8 @@ raíz/
         │   ├── mision-01/  E01 — El pijama de la muerte (PNG) · resolución ✅
         │   ├── mision-02/  E02 — Método de inversión (HTML ficha) · resolución ✅
         │   ├── mision-03/  E03 — Práctica de ecuaciones (PNG) · resolución ✅
-        │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución 🔒
-        │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución 🔒
+        │   ├── mision-04/  E04 — Jo y la consola de juegos (PNG) · resolución ✅
+        │   ├── mision-05/  E05 — Ficha interactiva (HTML) · resolución ✅
         │   ├── mision-06/  E11 — Melissa y Mariángel (HTML ficha) · resolución 🔒
         │   ├── mision-09/  E08 — Ecuaciones · Freudenthal (HTML ficha) · resolución ✅
         │   ├── mision-10/  E12 — Las estalagmitas de la cueva (PNG) · resolución ✅

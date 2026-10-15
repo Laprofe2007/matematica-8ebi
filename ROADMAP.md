@@ -27,11 +27,13 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 - [x] **Biblioteca S8** — 5 lecciones + hub en `s8-ecuaciones/biblioteca/`. ✓
 - [x] **Biblioteca desbloqueada en el mapa** — territorio activo, enlace a `biblioteca/index.html`. ✓
 - [x] **Cierre S8 publicado** — `s8-ecuaciones/cierre/` con `index.html`, ficha y resolución. ✓
+- [x] **MC-S8 ficha y resolución — ejercicio 3 actualizado** a «La granja y el hotel» (2026-10-15). ✓
+- [x] **Resoluciones E01–E05, E08, E10, E11** publicadas en `resoluciones/`. ✓
+- [x] **Resoluciones E04 y E05 habilitadas** — botón «Ver resolución» activo en mision-04 y mision-05 (2026-10-15). ✓
+- [x] **E06/E07 retiradas** del reino por decisión docente (calendario). Carpetas mision-07/08 eliminadas. ✓
 - [ ] **Habilitar MC-S8** cuando corresponda: `cierre/index.html`, `MC_HABILITADO = false` → `true`.
 - [ ] **Habilitar resolución MC-S8** en momento posterior: `RESOLUCION_HABILITADA = false` → `true`.
 - [ ] **Habilitar Desafío Final S8 en el mapa** — `s8-ecuaciones/index.html`, territorio `desafio`: `bloqueado: false`, `enlace: "cierre/index.html"`.
-- [x] **Resoluciones E01–E05, E08, E10, E11** publicadas en `resoluciones/`. ✓
-- [x] **E06/E07 retiradas** del reino por decisión docente (calendario). Carpetas mision-07/08 eliminadas. ✓
 
 ### S6 — Código de Letras
 
@@ -50,12 +52,13 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 
 ### Nuevas secuencias en Álgebra y Funciones
 
-- [ ] **S9 — Funciones Lineales**: próximo subreino a crear. El Applet v4 (`proporciones/Fabrica_Pintura_Applet_v4.html`) está reservado para este subreino — es la actividad interactiva de recta y = kx. Crear `algebra-funciones/s9-funciones-lineales/` siguiendo el patrón de S7/S8.
+- [x] **S9 — El Taller de las Máquinas (Funciones)**: subreino creado en `algebra-funciones/s9-funciones/`. F12 activo en misiones/mision-01; biblioteca y cierre pendientes. ✓
+- [ ] **S9 — Completar biblioteca y cierre** cuando estén listos.
 - [ ] **S10 y siguientes** (si corresponde al año): mismo patrón de subreino autocontenido.
 
 ### Mejoras generales
 
-- [ ] **Activar territorio S9 en el mapa del reino** (`algebra-funciones/index.html`) cuando se cree el subreino.
+- [x] **Activar territorio S9 en el mapa del reino** — `algebra-funciones/index.html`, S9 con `bloqueado: false`. ✓
 - [ ] **Resolución A-01 independiente** para S6: actualmente A-01 y A-02 comparten un solo HTML. Si se requiere separación, crear `A-01_Resolucion_Explicada.html`.
 - [ ] **Bitácora de Álgebra y Funciones**: carpeta `bitacora/` referenciada en el ROADMAP anterior pero sin contenido. Crear cuando se cuente con el PDF.
 

@@ -27,7 +27,7 @@ S8 completamente armada pedagógicamente. Biblioteca y cierre publicados; pendie
 - [x] **Biblioteca S8** — 5 lecciones + hub en `s8-ecuaciones/biblioteca/`. ✓
 - [x] **Biblioteca desbloqueada en el mapa** — territorio activo, enlace a `biblioteca/index.html`. ✓
 - [x] **Cierre S8 publicado** — `s8-ecuaciones/cierre/` con `index.html`, ficha y resolución. ✓
-- [x] **MC-S8 ficha y resolución — ejercicio 3 actualizado** a «La granja y el hotel» (2026-10-15). ✓
+- [x] **MC-S8 ficha y resolución — ejercicio 3 actualizado** a «La granja» (35 animales / 110 patas, 2026-10-15). ✓
 - [x] **Resoluciones E01–E05, E08, E10, E11** publicadas en `resoluciones/`. ✓
 - [x] **Resoluciones E04 y E05 habilitadas** — botón «Ver resolución» activo en mision-04 y mision-05 (2026-10-15). ✓
 - [x] **E06/E07 retiradas** del reino por decisión docente (calendario). Carpetas mision-07/08 eliminadas. ✓

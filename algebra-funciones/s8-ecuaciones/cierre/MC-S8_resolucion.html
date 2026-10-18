@@ -28,6 +28,14 @@
   .eq-box{background:#241419;color:#fbe4e7;border-radius:10px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:14.5px;line-height:1.9;margin:8px 0}
   .eq-box .step{opacity:.65;font-size:12px;font-family:'Nunito',sans-serif;margin-top:2px}
 
+  .eq-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:3px 0}
+  .eq-row + .eq-row{border-top:1px solid rgba(251,228,231,.08)}
+  .eq-row .why{font-family:'Nunito',sans-serif;font-size:12px;opacity:.72;text-align:right;max-width:46%;line-height:1.4}
+  .eq-row.op .eq{color:#ffd6a0}
+  .frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;margin:0 2px}
+  .frac .n{border-bottom:1.5px solid currentColor;padding:0 3px}
+  .frac .d{padding:0 3px}
+  @media (max-width:560px){.eq-row .why{max-width:100%;text-align:left}}
   .final-answer{border:2px dashed var(--ok);background:#f1faf1;border-radius:12px;padding:10px 16px;margin-top:8px;font-size:14px;color:#1c5e1c;font-weight:700}
   .final-answer span{display:block;font-weight:400;font-size:13px;color:#2c7a2c;margin-top:4px}
 
@@ -60,22 +68,36 @@
       <div class="bloque-body">
 
         <div class="paso"><p><b>a)</b> 12m = 48</p></div>
-        <div class="eq-box">m = 48 ÷ 12<div class="step">se divide entre 12 en los dos miembros</div>m = 4</div>
+        <div class="eq-box">
+          <div class="eq-row"><span class="eq">12m = 48</span></div>
+          <div class="eq-row op"><span class="eq"><span class="frac"><span class="n">12m</span><span class="d">12</span></span> = <span class="frac"><span class="n">48</span><span class="d">12</span></span></span><span class="why">se dividen los dos miembros entre 12</span></div>
+          <div class="eq-row"><span class="eq">m = 4</span></div>
+        </div>
         <div class="final-answer">S = {4}</div>
         <div class="comprobacion"><b>Comprobación</b> 12 · 4 = 48. ✓</div>
 
         <div class="paso" style="margin-top:16px"><p><b>b)</b> 3h + 4 = 25</p></div>
-        <div class="eq-box">3h = 25 − 4<div class="step">se resta 4 en los dos miembros</div>3h = 21<div class="step"></div>h = 7<div class="step">se divide entre 3 en los dos miembros</div></div>
+        <div class="eq-box">
+          <div class="eq-row"><span class="eq">3h + 4 = 25</span></div>
+          <div class="eq-row op"><span class="eq">3h + 4 − 4 = 25 − 4</span><span class="why">se resta 4 en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">3h = 21</span></div>
+          <div class="eq-row op"><span class="eq"><span class="frac"><span class="n">3h</span><span class="d">3</span></span> = <span class="frac"><span class="n">21</span><span class="d">3</span></span></span><span class="why">se dividen los dos miembros entre 3</span></div>
+          <div class="eq-row"><span class="eq">h = 7</span></div>
+        </div>
         <div class="final-answer">S = {7}</div>
         <div class="comprobacion"><b>Comprobación</b> 3 · 7 + 4 = 21 + 4 = 25. ✓</div>
 
         <div class="paso" style="margin-top:16px"><p><b>c)</b> 2x + (4x + 6) = 3x + (x + 2)</p></div>
         <div class="eq-box">
-          2x + 4x + 6 = 3x + x + 2<div class="step">se eliminan los paréntesis</div>
-          6x + 6 = 4x + 2<div class="step">se reducen términos semejantes</div>
-          6x − 4x = 2 − 6<div class="step">se resta 4x y se resta 6 en los dos miembros</div>
-          2x = −4<br>
-          x = −2<div class="step">se divide entre 2 en los dos miembros</div>
+          <div class="eq-row"><span class="eq">2x + (4x + 6) = 3x + (x + 2)</span></div>
+          <div class="eq-row"><span class="eq">2x + 4x + 6 = 3x + x + 2</span><span class="why">se eliminan los paréntesis</span></div>
+          <div class="eq-row"><span class="eq">6x + 6 = 4x + 2</span><span class="why">se reducen términos semejantes</span></div>
+          <div class="eq-row op"><span class="eq">6x + 6 − 4x = 4x + 2 − 4x</span><span class="why">se resta 4x en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">2x + 6 = 2</span></div>
+          <div class="eq-row op"><span class="eq">2x + 6 − 6 = 2 − 6</span><span class="why">se resta 6 en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">2x = −4</span></div>
+          <div class="eq-row op"><span class="eq"><span class="frac"><span class="n">2x</span><span class="d">2</span></span> = <span class="frac"><span class="n">−4</span><span class="d">2</span></span></span><span class="why">se dividen los dos miembros entre 2</span></div>
+          <div class="eq-row"><span class="eq">x = −2</span></div>
         </div>
         <div class="final-answer">S = {−2}</div>
         <div class="comprobacion"><b>Comprobación</b> 2(−2) + (4(−2) + 6) = −4 + (−2) = −6. 3(−2) + (−2 + 2) = −6 + 0 = −6. ✓</div>
@@ -90,10 +112,15 @@
 
         <div class="paso" style="margin-top:14px"><p><b>b)</b> Basta con observar qué ocurre al restar 2x o al eliminar el paréntesis:</p></div>
         <div class="eq-box">
-          2x + 3 = 2x + 5<div class="step">se resta 2x en los dos miembros → 3 = 5, falso</div>S = { }<div class="step">sin solución</div>
+          <div class="eq-row"><span class="eq">2x + 3 = 2x + 5</span></div>
+          <div class="eq-row op"><span class="eq">2x + 3 − 2x = 2x + 5 − 2x</span><span class="why">se resta 2x en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">3 = 5</span><span class="why">igualdad falsa</span></div>
+          <div class="eq-row"><span class="eq">S = { }</span><span class="why">sin solución</span></div>
         </div>
         <div class="eq-box">
-          3(x + 1) = 3x + 3<div class="step">se elimina el paréntesis → 3x + 3 = 3x + 3</div>S = {x / x ∈ Q}<div class="step">infinitas soluciones: se cumple para cualquier valor de x</div>
+          <div class="eq-row"><span class="eq">3(x + 1) = 3x + 3</span></div>
+          <div class="eq-row"><span class="eq">3x + 3 = 3x + 3</span><span class="why">se elimina el paréntesis</span></div>
+          <div class="eq-row"><span class="eq">S = {x / x ∈ Q}</span><span class="why">infinitas soluciones: se cumple para cualquier valor de x</span></div>
         </div>
         <div class="comprobacion"><b>Para recordar</b> una ecuación puede tener una única solución, no tener
           solución o tener infinitas soluciones. Son los tres casos que trabajaste en E03 y en la Lección de Biblioteca
@@ -108,13 +135,16 @@
           conejos 4. Las dos cantidades están relacionadas por el total de animales: si sabemos cuántas gallinas hay,
           los conejos son los que faltan para llegar a 35. Así la ecuación queda con una sola incógnita.</p></div>
         <div class="paso"><p>x = cantidad de gallinas &nbsp;&nbsp;·&nbsp;&nbsp; 35 − x = cantidad de conejos</p></div>
-        <div class="eq-box">2x + 4(35 − x) = 110<div class="step">patas de las gallinas + patas de los conejos = total de patas</div></div>
         <div class="eq-box">
-          2x + 140 − 4x = 110<div class="step">se elimina el paréntesis aplicando la propiedad distributiva</div>
-          −2x + 140 = 110<div class="step">se reducen términos semejantes</div>
-          −2x = 110 − 140<div class="step">se resta 140 en los dos miembros</div>
-          −2x = −30<br>
-          x = 15<div class="step">se divide entre −2 en los dos miembros</div>
+          <div class="eq-row"><span class="eq">2x + 4(35 − x) = 110</span><span class="why">patas de las gallinas + patas de los conejos = total de patas</span></div>
+        </div>
+        <div class="eq-box">
+          <div class="eq-row"><span class="eq">2x + 140 − 4x = 110</span><span class="why">se elimina el paréntesis aplicando la propiedad distributiva</span></div>
+          <div class="eq-row"><span class="eq">−2x + 140 = 110</span><span class="why">se reducen términos semejantes</span></div>
+          <div class="eq-row op"><span class="eq">−2x + 140 − 140 = 110 − 140</span><span class="why">se resta 140 en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">−2x = −30</span></div>
+          <div class="eq-row op"><span class="eq"><span class="frac"><span class="n">−2x</span><span class="d">(−2)</span></span> = <span class="frac"><span class="n">−30</span><span class="d">(−2)</span></span></span><span class="why">se dividen los dos miembros entre −2</span></div>
+          <div class="eq-row"><span class="eq">x = 15</span></div>
         </div>
         <div class="final-answer">
           x = 15
@@ -127,7 +157,7 @@
           En ese caso hay que revisar el planteo o las cuentas.</div>
         <div class="comprobacion"><b>Atención</b> si usas dos letras distintas sin relacionarlas, la ecuación no se
           puede resolver con lo que trabajamos en la secuencia. La clave es escribir los conejos como 35 − x. Cuida el
-          signo al dividir entre −2 y respondé las dos cantidades que pide la pregunta, no solo el valor de x.</div>
+          signo al dividir entre −2 y responde las dos cantidades que pide la pregunta, no solo el valor de x.</div>
       </div>
     </div>
 
@@ -136,10 +166,12 @@
       <div class="bloque-body">
         <div class="paso"><p>Llamamos x al número buscado. «El doble de un número, aumentado en cinco» es
           2x + 5: primero se duplica el número y después se suma cinco; «el número disminuido en 3» es x − 3.</p></div>
-        <div class="eq-box">2x + 5 = x − 3</div>
-        <div class="eq-box">
-          2x − x = −3 − 5<div class="step">se resta x y se resta 5 en los dos miembros</div>
-          x = −8
+                <div class="eq-box">
+          <div class="eq-row"><span class="eq">2x + 5 = x − 3</span></div>
+          <div class="eq-row op"><span class="eq">2x + 5 − x = x − 3 − x</span><span class="why">se resta x en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">x + 5 = −3</span></div>
+          <div class="eq-row op"><span class="eq">x + 5 − 5 = −3 − 5</span><span class="why">se resta 5 en los dos miembros</span></div>
+          <div class="eq-row"><span class="eq">x = −8</span></div>
         </div>
         <div class="final-answer">
           x = −8

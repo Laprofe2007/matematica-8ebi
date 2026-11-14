@@ -5,6 +5,16 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-11-13
+
+### S8 — Habilitación de la resolución del mini control
+
+- Por indicación de Gabriela, `RESOLUCION_HABILITADA` pasa a `true` en `algebra-funciones/s8-ecuaciones/cierre/index.html` para permitir el acceso a la resolución común durante la corrección.
+- Se conserva `MC_HABILITADO = true` y el destino existente `MC-S8_resolucion.html`. No se modifica el contenido de la evaluación ni de su resolución.
+- Reversión: cambiar únicamente `RESOLUCION_HABILITADA` a `false` y publicar esa modificación.
+
+---
+
 ## 2026-10-10
 
 ### S4 y S5 — Etiquetas, bloqueo de S5 y retiro de materiales docentes y con copyright

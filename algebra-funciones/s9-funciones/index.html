@@ -394,27 +394,27 @@
       nombre: "Misiones del Explorador",
       icono: "⚙️",
       tipo: "Práctica · Subreino 4",
-      descripcion: "Misión I · F12 El Taller de las Máquinas. Investiga qué hacen las herramientas del Generador de funciones.",
-      boton: "Ir a la Misión I →",
-      enlace: "misiones/mision-01/index.html",
+      descripcion: "Explora relaciones entre imágenes y cantidades con actividades, tablas, gráficas y expresiones.",
+      boton: "Abrir el menú de misiones →",
+      enlace: "misiones/index.html",
       nuevaPestana: false,
       bloqueado: false,
       posicion: {
         desktop: { x: "50%", y: "65%" },
         mobile:  { x: "50%", y: "62%" }
       },
-      recursos: [{ etiqueta: "1 misión disponible · ficha interactiva", tipo: "HTML" }]
+      recursos: [{ etiqueta: "Actividades del Taller" }]
     },
     {
       id: "biblioteca",
       nombre: "Biblioteca del Explorador",
       icono: "📖",
       tipo: "Material teórico · Subreino 4",
-      descripcion: "Material de lectura sobre funciones. Se habilita cuando la docente lo indique.",
-      boton: null,
-      enlace: null,
+      descripcion: "Consulta las lecciones sobre función lineal y afín, pendiente y ordenada en el origen.",
+      boton: "Abrir la Biblioteca →",
+      enlace: "biblioteca/index.html",
       nuevaPestana: false,
-      bloqueado: true,
+      bloqueado: false,
       posicion: {
         desktop: { x: "70%", y: "44%" },
         mobile:  { x: "74%", y: "42%" }
@@ -486,7 +486,7 @@
     resourceList.innerHTML = "";
     (t.recursos || []).forEach(r => {
       const li = document.createElement("li");
-      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      li.textContent = r.etiqueta;
       resourceList.appendChild(li);
     });
     modalActions.innerHTML = "";

@@ -5,6 +5,39 @@ Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`]
 
 ---
 
+## 2026-11-15
+
+### S9 — Ajustes de revisión: orden, resoluciones y F04 independiente
+
+- Propósito: aplicar la revisión de Gabriela conservando la composición aprobada y el contenido didáctico. F12 pasa al primer acceso sin cambiar código, imagen o archivo. Se quitan «HTML» de los textos visibles y las tarjetas generales de Resoluciones/Evaluación; el Desafío Final mantiene su territorio propio, bloqueado.
+- F01 deja de ofrecer resolución. F02/F03 enlazan sus resoluciones corregidas existentes por autorización expresa; se verifican regreso y correspondencia. Los tres casos ambiguos siguen en «Se discute en clase» sin respuesta escrita. No se habilitan las otras resoluciones.
+- F04 se separa después de comprobar que no existía esa separación: `biblioteca/F04_leccion.html` conserva teoría y ejemplos; `misiones/f04-dominio-recorrido/F04_ficha.html` recibe sus nueve ejercicios y dos gráficos. Comparten `biblioteca/F04_estilo.css`, con botones del tratamiento aprobado. Se comprueban contenido y créditos contra el material anterior, sin duplicar la teoría en la actividad.
+- F08 recibe nueve etiquetas visualmente diferenciadas, conservando a/b/c y 1/2/3 originales. No se cambian identificadores ni se toca su resolución íntegra o Google Doc.
+- Otras actividades permite abrir la Baraja revisada y De imágenes a números; se añaden regresos a Misiones/Taller sin cambiar consignas. El recorte Es_funcion_deberes sigue fuera del menú y no se habilitan solucionarios adicionales.
+- F06 se localiza y clasifica como material mixto (teoría afín, ejemplo del taxi y cuatro ejercicios), actualmente sin enlazar. Se registra el acceso pendiente y la discrepancia «lineal» en el título de su resolución; no se modifica ni se genera una ficha nueva.
+- README y ROADMAP actualizados. Lista propuesta: 46 archivos, 6 modificaciones y 40 incorporaciones, incluidas 21 ignoradas localmente; sin eliminaciones de archivos seguidos. Mejoras futuras registradas, no ejecutadas: numeración F12 y controles del Desafío duplicados en Misiones de reinos anteriores.
+- Verificación local: 40 HTML inspeccionados, 42 comprobaciones de página en 1440/390 px, 26 recorridos de misión/recursos, cuatro recorridos F02/F03 y sus resoluciones, navegación de F04, separación de etiquetas F08 e impresión/descarga de F02. Texto, dos gráficos y créditos de F04 conservados; CSS aprobado y F12 sin cambios. Sin enlaces locales rotos, imágenes faltantes ni errores JavaScript. Pruebas sobre servidor HTTP local temporal, cerrado al terminar.
+- Reversión: deshacer solo estos cambios; reunir el contenido de la lección y la actividad de F04 antes de retirar el HTML nuevo y el CSS compartido. No usar una restauración global ni recuperar propuestas antiguas. No se crearon índices extra ni copias de reversión. Sin staging, commit ni push.
+
+### S9 — Corrección de omisiones antes de publicar
+
+- Propósito: completar los accesos del Taller sin alterar el diseño aprobado ni la propuesta didáctica. F01–F03 se incorporan al menú; F04 se enlaza desde Biblioteca y desde Misiones mediante el ancla `#ejercicios` del mismo archivo, sin duplicar ni renumerar.
+- F01–F03 reciben regresos a Misiones/Taller y controles de resolución sin destino ni activación por teclado. F02/F03 incorporan las funciones útiles y las correcciones de las versiones revisadas del 13/11 dentro de sus páginas existentes, manteniendo estilos e imágenes. Sus resoluciones locales dejan sin respuesta escrita meses/días, personas/hermanos y países/capitales; F03 corrige el punto (2,7) según la imagen. No se habilitan ni se proponen para publicación esas resoluciones.
+- Se retiran las entradas duplicadas y los cuatro HTML de ficha/redirección en `misiones/f07-pendiente-ordenada/` y `misiones/f08-tablas-graficas/`. Desarrollaban los ejercicios de las fichas que se conservan, no actividades independientes. No se tocan las resoluciones íntegras F07/F08, sus Google Docs ni las guías docentes reservadas.
+- Se actualizan README y ROADMAP con once accesos, las verificaciones realizadas, los pendientes y la lista cerrada propuesta: 34 archivos (6 modificaciones y 28 incorporaciones, de las cuales 20 están ignoradas localmente). Sin bajas de archivos seguidos al comprobar Git; los cuatro HTML retirados estaban ignorados y no seguidos. No se modifican exclusiones Git.
+- Verificación: 39 HTML inspeccionados; 36 pruebas de página en escritorio/celular (1440/390 px); 22 recorridos de misión y regreso; mapa, ancla F04, descargas y botón de impresión de F02. Sin enlaces locales/fragmentos rotos, imágenes faltantes ni errores JavaScript. CSS aprobado y F12 sin cambios por SHA-256. El primer intento de descarga por `file://` no produjo evento del navegador; se repitió correctamente sobre servidor HTTP local temporal, cerrado al terminar.
+- Reversión: deshacer únicamente los cambios de acceso/navegación y textos de esta tanda; no restaurar globalmente el árbol ni recuperar propuestas antiguas. Los recortes no seguidos se retiraron sin copia nueva, por pedido de Gabriela. No se recrea `_revision_privada` ni se interviene en `C:\Respaldo_Borradores_Reino`.
+- Estado: local para revisión. Sin staging, commit, push ni despliegue. No se generaron índices extra, mensajes de traspaso ni copias de reversión.
+
+### S9 — Continuidad visual aprobada: menú de misiones y marco F12
+
+- Aplicación local de la muestra aprobada por Gabriela: composición de atlas, pergamino y jerarquía de misiones tomando S8 como referencia y conservando el verde de S9.
+- Se actualizan únicamente el menú de misiones y el marco de F12 mediante continuidad-s9.css. Se preservan contenidos, numeración, enlaces, descargas y bloqueos; no se rediseñan mapa, biblioteca interior ni otras actividades.
+- Se conservaron respaldos previos completos de ambos HTML y CHANGELOG fuera del repo, en la carpeta de integración visual de esta tarea. La reversión debe recuperar esa versión previa o retirar solo esta tanda, sin descartar otros cambios locales.
+- Estado: aplicación local para revisión; esta entrega no realiza commit ni push.
+
+---
+
 ## 2026-11-13
 
 ### S8 — Habilitación de la resolución del mini control

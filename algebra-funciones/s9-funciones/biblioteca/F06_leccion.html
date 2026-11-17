@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F06 · Función afín: la tarifa del taxi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Cinzel:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{ --accent:#0e8a7d; --accent-dark:#0a5850; --ok:#4caf50; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+.wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+.kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+
+.body{padding:26px 28px}
+
+.retoma{background:#eafaf7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+
+.concepto{border:2px solid #d9f0ec;border-radius:14px;margin-bottom:18px;overflow:hidden}
+.concepto-head{background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.concepto-head h2{font-size:15px;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.04em}
+.concepto-body{padding:16px 20px;font-size:14.5px;line-height:1.65;color:#333}
+.concepto-body p{margin-bottom:8px}
+
+.ejemplo{border:2px solid var(--accent);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.ejemplo-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.ejemplo-head h3{font-size:14.5px;color:var(--accent-dark)}
+.ejemplo-body{padding:16px 20px;font-size:14.5px;line-height:1.6;color:#333}
+.ejemplo-body p{margin-bottom:8px}
+
+.resultado{background:#f1faf1;border:1.5px dashed var(--ok);border-radius:10px;padding:10px 16px;font-size:13.5px;color:#1c5e1c;margin-top:8px}
+.resultado b{color:#155e15}
+
+.formula{background:#0a2e2a;color:#d9fff7;border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:15px;text-align:center;margin:8px 0}
+
+.seccion-titulo{font-size:17px;font-weight:800;color:var(--accent-dark);margin:28px 0 6px;padding-top:10px;border-top:2px solid #d9f0ec}
+
+.consigna{background:#eafaf7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:12px 18px;font-size:14px;line-height:1.55;margin-bottom:18px}
+
+.bloque{border:2px solid #d9f0ec;border-radius:14px;margin-bottom:16px;overflow:hidden}
+.bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.bloque-body{padding:16px 20px}
+.enunciado{font-size:14.5px;line-height:1.6;margin-bottom:12px}
+.respuesta-space{border:1.5px dashed #ccd7e2;border-radius:10px;min-height:56px;margin-top:10px}
+
+footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+
+.barra-recurso{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.barra-recurso a,.barra-recurso button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 14px;border:1px solid #9eb7a8;border-radius:4px;background:#fff9e9;color:#0a5850;font:600 11px/1.6 "Cinzel",Georgia,serif;letter-spacing:0;text-decoration:none}
+.barra-recurso button:not(:disabled){background:var(--accent);border-color:var(--accent);color:#fff;cursor:pointer}
+.barra-recurso a:hover{background:#e8f2ef}.barra-recurso a:focus-visible,.barra-recurso button:focus-visible{outline:3px solid #a95d26;outline-offset:4px}
+.barra-recurso button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:700px){.barra-recurso{gap:7px}.barra-recurso a,.barra-recurso button{flex:1;min-width:135px;font-size:10px;padding:9px 10px}}
+@media print{.barra-recurso{display:none!important}}
+@page{size:A4;margin:15mm}
+@media print{body{padding:0;background:white}.wrap{max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:visible}.body{padding:20px 22px 0}.concepto,.ejemplo,.bloque,footer{break-inside:avoid}.bloque{margin-bottom:10px}.bloque-body{padding:12px 18px}footer{padding:12px 22px}.seccion-titulo,.concepto-head,.ejemplo-head,.bloque-head{break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+ <div class="kicker">Bloque 3: Álgebra y Funciones · Secuencia 9 · F06 · Matemática 8.° EBI</div>
+ <h1>Función afín: la tarifa del taxi</h1>
+ </header>
+
+ <div class="body">
+ <nav class="barra-recurso" aria-label="Acciones de F06"><button type="button" onclick="window.print()">Imprimir</button><a href="./index.html">Volver a la Biblioteca</a><a href="../misiones/index.html">Volver a las misiones</a><a href="../index.html">Volver al Taller</a><button type="button" disabled aria-disabled="true" data-resolucion="../resoluciones/F06_resolucion.html">Ver resolución · bloqueada</button></nav>
+
+ <div class="retoma">
+ En clase ya resolviste y discutiste la tarifa del taxi: $50 de bajada de bandera más $60 por cada kilómetro, expresión 60k + 50. Ahí surgió la discusión entre Marina y Franco sobre si duplicar los kilómetros duplica el precio, y viste que no: el $50 fijo rompe la proporcionalidad. Ahora vas a nombrar formalmente ese tipo de relación.
+ </div>
+
+ <div class="concepto">
+ <div class="concepto-head"><h2>Función afín</h2></div>
+ <div class="concepto-body">
+ <p>Una función afín es una función de la forma:</p>
+ <div class="formula">f(x) = a · x + b</div>
+ <p>donde a y b son números fijos. El número a es la pendiente: indica la variación de la salida por cada unidad que aumenta la entrada. El número b es la ordenada en el origen: el término independiente, la parte fija que no cambia.</p>
+ <p>Cuando b = 0, la función afín se reduce a f(x) = a · x: en ese caso se llama función lineal (es la proporcionalidad directa, como en La Fábrica de Pintura). Cuando b ≠ 0, la función es afín pero no lineal.</p>
+ </div>
+ </div>
+
+ <div class="seccion-titulo">La tarifa del taxi como función afín</div>
+
+ <div class="ejemplo">
+ <div class="ejemplo-head"><h3>Ejemplo resuelto</h3></div>
+ <div class="ejemplo-body">
+ <p>La tarifa del taxi es una función afín:</p>
+ <div class="formula">f(k) = 60 · k + 50</div>
+ <p>con a = 60 (el precio por kilómetro) y b = 50 (la bajada de bandera). Como b ≠ 0, la recta no pasa por el origen: corta al eje y en el punto (0, 50). Eso es justamente lo que hacía que 60k + 50 no fuera proporcional.</p>
+ <div class="resultado"><b>Dominio real:</b> los kilómetros que puede recorrer un taxi. No puede ser un número negativo: k ≥ 0.</div>
+ </div>
+ </div>
+
+ <div class="seccion-titulo">Ejercicios</div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">1</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">En f(k) = 60k + 50, identifica el valor de a y el valor de b. Explica qué representa cada uno en la situación del taxi.</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">2</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Ya calculaste en clase cuánto cuesta un viaje de 20 km. Escribe ese cálculo usando notación de función: f(20) = ...</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">3</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Si el taxi eliminara la bajada de bandera (b = 0), ¿cómo cambiaría el gráfico de la función? ¿Y si en cambio subiera la bajada de bandera a $100, dejando el precio por km igual?</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">4</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Piensa en una situación de tu vida cotidiana con una parte fija y una parte variable (como la que escribiste en tu Bitácora del Explorador). Exprésala como función afín f(x) = a·x + b, indicando qué representa a y qué representa b.</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ </div>
+
+ <footer>
+ <b>Fuente:</b> Situación adaptada de Gravemeijer, K., Roodhardt, A., Wijers, M., Kindt, M., Cole, B. R. y Burrill, G. (2006). <i>Expresiones y fórmulas</i>. Wisconsin Center for Education Research y Freudenthal Institute (Eds.), <i>Las matemáticas en contexto</i>. Chicago: Encyclopædia Britannica, Inc. Edición española, «Tarifas de taxi», pp. 14–15 (paginación impresa). Valores en pesos uruguayos ficticios. Fernández, G. M. (2026). Reino Matemático · Secuencia 9. Liceo de Médanos.
+ </footer>
+</div>
+</body>
+</html>

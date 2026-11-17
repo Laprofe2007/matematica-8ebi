@@ -1,11 +1,26 @@
 # CHANGELOG — Reinos Matemáticos 2026
 
+## Cierre de precisiones F04–F07
+
+Sincronizados los Google Docs en sus enlaces vigentes y preparada la entrega autorizada de 20 archivos. Caso constante de F07 con tabla y gráfica; precisiones de alturas, applet, pendiente y fuente bibliográfica. Se conservan los PNG impresos y se excluyen resoluciones reservadas y cambios ajenos. Ver README para alcance, comprobaciones y reversión.
+
+
 Historial completo de cambios del proyecto, de más reciente a más antiguo.
 Ver el estado actual en [`README.md`](README.md) · Pendientes en [`ROADMAP.md`](ROADMAP.md).
 
 ---
 
 ## 2026-11-15
+
+### F10 reservada, limpieza de menús y propuesta de organización S6
+
+- Propósito: preparar la F10 integrada elegida por Gabriela y corregir solo accesos/etiquetas, conservando contenidos y diseños aprobados. Una tarjeta F10 bloqueada se incorpora al comienzo del Taller; el resto del orden se conserva. F10_v1/F11 no se recrean.
+- F10 actividad y resolución reciben marco, botones y regresos coherentes con S9. Sus cuatro partes, texto y créditos se conservan. Ambos archivos muestran reserva y ocultan el contenido por defecto; actividad y resolución mantienen constantes en `false`. Permanecen fuera de la lista de publicación. Las vistas habilitadas usadas para revisar el marco fueron simulaciones de respuesta en el navegador, no cambios guardados.
+- Se retira «HTML» de cinco menús (Proporciones, Tierras sin Mapa, Álgebra, S6 y S7), sin cambiar sus CSS, ilustraciones ni posiciones. Se elimina solo la fila duplicada MC-S6/MC-S7/MC-S8 de sus listas de Misiones; archivos, contenidos, accesos del Desafío y estados de habilitación se preservan.
+- S6 se inspecciona sin movimientos: 26 archivos, 73 referencias locales sin faltantes. Propuesta en README: reunir 25 recursos bajo `s6-codigo-letras/`, conservando prólogo compartido, portal e índices. Simulación de 69 referencias afectadas, con 51 rutas relativas a ajustar y sin colisiones. La simulación no se presenta como un traslado ejecutado; antes de mover falta aprobar y revisar enlaces externos directos.
+- README/ROADMAP actualizados respetando sus notas paralelas de F12. Solo F02/F03 siguen con resoluciones habilitadas en S9; F09 activa y su resolución bloqueada. Lecciones, F12 y Docente no se modifican por esta tanda; no se recuperan recortes de ZIP.
+- Verificación: 31 páginas en escritorio/móvil más cuatro vistas futuras F10 (66 comprobaciones); 50 aperturas de menús y doce regresos S6. Contenido/créditos F10, 73 referencias S6 antes/después y 204 archivos protegidos cotejados. Sin imágenes rotas ni errores JavaScript detectados. Se registran desbordes previos de Biblioteca S7/S8 (15/10 px a 390 px), sin alterarlas. La prueba de regreso S6 espera la apertura diferida existente de 200 ms; se adapta la comprobación a la etiqueta propia del control PDF S7. No se cambia ese comportamiento del sitio.
+- Reversión: deshacer únicamente etiquetas, tres filas, tarjeta F10 y su marco/controles, preservando los originales didácticos en los mismos archivos; no restaurar globalmente el árbol. No se crearon respaldos ni índices extra. Sin staging, commit ni push. La lista futura se limita a siete menús y tres documentos, no a los HTML reservados.
 
 ### S9 — Ajustes de revisión: orden, resoluciones y F04 independiente
 

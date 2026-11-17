@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cómo funciona el Taller · F12</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&amp;family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="../../continuidad-s9.css">
+<style>
+*{box-sizing:border-box}body{margin:0}header,main,footer{margin:auto}
+.barra-recurso{display:flex;flex-wrap:wrap}.barra-recurso a,.barra-recurso button{display:inline-flex;align-items:center;justify-content:center;border:1px solid;text-decoration:none;cursor:pointer}
+button{font:inherit}.documento-completo h2{font-size:1.15rem;color:#0a5850;margin:1.4em 0 .6em}.documento-completo h2:first-child{margin-top:0}
+.introduccion{font-size:1.05rem;max-width:70ch}.ejemplo{margin:20px 0}.ejemplo img{display:block;width:100%;height:auto}.ejemplo figcaption{font-size:.88rem;line-height:1.6;margin-top:8px;color:#5f5944}
+.tabla-apoyo{border-collapse:collapse;width:100%;font-size:.98rem}.tabla-apoyo th,.tabla-apoyo td{padding:13px 16px;text-align:left;vertical-align:top;border:1px solid #b2c0b0;line-height:1.6}.tabla-apoyo thead{background:#edf2e6}.tabla-apoyo tbody th{width:26%;color:#0a5850}
+.aclaracion{border-left:4px solid #0c7a6e;background:#edf2e6;padding:12px 18px;margin:20px 0}.aclaracion p{margin:0}.regla{padding:16px 20px;border:1px solid #b2c0b0;background:#fff9e9}.regla p{margin:0}
+@media(max-width:700px){.tabla-apoyo{font-size:.9rem}.tabla-apoyo th,.tabla-apoyo td{padding:10px}.tabla-apoyo tbody th{width:32%}}
+@page{size:A4 portrait;margin:2cm}
+@media print{body.continuidad-actividad{font-size:10pt;line-height:1.3}body.continuidad-actividad>header,body.continuidad-actividad main.documento-completo,body.continuidad-actividad footer{width:100%;max-width:none;padding:0;margin:0;border:0;box-shadow:none}body.continuidad-actividad>header{padding-bottom:8px}body.continuidad-actividad>header h1{font-size:19pt}.barra-recurso{display:none!important}.activity-identity{display:none!important}body.continuidad-actividad main.documento-completo>article{padding:8px 0}.introduccion{font-size:10pt}.ejemplo{margin:10px 0}.ejemplo img{max-height:5cm;object-fit:contain}.ejemplo figcaption{font-size:8pt}.tabla-apoyo{font-size:9pt}.tabla-apoyo th,.tabla-apoyo td{padding:7px}.aclaracion{padding:9px 12px;margin:12px 0}.regla{padding:10px 12px}.documento-completo h2{font-size:12pt;break-after:avoid;margin-top:14px}.ejemplo,tr,.aclaracion,.regla{break-inside:avoid}body.continuidad-actividad footer{font-size:8pt;margin-top:16px}footer p{margin:3px 0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body class="continuidad-actividad">
+<header>
+<div class="activity-identity"><img src="../../../../iconos_web/pergamino.png" alt="" width="45" height="48"><span>F12 · El Taller de las Máquinas</span></div>
+<p>Reino Matemático · El Taller de las Máquinas</p>
+<h1>Cómo funciona el Taller</h1>
+</header>
+<nav class="barra-recurso" aria-label="Acciones del recurso">
+<button type="button" onclick="window.print()">Imprimir</button>
+<a href="F12_ficha.html">← Volver a F12</a>
+<a href="../index.html">← Volver a las misiones</a>
+<a href="../../index.html">← Volver al Taller</a>
+</nav>
+<main class="documento-completo"><article>
+<h2>Una entrada, una transformación y una salida</h2>
+<p class="introduccion">En el simulador, una imagen entra en el tubo, una herramienta actúa sobre ella y se obtiene una imagen de salida.</p>
+<figure class="ejemplo">
+<img src="F12_ejemplo_reflexion.png" width="1600" height="530" alt="Ejemplo de reflexión: a la izquierda entra una figura asimétrica; en el centro, una herramienta con un espejo actúa sobre ella; a la derecha sale su imagen reflejada, con izquierda y derecha intercambiadas.">
+<figcaption>En este ejemplo, la herramienta aplica una reflexión: lo que estaba a la izquierda aparece a la derecha.</figcaption>
+</figure>
+<table class="tabla-apoyo">
+<thead><tr><th scope="col">Qué observas</th><th scope="col">Dónde y qué significa</th></tr></thead>
+<tbody>
+<tr><th scope="row">Entrada</th><td>La imagen que introduces en el tubo, desde la columna de la izquierda.</td></tr>
+<tr><th scope="row">Transformación</th><td>Lo que hace la herramienta al actuar sobre la imagen de entrada. En el ejemplo, refleja la imagen de izquierda a derecha.</td></tr>
+<tr><th scope="row">Salida</th><td>La imagen que obtienes después de la transformación, a la derecha del tubo.</td></tr>
+</tbody></table>
+<aside class="aclaracion"><p><strong>Herramienta y transformación:</strong> la herramienta es la que colocas en el tubo; la transformación es lo que esa herramienta hace.</p></aside>
+<h2>Para comparar dos pruebas</h2>
+<div class="regla"><p><strong>Mantén la misma herramienta durante las dos pruebas.</strong> Cambia la imagen de entrada y observa la salida que se obtiene en cada caso.</p></div>
+</article></main>
+<footer>
+<p>Gabriela Michelle Fernández · Liceo de Médanos · 2026.</p>
+<p>Reino Matemático. Crónicas de los Exploradores de 8.º.</p>
+<div class="nota-fuente"><p>Apoyo de F12. Referencias de la ficha: actividad original de A. McGarry (PhET), traducción de M. Tavares (2020) y adaptación de G. M. Fernández (2024) para el curso <em>Hacia una práctica constructivista en el aula</em> (Pontificia Universidad Católica de Chile, Coursera). Simulación e imágenes: PhET Interactive Simulations, Universidad de Colorado Boulder, <em>Generador de funciones</em>. Selección y organización pedagógica: Gabriela Michelle Fernández.</p></div>
+</footer>
+</body></html>

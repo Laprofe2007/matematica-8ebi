@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F05 · Proporcionalidad directa: repaso y conexión con funciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Cinzel:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{ --accent:#0e8a7d; --accent-dark:#0a5850; --ok:#4caf50; }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',Arial,sans-serif;background:#eef2f7;color:#1a1a2e;padding:24px 12px}
+.wrap{max-width:820px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+
+header{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff;padding:22px 28px}
+.kicker{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85;font-weight:700}
+header h1{font-size:24px;margin:4px 0 6px;font-weight:800}
+
+.body{padding:26px 28px}
+
+.retoma{background:#eafaf7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;font-size:14.5px;line-height:1.6;margin-bottom:22px}
+
+.concepto{border:2px solid #d9f0ec;border-radius:14px;margin-bottom:18px;overflow:hidden}
+.concepto-head{background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.concepto-head h2{font-size:15px;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.04em}
+.concepto-body{padding:16px 20px;font-size:14.5px;line-height:1.65;color:#333}
+.concepto-body p{margin-bottom:8px}
+
+.ejemplo{border:2px solid var(--accent);border-radius:14px;margin-bottom:18px;overflow:hidden}
+.ejemplo-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.ejemplo-head h3{font-size:14.5px;color:var(--accent-dark)}
+.ejemplo-body{padding:16px 20px;font-size:14.5px;line-height:1.6;color:#333}
+.ejemplo-body p{margin-bottom:8px}
+
+.resultado{background:#f1faf1;border:1.5px dashed var(--ok);border-radius:10px;padding:10px 16px;font-size:13.5px;color:#1c5e1c;margin-top:8px}
+.resultado b{color:#155e15}
+
+.formula{background:#0a2e2a;color:#d9fff7;border-radius:10px;padding:10px 16px;font-family:'JetBrains Mono',monospace;font-size:15px;text-align:center;margin:8px 0}
+
+.seccion-titulo{font-size:17px;font-weight:800;color:var(--accent-dark);margin:28px 0 6px;padding-top:10px;border-top:2px solid #d9f0ec}
+
+.consigna{background:#eafaf7;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:12px 18px;font-size:14px;line-height:1.55;margin-bottom:18px}
+
+.applet-link{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:10px;margin:8px 0 18px}
+.applet-link:hover{background:var(--accent-dark)}
+
+.bloque{border:2px solid #d9f0ec;border-radius:14px;margin-bottom:16px;overflow:hidden}
+.bloque-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#e2f6f2,#f2fcfa);padding:12px 18px;border-bottom:2px solid #d9f0ec}
+.num-badge{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.bloque-body{padding:16px 20px}
+.enunciado{font-size:14.5px;line-height:1.6;margin-bottom:12px}
+.respuesta-space{border:1.5px dashed #ccd7e2;border-radius:10px;min-height:56px;margin-top:10px}
+
+footer{border-top:1px solid #e6e6e6;padding:16px 28px;font-size:11.5px;color:#777}
+
+.barra-recurso{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.barra-recurso a,.barra-recurso button{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 14px;border:1px solid #9eb7a8;border-radius:4px;background:#fff9e9;color:#0a5850;font:600 11px/1.6 "Cinzel",Georgia,serif;letter-spacing:0;text-decoration:none}
+.barra-recurso button:not(:disabled){background:var(--accent);border-color:var(--accent);color:#fff;cursor:pointer}
+.barra-recurso a:hover{background:#e8f2ef}.barra-recurso a:focus-visible,.barra-recurso button:focus-visible{outline:3px solid #a95d26;outline-offset:4px}
+.barra-recurso button:disabled{opacity:.55;cursor:not-allowed}
+@media(max-width:700px){.barra-recurso{gap:7px}.barra-recurso a,.barra-recurso button{flex:1;min-width:135px;font-size:10px;padding:9px 10px}}
+@media print{.barra-recurso{display:none!important}}
+@page{size:A4;margin:15mm}
+@media print{body{padding:0;background:white}.wrap{max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:visible}.body{padding:20px 22px 0}.concepto,.ejemplo,.bloque,footer{break-inside:avoid}.bloque{margin-bottom:10px}.bloque-body{padding:12px 18px}footer{padding:12px 22px}.seccion-titulo,.concepto-head,.ejemplo-head,.bloque-head{break-after:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header>
+ <div class="kicker">Bloque 3: Álgebra y Funciones · Secuencia 9 · F05 · Matemática 8.° EBI</div>
+ <h1>Proporcionalidad directa: repaso y conexión con funciones</h1>
+ </header>
+
+ <div class="body">
+ <nav class="barra-recurso" aria-label="Acciones de F05"><button type="button" onclick="window.print()">Imprimir</button><a href="./index.html">Volver a la Biblioteca</a><a href="../misiones/index.html">Volver a las misiones</a><a href="../index.html">Volver al Taller</a><button type="button" disabled aria-disabled="true" data-resolucion="../resoluciones/F05_resolucion.html">Ver resolución · bloqueada</button></nav>
+
+ <div class="retoma">
+ Ya trabajaste en profundidad la proporcionalidad directa con La Fábrica de Pintura: la razón k = verde ÷ rojo se mantiene constante sin importar cuánta pintura mezcles, el gráfico es una recta que pasa por el origen, y la relación se escribe como y = k · x. Ahora que conoces qué es una función, vas a mirar esa misma relación con ese lente nuevo.
+ </div>
+
+ <div class="concepto">
+ <div class="concepto-head"><h2>Conexión con porcentaje e interés</h2></div>
+ <div class="concepto-body">
+ <p>El factor multiplicador que usas para calcular porcentajes es el mismo tipo de relación: multiplicar un valor por un número que no cambia. Si k = p ÷ 100, calcular el 20% de algo es aplicar y = 0,20 · x. El total con IVA del 22% funciona igual: y = 1,22 · x. En el interés simple, si se mantienen fijos la tasa y el tiempo, el interés es proporcional al capital.</p>
+ </div>
+ </div>
+
+ <div class="concepto">
+ <div class="concepto-head"><h2>Conexión con recetas</h2></div>
+ <div class="concepto-body">
+ <p>Escalar una receta también es proporcionalidad directa: si duplicas las porciones, duplicas cada ingrediente en la misma proporción. En la receta de tortas fritas, el factor era k = 1,5: cada ingrediente escalado es 1,5 veces el ingrediente base.</p>
+ </div>
+ </div>
+
+ <div class="seccion-titulo">La fábrica de pintura como función</div>
+
+ <div class="ejemplo">
+ <div class="ejemplo-head"><h3>Ejemplo resuelto</h3></div>
+ <div class="ejemplo-body">
+ <p>La relación de La Fábrica de Pintura también es una función: para cada cantidad de rojo (x) hay una única cantidad de verde (y) que mantiene el mismo tono. Se escribe:</p>
+ <div class="formula">f(x) = k · x</div>
+ <p>donde k es la razón propia de cada receta. Por ejemplo, con k = 2: f(x) = 2x. Si entra 3 litros de rojo, salen f(3) = 6 litros de verde.</p>
+ <div class="resultado"><b>Dominio:</b> las cantidades de rojo que la fábrica puede usar. No pueden ser negativas y deben respetar la capacidad de los tanques de ambos colores.<br><b>Recorrido:</b> las cantidades de verde que se obtienen con esa receta, dentro de esos mismos límites.</div>
+ </div>
+ </div>
+
+ <div class="seccion-titulo">Tarea con el applet</div>
+ <div class="consigna">Abre el applet de La Fábrica de Pintura (el mismo que ya usaste) y elige una receta con un valor de k distinto a los que probaste antes.</div>
+ <div style="text-align:center">
+ <a class="applet-link" href="../../../proporciones/Fabrica_Pintura_Applet_v3.html" target="_blank" rel="noopener">Abrir el applet de La Fábrica de Pintura</a>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">1</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Escribe la función f(x) = k · x correspondiente a tu receta, con el valor de k que elegiste.</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">2</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Calcula f(2), f(5) y f(10) con la expresión que obtuviste. Comprueba en el applet los pares que puedas representar con sus controles. Si alguno no se puede representar, indícalo.</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">3</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">¿Qué pasaría si alguien pidiera f(−3)? ¿Tiene sentido en el contexto de la fábrica? Explica por qué eso te dice algo sobre el dominio de esta función.</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ <div class="bloque">
+ <div class="bloque-head"><div class="num-badge">4</div></div>
+ <div class="bloque-body">
+ <p class="enunciado">Si los tanques de la fábrica tienen una capacidad máxima de 20 litros de cada color, ¿cuál es el recorrido real de tu función?</p>
+ <div class="respuesta-space"></div>
+ </div>
+ </div>
+
+ </div>
+
+ <footer>
+ <b>Fuente:</b> Fernández, G. (2026). La Fábrica de Pintura [Laboratorio con applet digital]. Liceo de Médanos. Adaptación de NRICH Enriching Mathematics (s.f.), Mixing Paints, University of Cambridge, Millennium Mathematics Project.
+ </footer>
+</div>
+</body>
+</html>

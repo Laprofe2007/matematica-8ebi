@@ -570,15 +570,6 @@
           <a class="btn-mission" href="../misiones/mision-06/index.html" target="_blank" rel="noopener">Ver ficha</a>
         </div>
       </li>
-      <li class="mission-item locked" aria-label="Mini control bloqueado">
-        <div class="mission-info">
-          <span class="mission-num">MC-S6</span>
-          <span class="mission-name">Mini control del territorio</span>
-        </div>
-        <div class="mission-actions">
-          <span class="locked-tag">🔒 Se habilita después de la corrección en clase</span>
-        </div>
-      </li>
     </ol>
 
     <div style="margin-top:1.5rem;">
@@ -621,7 +612,7 @@
         desktop: { x: "70%", y: "46%" },
         mobile:  { x: "72%", y: "44%" }
       },
-      recursos: [{ etiqueta: "4 lecciones interactivas", tipo: "HTML" }]
+      recursos: [{ etiqueta: "4 lecciones interactivas", tipo: "" }]
     },
     {
       id: "cierre",
@@ -698,7 +689,7 @@
     resourceList.innerHTML = "";
     (t.recursos || []).forEach(r => {
       const li = document.createElement("li");
-      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      li.innerHTML = `${r.etiqueta}${r.tipo ? ` <span class="res-tipo">${r.tipo}</span>` : ""}`;
       resourceList.appendChild(li);
     });
     modalActions.innerHTML = "";

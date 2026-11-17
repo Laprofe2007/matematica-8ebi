@@ -658,7 +658,7 @@
       boton: "Ingresar a la Biblioteca", enlace: "biblioteca.html",
       nuevaPestana: false, esMisiones: false,
       posicion: { desktop: { x: "74%", y: "34%" }, mobile: { x: "72%", y: "38%" } },
-      recursos: [{ etiqueta: "Teoría completa", tipo: "Página HTML" }]
+      recursos: [{ etiqueta: "Teoría completa", tipo: "" }]
     },
     {
       id: "misiones", nombre: "Misiones del Explorador", icono: "🧪", tipo: "Práctica",
@@ -738,7 +738,7 @@
     resourceList.innerHTML = "";
     (t.recursos || []).forEach(r => {
       const li = document.createElement("li");
-      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      li.innerHTML = `${r.etiqueta}${r.tipo ? ` <span class="res-tipo">${r.tipo}</span>` : ""}`;
       resourceList.appendChild(li);
     });
     modalActions.innerHTML = "";

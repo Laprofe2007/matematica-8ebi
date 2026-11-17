@@ -591,7 +591,7 @@
       boton: "Leer el prólogo →", enlace: "./intro.html",
       nuevaPestana: false, esActividades: false, esEvaluacion: false,
       posicion: { desktop: { x: "16%", y: "44%" }, mobile: { x: "26%", y: "28%" } },
-      recursos: [{ etiqueta: "Prólogo narrativo", tipo: "HTML" }]
+      recursos: [{ etiqueta: "Prólogo narrativo", tipo: "" }]
     },
     {
       id: "biblioteca", nombre: "Biblioteca de las Tierras", icono: "📚", tipo: "Material teórico",
@@ -723,7 +723,7 @@
     resourceList.innerHTML = "";
     (t.recursos || []).forEach(r => {
       const li = document.createElement("li");
-      li.innerHTML = `${r.etiqueta} <span class="res-tipo">${r.tipo}</span>`;
+      li.innerHTML = `${r.etiqueta}${r.tipo ? ` <span class="res-tipo">${r.tipo}</span>` : ""}`;
       resourceList.appendChild(li);
     });
     modalActions.innerHTML = "";
